@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on Wed Feb 10 14:21:13 2021 by Eclipse SUMO dfrouter Version 1.8.0
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/dfrouterConfiguration.xsd">
+
+    <input>
+        <net-file value="../osm.net.xml"/>
+        <detector-files value="vehicleDetectors.xml"/>
+        <measure-files value="vehicleFlows_11hto12h.csv"/>
+    </input>
+
+    <output>
+        <routes-output value="../routes.rou.xml"/>
+        <routes-for-all value="true"/>
+        <detector-output value="../out.detectors.xml"/>
+        <detectors-poi-output value="../poi.detectors.xml"/>
+        <emitters-output value="../vehicles.xml"/>
+        <vtype value="true"/>
+        <vtype-output value="../vtype.xml"/>
+    </output>
+
+    <processing>
+        <guess-empty-flows value="true"/>
+        <highway-mode value="false"/>
+        <max-search-depth value="300"/>
+        <time-step value="1800"/>
+        <strict-sources value="true"/>
+        <respect-concurrent-inflows value="true"/>
+        <scale value="0.3"/>
+    </processing>
+
+</configuration>
+-->
+
+<additional xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/additional_file.xsd">
+    <poi id="gelb1_12.1" type="between_detector_position" color="green" lane="164086589_3" pos="0.00"/>
+    <poi id="gelb1_13.1" type="between_detector_position" color="green" lane="204207291_1" pos="0.00"/>
+    <poi id="gelb1_13.2" type="between_detector_position" color="green" lane="164086589_1" pos="0.00"/>
+    <poi id="gelb1_13.3" type="between_detector_position" color="green" lane="164086589_2" pos="0.00"/>
+    <poi id="gelb1_20.1" type="between_detector_position" color="green" lane="183629216#0_0" pos="0.00"/>
+    <poi id="gelb1_21.1" type="between_detector_position" color="green" lane="45085545_0" pos="0.00"/>
+    <poi id="gelb1_24.1" type="between_detector_position" color="green" lane="150549933#0_0" pos="0.00"/>
+    <poi id="gelb1_42.1" type="between_detector_position" color="green" lane="268931671_1" pos="0.00"/>
+    <poi id="gelb1_43.1" type="between_detector_position" color="green" lane="268931671_0" pos="0.00"/>
+    <poi id="gelb2_11.1" type="between_detector_position" color="green" lane="315426061_3" pos="0.00"/>
+    <poi id="gelb2_12.1" type="between_detector_position" color="green" lane="315426061_2" pos="0.00"/>
+    <poi id="gelb2_13.1" type="between_detector_position" color="green" lane="187060055_2" pos="0.00"/>
+    <poi id="gelb2_13.2" type="between_detector_position" color="green" lane="315426061_0" pos="0.00"/>
+    <poi id="gelb2_14.1" type="between_detector_position" color="green" lane="187060055_0" pos="0.00"/>
+    <poi id="gelb2_21.1" type="between_detector_position" color="green" lane="182065983#1_0" pos="0.00"/>
+    <poi id="gelb2_23.1" type="between_detector_position" color="green" lane="182065983#1_2" pos="0.00"/>
+    <poi id="gelb2_24.1" type="between_detector_position" color="green" lane="182065983#1_1" pos="0.00"/>
+    <poi id="gelb2_31.1" type="between_detector_position" color="green" lane="269040907#1_1" pos="0.00"/>
+    <poi id="gelb2_31.2" type="between_detector_position" color="green" lane="149904354_0" pos="0.00"/>
+    <poi id="gelb2_32.1" type="between_detector_position" color="green" lane="269040907#1_0" pos="0.00"/>
+    <poi id="gelb2_33.1" type="between_detector_position" color="green" lane="149904354_3" pos="0.00"/>
+    <poi id="gelb2_34.1" type="between_detector_position" color="green" lane="149904354_2" pos="0.00"/>
+    <poi id="gelb2_41.1" type="between_detector_position" color="green" lane="253488984_2" pos="0.00"/>
+    <poi id="gelb2_42.1" type="between_detector_position" color="green" lane="253488984_1" pos="0.00"/>
+    <poi id="gelb2_43.1" type="between_detector_position" color="green" lane="253488984_0" pos="0.00"/>
+    <poi id="gelb5_12.1" type="between_detector_position" color="green" lane="189877848_1" pos="0.00"/>
+    <poi id="gelb5_14.1" type="between_detector_position" color="green" lane="189877848_0" pos="0.00"/>
+    <poi id="gelb5_21.1" type="between_detector_position" color="green" lane="251157594_0" pos="0.00"/>
+    <poi id="gelb5_24.1" type="between_detector_position" color="green" lane="251157594_1" pos="0.00"/>
+    <poi id="gelb5_41.1" type="between_detector_position" color="green" lane="189877634#0_2" pos="0.00"/>
+    <poi id="gelb5_42.1" type="between_detector_position" color="green" lane="189877634#0_0" pos="0.00"/>
+    <poi id="gelb7_11.1" type="between_detector_position" color="green" lane="187057791#0_3" pos="0.00"/>
+    <poi id="gelb7_12.1" type="between_detector_position" color="green" lane="187057791#0_2" pos="0.00"/>
+    <poi id="gelb7_13.1" type="between_detector_position" color="green" lane="187057791#0_1" pos="0.00"/>
+    <poi id="gelb7_14.1" type="between_detector_position" color="green" lane="187057791#0_0" pos="0.00"/>
+    <poi id="gelb7_21.1" type="between_detector_position" color="green" lane="399741671_0" pos="0.00"/>
+    <poi id="gelb7_23.1" type="between_detector_position" color="green" lane="399741671_3" pos="0.00"/>
+    <poi id="gelb7_24.1" type="between_detector_position" color="green" lane="399741671_2" pos="0.00"/>
+    <poi id="gelb7_31.1" type="between_detector_position" color="green" lane="5466445#0_0" pos="0.00"/>
+    <poi id="gelb7_32.1" type="between_detector_position" color="green" lane="184156814#0_0" pos="0.00"/>
+    <poi id="gelb7_34.1" type="between_detector_position" color="green" lane="5466445#0_2" pos="0.00"/>
+    <poi id="gelb7_31.1_32.1_34.1" type="between_detector_position" color="green" lane="184156816_1" pos="0.00"/>
+    <poi id="gelb7_41.1" type="between_detector_position" color="green" lane="-5475488#1_1" pos="0.00"/>
+    <poi id="gelb7_42.1" type="between_detector_position" color="green" lane="-5475488#1_0" pos="0.00"/>
+    <poi id="gelb8_12.1" type="between_detector_position" color="green" lane="149996793_3" pos="0.00"/>
+    <poi id="gelb8_13.1" type="between_detector_position" color="green" lane="149996793_2" pos="0.00"/>
+    <poi id="gelb8_14.1" type="between_detector_position" color="green" lane="149996793_0" pos="0.00"/>
+    <poi id="gelb8_21.1" type="between_detector_position" color="green" lane="269040899_0" pos="0.00"/>
+    <poi id="gelb8_24.1" type="between_detector_position" color="green" lane="269040899_1" pos="0.00"/>
+    <poi id="gelb8_31.1" type="between_detector_position" color="green" lane="104802734#0_1" pos="0.00"/>
+    <poi id="gelb8_32.1" type="between_detector_position" color="green" lane="104802734#0_0" pos="0.00"/>
+    <poi id="gelb8_41.1" type="between_detector_position" color="green" lane="189772874#0_2" pos="0.00"/>
+    <poi id="gelb8_42.1" type="between_detector_position" color="green" lane="189772874#0_1" pos="0.00"/>
+    <poi id="gelb8_43.1" type="between_detector_position" color="green" lane="189772874#0_0" pos="0.00"/>
+    <poi id="gelb8_21.1_24.1" type="between_detector_position" color="green" lane="189769943#0_2" pos="0.00"/>
+    <poi id="gelb9_21.1" type="between_detector_position" color="green" lane="320185059_0" pos="0.00"/>
+    <poi id="gelb9_22.1" type="between_detector_position" color="green" lane="320185059_4" pos="0.00"/>
+    <poi id="gelb9_24.1" type="between_detector_position" color="green" lane="320185059_1" pos="0.00"/>
+    <poi id="gelb9_41.1" type="between_detector_position" color="green" lane="42760132_2" pos="0.00"/>
+    <poi id="gelb9_42.1" type="between_detector_position" color="green" lane="42760132_1" pos="0.00"/>
+    <poi id="gelb9_43.1" type="between_detector_position" color="green" lane="42760132_0" pos="0.00"/>
+    <poi id="gelb9_44.1" type="between_detector_position" color="green" lane="42760132_4" pos="0.00"/>
+    <poi id="gelb9a_12.1" type="between_detector_position" color="green" lane="561882212_2" pos="0.00"/>
+    <poi id="gelb9a_14.1" type="source_detector_position" color="green" lane="4474668_1" pos="0.00"/>
+    <poi id="gelb9a_24.1" type="between_detector_position" color="green" lane="190022224#1_0" pos="0.00"/>
+    <poi id="gelb9a_41.1" type="between_detector_position" color="green" lane="187060057#0_0" pos="0.00"/>
+    <poi id="gelb9b_21.1" type="between_detector_position" color="green" lane="115738329#0_0" pos="0.00"/>
+    <poi id="gelb9b_22.1" type="between_detector_position" color="green" lane="115738329#0_1" pos="0.00"/>
+    <poi id="gelb9b_41.1" type="between_detector_position" color="green" lane="187060058#0_0" pos="0.00"/>
+    <poi id="gelb9b_32.1" type="between_detector_position" color="green" lane="270905178#0_0" pos="0.00"/>
+    <poi id="gelb10_13.1" type="between_detector_position" color="green" lane="236995001_0" pos="0.00"/>
+    <poi id="gelb10_21.1" type="between_detector_position" color="green" lane="268931665_0" pos="0.00"/>
+    <poi id="gelb10_23.1" type="between_detector_position" color="green" lane="268931665_1" pos="0.00"/>
+    <poi id="gelb10_31.1" type="between_detector_position" color="green" lane="268931654#1_1" pos="0.00"/>
+    <poi id="gelb10_32.1" type="between_detector_position" color="green" lane="268931654#1_0" pos="0.00"/>
+    <poi id="gelb10_43.1" type="between_detector_position" color="green" lane="268931682#0_0" pos="0.00"/>
+    <poi id="gelb7_11_12_13_14_gelb9b_41_left" type="source_detector_position" color="green" lane="24377457_0" pos="0.00"/>
+    <poi id="gelb7_11_12_13_14_gelb9b_41_right" type="source_detector_position" color="green" lane="184156818_0" pos="0.00"/>
+    <poi id="konradAdenauerBridgeSink" type="sink_detector_position" color="green" lane="321703404_1" pos="0.00"/>
+    <poi id="bundesstrasse36Sink" type="sink_detector_position" color="green" lane="251816541_0" pos="0.00"/>
+    <poi id="reichskanzlerMuellerStrasseSink" type="between_detector_position" color="green" lane="269040914_0" pos="0.00"/>
+    <poi id="augustaanlageSink" type="between_detector_position" color="green" lane="150837582#1_0" pos="0.00"/>
+    <poi id="friedrichEbertStrasseSink" type="between_detector_position" color="green" lane="396385838_0" pos="0.00"/>
+</additional>
