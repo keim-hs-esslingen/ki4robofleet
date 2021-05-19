@@ -6,12 +6,17 @@
 * Python 3.8.5 or higher
 * Eclipse SUMO Version 1.9.0 or higher (Download from https://www.eclipse.org/sumo/)
 
-### Some Python Packages have to be installed:
+### Some Python Packages need to be installed:
 
 ```bash
 pip install osmapi
 pip install PyQt5
 pip install PyQtChart
+```
+
+### The latest SUMO Tools Version has to be installed:
+```
+sudo apt-get dist-upgrade
 ```
 
 ### Getting Started:
