@@ -13,6 +13,23 @@
 # =============================================================================
 
 
+# Defining our Constants for the Result- Calculation:
+
+# we assume 15kWh/100km to calculate the power consumption for the vehicles
+vehiclePowerConsumption = 0.15
+
+# we assume 401 gram / kWh (German Energymix 2019) to calculate the emissions
+germanEnergyMix2019 = 401
+
+# we assume 32 cent / kWh (German Energy price) to calculate the energy cost
+germanEnergyPrice2021 = 0.32
+
+# the usual factor to calculate the monthly fleet Cost is carPrize / 1000 *40
+# we assume 22500€ / 1000 * 40 = 900€ / Month
+# with a daily usage of 10h we assumed the fleetCost to 3€ / h per vehicle
+vehicleCostPerHour = 3
+
+
 import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
@@ -41,6 +58,8 @@ from PyQt5.QtCore import Qt
 
 import os
 import json
+import csv
+import pandas
 
 from PyQt5.QtWidgets import *
 from PyQt5.QtChart import *
@@ -59,17 +78,55 @@ class Result:
         lookAheadTime,
         latenessFactor,
         realisticTime,
+        simulationExitTime,
     ):
-        self.emptyKm = emptyKm
-        self.passengerKm = passengerKm
-        self.fullfilledRequests = fullfilledRequests
-        self.roboTaxis = roboTaxis
+        self.emptyKm = float(emptyKm)
+        self.passengerKm = float(passengerKm)
+        self.fullfilledRequests = int(fullfilledRequests)
+        self.roboTaxis = int(roboTaxis)
         self.strategy = strategy
-        self.pRidingTime = pRidingTime
-        self.pWaitingTime = pWaitingTime
-        self.lookAheadTime = lookAheadTime
-        self.latenessFactor = latenessFactor
-        self.realisticTime = realisticTime
+        self.pRidingTime = int(pRidingTime)
+        self.pWaitingTime = int(pWaitingTime)
+        self.lookAheadTime = str(lookAheadTime)
+        self.latenessFactor = str(latenessFactor)
+        self.realisticTime = str(realisticTime)
+        self.simulationExitTime = simulationExitTime
+
+        self.emptyKmPerRequest = self.emptyKm / self.fullfilledRequests
+
+        self.passengerKmPerRequest = self.passengerKm / self.fullfilledRequests
+
+        # Waiting Time in Minutes:
+        self.waitingTimePerRequest = self.pWaitingTime / self.fullfilledRequests // 60
+
+        # Riding Time in Minutes:
+        self.ridingTimePerRequest = self.pRidingTime / self.fullfilledRequests // 60
+
+        self.totalDistancePerRequest = (
+            self.emptyKmPerRequest + self.passengerKmPerRequest
+        )
+
+        self.powerConsumptionPerRequest = (
+            self.totalDistancePerRequest * vehiclePowerConsumption
+        )
+
+        self.emissionsPerRequest = self.powerConsumptionPerRequest * germanEnergyMix2019
+
+        self.energyCostPerRequest = (
+            self.powerConsumptionPerRequest * germanEnergyPrice2021
+        )
+
+        # to calculate the fleet cost, we consider the amount of time which was necessary to
+        # fulfill all requests (simulationExitTime[s]) multiplied by the fleet size (roboTaxis) and cost per vehicle (vehicleCostPerHour/3600s)
+        self.fleetCostPerRequest = (
+            (self.simulationExitTime * self.roboTaxis * vehicleCostPerHour)
+            / self.fullfilledRequests
+            / 3600
+        )
+
+        self.totalCostPerRequest = self.energyCostPerRequest + self.fleetCostPerRequest
+
+        self.costPerPassengerKm = self.totalCostPerRequest / self.passengerKmPerRequest
 
 
 class ResultManager:
@@ -112,8 +169,8 @@ class ResultManager:
 class ResultsViewerWindow(QWidget):
     def __init__(self):
         super().__init__()
-
-        self.setWindowTitle("KI4ROBOFLEET Results Viewer v0.3")
+        self.currentSessionJsonFile = ""
+        self.setWindowTitle("KI4ROBOFLEET Results Viewer v0.4")
         self.setGeometry(100, 100, 1800, 1200)
         self.uiInit()
         self.show()
@@ -159,6 +216,10 @@ class ResultsViewerWindow(QWidget):
         self.styleComboBox.currentIndexChanged.connect(self.changeStyle)
         ctrlElements1.addWidget(self.styleComboBox)
 
+        buttonResultCsv = QPushButton("Create Result CSV and HTML", self)
+        buttonResultCsv.clicked.connect(self.createResultCsv)
+        ctrlElements1.addWidget(buttonResultCsv)
+
         # self.gridLayout.addLayout(ctrlElements, 0, 0, 1, 3)
         self.gridLayout.addLayout(ctrlElements, 0, 0)
         self.gridLayout.addLayout(ctrlElements1, 1, 0)
@@ -195,6 +256,9 @@ class ResultsViewerWindow(QWidget):
         self.simulationStrategyLabel = QLabel("")
         self.simulationStrategyLabel.setFont(QFont("Arial", 18))
 
+        self.simulationTimeLabel = QLabel("")
+        self.simulationTimeLabel.setFont(QFont("Arial", 18))
+
         self.totalDistance = QLabel("")
         self.totalDistance.setFont(QFont("Arial", 18))
 
@@ -227,6 +291,7 @@ class ResultsViewerWindow(QWidget):
         textResultsLeft.addWidget(self.numberOfRoboTaxis)
         textResultsLeft.addWidget(self.numberOfRequests)
         textResultsLeft.addWidget(self.simulationStrategyLabel)
+        textResultsLeft.addWidget(self.simulationTimeLabel)
         textResultsLeft.addWidget(self.leafIcon)
         textResultsLeft.addWidget(self.powerConsumption)
         textResultsLeft.addWidget(self.emissions)
@@ -284,25 +349,11 @@ class ResultsViewerWindow(QWidget):
         for result in results:
             numberOfRoboTaxis.append(str(result.roboTaxis))
 
-            emptyKm = float(result.emptyKm / result.fullfilledRequests)
-            passengerKm = float(result.passengerKm / result.fullfilledRequests)
-            if emptyKm > maxKm:
-                maxKm = emptyKm
-            if passengerKm > maxKm:
-                maxKm = passengerKm
+            set1[0].append(result.emptyKmPerRequest)
+            set1[1].append(result.passengerKmPerRequest)
 
-            set1[0].append(emptyKm)
-            set1[1].append(passengerKm)
-
-            pRidingTime = int(result.pRidingTime / result.fullfilledRequests) // 60
-            pWaitingTime = int(result.pWaitingTime / result.fullfilledRequests) // 60
-            if pRidingTime > maxTime:
-                maxTime = pRidingTime
-            if pWaitingTime > maxTime:
-                maxTime = pWaitingTime
-
-            set2[0].append(pRidingTime)
-            set2[1].append(pWaitingTime)
+            set2[0].append(result.ridingTimePerRequest)
+            set2[1].append(result.waitingTimePerRequest)
 
         series1 = QBarSeries()
         series2 = QBarSeries()
@@ -376,6 +427,7 @@ class ResultsViewerWindow(QWidget):
     def readFile(self):
         try:
             selectedFile = self.sessionFileList.currentItem().text()
+            self.currentSessionJsonFile = selectedFile
             print("View Results for", selectedFile)
             try:
                 self.resultManager = ResultManager()
@@ -412,16 +464,17 @@ class ResultsViewerWindow(QWidget):
 
                         self.resultManager.addResult(
                             Result(
-                                float(result["d_empty (km)"]),
-                                float(result["d_pass (km)"]),
-                                int(result["fullfilled requests"]),
-                                int(result["num_of_vehicles"]),
+                                result["d_empty (km)"],
+                                result["d_pass (km)"],
+                                result["fullfilled requests"],
+                                result["num_of_vehicles"],
                                 result["strategy"],
-                                int(result["t_drive (sec)"]),
-                                int(result["t_wait (sec)"]),
+                                result["t_drive (sec)"],
+                                result["t_wait (sec)"],
                                 lookAheadTime,
                                 latenessFactor,
                                 realisticTime,
+                                result["simulation_exit_time (sec)"],
                             )
                         )
 
@@ -446,6 +499,7 @@ class ResultsViewerWindow(QWidget):
         self.simulationRunLabel.setText("")
         self.numberOfRoboTaxis.setText("")
         self.simulationStrategyLabel.setText("")
+        self.simulationTimeLabel.setText("")
         self.totalDistance.setText("")
         self.powerConsumption.setText("")
         self.emissions.setText("")
@@ -468,19 +522,14 @@ class ResultsViewerWindow(QWidget):
             QPixmap("./SimulationToolsUI/icons/coin.png").scaledToWidth(60)
         )
 
-        numberOfRoboTaxis = int(result.roboTaxis)
-        numberOfRequests = int(result.fullfilledRequests)
-        emptyKm = float(result.emptyKm) / numberOfRequests
-        passengerKm = float(result.passengerKm) / numberOfRequests
-
         self.simulationRunLabel.setText(
             "Run "
             + str(self.resultManager.resultIndex + 1)
             + " of "
             + str(self.resultManager.numberOfResults)
         )
-        self.numberOfRoboTaxis.setText("RoboTaxis : " + str(numberOfRoboTaxis))
-        self.numberOfRequests.setText("Requests : " + str(numberOfRequests))
+        self.numberOfRoboTaxis.setText("RoboTaxis : " + str(result.roboTaxis))
+        self.numberOfRequests.setText("Requests : " + str(result.fullfilledRequests))
 
         strategy = "Strategy: " + result.strategy
         if "look_ahead" in result.strategy:
@@ -489,68 +538,136 @@ class ResultsViewerWindow(QWidget):
             strategy += "  LF=" + result.latenessFactor + "  RT=" + result.realisticTime
 
         self.simulationStrategyLabel.setText(strategy)
-
-        totalDistance = emptyKm + passengerKm
-
-        # we assume 15kWh/100km to calculate the power consumption
-        powerConsumption = totalDistance * 0.15
-
-        # we assume 401 gram / kWh (German Energymix 2019) to calculate the emissions
-        emissions = powerConsumption * 401
-
-        # we assume 32 cent / kWh (German Energy price) to calculate the energy cost
-        energyCost = powerConsumption * 0.32
-
-        # the usual factor to calculate the monthly fleet Cost is carPrize / 1000 *40
-        # we assume 22500€ / 1000 * 40 = 900€ / Month
-        # with a daily usage of 10h we assumed the fleetCost to 3€ / h
-        fleetCost = (
-            (int(result.pWaitingTime) + int(result.pRidingTime))
-            / numberOfRequests
-            / 3600
-            * 3
+        self.simulationTimeLabel.setText(
+            "requiredTime : "
+            + str(int(result.simulationExitTime) // 3600)
+            + "h "
+            + str(int(result.simulationExitTime) // 60)
+            + "m "
+            + str(int(result.simulationExitTime) % 60)
+            + "s"
         )
-
-        totalCost = energyCost + fleetCost
-
-        costPerPassengerKm = totalCost / passengerKm
 
         self.totalDistance.setText(
             "Total Driving Distance: "
-            + str(float("{:.2f}".format(totalDistance)))
+            + str(float("{:.2f}".format(result.totalDistancePerRequest)))
             + " km"
         )
         self.distanceWithPassenger.setText(
             "Distance With Passenger: "
-            + str(float("{:.2f}".format(passengerKm)))
+            + str(float("{:.2f}".format(result.passengerKmPerRequest)))
             + " km"
         )
         self.powerConsumption.setText(
             "Power Consumption: "
-            + str(float("{:.2f}".format(powerConsumption)))
+            + str(float("{:.2f}".format(result.powerConsumptionPerRequest)))
             + " kWh"
         )
         self.emissions.setText(
-            "Emissions: " + str(float("{:.2f}".format(emissions))) + " g CO2"
+            "Emissions: "
+            + str(float("{:.2f}".format(result.emissionsPerRequest)))
+            + " g CO2"
         )
         self.energyCost.setText(
-            "Energy Cost: " + str(float("{:.2f}".format(energyCost))) + " €"
+            "Energy Cost: "
+            + str(float("{:.2f}".format(result.energyCostPerRequest)))
+            + " €"
         )
         self.fleetCost.setText(
-            "Fleet Cost: " + str(float("{:.2f}".format(fleetCost))) + " €"
+            "Fleet Cost: "
+            + str(float("{:.2f}".format(result.fleetCostPerRequest)))
+            + " €"
         )
         self.totalCost.setText(
-            "Total Cost: " + str(float("{:.2f}".format(totalCost))) + " €"
+            "Total Cost: "
+            + str(float("{:.2f}".format(result.totalCostPerRequest)))
+            + " €"
         )
         self.costPerPassengerKm.setText(
-            "Cost per km: " + str(float("{:.2f}".format(costPerPassengerKm))) + " €"
+            "Cost per km: "
+            + str(float("{:.2f}".format(result.costPerPassengerKm)))
+            + " €"
         )
         self.customerWaitingTime.setText(
-            "Waiting Time: "
-            + str(int(result.pWaitingTime) // int(result.fullfilledRequests) // 60)
-            + " minutes"
+            "Waiting Time: " + str(int(result.waitingTimePerRequest)) + " minutes"
         )
 
         results = []
         results.append(result)
         self.createChart(results)
+
+    def createResultCsv(self, result):
+
+        cwd = os.getcwd()
+        if len(self.currentSessionJsonFile) > 0:
+            resultCsvFileName = (
+                cwd + "/Results/" + self.currentSessionJsonFile.split(".")[0] + ".csv"
+            )
+            print("Writing Result CSV File...")
+
+            with open(resultCsvFileName, mode="w") as csv_file:
+                fieldnames = [
+                    "Requests",
+                    "Strategy",
+                    "reqiredTime[s]",
+                    "RoboTaxis",
+                    "avDrivingDist[km]",
+                    "avPassengerDist[km]",
+                    "avWaitingTime[min]",
+                    "avPowerConsumption[kWh]",
+                    "avEmissions[gCO2]",
+                    "avEnergyCost[€]",
+                    "avFleetCost[€]",
+                    "avTotalCost[€]",
+                    "avCostPerPassengerKm[€]",
+                ]
+                writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+                writer.writeheader()
+
+                for result in self.resultManager.resultList:
+                    writer.writerow(
+                        {
+                            "Requests": result.fullfilledRequests,
+                            "Strategy": result.strategy,
+                            "reqiredTime[s]": result.simulationExitTime,
+                            "RoboTaxis": result.roboTaxis,
+                            "avDrivingDist[km]": str(
+                                float("{:.2f}".format(result.totalDistancePerRequest))
+                            ),
+                            "avPassengerDist[km]": str(
+                                float("{:.2f}".format(result.passengerKmPerRequest))
+                            ),
+                            "avWaitingTime[min]": str(
+                                int(result.waitingTimePerRequest)
+                            ),
+                            "avPowerConsumption[kWh]": str(
+                                float(
+                                    "{:.2f}".format(result.powerConsumptionPerRequest)
+                                )
+                            ),
+                            "avEmissions[gCO2]": str(
+                                float("{:.2f}".format(result.emissionsPerRequest))
+                            ),
+                            "avEnergyCost[€]": str(
+                                float("{:.2f}".format(result.energyCostPerRequest))
+                            ),
+                            "avFleetCost[€]": str(
+                                float("{:.2f}".format(result.fleetCostPerRequest))
+                            ),
+                            "avTotalCost[€]": str(
+                                float("{:.2f}".format(result.totalCostPerRequest))
+                            ),
+                            "avCostPerPassengerKm[€]": str(
+                                float("{:.2f}".format(result.costPerPassengerKm))
+                            ),
+                        }
+                    )
+            print("READY!")
+            print(resultCsvFileName, " was created")
+
+            # create Result HTML file
+            resultHtmlFileName = resultCsvFileName.split(".")[0] + ".html"
+            pandas.read_csv(resultCsvFileName).to_html(resultHtmlFileName)
+            print(resultHtmlFileName, " was created")
+        else:
+            print("Please first select and read a Result Session JSON File!")

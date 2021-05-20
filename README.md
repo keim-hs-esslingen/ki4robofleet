@@ -3,6 +3,7 @@
 #### A Simulation Environment based on SUMO to analyze Scenarios for autonomous driving vehicles in Cities 
 
 ### Reqirements to run the Simulation:
+* ubuntu 20.04 
 * Python 3.8.5 or higher
 * Eclipse SUMO Version 1.9.0 or higher (Download from https://www.eclipse.org/sumo/)
 
