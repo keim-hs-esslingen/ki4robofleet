@@ -79,6 +79,7 @@ class Result:
         latenessFactor,
         realisticTime,
         simulationExitTime,
+        cpuTime,
     ):
         self.emptyKm = float(emptyKm)
         self.passengerKm = float(passengerKm)
@@ -127,6 +128,8 @@ class Result:
         self.totalCostPerRequest = self.energyCostPerRequest + self.fleetCostPerRequest
 
         self.costPerPassengerKm = self.totalCostPerRequest / self.passengerKmPerRequest
+
+        self.cpuTime = cpuTime
 
 
 class ResultManager:
@@ -475,6 +478,7 @@ class ResultsViewerWindow(QWidget):
                                 latenessFactor,
                                 realisticTime,
                                 result["simulation_exit_time (sec)"],
+                                result["cpuTime (sec)"],
                             )
                         )
 
@@ -542,7 +546,7 @@ class ResultsViewerWindow(QWidget):
             "requiredTime : "
             + str(int(result.simulationExitTime) // 3600)
             + "h "
-            + str(int(result.simulationExitTime) // 60)
+            + str((int(result.simulationExitTime) % 3600) // 60)
             + "m "
             + str(int(result.simulationExitTime) % 60)
             + "s"
@@ -620,15 +624,27 @@ class ResultsViewerWindow(QWidget):
                     "avFleetCost[€]",
                     "avTotalCost[€]",
                     "avCostPerPassengerKm[€]",
+                    "cpuTime[s]",
                 ]
                 writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
                 writer.writeheader()
 
                 for result in self.resultManager.resultList:
+                    strategy = result.strategy
+                    if "look_ahead" in result.strategy:
+                        strategy += "  " + result.lookAheadTime + "s"
+                    if "shared" in result.strategy:
+                        strategy += (
+                            "  LF="
+                            + result.latenessFactor
+                            + "  RT="
+                            + result.realisticTime
+                        )
+
                     writer.writerow(
                         {
                             "Requests": result.fullfilledRequests,
-                            "Strategy": result.strategy,
+                            "Strategy": strategy,
                             "reqiredTime[s]": result.simulationExitTime,
                             "RoboTaxis": result.roboTaxis,
                             "avDrivingDist[km]": str(
@@ -660,6 +676,7 @@ class ResultsViewerWindow(QWidget):
                             "avCostPerPassengerKm[€]": str(
                                 float("{:.2f}".format(result.costPerPassengerKm))
                             ),
+                            "cpuTime[s]": str(int(result.cpuTime)),
                         }
                     )
             print("READY!")
