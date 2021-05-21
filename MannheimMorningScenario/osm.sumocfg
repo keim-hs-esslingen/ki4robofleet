@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on Mon Dec  7 17:11:56 2020 by Eclipse SUMO sumo Version 1.8.0
+-->
+
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
+
+    <input>
+        <net-file value="osm.net.xml"/>
+
+	<!-- USE THIS BLOCK TO TURN OFF BACKGROUND TRAFFIC
+	<additional-files value="vehicleTypes.xml,osm.poly.xml,poi.carsharing.xml,parkingAreas.xml,parkingAreasCarSharing.xml"/>
+	-->
+	
+	<additional-files value="vehicleTypes.xml,routesPKW.xml,routesLKW.xml,osm.poly.xml,poi.carsharing.xml,parkingAreas.xml,parkingAreasCarSharing.xml"/>
+    </input>
+
+    <processing>
+        <ignore-route-errors value="true"/>
+    </processing>
+
+    <routing>
+        <device.rerouting.adaptation-steps value="18"/>
+        <device.rerouting.adaptation-interval value="10"/>
+    </routing>
+
+    <report>
+        <verbose value="true"/>
+        <duration-log.statistics value="true"/>
+        <no-step-log value="true"/>
+    </report>
+
+    <gui_only>
+        <gui-settings-file value="osm.view.xml"/>
+    </gui_only>
+
+</configuration>

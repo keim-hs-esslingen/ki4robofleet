@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<poisetting>
+  <poly type="amenity.kindergarten" color="100,60,255" fill="1" layer="1.00"/>
+  <poly type="building.apartments" color="0,100,100" fill="1" layer="1.00"/>
+  <poly type="building.office" color="255,0,255" fill="1" layer="1.00"/>
+  <poly type="building.residential" color="30,60,150" fill="1" layer="1.00"/>
+  <poly type="building.school" color="255,100,0" fill="1" layer="1.00"/>
+  <poi type="amenity.kindergarten" color="50,0,255" layer="1.00"/>
+  <poi type="amenity.school" color="255,150,0" layer="1.00"/>
+  <poi type="amenity.car_sharing" color="200,0,0" layer="1.00"/>
+</poisetting>

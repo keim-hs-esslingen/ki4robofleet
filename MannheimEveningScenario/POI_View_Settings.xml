@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<poisetting>
+  <poly type="building.apartments" color="81,162,136" fill="1" layer="1.00"/>
+  <poly type="building.office" color="255,0,255" fill="1" layer="1.00"/>
+  <poly type="building.residential" color="58,36,101" fill="1" layer="1.00"/>
+  <poly type="amenity.theatre" color="0,255,0" fill="1" layer="1.00"/>
+  <poly type="amenity.cinema" color="152,208,88" fill="1" layer="1.00"/>
+  <poly type="amenity.restaurant" color="0,0,255" fill="1" layer="1.00"/>
+  <poly type="leisure.fitness_centre" color="52,187,255" fill="" layer="1.00"/>
+  <poi type="amenity.biergarten" color="42,32,0" layer="1.00"/>
+  <poi type="amenity.cinema" color="152,208,88" layer="1.00"/>
+  <poi type="amenity.pub" color="236,82,0" layer="1.00"/>
+  <poi type="amenity.restaurant" color="0,0,255" layer="1.00"/>
+  <poi type="amenity.theatre" color="0,255,0" layer="1.00"/>
+  <poi type="leisure.fitness_centre" color="52,187,255" layer="1.00"/>
+  <poi type="amenity.car_sharing" color="200,0,0" layer="1.00"/>
+</poisetting>

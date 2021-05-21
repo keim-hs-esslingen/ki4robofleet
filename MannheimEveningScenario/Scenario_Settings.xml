@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<scenariosetting>
+  <scenario pickupPoiGroup="POLY: building" pickupAnySubGroup="False" pickupPoiSubGroup="apartments" targetPoiGroup="POI: amenity" targetAnySubGroup="False" targetPoiSubGroup="theatre" numberOfRequests="50" roundTrip="False" stayTime="1800" normalDistributed="True" standardDeviation="600"/>
+  <scenario pickupPoiGroup="POLY: building" pickupAnySubGroup="False" pickupPoiSubGroup="residential" targetPoiGroup="POI: amenity" targetAnySubGroup="False" targetPoiSubGroup="restaurant" numberOfRequests="100" roundTrip="False" stayTime="1800" normalDistributed="True" standardDeviation="600"/>
+  <scenario pickupPoiGroup="POLY: building" pickupAnySubGroup="False" pickupPoiSubGroup="residential" targetPoiGroup="POI: amenity" targetAnySubGroup="False" targetPoiSubGroup="cinema" numberOfRequests="50" roundTrip="False" stayTime="1800" normalDistributed="True" standardDeviation="600"/>
+  <scenario pickupPoiGroup="POLY: building" pickupAnySubGroup="False" pickupPoiSubGroup="office" targetPoiGroup="POI: amenity" targetAnySubGroup="False" targetPoiSubGroup="pub" numberOfRequests="50" roundTrip="False" stayTime="1800" normalDistributed="True" standardDeviation="600"/>
+  <scenario pickupPoiGroup="POLY: building" pickupAnySubGroup="False" pickupPoiSubGroup="office" targetPoiGroup="POI: amenity" targetAnySubGroup="False" targetPoiSubGroup="biergarten" numberOfRequests="50" roundTrip="False" stayTime="1800" normalDistributed="True" standardDeviation="600"/>
+  <scenario pickupPoiGroup="POLY: building" pickupAnySubGroup="False" pickupPoiSubGroup="office" targetPoiGroup="POI: leisure" targetAnySubGroup="False" targetPoiSubGroup="fitness_centre" numberOfRequests="50" roundTrip="False" stayTime="1800" normalDistributed="True" standardDeviation="600"/>
+</scenariosetting>

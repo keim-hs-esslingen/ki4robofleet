@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<additional>
+  <poi id="1435395114" type="amenity.car_sharing" color="200,0,0" layer="5.00" x="14280.00" y="55678.52"/>
+  <poi id="1435486569" type="amenity.car_sharing" color="200,0,0" layer="5.00" x="14018.62" y="55573.42"/>
+  <poi id="2335100685" type="amenity.car_sharing" color="200,0,0" layer="5.00" x="14374.83" y="55405.48"/>
+  <poi id="2335111824" type="amenity.car_sharing" color="200,0,0" layer="5.00" x="14245.46" y="55467.62"/>
+  <poi id="2335119549" type="amenity.car_sharing" color="200,0,0" layer="5.00" x="14304.94" y="55298.19"/>
+  <poi id="2335120731" type="amenity.car_sharing" color="200,0,0" layer="5.00" x="14085.74" y="55894.16"/>
+  <poi id="2335121051" type="amenity.car_sharing" color="200,0,0" layer="5.00" x="14343.35" y="56006.97"/>
+  <poi id="2335122116" type="amenity.car_sharing" color="200,0,0" layer="5.00" x="15262.78" y="55823.16"/>
+  <poi id="2335123253" type="amenity.car_sharing" color="200,0,0" layer="5.00" x="15110.92" y="55490.17"/>
+  <poi id="2335125509" type="amenity.car_sharing" color="200,0,0" layer="5.00" x="15221.54" y="55253.08"/>
+  <poi id="2335154653" type="amenity.car_sharing" color="200,0,0" layer="5.00" x="14778.25" y="55147.68"/>
+  <poi id="2335155709" type="amenity.car_sharing" color="200,0,0" layer="5.00" x="15087.43" y="54910.72"/>
+  <poi id="2335155967" type="amenity.car_sharing" color="200,0,0" layer="5.00" x="14825.30" y="55096.58"/>
+  <poi id="2335158698" type="amenity.car_sharing" color="200,0,0" layer="5.00" x="14672.98" y="56256.47"/>
+  <poi id="2335207635" type="amenity.car_sharing" color="200,0,0" layer="5.00" x="14910.84" y="56492.64"/>
+  <poi id="2335208197" type="amenity.car_sharing" color="200,0,0" layer="5.00" x="15405.44" y="56285.77"/>
+  <poi id="2335208912" type="amenity.car_sharing" color="200,0,0" layer="5.00" x="15645.08" y="56154.89"/>
+  <poi id="2335209493" type="amenity.car_sharing" color="200,0,0" layer="5.00" x="15441.34" y="56471.90"/>
+  <poi id="2335209634" type="amenity.car_sharing" color="200,0,0" layer="5.00" x="15654.50" y="56597.90"/>
+  <poi id="2335212222" type="amenity.car_sharing" color="200,0,0" layer="5.00" x="15375.95" y="56719.34"/>
+  <poi id="2335220526" type="amenity.car_sharing" color="200,0,0" layer="5.00" x="13860.87" y="56545.44"/>
+  <poi id="2335222787" type="amenity.car_sharing" color="200,0,0" layer="5.00" x="15594.27" y="55324.89"/>
+  <poi id="2335223633" type="amenity.car_sharing" color="200,0,0" layer="5.00" x="15980.24" y="54491.50"/>
+  <poi id="2335223863" type="amenity.car_sharing" color="200,0,0" layer="5.00" x="15804.58" y="54489.60"/>
+  <poi id="2335225263" type="amenity.car_sharing" color="200,0,0" layer="5.00" x="15350.84" y="54622.93"/>
+  <poi id="2335225518" type="amenity.car_sharing" color="200,0,0" layer="5.00" x="15129.28" y="54565.80"/>
+  <poi id="2335229003" type="amenity.car_sharing" color="200,0,0" layer="5.00" x="15044.96" y="54394.48"/>
+  <poi id="2335321626" type="amenity.car_sharing" color="200,0,0" layer="5.00" x="13243.48" y="55042.84"/>
+  <poi id="534770397" type="amenity.car_sharing" color="200,0,0" layer="5.00" x="15155.80" y="54553.84"/>
+  <poi id="648771358" type="amenity.car_sharing" color="200,0,0" layer="5.00" x="14603.44" y="56728.00"/>
+  <poi id="662299857" type="amenity.car_sharing" color="200,0,0" layer="5.00" x="15121.07" y="54558.55"/>
+</additional>

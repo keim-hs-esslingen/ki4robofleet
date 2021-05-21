@@ -1,0 +1,9 @@
+
+<viewsettings>
+    <scheme name="real world"/>
+    <delay value="0"/>
+    <viewport zoom="1650.64" x="14871.20" y="55617.98" angle="0.00"/>    
+    <vehicles vehicle_exaggeration="1.00" vehicleName_show="0" vehicleName_size="50.00" vehicleName_color="0,0,0" vehicleName_bgColor="255,255,255,255" ></vehicles>
+    <persons person_exaggeration="1.00" personName_show="1" personName_size="50.00" personName_color="0,0,0" personName_bgColor="255,255,255,255"></persons> 
+    <pois poi_exaggeration="10.00"></pois>
+</viewsettings>
