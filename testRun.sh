@@ -1,0 +1,1 @@
+python3 ./web_taxi_runner.py -f ./MannheimMorningScenario/CustomerRequests.xml -c ./MannheimMorningScenario/osm.sumocfg -t 36000 -e 45085545 -s "simple" -n "10" -a 900 -r "1.0" -l "1.0"

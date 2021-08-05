@@ -8,11 +8,11 @@
     <input>
         <net-file value="osm.net.xml"/>
 
-	<!-- USE THIS BLOCK TO TURN ON BACKGROUND TRAFFIC
-	<additional-files value="vehicleTypes.xml,routesPKW.xml,routesLKW.xml,osm.poly.xml,poi.carsharing.xml,parkingAreas.xml,parkingAreasCarSharing.xml"/>
-	-->
-
+	<!-- USE THIS BLOCK TO TURN OFF BACKGROUND TRAFFIC
 	<additional-files value="vehicleTypes.xml,osm.poly.xml,poi.carsharing.xml,parkingAreas.xml,parkingAreasCarSharing.xml"/>
+	-->
+	
+	<additional-files value="vehicleTypes.xml,routesPKW.xml,routesLKW.xml,osm.poly.xml,poi.carsharing.xml,parkingAreas.xml,parkingAreasCarSharing.xml"/>
     </input>
 
     <processing>

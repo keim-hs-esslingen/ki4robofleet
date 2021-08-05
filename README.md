@@ -18,10 +18,15 @@ pip install PyQt5
 pip install PyQtChart
 ```
 
-### The latest SUMO Tools Version has to be installed:
+### The latest SUMO Tools Version has to be installed otherwise routing errors could arise:
 
-```
+```bash
 sudo apt-get dist-upgrade
+```
+
+### Test the Setup with the provided Scipt to see if SUMO is working properly
+```bash
+./testRun.sh
 ```
 
 ### Getting Started:
@@ -35,3 +40,10 @@ or
 ```bash
 python3 KI4RoboFleetUI.py
 ```
+
+### During the Simulation the Status is displayed on the Web Interface 
+http://localhost:8080/index.html
+
+
+
+
