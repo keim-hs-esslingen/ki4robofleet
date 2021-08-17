@@ -143,19 +143,21 @@ class SimulationInputWindow(QWidget):
         self.sumoConfigFile, _ = QFileDialog.getOpenFileName(
             None, "select SUMO Config File", ".", "(*.sumocfg)"
         )
-        self.sumoConfigFileLabel.setText(self.sumoConfigFile)
-        self.sumoConfigFileLabel.setStyleSheet(
-            "background-color: green; text-align: center;"
-        )
+        if len(self.sumoConfigFile) > 0:
+            self.sumoConfigFileLabel.setText(self.sumoConfigFile)
+            self.sumoConfigFileLabel.setStyleSheet(
+                "background-color: green; text-align: center;"
+            )
 
     def chooseRequestList(self):
         self.requestList, _ = QFileDialog.getOpenFileName(
             None, "select List of Customer Requests", ".", "(*.xml)"
         )
-        self.requestlistLabel.setText(self.requestList)
-        self.requestlistLabel.setStyleSheet(
-            "background-color: green; text-align: center;"
-        )
+        if len(self.requestList) > 0:
+            self.requestlistLabel.setText(self.requestList)
+            self.requestlistLabel.setStyleSheet(
+                "background-color: green; text-align: center;"
+            )
 
     def startSimulation(self):
         additionalParams = ""
@@ -166,12 +168,10 @@ class SimulationInputWindow(QWidget):
         realisticTimeFactorParam = ""
         latenessFactorParam = ""
 
-
         if self.sumoGui.isChecked():
             showSumoGui = " -g True "
         else:
-            showSumoGui = " -g False "    
-
+            showSumoGui = " -g False "
 
         if self.fixedFleetSizeStrategy.isChecked():
             if len(self.numberOfVehiclesInput.text()) > 0:
