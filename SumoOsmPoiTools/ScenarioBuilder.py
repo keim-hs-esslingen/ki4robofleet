@@ -247,7 +247,7 @@ class ScenarioBuilderWindow(QWidget):
         self.poiGroup = PoiTypeList().getGroups()
 
         self.setWindowTitle(
-            "Anwendungszentrum KEIM Hochschule Esslingen - KI4ROBOFLEET Scenario Builder v0.5"
+            "Anwendungszentrum KEIM Hochschule Esslingen - KI4ROBOFLEET Scenario Builder v1.0"
         )
         self.setGeometry(100, 100, 1970, 850)
         self.uiInit()
@@ -305,61 +305,69 @@ class ScenarioBuilderWindow(QWidget):
         self.buttonCreateList.clicked.connect(self.showManual)
 
     def loadSettings(self):
-        print("loading Scenario Settings")
-        self.listWidget.clear()
-        settingsTree = ET.parse("Scenario_Settings.xml")
+        scenarioSettingsFile, _ = QFileDialog.getOpenFileName(
+            None, "select Scenario Settings File", ".", "(*.xml)"
+        )
+        if len(scenarioSettingsFile) > 0:
+            print("loading Scenario Settings from ", scenarioSettingsFile)
+            self.listWidget.clear()
+            settingsTree = ET.parse(scenarioSettingsFile)
 
-        settingsRoot = settingsTree.getroot()
+            settingsRoot = settingsTree.getroot()
 
-        for setting in settingsRoot.findall("scenario"):
-            scenarioSetting = ScenarioSetting(
-                setting.attrib.get("pickupPoiGroup"),
-                setting.attrib.get("pickupAnySubGroup"),
-                setting.attrib.get("pickupPoiSubGroup"),
-                setting.attrib.get("targetPoiGroup"),
-                setting.attrib.get("targetAnySubGroup"),
-                setting.attrib.get("targetPoiSubGroup"),
-                setting.attrib.get("numberOfRequests"),
-                setting.attrib.get("roundTrip"),
-                setting.attrib.get("stayTime"),
-                setting.attrib.get("normalDistributed"),
-                setting.attrib.get("standardDeviation"),
-            )
-            self.item = QListWidgetItem(self.listWidget)
-            self.listWidget.addItem(self.item)
-            self.row = WidgetRow(self.poiGroup, scenarioSetting)
-            self.item.setSizeHint(self.row.minimumSizeHint())
-            self.listWidget.setItemWidget(self.item, self.row)
+            for setting in settingsRoot.findall("scenario"):
+                scenarioSetting = ScenarioSetting(
+                    setting.attrib.get("pickupPoiGroup"),
+                    setting.attrib.get("pickupAnySubGroup"),
+                    setting.attrib.get("pickupPoiSubGroup"),
+                    setting.attrib.get("targetPoiGroup"),
+                    setting.attrib.get("targetAnySubGroup"),
+                    setting.attrib.get("targetPoiSubGroup"),
+                    setting.attrib.get("numberOfRequests"),
+                    setting.attrib.get("roundTrip"),
+                    setting.attrib.get("stayTime"),
+                    setting.attrib.get("normalDistributed"),
+                    setting.attrib.get("standardDeviation"),
+                )
+                self.item = QListWidgetItem(self.listWidget)
+                self.listWidget.addItem(self.item)
+                self.row = WidgetRow(self.poiGroup, scenarioSetting)
+                self.item.setSizeHint(self.row.minimumSizeHint())
+                self.listWidget.setItemWidget(self.item, self.row)
 
     def writeSettings(self):
-        print("writing Scenario Settings")
-        xml_output = ET.Element("scenariosetting")
-        for index in range(self.listWidget.count()):
-            item = self.listWidget.item(index)
-            widgetRow = self.listWidget.itemWidget(item)
-            ET.SubElement(
-                xml_output,
-                "scenario",
-                pickupPoiGroup=widgetRow.pickupPoiGroup.currentText(),
-                pickupAnySubGroup=str(widgetRow.pickupAnySubGroup.isChecked()),
-                pickupPoiSubGroup=widgetRow.pickupPoiSubGroup.currentText(),
-                targetPoiGroup=widgetRow.targetPoiGroup.currentText(),
-                targetAnySubGroup=str(widgetRow.targetAnySubGroup.isChecked()),
-                targetPoiSubGroup=widgetRow.targetPoiSubGroup.currentText(),
-                numberOfRequests=widgetRow.numberOfRequests.text(),
-                roundTrip=str(widgetRow.roundTrip.isChecked()),
-                stayTime=widgetRow.stayTime.text(),
-                normalDistributed=str(widgetRow.normalDistributed.isChecked()),
-                standardDeviation=widgetRow.standardDeviation.text(),
-            )
-
-        tree = ET.ElementTree(xml_output)
-        tree.write(
-            "./Scenario_Settings.xml",
-            encoding="UTF-8",
-            xml_declaration=True,
-            pretty_print=True,
+        scenarioSettingsFile, _ = QtWidgets.QFileDialog.getSaveFileName(
+            self, "Save Scenario Settings", ".", "*.xml"
         )
+        if len(scenarioSettingsFile) > 0:
+            print("writing Scenario Settings to ", scenarioSettingsFile)
+            xml_output = ET.Element("scenariosetting")
+            for index in range(self.listWidget.count()):
+                item = self.listWidget.item(index)
+                widgetRow = self.listWidget.itemWidget(item)
+                ET.SubElement(
+                    xml_output,
+                    "scenario",
+                    pickupPoiGroup=widgetRow.pickupPoiGroup.currentText(),
+                    pickupAnySubGroup=str(widgetRow.pickupAnySubGroup.isChecked()),
+                    pickupPoiSubGroup=widgetRow.pickupPoiSubGroup.currentText(),
+                    targetPoiGroup=widgetRow.targetPoiGroup.currentText(),
+                    targetAnySubGroup=str(widgetRow.targetAnySubGroup.isChecked()),
+                    targetPoiSubGroup=widgetRow.targetPoiSubGroup.currentText(),
+                    numberOfRequests=widgetRow.numberOfRequests.text(),
+                    roundTrip=str(widgetRow.roundTrip.isChecked()),
+                    stayTime=widgetRow.stayTime.text(),
+                    normalDistributed=str(widgetRow.normalDistributed.isChecked()),
+                    standardDeviation=widgetRow.standardDeviation.text(),
+                )
+
+            tree = ET.ElementTree(xml_output)
+            tree.write(
+                scenarioSettingsFile,
+                encoding="UTF-8",
+                xml_declaration=True,
+                pretty_print=True,
+            )
 
     def addRow(self):
         self.item = QListWidgetItem(self.listWidget)

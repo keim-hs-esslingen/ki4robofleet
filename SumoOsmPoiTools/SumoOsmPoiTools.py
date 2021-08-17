@@ -223,78 +223,89 @@ class PoiToolMainWindow(QWidget):
             self.listWidget.setItemWidget(self.item, self.row)
 
     def loadSettings(self):
-        settingsTree = ET.parse("POI_View_Settings.xml")
-        settingsRoot = settingsTree.getroot()
+        poiViewSettingsFile, _ = QFileDialog.getOpenFileName(
+            None, "select POI View Settings File", ".", "(*.xml)"
+        )
+        if len(poiViewSettingsFile) > 0:
+            print("loading POI View Settings from ", poiViewSettingsFile)
+            settingsTree = ET.parse(poiViewSettingsFile)
+            settingsRoot = settingsTree.getroot()
 
-        # read poly- Settings
-        for setting in settingsRoot.findall("poly"):
-            poiSetting = PoiSetting(
-                "POLY",
-                "POLY: " + setting.attrib.get("type"),
-                setting.attrib.get("color"),
-                setting.attrib.get("fill"),
-                setting.attrib.get("layer"),
-            )
-            self.item = QListWidgetItem(self.listWidget)
-            self.listWidget.addItem(self.item)
-            self.row = WidgetRow(poiSetting)
-            self.item.setSizeHint(self.row.minimumSizeHint())
-            self.listWidget.setItemWidget(self.item, self.row)
+            # read poly- Settings
+            for setting in settingsRoot.findall("poly"):
+                poiSetting = PoiSetting(
+                    "POLY",
+                    "POLY: " + setting.attrib.get("type"),
+                    setting.attrib.get("color"),
+                    setting.attrib.get("fill"),
+                    setting.attrib.get("layer"),
+                )
+                self.item = QListWidgetItem(self.listWidget)
+                self.listWidget.addItem(self.item)
+                self.row = WidgetRow(poiSetting)
+                self.item.setSizeHint(self.row.minimumSizeHint())
+                self.listWidget.setItemWidget(self.item, self.row)
 
-        # read poi- Settings
-        for setting in settingsRoot.findall("poi"):
-            poiSetting = PoiSetting(
-                "POI",
-                "POI: " + setting.attrib.get("type"),
-                setting.attrib.get("color"),
-                "",
-                setting.attrib.get("layer"),
-            )
-            self.item = QListWidgetItem(self.listWidget)
-            self.listWidget.addItem(self.item)
-            self.row = WidgetRow(poiSetting)
-            self.item.setSizeHint(self.row.minimumSizeHint())
-            self.listWidget.setItemWidget(self.item, self.row)
+            # read poi- Settings
+            for setting in settingsRoot.findall("poi"):
+                poiSetting = PoiSetting(
+                    "POI",
+                    "POI: " + setting.attrib.get("type"),
+                    setting.attrib.get("color"),
+                    "",
+                    setting.attrib.get("layer"),
+                )
+                self.item = QListWidgetItem(self.listWidget)
+                self.listWidget.addItem(self.item)
+                self.row = WidgetRow(poiSetting)
+                self.item.setSizeHint(self.row.minimumSizeHint())
+                self.listWidget.setItemWidget(self.item, self.row)
 
     def writeSettings(self):
-        xml_output = ET.Element("poisetting")
-        for index in range(self.listWidget.count()):
-            item = self.listWidget.item(index)
-            widgetRow = self.listWidget.itemWidget(item)
-            if widgetRow.check.isChecked():
-                if "POLY" in widgetRow.poiName.text():
-                    ET.SubElement(
-                        xml_output,
-                        "poly",
-                        type=widgetRow.poiName.text()[6:].strip(),
-                        color=widgetRow.r.text()
-                        + ","
-                        + widgetRow.g.text()
-                        + ","
-                        + widgetRow.b.text(),
-                        fill=widgetRow.fill.text(),
-                        layer=widgetRow.layer.text(),
-                    )
-
-                if "POI" in widgetRow.poiName.text():
-                    ET.SubElement(
-                        xml_output,
-                        "poi",
-                        type=widgetRow.poiName.text()[5:].strip(),
-                        color=widgetRow.r.text()
-                        + ","
-                        + widgetRow.g.text()
-                        + ","
-                        + widgetRow.b.text(),
-                        layer=widgetRow.layer.text(),
-                    )
-        tree = ET.ElementTree(xml_output)
-        tree.write(
-            "./POI_View_Settings.xml",
-            encoding="UTF-8",
-            xml_declaration=True,
-            pretty_print=True,
+        poiViewSettingsFile, _ = QtWidgets.QFileDialog.getSaveFileName(
+            self, "Save POI View Settings", ".", "*.xml"
         )
+        if len(poiViewSettingsFile) > 0:
+            print("writing POI View Settings to ", poiViewSettingsFile)
+
+            xml_output = ET.Element("poisetting")
+            for index in range(self.listWidget.count()):
+                item = self.listWidget.item(index)
+                widgetRow = self.listWidget.itemWidget(item)
+                if widgetRow.check.isChecked():
+                    if "POLY" in widgetRow.poiName.text():
+                        ET.SubElement(
+                            xml_output,
+                            "poly",
+                            type=widgetRow.poiName.text()[6:].strip(),
+                            color=widgetRow.r.text()
+                            + ","
+                            + widgetRow.g.text()
+                            + ","
+                            + widgetRow.b.text(),
+                            fill=widgetRow.fill.text(),
+                            layer=widgetRow.layer.text(),
+                        )
+
+                    if "POI" in widgetRow.poiName.text():
+                        ET.SubElement(
+                            xml_output,
+                            "poi",
+                            type=widgetRow.poiName.text()[5:].strip(),
+                            color=widgetRow.r.text()
+                            + ","
+                            + widgetRow.g.text()
+                            + ","
+                            + widgetRow.b.text(),
+                            layer=widgetRow.layer.text(),
+                        )
+            tree = ET.ElementTree(xml_output)
+            tree.write(
+                poiViewSettingsFile,
+                encoding="UTF-8",
+                xml_declaration=True,
+                pretty_print=True,
+            )
 
     def createMapLegend(self):
         fnt = ImageFont.truetype("Pillow/Tests/fonts/FreeMono.ttf", 30)
