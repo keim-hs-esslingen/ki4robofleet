@@ -139,8 +139,6 @@ def add_and_route_vehicle(vehID, to_poi: Point_of_Interest, t=0):
 
     try:
         toPoiColor = to_poi.color
-        print("add_and_route_vehicle",to_poi.poi_type)
-        print(toPoiColor)
         traci.vehicle.setColor(
             vehID, (int(toPoiColor[0]), int(toPoiColor[1]), int(toPoiColor[2]))
         )
@@ -161,7 +159,8 @@ def add_person_request(personID, req: Request):
     """
     req.personID = None
     try:
-        traci.person.add(
+
+         traci.person.add(
             personID, req.from_edge, pos=req.oldpos, typeID="DEFAULT_PEDTYPE"
         )
     except Exception as e:

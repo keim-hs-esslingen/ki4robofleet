@@ -304,12 +304,11 @@ def simple_strategy(data: ProjectConfigData):
         while current_open_requests and empty_fleet:
             vehID = empty_fleet.pop()
             req = current_open_requests.pop()
-            toPoiColor = req.to_poi.color
+            fromPoiColor = req.from_poi.color
             # set vehicle color according to POI color
             
-            print("SIMPLE DISPATCH",toPoiColor)
             traci.vehicle.setColor(
-                vehID, (int(toPoiColor[0]), int(toPoiColor[1]), int(toPoiColor[2]))
+                vehID, (int(fromPoiColor[0]), int(fromPoiColor[1]), int(fromPoiColor[2]))
             )
 
             sf.dispatch(vehID, [req.reservation.id])
@@ -439,10 +438,10 @@ def look_ahead_strategy(data: ProjectConfigData):
                         bestVehID = vehID
             if bestVehID:
                 empty_fleet.remove(bestVehID)
-                toPoiColor = req.to_poi.color
+                fromPoiColor = req.from_poi.color
                 # set vehicle color according to POI color
                 traci.vehicle.setColor(
-                    vehID, (int(toPoiColor[0]), int(toPoiColor[1]), int(toPoiColor[2]))
+                    vehID, (int(fromPoiColor[0]), int(fromPoiColor[1]), int(fromPoiColor[2]))
                 )
 
                 sf.dispatch(bestVehID, [req.reservation.id])

@@ -58,6 +58,7 @@ def current_passengers(
                 log(f"{personID} enters {vehID}")
                 for req in open_requests:
                     if req.personID == personID:
+                        traci.vehicle.setColor(vehID, (int(req.to_poi.color[0]), int(req.to_poi.color[1]), int(req.to_poi.color[2])))
                         req.enter(vehID, sumo_time, vehicle_positions[vehID].dist)
                         break
             current_driving.append(personID)
