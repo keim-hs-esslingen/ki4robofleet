@@ -351,8 +351,14 @@ class Project:
 
         else:
             atexit.register(self.cleanup)
-            sumoBinary = checkBinary("sumo-gui")
-            #sumoBinary = checkBinary("sumo")
+
+            sumoBinary = ""
+            if self.data.show_gui == "True":
+                sumoBinary = checkBinary("sumo-gui")
+                dlog(f"Starting SUMO in GUI - Mode...")
+            else:
+                sumoBinary = checkBinary("sumo")
+                dlog(f"Starting SUMO without GUI...")
             sumoStart = [
                 sumoBinary,
                 "-S",

@@ -98,6 +98,16 @@ if __name__ == "__main__":
         help="requests file to load",
         default=requests_file,
     )
+
+    parser.add_option(
+        "-g",
+        "--show_gui",
+        action="store",
+        dest="show_gui",
+        help="show SUMO GUI during the Simulation",
+        default="True",
+    )
+
     parser.add_option(
         "-l",
         "--lateness_factors",

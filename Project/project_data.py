@@ -21,6 +21,7 @@ from Tools.logger import log
 
 class ProjectConfigData:
     def __init__(self, sumo_config_file: str, project_file: str, **kwargs):
+        self.show_gui = kwargs.get("show_gui", True)
         self.no_of_poi = kwargs.get("no_of_poi", 10)
         self.no_of_trips = kwargs.get("no_of_trips", 10)
         self.no_of_vehicles = kwargs.get("no_of_vehicles", 10)

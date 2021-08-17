@@ -117,18 +117,22 @@ class SimulationInputWindow(QWidget):
         vboxSharing.addWidget(self.latenessFactorInput)
 
         self.simulationTimeLabel = QLabel("Simulation Time [s]", self)
-        self.simulationTimeLabel.move(148, 595)
+        self.simulationTimeLabel.move(148, 580)
 
         self.simulationTimeInput = QLineEdit("3600", self)
         self.simulationTimeInput.setFixedWidth(100)
-        self.simulationTimeInput.move(270, 590)
+        self.simulationTimeInput.move(270, 575)
+
+        self.sumoGui = QCheckBox("show SUMO GUI", self)
+        self.sumoGui.setChecked(True)
+        self.sumoGui.move(148, 610)
 
         self.cleanEdgeLabel = QLabel("ID of an arbitrary (ideally central) Edge", self)
-        self.cleanEdgeLabel.move(25, 645)
+        self.cleanEdgeLabel.move(25, 650)
 
         self.cleanEdgeInput = QLineEdit("45085545", self)
         self.cleanEdgeInput.setFixedWidth(100)
-        self.cleanEdgeInput.move(270, 640)
+        self.cleanEdgeInput.move(270, 645)
 
         self.startSimulationButton = QPushButton("start Simulation", self)
         self.startSimulationButton.resize(200, 30)
@@ -155,11 +159,19 @@ class SimulationInputWindow(QWidget):
 
     def startSimulation(self):
         additionalParams = ""
+        showSumoGui = ""
         strategies = []
         numberOfVehiclesParam = ""
         lookAheadTimeParam = ""
         realisticTimeFactorParam = ""
         latenessFactorParam = ""
+
+
+        if self.sumoGui.isChecked():
+            showSumoGui = " -g True "
+        else:
+            showSumoGui = " -g False "    
+
 
         if self.fixedFleetSizeStrategy.isChecked():
             if len(self.numberOfVehiclesInput.text()) > 0:
@@ -203,6 +215,7 @@ class SimulationInputWindow(QWidget):
                 + self.simulationTimeInput.text()
                 + " -e "
                 + self.cleanEdgeInput.text()
+                + showSumoGui
                 + additionalParams
             )
             print("executing: ", cmd)
