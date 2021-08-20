@@ -4,6 +4,10 @@
 
 ### Link to the Overview-Page: [KI4RoboFleet](https://keim-hs-esslingen.github.io/ki4robofleet/)
 
+### Video Tutorial 
+
+##### [Setup a new SUMO Model from scratch using OsmWebWizard](https://youtu.be/Dh_0A-wOk84)
+
 ### Reqirements to run the Simulation:
 
 - ubuntu 20.04
