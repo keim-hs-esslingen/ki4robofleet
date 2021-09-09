@@ -17,14 +17,32 @@
 - Python 3.8.5 or higher
 - Eclipse SUMO Version 1.9.0 or higher (Download from https://www.eclipse.org/sumo/)
 
+
+### SUMO installation:
+```bash
+sudo add-apt-repository ppa:sumo/stable
+sudo apt-get update
+sudo apt-get install sumo sumo-tools sumo-doc
+```
+
+#### open ~/.bashrc and add following entry (or similar path to SUMO binary):
+```bash
+export SUMO_HOME="/usr/share/sumo"
+
+```
+
+
 ### Some Python Packages need to be installed:
 
 ```bash
-pip install osmapi
-pip install PyQt5
-pip install PyQtChart
+pip3 install osmapi
+pip3 install PyQt5
+pip3 install PyQtChart
+pip3 install pandas
+pip3 install termcolor
+sudo apt-get install python3-lxml
 ```
-
+.
 ### The latest SUMO Tools Version has to be installed otherwise routing errors could arise:
 
 ```bash
