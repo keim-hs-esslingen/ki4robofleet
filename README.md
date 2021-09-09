@@ -25,7 +25,7 @@ sudo apt-get update
 sudo apt-get install sumo sumo-tools sumo-doc
 ```
 
-#### open ~/.bashrc and add following entry (or similar path to SUMO binary):
+#### open ~/.bashrc and add following entry (or similar path to your SUMO Installation):
 ```bash
 export SUMO_HOME="/usr/share/sumo"
 
@@ -42,7 +42,7 @@ pip3 install pandas
 pip3 install termcolor
 sudo apt-get install python3-lxml
 ```
-.
+
 ### The latest SUMO Tools Version has to be installed otherwise routing errors could arise:
 
 ```bash
