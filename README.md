@@ -1,6 +1,6 @@
-![KI4RoboFleet](KI4RoboFleet.gif)
-
 # KI4RoboFleet
+
+![KI4RoboFleet](KI4RoboFleet.gif)
 
 #### A Simulation Environment based on SUMO to analyze Scenarios for autonomous driving vehicles in Cities
 
