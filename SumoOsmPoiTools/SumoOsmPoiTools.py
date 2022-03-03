@@ -98,11 +98,11 @@ class PoiToolMainWindow(QWidget):
 
     def __init__(self):
         super().__init__()
-        self.poiTypeList = PoiTypeList()
+        self.poiTypeList = None
         self.poi2EdgeConverter = Poi2EdgeConverter()
         self.parkingAreaConverter = ParkingAreaConverter()
         self.setWindowTitle(
-            "Anwendungszentrum KEIM Hochschule Esslingen - SUMO OSM POI-Tools v0.2"
+            "Anwendungszentrum KEIM Hochschule Esslingen - SUMO OSM POI-Tools v0.3"
         )
         self.setGeometry(100, 100, 600, 870)
         self.uiInit()
@@ -209,6 +209,11 @@ class PoiToolMainWindow(QWidget):
             widgetRow.check.setChecked(False)
 
     def createSettings(self):
+        osmPolyFile, _ = QFileDialog.getOpenFileName(
+            None, "select OSM Poly File", ".", "(*.xml)"
+        )
+        self.poiTypeList = PoiTypeList(osmPolyFile)
+        
         randomColorGenerator = RandomColorGenerator()
         pois = self.poiTypeList.getSortedList()
 
@@ -266,7 +271,8 @@ class PoiToolMainWindow(QWidget):
             self, "Save POI View Settings", ".", "*.xml"
         )
         if len(poiViewSettingsFile) > 0:
-            print("writing POI View Settings to ", poiViewSettingsFile)
+            poiViewSettingsFile+=".xml"
+            print("Writing POI View Settings to ", poiViewSettingsFile)
 
             xml_output = ET.Element("poisetting")
             for index in range(self.listWidget.count()):

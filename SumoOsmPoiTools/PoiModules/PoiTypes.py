@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+13#!/usr/bin/env python3
 
 # =============================================================================
 # Created at Hochschule Esslingen - University of Applied Sciences
@@ -21,9 +21,10 @@ class PoiTypeList:
     pois = {}
     poiGroup = {}
 
-    def __init__(self):
+    def __init__(self, osmPolyFile = "osm.poly.xml" ):
+        self.osmPolyFile = osmPolyFile
         try:
-            polyTree = ET.parse("osm.poly.xml")
+            polyTree = ET.parse(osmPolyFile)
             polyRoot = polyTree.getroot()
             print("Import osm.poly.xml ...")
             # read the <poly> - Tags:
@@ -44,7 +45,7 @@ class PoiTypeList:
             print("READY!")
         except:
             print(
-                "An Error has occurred: please check if the file 'osm.poly.xml' is in the current direcory"
+                "An Error has occurred: please check if the selected 'osm.poly.xml' file is flawless"
             )
 
         # create a dictionary  key: POI Group (eg. shop) value: list of SubGroups (eg. supermarket, florist, bakery,...)
@@ -92,9 +93,9 @@ class PoiTypeList:
 
         try:
 
-            print("Reading osm.poly.xml")
+            print("Reading ", self.osmPolyFile)
 
-            polyTree = ET.parse("osm.poly.xml")
+            polyTree = ET.parse(self.osmPolyFile)
             polyRoot = polyTree.getroot()
 
             print("Reading POI_Settings.xml")
@@ -182,10 +183,11 @@ class PoiTypeList:
 
             tree = ET.ElementTree(xml_output)
 
-            print("Writing osm.poly.customized.xml")
-            # formatting and writing the xml file
+             # formatting and writing the xml file
+            outputFile =  self.osmPolyFile.rsplit("/",0)+"osm.poly.customized.xml"
+            print("Writing ", outputFile)
             tree.write(
-                "./osm.poly.customized.xml",
+                outputFile,
                 encoding="UTF-8",
                 xml_declaration=True,
                 pretty_print=True,
