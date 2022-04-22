@@ -1,0 +1,1238 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<logbook>
+  <vehicle time="0" vehicle="taxi_0000" cmd="init" poi="265"/>
+  <vehicle time="0" vehicle="taxi_0001" cmd="init" poi="266"/>
+  <vehicle time="0" vehicle="taxi_0002" cmd="init" poi="267"/>
+  <vehicle time="0" vehicle="taxi_0003" cmd="init" poi="268"/>
+  <vehicle time="0" vehicle="taxi_0004" cmd="init" poi="269"/>
+  <vehicle time="0" vehicle="taxi_0005" cmd="init" poi="270"/>
+  <vehicle time="0" vehicle="taxi_0006" cmd="init" poi="271"/>
+  <vehicle time="0" vehicle="taxi_0007" cmd="init" poi="272"/>
+  <vehicle time="0" vehicle="taxi_0008" cmd="init" poi="273"/>
+  <vehicle time="0" vehicle="taxi_0009" cmd="init" poi="274"/>
+  <vehicle time="0" vehicle="taxi_0010" cmd="init" poi="275"/>
+  <vehicle time="0" vehicle="taxi_0011" cmd="init" poi="276"/>
+  <vehicle time="0" vehicle="taxi_0012" cmd="init" poi="277"/>
+  <vehicle time="0" vehicle="taxi_0013" cmd="init" poi="278"/>
+  <vehicle time="0" vehicle="taxi_0014" cmd="init" poi="279"/>
+  <vehicle time="0" vehicle="taxi_0015" cmd="init" poi="280"/>
+  <vehicle time="0" vehicle="taxi_0016" cmd="init" poi="281"/>
+  <vehicle time="0" vehicle="taxi_0017" cmd="init" poi="282"/>
+  <vehicle time="0" vehicle="taxi_0018" cmd="init" poi="283"/>
+  <vehicle time="0" vehicle="taxi_0019" cmd="init" poi="284"/>
+  <vehicle time="0" vehicle="taxi_0020" cmd="init" poi="285"/>
+  <vehicle time="0" vehicle="taxi_0021" cmd="init" poi="286"/>
+  <vehicle time="0" vehicle="taxi_0022" cmd="init" poi="287"/>
+  <vehicle time="0" vehicle="taxi_0023" cmd="init" poi="288"/>
+  <vehicle time="0" vehicle="taxi_0024" cmd="init" poi="289"/>
+  <dispatch vehicle="taxi_0024" reservations="['0']"/>
+  <request time="3" vehicle="taxi_0024" cmd="schedule" req_id="84" submit_time="1"/>
+  <dispatch vehicle="taxi_0023" reservations="['1']"/>
+  <request time="5" vehicle="taxi_0023" cmd="schedule" req_id="35" submit_time="5"/>
+  <dispatch vehicle="taxi_0022" reservations="['2']"/>
+  <request time="22" vehicle="taxi_0022" cmd="schedule" req_id="106" submit_time="22"/>
+  <dispatch vehicle="taxi_0021" reservations="['3']"/>
+  <request time="31" vehicle="taxi_0021" cmd="schedule" req_id="267" submit_time="31"/>
+  <dispatch vehicle="taxi_0020" reservations="['5']"/>
+  <request time="37" vehicle="taxi_0020" cmd="schedule" req_id="239" submit_time="37"/>
+  <dispatch vehicle="taxi_0019" reservations="['4']"/>
+  <request time="37" vehicle="taxi_0019" cmd="schedule" req_id="32" submit_time="37"/>
+  <dispatch vehicle="taxi_0018" reservations="['6']"/>
+  <request time="45" vehicle="taxi_0018" cmd="schedule" req_id="248" submit_time="45"/>
+  <dispatch vehicle="taxi_0017" reservations="['7']"/>
+  <request time="46" vehicle="taxi_0017" cmd="schedule" req_id="59" submit_time="46"/>
+  <dispatch vehicle="taxi_0016" reservations="['8']"/>
+  <request time="62" vehicle="taxi_0016" cmd="schedule" req_id="98" submit_time="62"/>
+  <dispatch vehicle="taxi_0015" reservations="['9']"/>
+  <request time="80" vehicle="taxi_0015" cmd="schedule" req_id="245" submit_time="80"/>
+  <request time="86" vehicle="taxi_0024" cmd="enter" req_id="84" distance="0.603" t_late="-815"/>
+  <dispatch vehicle="taxi_0014" reservations="['11']"/>
+  <request time="87" vehicle="taxi_0014" cmd="schedule" req_id="219" submit_time="87"/>
+  <dispatch vehicle="taxi_0013" reservations="['10']"/>
+  <request time="87" vehicle="taxi_0013" cmd="schedule" req_id="14" submit_time="87"/>
+  <dispatch vehicle="taxi_0012" reservations="['12']"/>
+  <request time="94" vehicle="taxi_0012" cmd="schedule" req_id="49" submit_time="94"/>
+  <dispatch vehicle="taxi_0011" reservations="['13']"/>
+  <request time="102" vehicle="taxi_0011" cmd="schedule" req_id="246" submit_time="102"/>
+  <dispatch vehicle="taxi_0010" reservations="['14']"/>
+  <request time="105" vehicle="taxi_0010" cmd="schedule" req_id="143" submit_time="105"/>
+  <dispatch vehicle="taxi_0009" reservations="['15']"/>
+  <request time="106" vehicle="taxi_0009" cmd="schedule" req_id="46" submit_time="106"/>
+  <dispatch vehicle="taxi_0008" reservations="['16']"/>
+  <request time="110" vehicle="taxi_0008" cmd="schedule" req_id="243" submit_time="110"/>
+  <dispatch vehicle="taxi_0007" reservations="['17']"/>
+  <request time="111" vehicle="taxi_0007" cmd="schedule" req_id="197" submit_time="111"/>
+  <dispatch vehicle="taxi_0006" reservations="['18']"/>
+  <request time="118" vehicle="taxi_0006" cmd="schedule" req_id="5" submit_time="118"/>
+  <dispatch vehicle="taxi_0005" reservations="['19']"/>
+  <request time="119" vehicle="taxi_0005" cmd="schedule" req_id="296" submit_time="119"/>
+  <dispatch vehicle="taxi_0004" reservations="['20']"/>
+  <request time="123" vehicle="taxi_0004" cmd="schedule" req_id="270" submit_time="123"/>
+  <dispatch vehicle="taxi_0003" reservations="['21']"/>
+  <request time="133" vehicle="taxi_0003" cmd="schedule" req_id="165" submit_time="133"/>
+  <dispatch vehicle="taxi_0002" reservations="['22']"/>
+  <request time="143" vehicle="taxi_0002" cmd="schedule" req_id="160" submit_time="143"/>
+  <dispatch vehicle="taxi_0001" reservations="['23']"/>
+  <request time="150" vehicle="taxi_0001" cmd="schedule" req_id="94" submit_time="150"/>
+  <dispatch vehicle="taxi_0000" reservations="['24']"/>
+  <request time="154" vehicle="taxi_0000" cmd="schedule" req_id="258" submit_time="154"/>
+  <request time="160" vehicle="taxi_0013" cmd="enter" req_id="14" distance="0.494" t_late="-827"/>
+  <request time="183" vehicle="taxi_0011" cmd="enter" req_id="246" distance="0.762" t_late="-819"/>
+  <request time="213" vehicle="taxi_0016" cmd="enter" req_id="98" distance="1.015" t_late="-749"/>
+  <request time="301" vehicle="taxi_0019" cmd="enter" req_id="32" distance="1.761" t_late="-636"/>
+  <request time="312" vehicle="taxi_0012" cmd="enter" req_id="49" distance="2.075" t_late="-682"/>
+  <request time="358" vehicle="taxi_0018" cmd="enter" req_id="248" distance="1.410" t_late="-587"/>
+  <request time="362" vehicle="taxi_0022" cmd="enter" req_id="106" distance="1.680" t_late="-560"/>
+  <request time="397" vehicle="taxi_0021" cmd="enter" req_id="267" distance="1.861" t_late="-534"/>
+  <request time="401" vehicle="taxi_0003" cmd="enter" req_id="165" distance="1.800" t_late="-632"/>
+  <dispatch vehicle="taxi_0024" reservations="['65']"/>
+  <request time="403" vehicle="taxi_0024" cmd="schedule" req_id="44" submit_time="399"/>
+  <request time="403" vehicle="taxi_0024" cmd="finished" req_id="84" dist_w_psg="1.793" t_submit="1" t_schedule="3" t_enter="86" t_finish="1072" t_latest="1072" t_drive="317" t_est="0.5" t_late="0" t_early="-669"/>
+  <request time="438" vehicle="taxi_0023" cmd="enter" req_id="35" distance="2.242" t_late="-467"/>
+  <request time="462" vehicle="taxi_0009" cmd="enter" req_id="46" distance="2.450" t_late="-544"/>
+  <dispatch vehicle="taxi_0011" reservations="['77']"/>
+  <request time="522" vehicle="taxi_0011" cmd="schedule" req_id="192" submit_time="500"/>
+  <request time="522" vehicle="taxi_0011" cmd="finished" req_id="246" dist_w_psg="2.187" t_submit="102" t_schedule="102" t_enter="183" t_finish="1214" t_latest="1214" t_drive="339" t_est="0.6" t_late="0" t_early="-692"/>
+  <request time="532" vehicle="taxi_0002" cmd="enter" req_id="160" distance="2.991" t_late="-511"/>
+  <dispatch vehicle="taxi_0003" reservations="['81']"/>
+  <request time="546" vehicle="taxi_0003" cmd="schedule" req_id="210" submit_time="546"/>
+  <request time="546" vehicle="taxi_0007" cmd="enter" req_id="197" distance="2.632" t_late="-465"/>
+  <request time="546" vehicle="taxi_0003" cmd="finished" req_id="165" dist_w_psg="0.641" t_submit="133" t_schedule="133" t_enter="401" t_finish="1117" t_latest="1117" t_drive="145" t_est="0.6" t_late="0" t_early="-571"/>
+  <request time="553" vehicle="taxi_0017" cmd="enter" req_id="59" distance="2.839" t_late="-393"/>
+  <request time="571" vehicle="taxi_0001" cmd="enter" req_id="94" distance="2.474" t_late="-479"/>
+  <request time="625" vehicle="taxi_0024" cmd="enter" req_id="44" distance="3.593" t_late="-674"/>
+  <request time="634" vehicle="taxi_0010" cmd="enter" req_id="143" distance="1.297" t_late="-371"/>
+  <dispatch vehicle="taxi_0013" reservations="['94']"/>
+  <request time="649" vehicle="taxi_0013" cmd="schedule" req_id="109" submit_time="647"/>
+  <request time="649" vehicle="taxi_0015" cmd="enter" req_id="245" distance="3.230" t_late="-331"/>
+  <request time="649" vehicle="taxi_0013" cmd="finished" req_id="14" dist_w_psg="1.614" t_submit="87" t_schedule="87" t_enter="160" t_finish="1167" t_latest="1167" t_drive="489" t_est="0.4" t_late="0" t_early="-518"/>
+  <dispatch vehicle="taxi_0021" reservations="['93']"/>
+  <request time="650" vehicle="taxi_0021" cmd="schedule" req_id="169" submit_time="643"/>
+  <request time="650" vehicle="taxi_0021" cmd="finished" req_id="267" dist_w_psg="1.535" t_submit="31" t_schedule="31" t_enter="397" t_finish="1103" t_latest="1103" t_drive="253" t_est="0.7" t_late="0" t_early="-453"/>
+  <dispatch vehicle="taxi_0022" reservations="['92']"/>
+  <request time="651" vehicle="taxi_0022" cmd="schedule" req_id="202" submit_time="639"/>
+  <request time="651" vehicle="taxi_0022" cmd="finished" req_id="106" dist_w_psg="2.250" t_submit="22" t_schedule="22" t_enter="362" t_finish="1152" t_latest="1152" t_drive="289" t_est="0.8" t_late="0" t_early="-501"/>
+  <dispatch vehicle="taxi_0018" reservations="['101']"/>
+  <request time="686" vehicle="taxi_0018" cmd="schedule" req_id="170" submit_time="680"/>
+  <request time="686" vehicle="taxi_0018" cmd="finished" req_id="248" dist_w_psg="1.875" t_submit="45" t_schedule="45" t_enter="358" t_finish="1138" t_latest="1138" t_drive="328" t_est="0.6" t_late="0" t_early="-452"/>
+  <dispatch vehicle="taxi_0019" reservations="['100']"/>
+  <request time="687" vehicle="taxi_0019" cmd="schedule" req_id="261" submit_time="679"/>
+  <request time="687" vehicle="taxi_0019" cmd="finished" req_id="32" dist_w_psg="2.441" t_submit="37" t_schedule="37" t_enter="301" t_finish="1168" t_latest="1168" t_drive="386" t_est="0.6" t_late="0" t_early="-481"/>
+  <request time="708" vehicle="taxi_0008" cmd="enter" req_id="243" distance="3.258" t_late="-302"/>
+  <dispatch vehicle="taxi_0023" reservations="['107']"/>
+  <request time="717" vehicle="taxi_0023" cmd="schedule" req_id="83" submit_time="717"/>
+  <request time="717" vehicle="taxi_0023" cmd="finished" req_id="35" dist_w_psg="1.262" t_submit="5" t_schedule="5" t_enter="438" t_finish="1045" t_latest="1045" t_drive="279" t_est="0.5" t_late="0" t_early="-328"/>
+  <request time="732" vehicle="taxi_0014" cmd="enter" req_id="219" distance="2.328" t_late="-255"/>
+  <request time="770" vehicle="taxi_0006" cmd="enter" req_id="5" distance="2.504" t_late="-248"/>
+  <request time="876" vehicle="taxi_0021" cmd="enter" req_id="169" distance="4.845" t_late="-667"/>
+  <request time="879" vehicle="taxi_0022" cmd="enter" req_id="202" distance="5.291" t_late="-660"/>
+  <dispatch vehicle="taxi_0007" reservations="['134']"/>
+  <request time="880" vehicle="taxi_0007" cmd="schedule" req_id="205" submit_time="879"/>
+  <request time="880" vehicle="taxi_0007" cmd="finished" req_id="197" dist_w_psg="2.076" t_submit="111" t_schedule="111" t_enter="546" t_finish="1199" t_latest="1199" t_drive="334" t_est="0.6" t_late="0" t_early="-319"/>
+  <request time="917" vehicle="taxi_0020" cmd="enter" req_id="239" distance="4.358" t_late="-20"/>
+  <dispatch vehicle="taxi_0009" reservations="['142']"/>
+  <request time="918" vehicle="taxi_0009" cmd="schedule" req_id="132" submit_time="912"/>
+  <request time="918" vehicle="taxi_0009" cmd="finished" req_id="46" dist_w_psg="2.491" t_submit="106" t_schedule="106" t_enter="462" t_finish="1291" t_latest="1291" t_drive="456" t_est="0.6" t_late="0" t_early="-373"/>
+  <request time="919" vehicle="taxi_0011" cmd="enter" req_id="192" distance="4.955" t_late="-481"/>
+  <dispatch vehicle="taxi_0024" reservations="['141']"/>
+  <request time="921" vehicle="taxi_0024" cmd="schedule" req_id="222" submit_time="910"/>
+  <request time="921" vehicle="taxi_0024" cmd="finished" req_id="44" dist_w_psg="2.097" t_submit="399" t_schedule="403" t_enter="625" t_finish="1541" t_latest="1541" t_drive="296" t_est="0.8" t_late="0" t_early="-620"/>
+  <request time="925" vehicle="taxi_0000" cmd="enter" req_id="258" distance="4.302" t_late="-129"/>
+  <request time="939" vehicle="taxi_0004" cmd="enter" req_id="270" distance="3.104" t_late="-84"/>
+  <dispatch vehicle="taxi_0016" reservations="['151']"/>
+  <request time="950" vehicle="taxi_0016" cmd="schedule" req_id="295" submit_time="944"/>
+  <request time="950" vehicle="taxi_0016" cmd="finished" req_id="98" dist_w_psg="3.751" t_submit="62" t_schedule="62" t_enter="213" t_finish="1217" t_latest="1217" t_drive="737" t_est="0.3" t_late="0" t_early="-267"/>
+  <dispatch vehicle="taxi_0012" reservations="['164']"/>
+  <request time="1006" vehicle="taxi_0012" cmd="schedule" req_id="168" submit_time="1006"/>
+  <request time="1006" vehicle="taxi_0012" cmd="finished" req_id="49" dist_w_psg="3.437" t_submit="94" t_schedule="94" t_enter="312" t_finish="1266" t_latest="1266" t_drive="694" t_est="0.4" t_late="0" t_early="-260"/>
+  <dispatch vehicle="taxi_0014" reservations="['163']"/>
+  <request time="1009" vehicle="taxi_0014" cmd="schedule" req_id="226" submit_time="1005"/>
+  <request time="1009" vehicle="taxi_0014" cmd="finished" req_id="219" dist_w_psg="1.682" t_submit="87" t_schedule="87" t_enter="732" t_finish="1128" t_latest="1128" t_drive="277" t_est="0.5" t_late="0" t_early="-119"/>
+  <request time="1047" vehicle="taxi_0013" cmd="enter" req_id="109" distance="3.901" t_late="-500"/>
+  <request time="1051" vehicle="taxi_0018" cmd="enter" req_id="170" distance="5.507" t_late="-529"/>
+  <dispatch vehicle="taxi_0015" reservations="['170']"/>
+  <request time="1053" vehicle="taxi_0015" cmd="schedule" req_id="227" submit_time="1053"/>
+  <request time="1053" vehicle="taxi_0015" cmd="finished" req_id="245" dist_w_psg="2.397" t_submit="80" t_schedule="80" t_enter="649" t_finish="1143" t_latest="1143" t_drive="404" t_est="0.4" t_late="0" t_early="-90"/>
+  <dispatch vehicle="taxi_0002" reservations="['178']"/>
+  <request time="1086" vehicle="taxi_0002" cmd="schedule" req_id="6" submit_time="1081"/>
+  <request time="1086" vehicle="taxi_0002" cmd="finished" req_id="160" dist_w_psg="1.961" t_submit="143" t_schedule="143" t_enter="532" t_finish="1227" t_latest="1227" t_drive="554" t_est="0.3" t_late="0" t_early="-141"/>
+  <request time="1150" vehicle="taxi_0014" cmd="enter" req_id="226" distance="4.838" t_late="-755"/>
+  <request time="1156" vehicle="taxi_0003" cmd="enter" req_id="210" distance="4.882" t_late="-290"/>
+  <dispatch vehicle="taxi_0000" reservations="['196']"/>
+  <request time="1157" vehicle="taxi_0000" cmd="schedule" req_id="122" submit_time="1155"/>
+  <request time="1157" vehicle="taxi_0000" cmd="finished" req_id="258" dist_w_psg="1.210" t_submit="154" t_schedule="154" t_enter="925" t_finish="1204" t_latest="1204" t_drive="232" t_est="0.6" t_late="0" t_early="-47"/>
+  <dispatch vehicle="taxi_0017" reservations="['202']"/>
+  <request time="1167" vehicle="taxi_0017" cmd="schedule" req_id="65" submit_time="1167"/>
+  <request time="1167" vehicle="taxi_0017" cmd="finished" req_id="59" dist_w_psg="2.266" t_submit="46" t_schedule="46" t_enter="553" t_finish="1121" t_latest="1121" t_drive="614" t_est="0.3" t_late="46" t_early="0"/>
+  <request time="1178" vehicle="taxi_0023" cmd="enter" req_id="83" distance="6.218" t_late="-439"/>
+  <request time="1180" vehicle="taxi_0005" cmd="enter" req_id="296" distance="4.855" t_late="161"/>
+  <request time="1183" vehicle="taxi_0007" cmd="enter" req_id="205" distance="6.515" t_late="-596"/>
+  <request time="1184" vehicle="taxi_0012" cmd="enter" req_id="168" distance="6.601" t_late="-722"/>
+  <dispatch vehicle="taxi_0001" reservations="['205']"/>
+  <request time="1187" vehicle="taxi_0001" cmd="schedule" req_id="271" submit_time="1182"/>
+  <request time="1187" vehicle="taxi_0001" cmd="finished" req_id="94" dist_w_psg="2.674" t_submit="150" t_schedule="150" t_enter="571" t_finish="1282" t_latest="1282" t_drive="616" t_est="0.4" t_late="0" t_early="-95"/>
+  <dispatch vehicle="taxi_0020" reservations="['216']"/>
+  <request time="1264" vehicle="taxi_0020" cmd="schedule" req_id="201" submit_time="1263"/>
+  <dispatch vehicle="taxi_0010" reservations="['215']"/>
+  <request time="1264" vehicle="taxi_0010" cmd="schedule" req_id="137" submit_time="1261"/>
+  <request time="1264" vehicle="taxi_0010" cmd="finished" req_id="143" dist_w_psg="2.689" t_submit="105" t_schedule="105" t_enter="634" t_finish="1281" t_latest="1281" t_drive="630" t_est="0.4" t_late="0" t_early="-17"/>
+  <request time="1264" vehicle="taxi_0020" cmd="finished" req_id="239" dist_w_psg="1.520" t_submit="37" t_schedule="37" t_enter="917" t_finish="1073" t_latest="1073" t_drive="347" t_est="0.4" t_late="191" t_early="0"/>
+  <vehicle time="1265" vehicle="taxi_0010" cmd="left"/>
+  <dispatch vehicle="taxi_0006" reservations="['218']"/>
+  <request time="1269" vehicle="taxi_0006" cmd="schedule" req_id="224" submit_time="1269"/>
+  <request time="1269" vehicle="taxi_0006" cmd="finished" req_id="5" dist_w_psg="3.044" t_submit="118" t_schedule="118" t_enter="770" t_finish="1278" t_latest="1278" t_drive="499" t_est="0.5" t_late="0" t_early="-9"/>
+  <request time="1274" vehicle="taxi_0009" cmd="enter" req_id="132" distance="6.347" t_late="-538"/>
+  <dispatch vehicle="taxi_0022" reservations="['220']"/>
+  <request time="1294" vehicle="taxi_0022" cmd="schedule" req_id="67" submit_time="1291"/>
+  <request time="1294" vehicle="taxi_0022" cmd="finished" req_id="202" dist_w_psg="1.297" t_submit="639" t_schedule="651" t_enter="879" t_finish="1672" t_latest="1672" t_drive="415" t_est="0.3" t_late="0" t_early="-378"/>
+  <request time="1337" vehicle="taxi_0024" cmd="enter" req_id="222" distance="8.185" t_late="-473"/>
+  <request time="1349" vehicle="taxi_0017" cmd="enter" req_id="65" distance="5.946" t_late="-718"/>
+  <request time="1349" vehicle="taxi_0019" cmd="enter" req_id="261" distance="8.395" t_late="-230"/>
+  <dispatch vehicle="taxi_0004" reservations="['229']"/>
+  <request time="1357" vehicle="taxi_0004" cmd="schedule" req_id="229" submit_time="1355"/>
+  <request time="1357" vehicle="taxi_0004" cmd="finished" req_id="270" dist_w_psg="1.850" t_submit="123" t_schedule="123" t_enter="939" t_finish="1207" t_latest="1207" t_drive="418" t_est="0.4" t_late="150" t_early="0"/>
+  <dispatch vehicle="taxi_0008" reservations="['232']"/>
+  <request time="1371" vehicle="taxi_0008" cmd="schedule" req_id="191" submit_time="1369"/>
+  <request time="1371" vehicle="taxi_0008" cmd="finished" req_id="243" dist_w_psg="3.377" t_submit="110" t_schedule="110" t_enter="708" t_finish="1353" t_latest="1353" t_drive="663" t_est="0.5" t_late="18" t_early="0"/>
+  <dispatch vehicle="taxi_0011" reservations="['236']"/>
+  <request time="1404" vehicle="taxi_0011" cmd="schedule" req_id="179" submit_time="1403"/>
+  <request time="1404" vehicle="taxi_0011" cmd="finished" req_id="192" dist_w_psg="2.384" t_submit="500" t_schedule="522" t_enter="919" t_finish="1569" t_latest="1569" t_drive="485" t_est="0.3" t_late="0" t_early="-165"/>
+  <dispatch vehicle="taxi_0012" reservations="['235']"/>
+  <request time="1405" vehicle="taxi_0012" cmd="schedule" req_id="138" submit_time="1390"/>
+  <request time="1405" vehicle="taxi_0012" cmd="finished" req_id="168" dist_w_psg="1.283" t_submit="1006" t_schedule="1006" t_enter="1184" t_finish="1991" t_latest="1991" t_drive="221" t_est="0.4" t_late="0" t_early="-586"/>
+  <request time="1439" vehicle="taxi_0015" cmd="enter" req_id="227" distance="7.511" t_late="-514"/>
+  <dispatch vehicle="taxi_0013" reservations="['248']"/>
+  <request time="1473" vehicle="taxi_0013" cmd="schedule" req_id="86" submit_time="1465"/>
+  <request time="1473" vehicle="taxi_0013" cmd="finished" req_id="109" dist_w_psg="2.266" t_submit="647" t_schedule="649" t_enter="1047" t_finish="1722" t_latest="1722" t_drive="426" t_est="0.4" t_late="0" t_early="-249"/>
+  <dispatch vehicle="taxi_0007" reservations="['254']"/>
+  <request time="1513" vehicle="taxi_0007" cmd="schedule" req_id="21" submit_time="1511"/>
+  <request time="1513" vehicle="taxi_0007" cmd="finished" req_id="205" dist_w_psg="2.118" t_submit="879" t_schedule="880" t_enter="1183" t_finish="1936" t_latest="1936" t_drive="330" t_est="0.5" t_late="0" t_early="-423"/>
+  <request time="1528" vehicle="taxi_0001" cmd="enter" req_id="271" distance="7.903" t_late="-554"/>
+  <request time="1532" vehicle="taxi_0011" cmd="enter" req_id="179" distance="8.230" t_late="-771"/>
+  <dispatch vehicle="taxi_0018" reservations="['258']"/>
+  <request time="1537" vehicle="taxi_0018" cmd="schedule" req_id="241" submit_time="1534"/>
+  <request time="1537" vehicle="taxi_0018" cmd="finished" req_id="170" dist_w_psg="3.372" t_submit="680" t_schedule="686" t_enter="1051" t_finish="1758" t_latest="1758" t_drive="486" t_est="0.4" t_late="0" t_early="-221"/>
+  <request time="1546" vehicle="taxi_0022" cmd="enter" req_id="67" distance="8.792" t_late="-645"/>
+  <dispatch vehicle="taxi_0015" reservations="['260']"/>
+  <request time="1547" vehicle="taxi_0015" cmd="schedule" req_id="25" submit_time="1541"/>
+  <request time="1547" vehicle="taxi_0015" cmd="finished" req_id="227" dist_w_psg="0.708" t_submit="1053" t_schedule="1053" t_enter="1439" t_finish="2040" t_latest="2040" t_drive="108" t_est="0.8" t_late="0" t_early="-493"/>
+  <request time="1594" vehicle="taxi_0020" cmd="enter" req_id="201" distance="7.096" t_late="-569"/>
+  <request time="1613" vehicle="taxi_0007" cmd="enter" req_id="21" distance="9.245" t_late="-798"/>
+  <dispatch vehicle="taxi_0014" reservations="['268']"/>
+  <request time="1628" vehicle="taxi_0014" cmd="schedule" req_id="157" submit_time="1613"/>
+  <request time="1628" vehicle="taxi_0014" cmd="finished" req_id="226" dist_w_psg="3.048" t_submit="1005" t_schedule="1009" t_enter="1150" t_finish="2184" t_latest="2184" t_drive="478" t_est="0.6" t_late="0" t_early="-556"/>
+  <request time="1637" vehicle="taxi_0010" cmd="enter" req_id="137" distance="6.072" t_late="-524"/>
+  <request time="1640" vehicle="taxi_0018" cmd="enter" req_id="241" distance="9.616" t_late="-794"/>
+  <request time="1651" vehicle="taxi_0004" cmd="enter" req_id="229" distance="6.492" t_late="-604"/>
+  <dispatch vehicle="taxi_0019" reservations="['275']"/>
+  <request time="1655" vehicle="taxi_0019" cmd="schedule" req_id="292" submit_time="1654"/>
+  <request time="1655" vehicle="taxi_0019" cmd="finished" req_id="261" dist_w_psg="1.667" t_submit="679" t_schedule="687" t_enter="1349" t_finish="1754" t_latest="1754" t_drive="306" t_est="0.6" t_late="0" t_early="-99"/>
+  <dispatch vehicle="taxi_0005" reservations="['279']"/>
+  <request time="1689" vehicle="taxi_0005" cmd="schedule" req_id="133" submit_time="1679"/>
+  <request time="1689" vehicle="taxi_0005" cmd="finished" req_id="296" dist_w_psg="3.355" t_submit="119" t_schedule="119" t_enter="1180" t_finish="1253" t_latest="1253" t_drive="509" t_est="0.5" t_late="436" t_early="0"/>
+  <request time="1695" vehicle="taxi_0013" cmd="enter" req_id="86" distance="7.068" t_late="-670"/>
+  <dispatch vehicle="taxi_0023" reservations="['281']"/>
+  <request time="1700" vehicle="taxi_0023" cmd="schedule" req_id="120" submit_time="1694"/>
+  <request time="1700" vehicle="taxi_0023" cmd="finished" req_id="83" dist_w_psg="2.840" t_submit="717" t_schedule="717" t_enter="1178" t_finish="1865" t_latest="1865" t_drive="522" t_est="0.5" t_late="0" t_early="-165"/>
+  <dispatch vehicle="taxi_0010" reservations="['283']"/>
+  <request time="1709" vehicle="taxi_0010" cmd="schedule" req_id="272" submit_time="1708"/>
+  <request time="1709" vehicle="taxi_0010" cmd="finished" req_id="137" dist_w_psg="0.470" t_submit="1261" t_schedule="1264" t_enter="1637" t_finish="2258" t_latest="2258" t_drive="72" t_est="1.3" t_late="0" t_early="-549"/>
+  <request time="1716" vehicle="taxi_0015" cmd="enter" req_id="25" distance="9.490" t_late="-725"/>
+  <dispatch vehicle="taxi_0009" reservations="['284']"/>
+  <request time="1721" vehicle="taxi_0009" cmd="schedule" req_id="166" submit_time="1718"/>
+  <request time="1721" vehicle="taxi_0009" cmd="finished" req_id="132" dist_w_psg="1.686" t_submit="912" t_schedule="918" t_enter="1274" t_finish="1975" t_latest="1975" t_drive="447" t_est="0.4" t_late="0" t_early="-254"/>
+  <dispatch vehicle="taxi_0001" reservations="['291']"/>
+  <request time="1748" vehicle="taxi_0001" cmd="schedule" req_id="193" submit_time="1745"/>
+  <request time="1748" vehicle="taxi_0001" cmd="finished" req_id="271" dist_w_psg="0.971" t_submit="1182" t_schedule="1187" t_enter="1528" t_finish="2245" t_latest="2245" t_drive="220" t_est="0.7" t_late="0" t_early="-497"/>
+  <request time="1751" vehicle="taxi_0002" cmd="enter" req_id="6" distance="8.020" t_late="-230"/>
+  <request time="1751" vehicle="taxi_0019" cmd="enter" req_id="292" distance="10.729" t_late="-803"/>
+  <request time="1772" vehicle="taxi_0006" cmd="enter" req_id="224" distance="8.469" t_late="-397"/>
+  <request time="1776" vehicle="taxi_0000" cmd="enter" req_id="122" distance="7.714" t_late="-279"/>
+  <request time="1790" vehicle="taxi_0008" cmd="enter" req_id="191" distance="8.798" t_late="-479"/>
+  <dispatch vehicle="taxi_0024" reservations="['297']"/>
+  <request time="1794" vehicle="taxi_0024" cmd="schedule" req_id="208" submit_time="1794"/>
+  <request time="1794" vehicle="taxi_0024" cmd="finished" req_id="222" dist_w_psg="2.520" t_submit="910" t_schedule="921" t_enter="1337" t_finish="1999" t_latest="1999" t_drive="457" t_est="0.4" t_late="0" t_early="-205"/>
+  <dispatch vehicle="taxi_0013" reservations="['299']"/>
+  <request time="1808" vehicle="taxi_0013" cmd="schedule" req_id="13" submit_time="1800"/>
+  <request time="1808" vehicle="taxi_0013" cmd="finished" req_id="86" dist_w_psg="0.982" t_submit="1465" t_schedule="1473" t_enter="1695" t_finish="2483" t_latest="2483" t_drive="113" t_est="1.0" t_late="0" t_early="-675"/>
+  <dispatch vehicle="taxi_0011" reservations="['298']"/>
+  <request time="1846" vehicle="taxi_0011" cmd="schedule" req_id="273" submit_time="1795"/>
+  <request time="1846" vehicle="taxi_0011" cmd="finished" req_id="179" dist_w_psg="1.926" t_submit="1403" t_schedule="1404" t_enter="1532" t_finish="2445" t_latest="2445" t_drive="314" t_est="0.5" t_late="0" t_early="-599"/>
+  <dispatch vehicle="taxi_0022" reservations="['296']"/>
+  <request time="1878" vehicle="taxi_0022" cmd="schedule" req_id="163" submit_time="1788"/>
+  <request time="1878" vehicle="taxi_0022" cmd="finished" req_id="67" dist_w_psg="1.372" t_submit="1291" t_schedule="1294" t_enter="1546" t_finish="2302" t_latest="2302" t_drive="332" t_est="0.3" t_late="0" t_early="-424"/>
+  <request time="1954" vehicle="taxi_0011" cmd="enter" req_id="273" distance="10.920" t_late="-741"/>
+  <dispatch vehicle="taxi_0018" reservations="['295']"/>
+  <request time="1960" vehicle="taxi_0018" cmd="schedule" req_id="15" submit_time="1785"/>
+  <request time="1960" vehicle="taxi_0018" cmd="finished" req_id="241" dist_w_psg="2.158" t_submit="1534" t_schedule="1537" t_enter="1640" t_finish="2648" t_latest="2648" t_drive="320" t_est="0.7" t_late="0" t_early="-688"/>
+  <request time="1967" vehicle="taxi_0005" cmd="enter" req_id="133" distance="9.772" t_late="-612"/>
+  <dispatch vehicle="taxi_0020" reservations="['294']"/>
+  <request time="1981" vehicle="taxi_0020" cmd="schedule" req_id="237" submit_time="1784"/>
+  <request time="1981" vehicle="taxi_0020" cmd="finished" req_id="201" dist_w_psg="1.837" t_submit="1263" t_schedule="1264" t_enter="1594" t_finish="2337" t_latest="2337" t_drive="387" t_est="0.4" t_late="0" t_early="-356"/>
+  <dispatch vehicle="taxi_0011" reservations="['293']"/>
+  <request time="1982" vehicle="taxi_0011" cmd="schedule" req_id="127" submit_time="1766"/>
+  <request time="1982" vehicle="taxi_0011" cmd="finished" req_id="273" dist_w_psg="0.147" t_submit="1795" t_schedule="1846" t_enter="1954" t_finish="2762" t_latest="2762" t_drive="28" t_est="2.4" t_late="0" t_early="-780"/>
+  <dispatch vehicle="taxi_0021" reservations="['292']"/>
+  <request time="1984" vehicle="taxi_0021" cmd="schedule" req_id="234" submit_time="1751"/>
+  <request time="1984" vehicle="taxi_0021" cmd="finished" req_id="169" dist_w_psg="2.994" t_submit="643" t_schedule="650" t_enter="876" t_finish="1830" t_latest="1830" t_drive="1108" t_est="0.3" t_late="154" t_early="0"/>
+  <vehicle time="1985" vehicle="taxi_0021" cmd="left"/>
+  <request time="1996" vehicle="taxi_0016" cmd="enter" req_id="295" distance="9.824" t_late="152"/>
+  <dispatch vehicle="taxi_0017" reservations="['290']"/>
+  <request time="1997" vehicle="taxi_0017" cmd="schedule" req_id="149" submit_time="1744"/>
+  <request time="1997" vehicle="taxi_0012" cmd="enter" req_id="138" distance="9.737" t_late="-293"/>
+  <request time="1997" vehicle="taxi_0017" cmd="finished" req_id="65" dist_w_psg="1.624" t_submit="1167" t_schedule="1167" t_enter="1349" t_finish="2260" t_latest="2260" t_drive="648" t_est="0.3" t_late="0" t_early="-263"/>
+  <dispatch vehicle="taxi_0002" reservations="['289']"/>
+  <request time="2014" vehicle="taxi_0002" cmd="schedule" req_id="130" submit_time="1743"/>
+  <request time="2014" vehicle="taxi_0002" cmd="finished" req_id="6" dist_w_psg="1.428" t_submit="1081" t_schedule="1086" t_enter="1751" t_finish="2168" t_latest="2168" t_drive="263" t_est="0.7" t_late="0" t_early="-154"/>
+  <dispatch vehicle="taxi_0003" reservations="['288']"/>
+  <request time="2050" vehicle="taxi_0003" cmd="schedule" req_id="280" submit_time="1742"/>
+  <request time="2050" vehicle="taxi_0003" cmd="finished" req_id="210" dist_w_psg="2.699" t_submit="546" t_schedule="546" t_enter="1156" t_finish="1722" t_latest="1722" t_drive="894" t_est="0.3" t_late="328" t_early="0"/>
+  <vehicle time="2051" vehicle="taxi_0003" cmd="left"/>
+  <request time="2069" vehicle="taxi_0010" cmd="enter" req_id="272" distance="8.155" t_late="-539"/>
+  <dispatch vehicle="taxi_0004" reservations="['287']"/>
+  <request time="2081" vehicle="taxi_0004" cmd="schedule" req_id="228" submit_time="1725"/>
+  <request time="2081" vehicle="taxi_0004" cmd="finished" req_id="229" dist_w_psg="1.965" t_submit="1355" t_schedule="1357" t_enter="1651" t_finish="2401" t_latest="2401" t_drive="430" t_est="0.3" t_late="0" t_early="-320"/>
+  <dispatch vehicle="taxi_0006" reservations="['286']"/>
+  <request time="2101" vehicle="taxi_0006" cmd="schedule" req_id="152" submit_time="1724"/>
+  <request time="2101" vehicle="taxi_0006" cmd="finished" req_id="224" dist_w_psg="1.815" t_submit="1269" t_schedule="1269" t_enter="1772" t_finish="2376" t_latest="2376" t_drive="329" t_est="0.6" t_late="0" t_early="-275"/>
+  <dispatch vehicle="taxi_0000" reservations="['285']"/>
+  <request time="2130" vehicle="taxi_0000" cmd="schedule" req_id="203" submit_time="1723"/>
+  <request time="2130" vehicle="taxi_0000" cmd="finished" req_id="122" dist_w_psg="2.191" t_submit="1155" t_schedule="1157" t_enter="1776" t_finish="2267" t_latest="2267" t_drive="354" t_est="0.6" t_late="0" t_early="-137"/>
+  <request time="2143" vehicle="taxi_0022" cmd="enter" req_id="163" distance="11.904" t_late="-545"/>
+  <request time="2187" vehicle="taxi_0001" cmd="enter" req_id="193" distance="10.545" t_late="-458"/>
+  <dispatch vehicle="taxi_0015" reservations="['282']"/>
+  <request time="2204" vehicle="taxi_0015" cmd="schedule" req_id="26" submit_time="1706"/>
+  <request time="2204" vehicle="taxi_0015" cmd="finished" req_id="25" dist_w_psg="2.503" t_submit="1541" t_schedule="1547" t_enter="1716" t_finish="2665" t_latest="2665" t_drive="488" t_est="0.5" t_late="0" t_early="-461"/>
+  <request time="2215" vehicle="taxi_0023" cmd="enter" req_id="120" distance="10.934" t_late="-379"/>
+  <dispatch vehicle="taxi_0016" reservations="['280']"/>
+  <request time="2225" vehicle="taxi_0016" cmd="schedule" req_id="20" submit_time="1694"/>
+  <request time="2225" vehicle="taxi_0016" cmd="finished" req_id="295" dist_w_psg="2.369" t_submit="944" t_schedule="950" t_enter="1996" t_finish="2038" t_latest="2038" t_drive="229" t_est="0.8" t_late="187" t_early="0"/>
+  <request time="2282" vehicle="taxi_0024" cmd="enter" req_id="208" distance="13.289" t_late="-412"/>
+  <dispatch vehicle="taxi_0007" reservations="['278']"/>
+  <request time="2299" vehicle="taxi_0007" cmd="schedule" req_id="89" submit_time="1671"/>
+  <request time="2299" vehicle="taxi_0007" cmd="finished" req_id="21" dist_w_psg="2.066" t_submit="1511" t_schedule="1513" t_enter="1613" t_finish="2646" t_latest="2646" t_drive="686" t_est="0.3" t_late="0" t_early="-347"/>
+  <request time="2306" vehicle="taxi_0017" cmd="enter" req_id="149" distance="9.287" t_late="-338"/>
+  <request time="2323" vehicle="taxi_0013" cmd="enter" req_id="13" distance="10.664" t_late="-377"/>
+  <request time="2365" vehicle="taxi_0014" cmd="enter" req_id="157" distance="12.148" t_late="-148"/>
+  <request time="2369" vehicle="taxi_0011" cmd="enter" req_id="127" distance="12.616" t_late="-297"/>
+  <dispatch vehicle="taxi_0017" reservations="['277']"/>
+  <request time="2375" vehicle="taxi_0017" cmd="schedule" req_id="42" submit_time="1660"/>
+  <request time="2375" vehicle="taxi_0017" cmd="finished" req_id="149" dist_w_psg="0.528" t_submit="1744" t_schedule="1997" t_enter="2306" t_finish="2681" t_latest="2681" t_drive="69" t_est="0.5" t_late="0" t_early="-306"/>
+  <dispatch vehicle="taxi_0008" reservations="['276']"/>
+  <request time="2401" vehicle="taxi_0008" cmd="schedule" req_id="81" submit_time="1656"/>
+  <request time="2401" vehicle="taxi_0008" cmd="finished" req_id="191" dist_w_psg="2.706" t_submit="1369" t_schedule="1371" t_enter="1790" t_finish="2486" t_latest="2486" t_drive="611" t_est="0.4" t_late="0" t_early="-85"/>
+  <dispatch vehicle="taxi_0005" reservations="['274']"/>
+  <request time="2403" vehicle="taxi_0005" cmd="schedule" req_id="200" submit_time="1654"/>
+  <request time="2403" vehicle="taxi_0005" cmd="finished" req_id="133" dist_w_psg="1.715" t_submit="1679" t_schedule="1689" t_enter="1967" t_finish="2723" t_latest="2723" t_drive="436" t_est="0.3" t_late="0" t_early="-320"/>
+  <request time="2415" vehicle="taxi_0021" cmd="enter" req_id="234" distance="9.563" t_late="-236"/>
+  <dispatch vehicle="taxi_0001" reservations="['273']"/>
+  <request time="2420" vehicle="taxi_0001" cmd="schedule" req_id="232" submit_time="1651"/>
+  <request time="2420" vehicle="taxi_0001" cmd="finished" req_id="193" dist_w_psg="0.819" t_submit="1745" t_schedule="1748" t_enter="2187" t_finish="2733" t_latest="2733" t_drive="233" t_est="0.4" t_late="0" t_early="-313"/>
+  <request time="2468" vehicle="taxi_0015" cmd="enter" req_id="26" distance="13.155" t_late="-138"/>
+  <request time="2473" vehicle="taxi_0009" cmd="enter" req_id="166" distance="10.015" t_late="-145"/>
+  <request time="2477" vehicle="taxi_0004" cmd="enter" req_id="228" distance="10.578" t_late="-148"/>
+  <dispatch vehicle="taxi_0010" reservations="['272']"/>
+  <request time="2484" vehicle="taxi_0010" cmd="schedule" req_id="95" submit_time="1646"/>
+  <request time="2484" vehicle="taxi_0010" cmd="finished" req_id="272" dist_w_psg="2.638" t_submit="1708" t_schedule="1709" t_enter="2069" t_finish="2804" t_latest="2804" t_drive="415" t_est="0.5" t_late="0" t_early="-320"/>
+  <dispatch vehicle="taxi_0022" reservations="['271']"/>
+  <request time="2520" vehicle="taxi_0022" cmd="schedule" req_id="263" submit_time="1641"/>
+  <request time="2520" vehicle="taxi_0022" cmd="finished" req_id="163" dist_w_psg="3.289" t_submit="1788" t_schedule="1878" t_enter="2143" t_finish="3007" t_latest="3007" t_drive="377" t_est="0.8" t_late="0" t_early="-487"/>
+  <request time="2538" vehicle="taxi_0002" cmd="enter" req_id="130" distance="12.298" t_late="-105"/>
+  <request time="2545" vehicle="taxi_0006" cmd="enter" req_id="152" distance="12.145" t_late="-79"/>
+  <request time="2566" vehicle="taxi_0008" cmd="enter" req_id="81" distance="12.519" t_late="10"/>
+  <request time="2574" vehicle="taxi_0020" cmd="enter" req_id="237" distance="12.121" t_late="-110"/>
+  <request time="2613" vehicle="taxi_0018" cmd="enter" req_id="15" distance="15.630" t_late="-72"/>
+  <request time="2618" vehicle="taxi_0000" cmd="enter" req_id="203" distance="11.600" t_late="-5"/>
+  <dispatch vehicle="taxi_0008" reservations="['270']"/>
+  <request time="2623" vehicle="taxi_0008" cmd="schedule" req_id="216" submit_time="1640"/>
+  <request time="2623" vehicle="taxi_0008" cmd="finished" req_id="81" dist_w_psg="0.363" t_submit="1656" t_schedule="2401" t_enter="2566" t_finish="2632" t_latest="2632" t_drive="57" t_est="1.3" t_late="0" t_early="-9"/>
+  <dispatch vehicle="taxi_0012" reservations="['269']"/>
+  <request time="2634" vehicle="taxi_0012" cmd="schedule" req_id="162" submit_time="1630"/>
+  <request time="2634" vehicle="taxi_0012" cmd="finished" req_id="138" dist_w_psg="3.527" t_submit="1390" t_schedule="1405" t_enter="1997" t_finish="2545" t_latest="2545" t_drive="637" t_est="0.4" t_late="89" t_early="0"/>
+  <request time="2655" vehicle="taxi_0001" cmd="enter" req_id="232" distance="12.982" t_late="104"/>
+  <dispatch vehicle="taxi_0023" reservations="['267']"/>
+  <request time="2662" vehicle="taxi_0023" cmd="schedule" req_id="136" submit_time="1605"/>
+  <request time="2662" vehicle="taxi_0023" cmd="finished" req_id="120" dist_w_psg="2.477" t_submit="1694" t_schedule="1700" t_enter="2215" t_finish="2878" t_latest="2878" t_drive="447" t_est="0.6" t_late="0" t_early="-216"/>
+  <dispatch vehicle="taxi_0019" reservations="['266']"/>
+  <request time="2676" vehicle="taxi_0019" cmd="schedule" req_id="161" submit_time="1601"/>
+  <request time="2676" vehicle="taxi_0019" cmd="finished" req_id="292" dist_w_psg="4.659" t_submit="1654" t_schedule="1655" t_enter="1751" t_finish="2938" t_latest="2938" t_drive="925" t_est="0.4" t_late="0" t_early="-262"/>
+  <dispatch vehicle="taxi_0009" reservations="['265']"/>
+  <request time="2689" vehicle="taxi_0009" cmd="schedule" req_id="266" submit_time="1593"/>
+  <request time="2689" vehicle="taxi_0009" cmd="finished" req_id="166" dist_w_psg="1.299" t_submit="1718" t_schedule="1721" t_enter="2473" t_finish="2778" t_latest="2778" t_drive="216" t_est="0.7" t_late="0" t_early="-89"/>
+  <request time="2706" vehicle="taxi_0003" cmd="enter" req_id="280" distance="9.776" t_late="64"/>
+  <dispatch vehicle="taxi_0006" reservations="['264']"/>
+  <request time="2720" vehicle="taxi_0006" cmd="schedule" req_id="33" submit_time="1592"/>
+  <request time="2720" vehicle="taxi_0006" cmd="finished" req_id="152" dist_w_psg="1.235" t_submit="1724" t_schedule="2101" t_enter="2545" t_finish="2821" t_latest="2821" t_drive="175" t_est="1.1" t_late="0" t_early="-101"/>
+  <dispatch vehicle="taxi_0004" reservations="['263']"/>
+  <request time="2735" vehicle="taxi_0004" cmd="schedule" req_id="206" submit_time="1584"/>
+  <request time="2735" vehicle="taxi_0004" cmd="finished" req_id="228" dist_w_psg="2.131" t_submit="1725" t_schedule="2081" t_enter="2477" t_finish="2832" t_latest="2832" t_drive="258" t_est="0.8" t_late="0" t_early="-97"/>
+  <request time="2745" vehicle="taxi_0016" cmd="enter" req_id="20" distance="14.930" t_late="151"/>
+  <request time="2746" vehicle="taxi_0017" cmd="enter" req_id="42" distance="11.752" t_late="186"/>
+  <dispatch vehicle="taxi_0013" reservations="['262']"/>
+  <request time="2772" vehicle="taxi_0013" cmd="schedule" req_id="41" submit_time="1574"/>
+  <request time="2772" vehicle="taxi_0013" cmd="finished" req_id="13" dist_w_psg="2.446" t_submit="1800" t_schedule="1808" t_enter="2323" t_finish="2906" t_latest="2906" t_drive="449" t_est="0.5" t_late="0" t_early="-134"/>
+  <request time="2790" vehicle="taxi_0007" cmd="enter" req_id="89" distance="13.338" t_late="219"/>
+  <dispatch vehicle="taxi_0015" reservations="['261']"/>
+  <request time="2799" vehicle="taxi_0015" cmd="schedule" req_id="24" submit_time="1559"/>
+  <request time="2799" vehicle="taxi_0015" cmd="finished" req_id="26" dist_w_psg="1.911" t_submit="1706" t_schedule="2204" t_enter="2468" t_finish="2822" t_latest="2822" t_drive="331" t_est="0.7" t_late="0" t_early="-23"/>
+  <dispatch vehicle="taxi_0011" reservations="['259']"/>
+  <request time="2873" vehicle="taxi_0011" cmd="schedule" req_id="188" submit_time="1540"/>
+  <request time="2873" vehicle="taxi_0011" cmd="finished" req_id="127" dist_w_psg="1.947" t_submit="1766" t_schedule="1982" t_enter="2369" t_finish="2807" t_latest="2807" t_drive="504" t_est="0.3" t_late="66" t_early="0"/>
+  <request time="2876" vehicle="taxi_0012" cmd="enter" req_id="162" distance="14.918" t_late="346"/>
+  <request time="2879" vehicle="taxi_0006" cmd="enter" req_id="33" distance="14.342" t_late="387"/>
+  <request time="2883" vehicle="taxi_0005" cmd="enter" req_id="200" distance="13.786" t_late="329"/>
+  <dispatch vehicle="taxi_0014" reservations="['257']"/>
+  <request time="2891" vehicle="taxi_0014" cmd="schedule" req_id="244" submit_time="1529"/>
+  <request time="2891" vehicle="taxi_0014" cmd="finished" req_id="157" dist_w_psg="2.370" t_submit="1613" t_schedule="1628" t_enter="2365" t_finish="2686" t_latest="2686" t_drive="526" t_est="0.3" t_late="205" t_early="0"/>
+  <dispatch vehicle="taxi_0020" reservations="['256']"/>
+  <request time="2924" vehicle="taxi_0020" cmd="schedule" req_id="279" submit_time="1523"/>
+  <request time="2924" vehicle="taxi_0020" cmd="finished" req_id="237" dist_w_psg="2.223" t_submit="1784" t_schedule="1981" t_enter="2574" t_finish="2949" t_latest="2949" t_drive="350" t_est="0.8" t_late="0" t_early="-25"/>
+  <dispatch vehicle="taxi_0017" reservations="['255']"/>
+  <request time="2944" vehicle="taxi_0017" cmd="schedule" req_id="19" submit_time="1516"/>
+  <request time="2944" vehicle="taxi_0017" cmd="finished" req_id="42" dist_w_psg="1.314" t_submit="1660" t_schedule="2375" t_enter="2746" t_finish="2706" t_latest="2706" t_drive="198" t_est="0.7" t_late="238" t_early="0"/>
+  <dispatch vehicle="taxi_0002" reservations="['253']"/>
+  <request time="2952" vehicle="taxi_0002" cmd="schedule" req_id="37" submit_time="1491"/>
+  <request time="2952" vehicle="taxi_0002" cmd="finished" req_id="130" dist_w_psg="3.927" t_submit="1743" t_schedule="2014" t_enter="2538" t_finish="3002" t_latest="3002" t_drive="414" t_est="0.9" t_late="0" t_early="-50"/>
+  <request time="2961" vehicle="taxi_0010" cmd="enter" req_id="95" distance="13.538" t_late="415"/>
+  <request time="2964" vehicle="taxi_0014" cmd="enter" req_id="244" distance="14.877" t_late="535"/>
+  <request time="2965" vehicle="taxi_0011" cmd="enter" req_id="188" distance="15.188" t_late="525"/>
+  <dispatch vehicle="taxi_0024" reservations="['252']"/>
+  <request time="2991" vehicle="taxi_0024" cmd="schedule" req_id="194" submit_time="1484"/>
+  <request time="2991" vehicle="taxi_0024" cmd="finished" req_id="208" dist_w_psg="2.796" t_submit="1794" t_schedule="1794" t_enter="2282" t_finish="2964" t_latest="2964" t_drive="709" t_est="0.4" t_late="27" t_early="0"/>
+  <request time="3034" vehicle="taxi_0017" cmd="enter" req_id="19" distance="13.631" t_late="618"/>
+  <request time="3050" vehicle="taxi_0022" cmd="enter" req_id="263" distance="18.986" t_late="509"/>
+  <dispatch vehicle="taxi_0012" reservations="['251']"/>
+  <request time="3072" vehicle="taxi_0012" cmd="schedule" req_id="259" submit_time="1482"/>
+  <request time="3072" vehicle="taxi_0012" cmd="finished" req_id="162" dist_w_psg="1.253" t_submit="1630" t_schedule="2634" t_enter="2876" t_finish="2656" t_latest="2656" t_drive="196" t_est="0.6" t_late="416" t_early="0"/>
+  <request time="3108" vehicle="taxi_0008" cmd="enter" req_id="216" distance="14.768" t_late="568"/>
+  <dispatch vehicle="taxi_0021" reservations="['250']"/>
+  <request time="3110" vehicle="taxi_0021" cmd="schedule" req_id="134" submit_time="1479"/>
+  <request time="3110" vehicle="taxi_0021" cmd="finished" req_id="234" dist_w_psg="3.465" t_submit="1751" t_schedule="1984" t_enter="2415" t_finish="2906" t_latest="2906" t_drive="695" t_est="0.4" t_late="204" t_early="0"/>
+  <dispatch vehicle="taxi_0018" reservations="['249']"/>
+  <request time="3112" vehicle="taxi_0018" cmd="schedule" req_id="204" submit_time="1477"/>
+  <request time="3112" vehicle="taxi_0018" cmd="finished" req_id="15" dist_w_psg="3.007" t_submit="1785" t_schedule="1960" t_enter="2613" t_finish="2963" t_latest="2963" t_drive="499" t_est="0.6" t_late="149" t_early="0"/>
+  <request time="3125" vehicle="taxi_0015" cmd="enter" req_id="24" distance="16.323" t_late="666"/>
+  <dispatch vehicle="taxi_0001" reservations="['247']"/>
+  <request time="3126" vehicle="taxi_0001" cmd="schedule" req_id="250" submit_time="1453"/>
+  <request time="3126" vehicle="taxi_0001" cmd="finished" req_id="232" dist_w_psg="1.963" t_submit="1651" t_schedule="2420" t_enter="2655" t_finish="2732" t_latest="2732" t_drive="471" t_est="0.4" t_late="394" t_early="0"/>
+  <dispatch vehicle="taxi_0000" reservations="['246']"/>
+  <request time="3132" vehicle="taxi_0000" cmd="schedule" req_id="214" submit_time="1453"/>
+  <request time="3132" vehicle="taxi_0000" cmd="finished" req_id="203" dist_w_psg="3.968" t_submit="1723" t_schedule="2130" t_enter="2618" t_finish="2961" t_latest="2961" t_drive="514" t_est="0.7" t_late="171" t_early="0"/>
+  <dispatch vehicle="taxi_0011" reservations="['245']"/>
+  <request time="3171" vehicle="taxi_0011" cmd="schedule" req_id="75" submit_time="1448"/>
+  <request time="3171" vehicle="taxi_0011" cmd="finished" req_id="188" dist_w_psg="1.484" t_submit="1540" t_schedule="2873" t_enter="2965" t_finish="2559" t_latest="2559" t_drive="206" t_est="0.6" t_late="612" t_early="0"/>
+  <request time="3187" vehicle="taxi_0018" cmd="enter" req_id="204" distance="19.184" t_late="810"/>
+  <request time="3201" vehicle="taxi_0023" cmd="enter" req_id="136" distance="15.656" t_late="696"/>
+  <request time="3239" vehicle="taxi_0019" cmd="enter" req_id="161" distance="19.440" t_late="738"/>
+  <dispatch vehicle="taxi_0022" reservations="['244']"/>
+  <request time="3241" vehicle="taxi_0022" cmd="schedule" req_id="23" submit_time="1443"/>
+  <request time="3241" vehicle="taxi_0022" cmd="finished" req_id="263" dist_w_psg="1.338" t_submit="1641" t_schedule="2520" t_enter="3050" t_finish="2745" t_latest="2745" t_drive="191" t_est="1.1" t_late="496" t_early="0"/>
+  <request time="3250" vehicle="taxi_0004" cmd="enter" req_id="206" distance="15.421" t_late="766"/>
+  <request time="3250" vehicle="taxi_0013" cmd="enter" req_id="41" distance="15.335" t_late="776"/>
+  <request time="3284" vehicle="taxi_0009" cmd="enter" req_id="266" distance="14.558" t_late="791"/>
+  <dispatch vehicle="taxi_0007" reservations="['243']"/>
+  <request time="3295" vehicle="taxi_0007" cmd="schedule" req_id="209" submit_time="1441"/>
+  <request time="3295" vehicle="taxi_0007" cmd="finished" req_id="89" dist_w_psg="3.192" t_submit="1671" t_schedule="2299" t_enter="2790" t_finish="2853" t_latest="2853" t_drive="505" t_est="0.6" t_late="442" t_early="0"/>
+  <dispatch vehicle="taxi_0003" reservations="['242']"/>
+  <request time="3301" vehicle="taxi_0003" cmd="schedule" req_id="79" submit_time="1436"/>
+  <request time="3301" vehicle="taxi_0003" cmd="finished" req_id="280" dist_w_psg="2.663" t_submit="1742" t_schedule="2050" t_enter="2706" t_finish="2872" t_latest="2872" t_drive="595" t_est="0.4" t_late="429" t_early="0"/>
+  <dispatch vehicle="taxi_0018" reservations="['241']"/>
+  <request time="3304" vehicle="taxi_0018" cmd="schedule" req_id="60" submit_time="1436"/>
+  <dispatch vehicle="taxi_0015" reservations="['240']"/>
+  <request time="3304" vehicle="taxi_0015" cmd="schedule" req_id="215" submit_time="1425"/>
+  <request time="3304" vehicle="taxi_0015" cmd="finished" req_id="24" dist_w_psg="1.019" t_submit="1559" t_schedule="2799" t_enter="3125" t_finish="2623" t_latest="2623" t_drive="179" t_est="0.9" t_late="681" t_early="0"/>
+  <request time="3304" vehicle="taxi_0018" cmd="finished" req_id="204" dist_w_psg="0.737" t_submit="1477" t_schedule="3112" t_enter="3187" t_finish="2450" t_latest="2450" t_drive="117" t_est="0.6" t_late="854" t_early="0"/>
+  <request time="3348" vehicle="taxi_0018" cmd="enter" req_id="60" distance="20.216" t_late="1012"/>
+  <dispatch vehicle="taxi_0006" reservations="['239']"/>
+  <request time="3358" vehicle="taxi_0006" cmd="schedule" req_id="256" submit_time="1423"/>
+  <request time="3358" vehicle="taxi_0006" cmd="finished" req_id="33" dist_w_psg="1.860" t_submit="1592" t_schedule="2720" t_enter="2879" t_finish="2693" t_latest="2693" t_drive="479" t_est="0.4" t_late="665" t_early="0"/>
+  <request time="3400" vehicle="taxi_0020" cmd="enter" req_id="279" distance="16.781" t_late="977"/>
+  <dispatch vehicle="taxi_0016" reservations="['238']"/>
+  <request time="3429" vehicle="taxi_0016" cmd="schedule" req_id="178" submit_time="1419"/>
+  <request time="3429" vehicle="taxi_0016" cmd="finished" req_id="20" dist_w_psg="2.610" t_submit="1694" t_schedule="2225" t_enter="2745" t_finish="2795" t_latest="2795" t_drive="684" t_est="0.3" t_late="634" t_early="0"/>
+  <request time="3447" vehicle="taxi_0012" cmd="enter" req_id="259" distance="18.364" t_late="1065"/>
+  <dispatch vehicle="taxi_0005" reservations="['237']"/>
+  <request time="3463" vehicle="taxi_0005" cmd="schedule" req_id="195" submit_time="1417"/>
+  <request time="3463" vehicle="taxi_0005" cmd="finished" req_id="200" dist_w_psg="2.430" t_submit="1654" t_schedule="2403" t_enter="2883" t_finish="2712" t_latest="2712" t_drive="580" t_est="0.3" t_late="751" t_early="0"/>
+  <dispatch vehicle="taxi_0014" reservations="['234']"/>
+  <request time="3467" vehicle="taxi_0014" cmd="schedule" req_id="56" submit_time="1385"/>
+  <request time="3467" vehicle="taxi_0014" cmd="finished" req_id="244" dist_w_psg="4.066" t_submit="1529" t_schedule="2891" t_enter="2964" t_finish="2788" t_latest="2788" t_drive="503" t_est="0.7" t_late="679" t_early="0"/>
+  <dispatch vehicle="taxi_0023" reservations="['233']"/>
+  <request time="3474" vehicle="taxi_0023" cmd="schedule" req_id="128" submit_time="1378"/>
+  <request time="3474" vehicle="taxi_0023" cmd="finished" req_id="136" dist_w_psg="1.678" t_submit="1605" t_schedule="2662" t_enter="3201" t_finish="2662" t_latest="2662" t_drive="273" t_est="0.6" t_late="812" t_early="0"/>
+  <request time="3495" vehicle="taxi_0024" cmd="enter" req_id="194" distance="18.594" t_late="1111"/>
+  <dispatch vehicle="taxi_0017" reservations="['231']"/>
+  <request time="3516" vehicle="taxi_0017" cmd="schedule" req_id="53" submit_time="1368"/>
+  <request time="3516" vehicle="taxi_0017" cmd="finished" req_id="19" dist_w_psg="1.595" t_submit="1516" t_schedule="2944" t_enter="3034" t_finish="2621" t_latest="2621" t_drive="482" t_est="0.4" t_late="895" t_early="0"/>
+  <vehicle time="3517" vehicle="taxi_0017" cmd="left"/>
+  <dispatch vehicle="taxi_0010" reservations="['230']"/>
+  <request time="3524" vehicle="taxi_0010" cmd="schedule" req_id="231" submit_time="1360"/>
+  <request time="3524" vehicle="taxi_0010" cmd="finished" req_id="95" dist_w_psg="2.149" t_submit="1646" t_schedule="2484" t_enter="2961" t_finish="2725" t_latest="2725" t_drive="563" t_est="0.3" t_late="799" t_early="0"/>
+  <request time="3531" vehicle="taxi_0003" cmd="enter" req_id="79" distance="13.401" t_late="1195"/>
+  <request time="3533" vehicle="taxi_0016" cmd="enter" req_id="178" distance="18.412" t_late="1214"/>
+  <dispatch vehicle="taxi_0012" reservations="['228']"/>
+  <request time="3575" vehicle="taxi_0012" cmd="schedule" req_id="87" submit_time="1351"/>
+  <request time="3575" vehicle="taxi_0012" cmd="finished" req_id="259" dist_w_psg="0.807" t_submit="1482" t_schedule="3072" t_enter="3447" t_finish="2466" t_latest="2466" t_drive="128" t_est="0.7" t_late="1109" t_early="0"/>
+  <request time="3584" vehicle="taxi_0001" cmd="enter" req_id="250" distance="17.108" t_late="1231"/>
+  <dispatch vehicle="taxi_0018" reservations="['227']"/>
+  <request time="3592" vehicle="taxi_0018" cmd="schedule" req_id="64" submit_time="1346"/>
+  <request time="3592" vehicle="taxi_0018" cmd="finished" req_id="60" dist_w_psg="1.436" t_submit="1436" t_schedule="3304" t_enter="3348" t_finish="2491" t_latest="2491" t_drive="244" t_est="0.6" t_late="1101" t_early="0"/>
+  <dispatch vehicle="taxi_0016" reservations="['226']"/>
+  <request time="3594" vehicle="taxi_0016" cmd="schedule" req_id="63" submit_time="1336"/>
+  <request time="3594" vehicle="taxi_0016" cmd="finished" req_id="178" dist_w_psg="0.418" t_submit="1419" t_schedule="3429" t_enter="3533" t_finish="2378" t_latest="2378" t_drive="61" t_est="1.0" t_late="1216" t_early="0"/>
+  <request time="3619" vehicle="taxi_0022" cmd="enter" req_id="23" distance="21.980" t_late="1276"/>
+  <request time="3628" vehicle="taxi_0002" cmd="enter" req_id="37" distance="20.516" t_late="1237"/>
+  <request time="3629" vehicle="taxi_0011" cmd="enter" req_id="75" distance="18.445" t_late="1281"/>
+  <dispatch vehicle="taxi_0009" reservations="['225']"/>
+  <request time="3635" vehicle="taxi_0009" cmd="schedule" req_id="102" submit_time="1326"/>
+  <request time="3635" vehicle="taxi_0009" cmd="finished" req_id="266" dist_w_psg="2.011" t_submit="1593" t_schedule="2689" t_enter="3284" t_finish="2683" t_latest="2683" t_drive="351" t_est="0.5" t_late="952" t_early="0"/>
+  <dispatch vehicle="taxi_0019" reservations="['224']"/>
+  <request time="3667" vehicle="taxi_0019" cmd="schedule" req_id="16" submit_time="1324"/>
+  <request time="3667" vehicle="taxi_0019" cmd="finished" req_id="161" dist_w_psg="1.782" t_submit="1601" t_schedule="2676" t_enter="3239" t_finish="2708" t_latest="2708" t_drive="428" t_est="0.5" t_late="959" t_early="0"/>
+  <request time="3701" vehicle="taxi_0019" cmd="enter" req_id="16" distance="21.344" t_late="1477"/>
+  <dispatch vehicle="taxi_0004" reservations="['223']"/>
+  <request time="3708" vehicle="taxi_0004" cmd="schedule" req_id="108" submit_time="1312"/>
+  <request time="3708" vehicle="taxi_0004" cmd="finished" req_id="206" dist_w_psg="2.061" t_submit="1584" t_schedule="2735" t_enter="3250" t_finish="2668" t_latest="2668" t_drive="458" t_est="0.4" t_late="1040" t_early="0"/>
+  <dispatch vehicle="taxi_0013" reservations="['222']"/>
+  <request time="3717" vehicle="taxi_0013" cmd="schedule" req_id="173" submit_time="1307"/>
+  <request time="3717" vehicle="taxi_0013" cmd="finished" req_id="41" dist_w_psg="2.577" t_submit="1574" t_schedule="2772" t_enter="3250" t_finish="2720" t_latest="2720" t_drive="467" t_est="0.5" t_late="997" t_early="0"/>
+  <dispatch vehicle="taxi_0008" reservations="['221']"/>
+  <request time="3782" vehicle="taxi_0008" cmd="schedule" req_id="185" submit_time="1296"/>
+  <request time="3782" vehicle="taxi_0008" cmd="finished" req_id="216" dist_w_psg="2.610" t_submit="1640" t_schedule="2623" t_enter="3108" t_finish="2741" t_latest="2741" t_drive="674" t_est="0.3" t_late="1041" t_early="0"/>
+  <dispatch vehicle="taxi_0003" reservations="['219']"/>
+  <request time="3799" vehicle="taxi_0003" cmd="schedule" req_id="286" submit_time="1278"/>
+  <request time="3799" vehicle="taxi_0003" cmd="finished" req_id="79" dist_w_psg="1.800" t_submit="1436" t_schedule="3301" t_enter="3531" t_finish="2549" t_latest="2549" t_drive="268" t_est="0.8" t_late="1250" t_early="0"/>
+  <dispatch vehicle="taxi_0020" reservations="['217']"/>
+  <request time="3805" vehicle="taxi_0020" cmd="schedule" req_id="154" submit_time="1268"/>
+  <request time="3805" vehicle="taxi_0020" cmd="finished" req_id="279" dist_w_psg="1.790" t_submit="1523" t_schedule="2924" t_enter="3400" t_finish="2526" t_latest="2526" t_drive="405" t_est="0.3" t_late="1279" t_early="0"/>
+  <request time="3806" vehicle="taxi_0021" cmd="enter" req_id="134" distance="16.312" t_late="1427"/>
+  <dispatch vehicle="taxi_0011" reservations="['214']"/>
+  <request time="3826" vehicle="taxi_0011" cmd="schedule" req_id="4" submit_time="1252"/>
+  <request time="3826" vehicle="taxi_0011" cmd="finished" req_id="75" dist_w_psg="1.392" t_submit="1448" t_schedule="3171" t_enter="3629" t_finish="2474" t_latest="2474" t_drive="197" t_est="0.6" t_late="1352" t_early="0"/>
+  <request time="3892" vehicle="taxi_0016" cmd="enter" req_id="63" distance="20.757" t_late="1656"/>
+  <request time="3908" vehicle="taxi_0018" cmd="enter" req_id="64" distance="23.097" t_late="1662"/>
+  <dispatch vehicle="taxi_0024" reservations="['213']"/>
+  <request time="3924" vehicle="taxi_0024" cmd="schedule" req_id="186" submit_time="1250"/>
+  <request time="3924" vehicle="taxi_0024" cmd="finished" req_id="194" dist_w_psg="2.447" t_submit="1484" t_schedule="2991" t_enter="3495" t_finish="2573" t_latest="2573" t_drive="429" t_est="0.4" t_late="1351" t_early="0"/>
+  <dispatch vehicle="taxi_0019" reservations="['212']"/>
+  <request time="3938" vehicle="taxi_0019" cmd="schedule" req_id="62" submit_time="1235"/>
+  <request time="3938" vehicle="taxi_0019" cmd="finished" req_id="16" dist_w_psg="1.415" t_submit="1324" t_schedule="3667" t_enter="3701" t_finish="2394" t_latest="2394" t_drive="237" t_est="0.7" t_late="1544" t_early="0"/>
+  <request time="3955" vehicle="taxi_0017" cmd="enter" req_id="53" distance="17.588" t_late="1687"/>
+  <request time="3986" vehicle="taxi_0012" cmd="enter" req_id="87" distance="21.260" t_late="1735"/>
+  <request time="4013" vehicle="taxi_0006" cmd="enter" req_id="256" distance="19.084" t_late="1690"/>
+  <request time="4039" vehicle="taxi_0014" cmd="enter" req_id="56" distance="22.164" t_late="1754"/>
+  <request time="4051" vehicle="taxi_0010" cmd="enter" req_id="231" distance="17.779" t_late="1791"/>
+  <request time="4063" vehicle="taxi_0020" cmd="enter" req_id="154" distance="19.980" t_late="1895"/>
+  <dispatch vehicle="taxi_0006" reservations="['211']"/>
+  <request time="4069" vehicle="taxi_0006" cmd="schedule" req_id="70" submit_time="1234"/>
+  <request time="4069" vehicle="taxi_0006" cmd="finished" req_id="256" dist_w_psg="0.354" t_submit="1423" t_schedule="3358" t_enter="4013" t_finish="2372" t_latest="2372" t_drive="56" t_est="0.9" t_late="1697" t_early="0"/>
+  <request time="4074" vehicle="taxi_0008" cmd="enter" req_id="185" distance="18.210" t_late="1878"/>
+  <request time="4095" vehicle="taxi_0005" cmd="enter" req_id="195" distance="18.639" t_late="1778"/>
+  <request time="4111" vehicle="taxi_0000" cmd="enter" req_id="214" distance="20.246" t_late="1758"/>
+  <request time="4116" vehicle="taxi_0023" cmd="enter" req_id="128" distance="19.853" t_late="1838"/>
+  <dispatch vehicle="taxi_0021" reservations="['210']"/>
+  <request time="4126" vehicle="taxi_0021" cmd="schedule" req_id="252" submit_time="1230"/>
+  <request time="4126" vehicle="taxi_0021" cmd="finished" req_id="134" dist_w_psg="1.882" t_submit="1479" t_schedule="3110" t_enter="3806" t_finish="2604" t_latest="2604" t_drive="320" t_est="0.7" t_late="1522" t_early="0"/>
+  <request time="4133" vehicle="taxi_0007" cmd="enter" req_id="209" distance="20.342" t_late="1792"/>
+  <dispatch vehicle="taxi_0001" reservations="['209']"/>
+  <request time="4134" vehicle="taxi_0001" cmd="schedule" req_id="55" submit_time="1214"/>
+  <request time="4134" vehicle="taxi_0001" cmd="finished" req_id="250" dist_w_psg="2.379" t_submit="1453" t_schedule="3126" t_enter="3584" t_finish="2533" t_latest="2533" t_drive="550" t_est="0.3" t_late="1601" t_early="0"/>
+  <request time="4144" vehicle="taxi_0019" cmd="enter" req_id="62" distance="23.925" t_late="2009"/>
+  <request time="4159" vehicle="taxi_0009" cmd="enter" req_id="102" distance="19.116" t_late="1933"/>
+  <dispatch vehicle="taxi_0022" reservations="['208']"/>
+  <request time="4167" vehicle="taxi_0022" cmd="schedule" req_id="182" submit_time="1207"/>
+  <request time="4167" vehicle="taxi_0022" cmd="finished" req_id="23" dist_w_psg="2.028" t_submit="1443" t_schedule="3241" t_enter="3619" t_finish="2588" t_latest="2588" t_drive="548" t_est="0.4" t_late="1579" t_early="0"/>
+  <request time="4174" vehicle="taxi_0013" cmd="enter" req_id="173" distance="19.190" t_late="1967"/>
+  <dispatch vehicle="taxi_0016" reservations="['207']"/>
+  <request time="4188" vehicle="taxi_0016" cmd="schedule" req_id="251" submit_time="1196"/>
+  <request time="4188" vehicle="taxi_0016" cmd="finished" req_id="63" dist_w_psg="1.808" t_submit="1336" t_schedule="3594" t_enter="3892" t_finish="2386" t_latest="2386" t_drive="296" t_est="0.5" t_late="1802" t_early="0"/>
+  <request time="4197" vehicle="taxi_0015" cmd="enter" req_id="215" distance="20.548" t_late="1872"/>
+  <request time="4199" vehicle="taxi_0024" cmd="enter" req_id="186" distance="22.387" t_late="2049"/>
+  <dispatch vehicle="taxi_0002" reservations="['206']"/>
+  <request time="4208" vehicle="taxi_0002" cmd="schedule" req_id="145" submit_time="1193"/>
+  <request time="4208" vehicle="taxi_0002" cmd="finished" req_id="37" dist_w_psg="3.122" t_submit="1491" t_schedule="2952" t_enter="3628" t_finish="2651" t_latest="2651" t_drive="580" t_est="0.4" t_late="1557" t_early="0"/>
+  <dispatch vehicle="taxi_0019" reservations="['204']"/>
+  <request time="4259" vehicle="taxi_0019" cmd="schedule" req_id="236" submit_time="1176"/>
+  <request time="4259" vehicle="taxi_0019" cmd="finished" req_id="62" dist_w_psg="0.884" t_submit="1235" t_schedule="3938" t_enter="4144" t_finish="2198" t_latest="2198" t_drive="115" t_est="0.5" t_late="2061" t_early="0"/>
+  <dispatch vehicle="taxi_0020" reservations="['203']"/>
+  <request time="4266" vehicle="taxi_0020" cmd="schedule" req_id="156" submit_time="1172"/>
+  <request time="4266" vehicle="taxi_0011" cmd="enter" req_id="4" distance="21.892" t_late="2114"/>
+  <request time="4266" vehicle="taxi_0020" cmd="finished" req_id="154" dist_w_psg="1.076" t_submit="1268" t_schedule="3805" t_enter="4063" t_finish="2291" t_latest="2291" t_drive="203" t_est="0.6" t_late="1975" t_early="0"/>
+  <request time="4282" vehicle="taxi_0003" cmd="enter" req_id="286" distance="17.428" t_late="2104"/>
+  <request time="4282" vehicle="taxi_0004" cmd="enter" req_id="108" distance="19.515" t_late="2070"/>
+  <dispatch vehicle="taxi_0007" reservations="['201']"/>
+  <request time="4297" vehicle="taxi_0007" cmd="schedule" req_id="265" submit_time="1166"/>
+  <request time="4297" vehicle="taxi_0007" cmd="finished" req_id="209" dist_w_psg="1.003" t_submit="1441" t_schedule="3295" t_enter="4133" t_finish="2524" t_latest="2524" t_drive="164" t_est="1.1" t_late="1773" t_early="0"/>
+  <request time="4353" vehicle="taxi_0020" cmd="enter" req_id="156" distance="21.649" t_late="2281"/>
+  <dispatch vehicle="taxi_0003" reservations="['200']"/>
+  <request time="4389" vehicle="taxi_0003" cmd="schedule" req_id="264" submit_time="1163"/>
+  <request time="4389" vehicle="taxi_0019" cmd="enter" req_id="236" distance="25.903" t_late="2313"/>
+  <request time="4389" vehicle="taxi_0003" cmd="finished" req_id="286" dist_w_psg="0.602" t_submit="1278" t_schedule="3799" t_enter="4282" t_finish="2211" t_latest="2211" t_drive="107" t_est="0.3" t_late="2178" t_early="0"/>
+  <dispatch vehicle="taxi_0017" reservations="['199']"/>
+  <request time="4454" vehicle="taxi_0017" cmd="schedule" req_id="190" submit_time="1163"/>
+  <request time="4454" vehicle="taxi_0017" cmd="finished" req_id="53" dist_w_psg="2.805" t_submit="1368" t_schedule="3516" t_enter="3955" t_finish="2514" t_latest="2514" t_drive="499" t_est="0.5" t_late="1940" t_early="0"/>
+  <dispatch vehicle="taxi_0014" reservations="['198']"/>
+  <request time="4455" vehicle="taxi_0014" cmd="schedule" req_id="183" submit_time="1159"/>
+  <request time="4455" vehicle="taxi_0014" cmd="finished" req_id="56" dist_w_psg="3.047" t_submit="1385" t_schedule="3467" t_enter="4039" t_finish="2532" t_latest="2532" t_drive="416" t_est="0.6" t_late="1923" t_early="0"/>
+  <dispatch vehicle="taxi_0012" reservations="['197']"/>
+  <request time="4466" vehicle="taxi_0012" cmd="schedule" req_id="74" submit_time="1158"/>
+  <request time="4466" vehicle="taxi_0012" cmd="finished" req_id="87" dist_w_psg="2.455" t_submit="1351" t_schedule="3575" t_enter="3986" t_finish="2465" t_latest="2465" t_drive="480" t_est="0.4" t_late="2001" t_early="0"/>
+  <dispatch vehicle="taxi_0000" reservations="['195']"/>
+  <request time="4473" vehicle="taxi_0000" cmd="schedule" req_id="78" submit_time="1154"/>
+  <request time="4473" vehicle="taxi_0000" cmd="finished" req_id="214" dist_w_psg="2.208" t_submit="1453" t_schedule="3132" t_enter="4111" t_finish="2554" t_latest="2554" t_drive="362" t_est="0.6" t_late="1919" t_early="0"/>
+  <dispatch vehicle="taxi_0009" reservations="['194']"/>
+  <request time="4497" vehicle="taxi_0009" cmd="schedule" req_id="213" submit_time="1150"/>
+  <request time="4497" vehicle="taxi_0009" cmd="finished" req_id="102" dist_w_psg="1.779" t_submit="1326" t_schedule="3635" t_enter="4159" t_finish="2434" t_latest="2434" t_drive="338" t_est="0.6" t_late="2063" t_early="0"/>
+  <request time="4570" vehicle="taxi_0022" cmd="enter" req_id="182" distance="25.374" t_late="2463"/>
+  <request time="4575" vehicle="taxi_0016" cmd="enter" req_id="251" distance="24.377" t_late="2479"/>
+  <request time="4594" vehicle="taxi_0006" cmd="enter" req_id="70" distance="21.797" t_late="2460"/>
+  <dispatch vehicle="taxi_0018" reservations="['193']"/>
+  <request time="4597" vehicle="taxi_0018" cmd="schedule" req_id="180" submit_time="1147"/>
+  <request time="4597" vehicle="taxi_0018" cmd="finished" req_id="64" dist_w_psg="2.160" t_submit="1346" t_schedule="3592" t_enter="3908" t_finish="2444" t_latest="2444" t_drive="689" t_est="0.3" t_late="2153" t_early="0"/>
+  <request time="4599" vehicle="taxi_0001" cmd="enter" req_id="55" distance="21.825" t_late="2485"/>
+  <dispatch vehicle="taxi_0010" reservations="['192']"/>
+  <request time="4613" vehicle="taxi_0010" cmd="schedule" req_id="121" submit_time="1143"/>
+  <request time="4613" vehicle="taxi_0010" cmd="finished" req_id="231" dist_w_psg="2.703" t_submit="1360" t_schedule="3524" t_enter="4051" t_finish="2516" t_latest="2516" t_drive="562" t_est="0.5" t_late="2097" t_early="0"/>
+  <request time="4630" vehicle="taxi_0018" cmd="enter" req_id="180" distance="25.423" t_late="2583"/>
+  <request time="4631" vehicle="taxi_0002" cmd="enter" req_id="145" distance="26.083" t_late="2538"/>
+  <dispatch vehicle="taxi_0013" reservations="['191']"/>
+  <request time="4647" vehicle="taxi_0013" cmd="schedule" req_id="293" submit_time="1138"/>
+  <request time="4647" vehicle="taxi_0013" cmd="finished" req_id="173" dist_w_psg="2.602" t_submit="1307" t_schedule="3717" t_enter="4174" t_finish="2417" t_latest="2417" t_drive="473" t_est="0.4" t_late="2230" t_early="0"/>
+  <dispatch vehicle="taxi_0018" reservations="['190']"/>
+  <request time="4674" vehicle="taxi_0018" cmd="schedule" req_id="117" submit_time="1135"/>
+  <request time="4674" vehicle="taxi_0018" cmd="finished" req_id="180" dist_w_psg="0.254" t_submit="1147" t_schedule="4597" t_enter="4630" t_finish="2079" t_latest="2079" t_drive="44" t_est="0.7" t_late="2595" t_early="0"/>
+  <request time="4688" vehicle="taxi_0021" cmd="enter" req_id="252" distance="20.087" t_late="2558"/>
+  <dispatch vehicle="taxi_0005" reservations="['189']"/>
+  <request time="4701" vehicle="taxi_0005" cmd="schedule" req_id="151" submit_time="1134"/>
+  <request time="4701" vehicle="taxi_0005" cmd="finished" req_id="195" dist_w_psg="2.817" t_submit="1417" t_schedule="3463" t_enter="4095" t_finish="2558" t_latest="2558" t_drive="606" t_est="0.4" t_late="2143" t_early="0"/>
+  <request time="4776" vehicle="taxi_0012" cmd="enter" req_id="74" distance="25.531" t_late="2718"/>
+  <request time="4791" vehicle="taxi_0017" cmd="enter" req_id="190" distance="22.428" t_late="2728"/>
+  <dispatch vehicle="taxi_0008" reservations="['188']"/>
+  <request time="4800" vehicle="taxi_0008" cmd="schedule" req_id="268" submit_time="1132"/>
+  <request time="4800" vehicle="taxi_0008" cmd="finished" req_id="185" dist_w_psg="1.421" t_submit="1296" t_schedule="3782" t_enter="4074" t_finish="2375" t_latest="2375" t_drive="726" t_est="0.2" t_late="2425" t_early="0"/>
+  <request time="4809" vehicle="taxi_0007" cmd="enter" req_id="265" distance="23.205" t_late="2743"/>
+  <request time="4811" vehicle="taxi_0003" cmd="enter" req_id="264" distance="19.927" t_late="2748"/>
+  <dispatch vehicle="taxi_0011" reservations="['187']"/>
+  <request time="4820" vehicle="taxi_0011" cmd="schedule" req_id="211" submit_time="1125"/>
+  <request time="4820" vehicle="taxi_0011" cmd="finished" req_id="4" dist_w_psg="3.312" t_submit="1252" t_schedule="3826" t_enter="4266" t_finish="2434" t_latest="2434" t_drive="554" t_est="0.5" t_late="2386" t_early="0"/>
+  <dispatch vehicle="taxi_0023" reservations="['186']"/>
+  <request time="4857" vehicle="taxi_0023" cmd="schedule" req_id="76" submit_time="1125"/>
+  <request time="4857" vehicle="taxi_0023" cmd="finished" req_id="128" dist_w_psg="2.806" t_submit="1378" t_schedule="3474" t_enter="4116" t_finish="2490" t_latest="2490" t_drive="741" t_est="0.3" t_late="2367" t_early="0"/>
+  <dispatch vehicle="taxi_0020" reservations="['185']"/>
+  <request time="4869" vehicle="taxi_0020" cmd="schedule" req_id="105" submit_time="1122"/>
+  <request time="4869" vehicle="taxi_0020" cmd="finished" req_id="156" dist_w_psg="2.651" t_submit="1172" t_schedule="4266" t_enter="4353" t_finish="2320" t_latest="2320" t_drive="516" t_est="0.5" t_late="2549" t_early="0"/>
+  <request time="4879" vehicle="taxi_0000" cmd="enter" req_id="78" distance="23.936" t_late="2825"/>
+  <dispatch vehicle="taxi_0024" reservations="['184']"/>
+  <request time="4899" vehicle="taxi_0024" cmd="schedule" req_id="297" submit_time="1113"/>
+  <dispatch vehicle="taxi_0006" reservations="['183']"/>
+  <request time="4899" vehicle="taxi_0006" cmd="schedule" req_id="111" submit_time="1112"/>
+  <request time="4899" vehicle="taxi_0006" cmd="finished" req_id="70" dist_w_psg="1.496" t_submit="1234" t_schedule="4069" t_enter="4594" t_finish="2290" t_latest="2290" t_drive="305" t_est="0.5" t_late="2609" t_early="0"/>
+  <request time="4899" vehicle="taxi_0024" cmd="finished" req_id="186" dist_w_psg="2.516" t_submit="1250" t_schedule="3924" t_enter="4199" t_finish="2386" t_latest="2386" t_drive="700" t_est="0.3" t_late="2513" t_early="0"/>
+  <dispatch vehicle="taxi_0015" reservations="['182']"/>
+  <request time="4927" vehicle="taxi_0015" cmd="schedule" req_id="274" submit_time="1108"/>
+  <request time="4927" vehicle="taxi_0015" cmd="finished" req_id="215" dist_w_psg="2.610" t_submit="1425" t_schedule="3304" t_enter="4197" t_finish="2529" t_latest="2529" t_drive="730" t_est="0.3" t_late="2398" t_early="0"/>
+  <dispatch vehicle="taxi_0022" reservations="['181']"/>
+  <request time="4932" vehicle="taxi_0022" cmd="schedule" req_id="141" submit_time="1104"/>
+  <request time="4932" vehicle="taxi_0022" cmd="finished" req_id="182" dist_w_psg="2.505" t_submit="1207" t_schedule="4167" t_enter="4570" t_finish="2321" t_latest="2321" t_drive="362" t_est="0.6" t_late="2611" t_early="0"/>
+  <dispatch vehicle="taxi_0012" reservations="['180']"/>
+  <request time="4947" vehicle="taxi_0012" cmd="schedule" req_id="80" submit_time="1103"/>
+  <request time="4947" vehicle="taxi_0012" cmd="finished" req_id="74" dist_w_psg="1.413" t_submit="1158" t_schedule="4466" t_enter="4776" t_finish="2189" t_latest="2189" t_drive="171" t_est="0.8" t_late="2758" t_early="0"/>
+  <dispatch vehicle="taxi_0001" reservations="['179']"/>
+  <request time="4951" vehicle="taxi_0001" cmd="schedule" req_id="9" submit_time="1090"/>
+  <request time="4951" vehicle="taxi_0001" cmd="finished" req_id="55" dist_w_psg="2.127" t_submit="1214" t_schedule="4134" t_enter="4599" t_finish="2315" t_latest="2315" t_drive="352" t_est="0.6" t_late="2636" t_early="0"/>
+  <request time="4965" vehicle="taxi_0009" cmd="enter" req_id="213" distance="23.126" t_late="2915"/>
+  <request time="4979" vehicle="taxi_0013" cmd="enter" req_id="293" distance="23.922" t_late="2941"/>
+  <dispatch vehicle="taxi_0019" reservations="['177']"/>
+  <request time="4990" vehicle="taxi_0019" cmd="schedule" req_id="294" submit_time="1080"/>
+  <request time="4990" vehicle="taxi_0019" cmd="finished" req_id="236" dist_w_psg="1.695" t_submit="1176" t_schedule="4259" t_enter="4389" t_finish="2256" t_latest="2256" t_drive="601" t_est="0.3" t_late="2734" t_early="0"/>
+  <dispatch vehicle="taxi_0016" reservations="['176']"/>
+  <request time="4997" vehicle="taxi_0016" cmd="schedule" req_id="220" submit_time="1080"/>
+  <request time="4997" vehicle="taxi_0016" cmd="finished" req_id="251" dist_w_psg="1.956" t_submit="1196" t_schedule="4188" t_enter="4575" t_finish="2295" t_latest="2295" t_drive="422" t_est="0.5" t_late="2702" t_early="0"/>
+  <request time="5010" vehicle="taxi_0011" cmd="enter" req_id="211" distance="26.717" t_late="2985"/>
+  <dispatch vehicle="taxi_0017" reservations="['175']"/>
+  <request time="5015" vehicle="taxi_0017" cmd="schedule" req_id="187" submit_time="1074"/>
+  <request time="5015" vehicle="taxi_0017" cmd="finished" req_id="190" dist_w_psg="1.612" t_submit="1163" t_schedule="4454" t_enter="4791" t_finish="2225" t_latest="2225" t_drive="224" t_est="0.7" t_late="2790" t_early="0"/>
+  <dispatch vehicle="taxi_0004" reservations="['174']"/>
+  <request time="5065" vehicle="taxi_0004" cmd="schedule" req_id="150" submit_time="1073"/>
+  <request time="5065" vehicle="taxi_0004" cmd="finished" req_id="108" dist_w_psg="1.830" t_submit="1312" t_schedule="3708" t_enter="4282" t_finish="2417" t_latest="2417" t_drive="783" t_est="0.3" t_late="2648" t_early="0"/>
+  <request time="5067" vehicle="taxi_0024" cmd="enter" req_id="297" distance="26.098" t_late="3054"/>
+  <request time="5079" vehicle="taxi_0018" cmd="enter" req_id="117" distance="27.789" t_late="3044"/>
+  <request time="5100" vehicle="taxi_0001" cmd="enter" req_id="9" distance="24.728" t_late="3110"/>
+  <request time="5120" vehicle="taxi_0010" cmd="enter" req_id="121" distance="22.784" t_late="3077"/>
+  <dispatch vehicle="taxi_0024" reservations="['173']"/>
+  <request time="5161" vehicle="taxi_0024" cmd="schedule" req_id="181" submit_time="1060"/>
+  <request time="5161" vehicle="taxi_0024" cmd="finished" req_id="297" dist_w_psg="0.719" t_submit="1113" t_schedule="4899" t_enter="5067" t_finish="2103" t_latest="2103" t_drive="94" t_est="1.0" t_late="3058" t_early="0"/>
+  <dispatch vehicle="taxi_0000" reservations="['172']"/>
+  <request time="5168" vehicle="taxi_0000" cmd="schedule" req_id="93" submit_time="1055"/>
+  <request time="5168" vehicle="taxi_0000" cmd="finished" req_id="78" dist_w_psg="1.255" t_submit="1154" t_schedule="4473" t_enter="4879" t_finish="2175" t_latest="2175" t_drive="289" t_est="0.4" t_late="2993" t_early="0"/>
+  <dispatch vehicle="taxi_0018" reservations="['171']"/>
+  <request time="5181" vehicle="taxi_0018" cmd="schedule" req_id="254" submit_time="1054"/>
+  <request time="5181" vehicle="taxi_0018" cmd="finished" req_id="117" dist_w_psg="0.686" t_submit="1135" t_schedule="4674" t_enter="5079" t_finish="2136" t_latest="2136" t_drive="102" t_est="1.0" t_late="3045" t_early="0"/>
+  <request time="5184" vehicle="taxi_0012" cmd="enter" req_id="80" distance="28.034" t_late="3181"/>
+  <request time="5185" vehicle="taxi_0014" cmd="enter" req_id="183" distance="29.486" t_late="3126"/>
+  <request time="5203" vehicle="taxi_0016" cmd="enter" req_id="220" distance="27.433" t_late="3223"/>
+  <request time="5204" vehicle="taxi_0019" cmd="enter" req_id="294" distance="28.962" t_late="3224"/>
+  <request time="5205" vehicle="taxi_0005" cmd="enter" req_id="151" distance="24.196" t_late="3171"/>
+  <dispatch vehicle="taxi_0003" reservations="['169']"/>
+  <request time="5216" vehicle="taxi_0003" cmd="schedule" req_id="238" submit_time="1052"/>
+  <request time="5216" vehicle="taxi_0003" cmd="finished" req_id="264" dist_w_psg="1.915" t_submit="1163" t_schedule="4389" t_enter="4811" t_finish="2277" t_latest="2277" t_drive="405" t_est="0.5" t_late="2939" t_early="0"/>
+  <dispatch vehicle="taxi_0013" reservations="['168']"/>
+  <request time="5258" vehicle="taxi_0013" cmd="schedule" req_id="30" submit_time="1050"/>
+  <request time="5258" vehicle="taxi_0013" cmd="finished" req_id="293" dist_w_psg="1.516" t_submit="1138" t_schedule="4647" t_enter="4979" t_finish="2199" t_latest="2199" t_drive="279" t_est="0.6" t_late="3059" t_early="0"/>
+  <dispatch vehicle="taxi_0002" reservations="['167']"/>
+  <request time="5263" vehicle="taxi_0002" cmd="schedule" req_id="240" submit_time="1029"/>
+  <request time="5263" vehicle="taxi_0002" cmd="finished" req_id="145" dist_w_psg="2.932" t_submit="1193" t_schedule="4208" t_enter="4631" t_finish="2345" t_latest="2345" t_drive="632" t_est="0.4" t_late="2918" t_early="0"/>
+  <request time="5330" vehicle="taxi_0006" cmd="enter" req_id="111" distance="25.179" t_late="3318"/>
+  <request time="5358" vehicle="taxi_0020" cmd="enter" req_id="105" distance="25.632" t_late="3336"/>
+  <request time="5365" vehicle="taxi_0015" cmd="enter" req_id="274" distance="25.654" t_late="3357"/>
+  <dispatch vehicle="taxi_0007" reservations="['166']"/>
+  <request time="5388" vehicle="taxi_0007" cmd="schedule" req_id="36" submit_time="1015"/>
+  <request time="5388" vehicle="taxi_0007" cmd="finished" req_id="265" dist_w_psg="2.366" t_submit="1166" t_schedule="4297" t_enter="4809" t_finish="2315" t_latest="2315" t_drive="579" t_est="0.4" t_late="3073" t_early="0"/>
+  <dispatch vehicle="taxi_0014" reservations="['165']"/>
+  <request time="5407" vehicle="taxi_0014" cmd="schedule" req_id="40" submit_time="1013"/>
+  <request time="5407" vehicle="taxi_0000" cmd="enter" req_id="93" distance="25.757" t_late="3452"/>
+  <request time="5407" vehicle="taxi_0014" cmd="finished" req_id="183" dist_w_psg="1.396" t_submit="1159" t_schedule="4455" t_enter="5185" t_finish="2317" t_latest="2317" t_drive="222" t_est="1.2" t_late="3090" t_early="0"/>
+  <dispatch vehicle="taxi_0016" reservations="['162']"/>
+  <request time="5408" vehicle="taxi_0016" cmd="schedule" req_id="18" submit_time="1005"/>
+  <request time="5408" vehicle="taxi_0016" cmd="finished" req_id="220" dist_w_psg="1.200" t_submit="1080" t_schedule="4997" t_enter="5203" t_finish="2084" t_latest="2084" t_drive="205" t_est="0.5" t_late="3324" t_early="0"/>
+  <request time="5422" vehicle="taxi_0022" cmd="enter" req_id="141" distance="30.843" t_late="3418"/>
+  <request time="5428" vehicle="taxi_0013" cmd="enter" req_id="30" distance="26.017" t_late="3478"/>
+  <request time="5443" vehicle="taxi_0024" cmd="enter" req_id="181" distance="27.657" t_late="3483"/>
+  <dispatch vehicle="taxi_0011" reservations="['161']"/>
+  <request time="5482" vehicle="taxi_0011" cmd="schedule" req_id="71" submit_time="1003"/>
+  <request time="5482" vehicle="taxi_0011" cmd="finished" req_id="211" dist_w_psg="2.684" t_submit="1125" t_schedule="4820" t_enter="5010" t_finish="2240" t_latest="2240" t_drive="472" t_est="0.5" t_late="3242" t_early="0"/>
+  <request time="5489" vehicle="taxi_0008" cmd="enter" req_id="268" distance="22.448" t_late="3457"/>
+  <dispatch vehicle="taxi_0021" reservations="['160']"/>
+  <request time="5492" vehicle="taxi_0021" cmd="schedule" req_id="100" submit_time="990"/>
+  <request time="5492" vehicle="taxi_0021" cmd="finished" req_id="252" dist_w_psg="1.980" t_submit="1230" t_schedule="4126" t_enter="4688" t_finish="2361" t_latest="2361" t_drive="804" t_est="0.3" t_late="3131" t_early="0"/>
+  <request time="5495" vehicle="taxi_0023" cmd="enter" req_id="76" distance="25.455" t_late="3470"/>
+  <dispatch vehicle="taxi_0009" reservations="['159']"/>
+  <request time="5517" vehicle="taxi_0009" cmd="schedule" req_id="66" submit_time="986"/>
+  <request time="5517" vehicle="taxi_0009" cmd="finished" req_id="213" dist_w_psg="2.584" t_submit="1150" t_schedule="4497" t_enter="4965" t_finish="2215" t_latest="2215" t_drive="552" t_est="0.3" t_late="3302" t_early="0"/>
+  <request time="5541" vehicle="taxi_0017" cmd="enter" req_id="187" distance="27.665" t_late="3567"/>
+  <request time="5553" vehicle="taxi_0018" cmd="enter" req_id="254" distance="30.178" t_late="3599"/>
+  <request time="5556" vehicle="taxi_0004" cmd="enter" req_id="150" distance="23.588" t_late="3583"/>
+  <request time="5590" vehicle="taxi_0003" cmd="enter" req_id="238" distance="23.645" t_late="3638"/>
+  <dispatch vehicle="taxi_0020" reservations="['158']"/>
+  <request time="5603" vehicle="taxi_0020" cmd="schedule" req_id="247" submit_time="985"/>
+  <request time="5603" vehicle="taxi_0020" cmd="finished" req_id="105" dist_w_psg="1.194" t_submit="1122" t_schedule="4869" t_enter="5358" t_finish="2175" t_latest="2175" t_drive="245" t_est="0.6" t_late="3428" t_early="0"/>
+  <request time="5665" vehicle="taxi_0021" cmd="enter" req_id="100" distance="23.398" t_late="3775"/>
+  <dispatch vehicle="taxi_0000" reservations="['157']"/>
+  <request time="5706" vehicle="taxi_0000" cmd="schedule" req_id="255" submit_time="983"/>
+  <request time="5706" vehicle="taxi_0000" cmd="finished" req_id="93" dist_w_psg="1.778" t_submit="1055" t_schedule="5168" t_enter="5407" t_finish="2144" t_latest="2144" t_drive="299" t_est="0.6" t_late="3562" t_early="0"/>
+  <dispatch vehicle="taxi_0019" reservations="['156']"/>
+  <request time="5710" vehicle="taxi_0019" cmd="schedule" req_id="118" submit_time="983"/>
+  <request time="5710" vehicle="taxi_0019" cmd="finished" req_id="294" dist_w_psg="2.455" t_submit="1080" t_schedule="4990" t_enter="5204" t_finish="2194" t_latest="2194" t_drive="506" t_est="0.4" t_late="3516" t_early="0"/>
+  <dispatch vehicle="taxi_0010" reservations="['155']"/>
+  <request time="5714" vehicle="taxi_0010" cmd="schedule" req_id="77" submit_time="983"/>
+  <request time="5714" vehicle="taxi_0010" cmd="finished" req_id="121" dist_w_psg="3.390" t_submit="1143" t_schedule="4613" t_enter="5120" t_finish="2253" t_latest="2253" t_drive="594" t_est="0.4" t_late="3461" t_early="0"/>
+  <dispatch vehicle="taxi_0012" reservations="['154']"/>
+  <request time="5722" vehicle="taxi_0012" cmd="schedule" req_id="230" submit_time="972"/>
+  <request time="5722" vehicle="taxi_0012" cmd="finished" req_id="80" dist_w_psg="2.436" t_submit="1103" t_schedule="4947" t_enter="5184" t_finish="2224" t_latest="2224" t_drive="538" t_est="0.4" t_late="3498" t_early="0"/>
+  <dispatch vehicle="taxi_0001" reservations="['153']"/>
+  <request time="5727" vehicle="taxi_0001" cmd="schedule" req_id="174" submit_time="972"/>
+  <request time="5727" vehicle="taxi_0001" cmd="finished" req_id="9" dist_w_psg="2.345" t_submit="1090" t_schedule="4951" t_enter="5100" t_finish="2181" t_latest="2181" t_drive="627" t_est="0.3" t_late="3546" t_early="0"/>
+  <dispatch vehicle="taxi_0006" reservations="['152']"/>
+  <request time="5728" vehicle="taxi_0006" cmd="schedule" req_id="299" submit_time="958"/>
+  <request time="5728" vehicle="taxi_0006" cmd="finished" req_id="111" dist_w_psg="2.310" t_submit="1112" t_schedule="4899" t_enter="5330" t_finish="2185" t_latest="2185" t_drive="398" t_est="0.4" t_late="3543" t_early="0"/>
+  <request time="5751" vehicle="taxi_0016" cmd="enter" req_id="18" distance="29.779" t_late="3846"/>
+  <request time="5759" vehicle="taxi_0012" cmd="enter" req_id="230" distance="30.772" t_late="3887"/>
+  <request time="5768" vehicle="taxi_0002" cmd="enter" req_id="240" distance="32.259" t_late="3839"/>
+  <dispatch vehicle="taxi_0015" reservations="['150']"/>
+  <request time="5801" vehicle="taxi_0015" cmd="schedule" req_id="139" submit_time="933"/>
+  <request time="5801" vehicle="taxi_0015" cmd="finished" req_id="274" dist_w_psg="2.646" t_submit="1108" t_schedule="4927" t_enter="5365" t_finish="2237" t_latest="2237" t_drive="436" t_est="0.5" t_late="3564" t_early="0"/>
+  <dispatch vehicle="taxi_0022" reservations="['149']"/>
+  <request time="5814" vehicle="taxi_0022" cmd="schedule" req_id="90" submit_time="933"/>
+  <request time="5814" vehicle="taxi_0022" cmd="finished" req_id="141" dist_w_psg="1.900" t_submit="1104" t_schedule="4932" t_enter="5422" t_finish="2228" t_latest="2228" t_drive="392" t_est="0.6" t_late="3586" t_early="0"/>
+  <dispatch vehicle="taxi_0023" reservations="['148']"/>
+  <request time="5846" vehicle="taxi_0023" cmd="schedule" req_id="8" submit_time="931"/>
+  <request time="5846" vehicle="taxi_0023" cmd="finished" req_id="76" dist_w_psg="1.120" t_submit="1125" t_schedule="4857" t_enter="5495" t_finish="2218" t_latest="2218" t_drive="351" t_est="0.5" t_late="3628" t_early="0"/>
+  <dispatch vehicle="taxi_0013" reservations="['147']"/>
+  <request time="5862" vehicle="taxi_0013" cmd="schedule" req_id="269" submit_time="930"/>
+  <request time="5862" vehicle="taxi_0013" cmd="finished" req_id="30" dist_w_psg="1.872" t_submit="1050" t_schedule="5258" t_enter="5428" t_finish="2072" t_latest="2072" t_drive="434" t_est="0.3" t_late="3790" t_early="0"/>
+  <dispatch vehicle="taxi_0005" reservations="['146']"/>
+  <request time="5867" vehicle="taxi_0005" cmd="schedule" req_id="172" submit_time="926"/>
+  <request time="5867" vehicle="taxi_0005" cmd="finished" req_id="151" dist_w_psg="2.575" t_submit="1134" t_schedule="4701" t_enter="5205" t_finish="2245" t_latest="2245" t_drive="662" t_est="0.3" t_late="3622" t_early="0"/>
+  <dispatch vehicle="taxi_0018" reservations="['145']"/>
+  <request time="5898" vehicle="taxi_0018" cmd="schedule" req_id="218" submit_time="925"/>
+  <request time="5898" vehicle="taxi_0018" cmd="finished" req_id="254" dist_w_psg="1.719" t_submit="1054" t_schedule="5181" t_enter="5553" t_finish="2157" t_latest="2157" t_drive="345" t_est="0.6" t_late="3741" t_early="0"/>
+  <request time="5926" vehicle="taxi_0006" cmd="enter" req_id="299" distance="28.253" t_late="4068"/>
+  <request time="5977" vehicle="taxi_0007" cmd="enter" req_id="36" distance="28.081" t_late="4062"/>
+  <request time="5979" vehicle="taxi_0014" cmd="enter" req_id="40" distance="34.382" t_late="4066"/>
+  <dispatch vehicle="taxi_0004" reservations="['144']"/>
+  <request time="5988" vehicle="taxi_0004" cmd="schedule" req_id="97" submit_time="925"/>
+  <request time="5988" vehicle="taxi_0004" cmd="finished" req_id="150" dist_w_psg="1.650" t_submit="1073" t_schedule="5065" t_enter="5556" t_finish="2126" t_latest="2126" t_drive="432" t_est="0.4" t_late="3862" t_early="0"/>
+  <request time="6010" vehicle="taxi_0011" cmd="enter" req_id="71" distance="31.146" t_late="4107"/>
+  <dispatch vehicle="taxi_0008" reservations="['143']"/>
+  <request time="6019" vehicle="taxi_0008" cmd="schedule" req_id="278" submit_time="922"/>
+  <request time="6019" vehicle="taxi_0008" cmd="finished" req_id="268" dist_w_psg="2.610" t_submit="1132" t_schedule="4800" t_enter="5489" t_finish="2236" t_latest="2236" t_drive="530" t_est="0.4" t_late="3783" t_early="0"/>
+  <request time="6065" vehicle="taxi_0015" cmd="enter" req_id="139" distance="29.899" t_late="4232"/>
+  <request time="6066" vehicle="taxi_0010" cmd="enter" req_id="77" distance="28.365" t_late="4183"/>
+  <request time="6147" vehicle="taxi_0020" cmd="enter" req_id="247" distance="29.769" t_late="4262"/>
+  <request time="6150" vehicle="taxi_0019" cmd="enter" req_id="118" distance="33.592" t_late="4267"/>
+  <request time="6183" vehicle="taxi_0009" cmd="enter" req_id="66" distance="28.342" t_late="4297"/>
+  <dispatch vehicle="taxi_0017" reservations="['140']"/>
+  <request time="6185" vehicle="taxi_0017" cmd="schedule" req_id="99" submit_time="904"/>
+  <request time="6185" vehicle="taxi_0017" cmd="finished" req_id="187" dist_w_psg="4.009" t_submit="1074" t_schedule="5015" t_enter="5541" t_finish="2275" t_latest="2275" t_drive="644" t_est="0.5" t_late="3910" t_early="0"/>
+  <dispatch vehicle="taxi_0024" reservations="['139']"/>
+  <request time="6192" vehicle="taxi_0024" cmd="schedule" req_id="147" submit_time="895"/>
+  <request time="6192" vehicle="taxi_0000" cmd="enter" req_id="255" distance="30.050" t_late="4309"/>
+  <request time="6192" vehicle="taxi_0024" cmd="finished" req_id="181" dist_w_psg="2.599" t_submit="1060" t_schedule="5161" t_enter="5443" t_finish="2174" t_latest="2174" t_drive="749" t_est="0.3" t_late="4018" t_early="0"/>
+  <vehicle time="6193" vehicle="taxi_0024" cmd="left"/>
+  <dispatch vehicle="taxi_0003" reservations="['138']"/>
+  <request time="6220" vehicle="taxi_0003" cmd="schedule" req_id="28" submit_time="895"/>
+  <request time="6220" vehicle="taxi_0003" cmd="finished" req_id="238" dist_w_psg="2.640" t_submit="1052" t_schedule="5216" t_enter="5590" t_finish="2204" t_latest="2204" t_drive="630" t_est="0.4" t_late="4016" t_early="0"/>
+  <dispatch vehicle="taxi_0012" reservations="['137']"/>
+  <request time="6241" vehicle="taxi_0012" cmd="schedule" req_id="61" submit_time="892"/>
+  <request time="6241" vehicle="taxi_0012" cmd="finished" req_id="230" dist_w_psg="2.831" t_submit="972" t_schedule="5722" t_enter="5759" t_finish="2145" t_latest="2145" t_drive="482" t_est="0.6" t_late="4096" t_early="0"/>
+  <dispatch vehicle="taxi_0006" reservations="['136']"/>
+  <request time="6265" vehicle="taxi_0006" cmd="schedule" req_id="198" submit_time="888"/>
+  <request time="6265" vehicle="taxi_0006" cmd="finished" req_id="299" dist_w_psg="1.768" t_submit="958" t_schedule="5728" t_enter="5926" t_finish="2011" t_latest="2011" t_drive="339" t_est="0.5" t_late="4254" t_early="0"/>
+  <dispatch vehicle="taxi_0011" reservations="['135']"/>
+  <request time="6266" vehicle="taxi_0011" cmd="schedule" req_id="167" submit_time="884"/>
+  <request time="6266" vehicle="taxi_0011" cmd="finished" req_id="71" dist_w_psg="1.741" t_submit="1003" t_schedule="5482" t_enter="6010" t_finish="2071" t_latest="2071" t_drive="256" t_est="0.7" t_late="4195" t_early="0"/>
+  <request time="6298" vehicle="taxi_0012" cmd="enter" req_id="61" distance="33.963" t_late="4506"/>
+  <dispatch vehicle="taxi_0019" reservations="['133']"/>
+  <request time="6312" vehicle="taxi_0019" cmd="schedule" req_id="242" submit_time="873"/>
+  <request time="6312" vehicle="taxi_0019" cmd="finished" req_id="118" dist_w_psg="1.123" t_submit="983" t_schedule="5710" t_enter="6150" t_finish="1973" t_latest="1973" t_drive="162" t_est="0.6" t_late="4339" t_early="0"/>
+  <vehicle time="6313" vehicle="taxi_0019" cmd="left"/>
+  <dispatch vehicle="taxi_0014" reservations="['132']"/>
+  <request time="6320" vehicle="taxi_0014" cmd="schedule" req_id="3" submit_time="872"/>
+  <request time="6320" vehicle="taxi_0014" cmd="finished" req_id="40" dist_w_psg="2.404" t_submit="1013" t_schedule="5407" t_enter="5979" t_finish="2132" t_latest="2132" t_drive="341" t_est="0.6" t_late="4188" t_early="0"/>
+  <vehicle time="6321" vehicle="taxi_0014" cmd="left"/>
+  <request time="6326" vehicle="taxi_0022" cmd="enter" req_id="90" distance="35.497" t_late="4493"/>
+  <request time="6351" vehicle="taxi_0013" cmd="enter" req_id="269" distance="29.838" t_late="4521"/>
+  <dispatch vehicle="taxi_0015" reservations="['131']"/>
+  <request time="6365" vehicle="taxi_0015" cmd="schedule" req_id="221" submit_time="871"/>
+  <request time="6365" vehicle="taxi_0015" cmd="finished" req_id="139" dist_w_psg="1.620" t_submit="933" t_schedule="5801" t_enter="6065" t_finish="2035" t_latest="2035" t_drive="300" t_est="0.7" t_late="4330" t_early="0"/>
+  <dispatch vehicle="taxi_0016" reservations="['130']"/>
+  <request time="6371" vehicle="taxi_0016" cmd="schedule" req_id="0" submit_time="858"/>
+  <request time="6371" vehicle="taxi_0016" cmd="finished" req_id="18" dist_w_psg="3.194" t_submit="1005" t_schedule="5408" t_enter="5751" t_finish="2148" t_latest="2148" t_drive="620" t_est="0.4" t_late="4223" t_early="0"/>
+  <request time="6372" vehicle="taxi_0001" cmd="enter" req_id="174" distance="29.584" t_late="4500"/>
+  <request time="6391" vehicle="taxi_0004" cmd="enter" req_id="97" distance="26.319" t_late="4566"/>
+  <dispatch vehicle="taxi_0021" reservations="['129']"/>
+  <request time="6392" vehicle="taxi_0021" cmd="schedule" req_id="217" submit_time="856"/>
+  <request time="6392" vehicle="taxi_0021" cmd="finished" req_id="100" dist_w_psg="2.965" t_submit="990" t_schedule="5492" t_enter="5665" t_finish="2169" t_latest="2169" t_drive="727" t_est="0.4" t_late="4223" t_early="0"/>
+  <request time="6433" vehicle="taxi_0023" cmd="enter" req_id="8" distance="29.287" t_late="4602"/>
+  <request time="6448" vehicle="taxi_0005" cmd="enter" req_id="172" distance="29.358" t_late="4622"/>
+  <request time="6453" vehicle="taxi_0024" cmd="enter" req_id="147" distance="31.455" t_late="4658"/>
+  <dispatch vehicle="taxi_0020" reservations="['128']"/>
+  <request time="6455" vehicle="taxi_0020" cmd="schedule" req_id="225" submit_time="851"/>
+  <request time="6455" vehicle="taxi_0020" cmd="finished" req_id="247" dist_w_psg="1.695" t_submit="985" t_schedule="5603" t_enter="6147" t_finish="2056" t_latest="2056" t_drive="308" t_est="0.6" t_late="4399" t_early="0"/>
+  <dispatch vehicle="taxi_0000" reservations="['127']"/>
+  <request time="6456" vehicle="taxi_0000" cmd="schedule" req_id="164" submit_time="850"/>
+  <request time="6456" vehicle="taxi_0000" cmd="finished" req_id="255" dist_w_psg="1.931" t_submit="983" t_schedule="5706" t_enter="6192" t_finish="2001" t_latest="2001" t_drive="264" t_est="0.4" t_late="4455" t_early="0"/>
+  <dispatch vehicle="taxi_0002" reservations="['126']"/>
+  <request time="6490" vehicle="taxi_0002" cmd="schedule" req_id="196" submit_time="847"/>
+  <request time="6490" vehicle="taxi_0002" cmd="finished" req_id="240" dist_w_psg="2.655" t_submit="1029" t_schedule="5263" t_enter="5768" t_finish="2162" t_latest="2162" t_drive="722" t_est="0.3" t_late="4328" t_early="0"/>
+  <request time="6511" vehicle="taxi_0011" cmd="enter" req_id="167" distance="34.218" t_late="4727"/>
+  <dispatch vehicle="taxi_0012" reservations="['125']"/>
+  <request time="6528" vehicle="taxi_0012" cmd="schedule" req_id="17" submit_time="839"/>
+  <request time="6528" vehicle="taxi_0012" cmd="finished" req_id="61" dist_w_psg="1.762" t_submit="892" t_schedule="6241" t_enter="6298" t_finish="1977" t_latest="1977" t_drive="230" t_est="0.8" t_late="4551" t_early="0"/>
+  <request time="6529" vehicle="taxi_0008" cmd="enter" req_id="278" distance="27.676" t_late="4707"/>
+  <dispatch vehicle="taxi_0007" reservations="['124']"/>
+  <request time="6542" vehicle="taxi_0007" cmd="schedule" req_id="48" submit_time="828"/>
+  <request time="6542" vehicle="taxi_0007" cmd="finished" req_id="36" dist_w_psg="3.016" t_submit="1015" t_schedule="5388" t_enter="5977" t_finish="2162" t_latest="2162" t_drive="565" t_est="0.4" t_late="4380" t_early="0"/>
+  <dispatch vehicle="taxi_0023" reservations="['123']"/>
+  <request time="6545" vehicle="taxi_0023" cmd="schedule" req_id="82" submit_time="823"/>
+  <request time="6545" vehicle="taxi_0023" cmd="finished" req_id="8" dist_w_psg="0.470" t_submit="931" t_schedule="5846" t_enter="6433" t_finish="1881" t_latest="1881" t_drive="112" t_est="0.4" t_late="4664" t_early="0"/>
+  <dispatch vehicle="taxi_0001" reservations="['122']"/>
+  <request time="6563" vehicle="taxi_0001" cmd="schedule" req_id="92" submit_time="822"/>
+  <request time="6563" vehicle="taxi_0001" cmd="finished" req_id="174" dist_w_psg="1.341" t_submit="972" t_schedule="5727" t_enter="6372" t_finish="2062" t_latest="2062" t_drive="191" t_est="1.0" t_late="4501" t_early="0"/>
+  <dispatch vehicle="taxi_0009" reservations="['121']"/>
+  <request time="6599" vehicle="taxi_0009" cmd="schedule" req_id="104" submit_time="814"/>
+  <request time="6599" vehicle="taxi_0009" cmd="finished" req_id="66" dist_w_psg="1.877" t_submit="986" t_schedule="5517" t_enter="6183" t_finish="2072" t_latest="2072" t_drive="416" t_est="0.4" t_late="4527" t_early="0"/>
+  <request time="6600" vehicle="taxi_0018" cmd="enter" req_id="218" distance="36.103" t_late="4775"/>
+  <request time="6604" vehicle="taxi_0000" cmd="enter" req_id="164" distance="32.636" t_late="4854"/>
+  <request time="6619" vehicle="taxi_0017" cmd="enter" req_id="99" distance="33.044" t_late="4815"/>
+  <request time="6636" vehicle="taxi_0023" cmd="enter" req_id="82" distance="30.321" t_late="4913"/>
+  <request time="6673" vehicle="taxi_0003" cmd="enter" req_id="28" distance="29.247" t_late="4878"/>
+  <dispatch vehicle="taxi_0010" reservations="['120']"/>
+  <request time="6684" vehicle="taxi_0010" cmd="schedule" req_id="253" submit_time="802"/>
+  <request time="6684" vehicle="taxi_0010" cmd="finished" req_id="77" dist_w_psg="2.860" t_submit="983" t_schedule="5714" t_enter="6066" t_finish="2125" t_latest="2125" t_drive="618" t_est="0.4" t_late="4559" t_early="0"/>
+  <dispatch vehicle="taxi_0011" reservations="['119']"/>
+  <request time="6685" vehicle="taxi_0011" cmd="schedule" req_id="199" submit_time="802"/>
+  <request time="6685" vehicle="taxi_0011" cmd="finished" req_id="167" dist_w_psg="1.189" t_submit="884" t_schedule="6266" t_enter="6511" t_finish="1967" t_latest="1967" t_drive="174" t_est="1.1" t_late="4718" t_early="0"/>
+  <dispatch vehicle="taxi_0023" reservations="['118']"/>
+  <request time="6749" vehicle="taxi_0023" cmd="schedule" req_id="298" submit_time="801"/>
+  <request time="6749" vehicle="taxi_0023" cmd="finished" req_id="82" dist_w_psg="0.735" t_submit="823" t_schedule="6545" t_enter="6636" t_finish="1814" t_latest="1814" t_drive="113" t_est="0.8" t_late="4935" t_early="0"/>
+  <dispatch vehicle="taxi_0004" reservations="['117']"/>
+  <request time="6759" vehicle="taxi_0004" cmd="schedule" req_id="175" submit_time="795"/>
+  <request time="6759" vehicle="taxi_0004" cmd="finished" req_id="97" dist_w_psg="1.850" t_submit="925" t_schedule="5988" t_enter="6391" t_finish="2010" t_latest="2010" t_drive="368" t_est="0.5" t_late="4749" t_early="0"/>
+  <request time="6766" vehicle="taxi_0014" cmd="enter" req_id="3" distance="39.401" t_late="4994"/>
+  <request time="6778" vehicle="taxi_0010" cmd="enter" req_id="253" distance="31.917" t_late="5076"/>
+  <request time="6786" vehicle="taxi_0015" cmd="enter" req_id="221" distance="33.837" t_late="5015"/>
+  <request time="6807" vehicle="taxi_0023" cmd="enter" req_id="298" distance="31.440" t_late="5106"/>
+  <request time="6820" vehicle="taxi_0019" cmd="enter" req_id="242" distance="37.439" t_late="5047"/>
+  <request time="6842" vehicle="taxi_0020" cmd="enter" req_id="225" distance="33.670" t_late="5091"/>
+  <dispatch vehicle="taxi_0013" reservations="['116']"/>
+  <request time="6851" vehicle="taxi_0013" cmd="schedule" req_id="29" submit_time="790"/>
+  <request time="6851" vehicle="taxi_0013" cmd="finished" req_id="269" dist_w_psg="2.648" t_submit="930" t_schedule="5862" t_enter="6351" t_finish="2022" t_latest="2022" t_drive="500" t_est="0.4" t_late="4829" t_early="0"/>
+  <request time="6853" vehicle="taxi_0012" cmd="enter" req_id="17" distance="37.567" t_late="5114"/>
+  <dispatch vehicle="taxi_0023" reservations="['115']"/>
+  <request time="6910" vehicle="taxi_0023" cmd="schedule" req_id="57" submit_time="774"/>
+  <request time="6910" vehicle="taxi_0023" cmd="finished" req_id="298" dist_w_psg="0.675" t_submit="801" t_schedule="6749" t_enter="6807" t_finish="1760" t_latest="1760" t_drive="103" t_est="0.6" t_late="5150" t_early="0"/>
+  <dispatch vehicle="taxi_0022" reservations="['114']"/>
+  <request time="6916" vehicle="taxi_0022" cmd="schedule" req_id="1" submit_time="768"/>
+  <request time="6916" vehicle="taxi_0022" cmd="finished" req_id="90" dist_w_psg="2.869" t_submit="933" t_schedule="5814" t_enter="6326" t_finish="2093" t_latest="2093" t_drive="590" t_est="0.4" t_late="4823" t_early="0"/>
+  <request time="6921" vehicle="taxi_0016" cmd="enter" req_id="0" distance="35.794" t_late="5163"/>
+  <dispatch vehicle="taxi_0024" reservations="['113']"/>
+  <request time="6974" vehicle="taxi_0024" cmd="schedule" req_id="45" submit_time="748"/>
+  <request time="6974" vehicle="taxi_0024" cmd="finished" req_id="147" dist_w_psg="2.402" t_submit="895" t_schedule="6192" t_enter="6453" t_finish="2015" t_latest="2015" t_drive="521" t_est="0.4" t_late="4959" t_early="0"/>
+  <request time="6992" vehicle="taxi_0002" cmd="enter" req_id="196" distance="38.766" t_late="5245"/>
+  <request time="7019" vehicle="taxi_0006" cmd="enter" req_id="198" distance="33.533" t_late="5231"/>
+  <dispatch vehicle="taxi_0005" reservations="['112']"/>
+  <request time="7024" vehicle="taxi_0005" cmd="schedule" req_id="2" submit_time="736"/>
+  <request time="7024" vehicle="taxi_0005" cmd="finished" req_id="172" dist_w_psg="2.473" t_submit="926" t_schedule="5867" t_enter="6448" t_finish="2063" t_latest="2063" t_drive="576" t_est="0.4" t_late="4961" t_early="0"/>
+  <dispatch vehicle="taxi_0018" reservations="['111']"/>
+  <request time="7059" vehicle="taxi_0018" cmd="schedule" req_id="119" submit_time="726"/>
+  <request time="7059" vehicle="taxi_0018" cmd="finished" req_id="218" dist_w_psg="2.881" t_submit="925" t_schedule="5898" t_enter="6600" t_finish="2135" t_latest="2135" t_drive="459" t_est="0.7" t_late="4924" t_early="0"/>
+  <dispatch vehicle="taxi_0017" reservations="['110']"/>
+  <request time="7070" vehicle="taxi_0017" cmd="schedule" req_id="146" submit_time="724"/>
+  <request time="7070" vehicle="taxi_0017" cmd="finished" req_id="99" dist_w_psg="1.731" t_submit="904" t_schedule="6185" t_enter="6619" t_finish="2011" t_latest="2011" t_drive="451" t_est="0.5" t_late="5059" t_early="0"/>
+  <request time="7098" vehicle="taxi_0004" cmd="enter" req_id="175" distance="30.404" t_late="5403"/>
+  <dispatch vehicle="taxi_0015" reservations="['109']"/>
+  <request time="7099" vehicle="taxi_0015" cmd="schedule" req_id="260" submit_time="719"/>
+  <request time="7099" vehicle="taxi_0015" cmd="finished" req_id="221" dist_w_psg="2.047" t_submit="871" t_schedule="6365" t_enter="6786" t_finish="1979" t_latest="1979" t_drive="313" t_est="0.7" t_late="5120" t_early="0"/>
+  <dispatch vehicle="taxi_0020" reservations="['108']"/>
+  <request time="7121" vehicle="taxi_0020" cmd="schedule" req_id="51" submit_time="718"/>
+  <request time="7121" vehicle="taxi_0020" cmd="finished" req_id="225" dist_w_psg="1.574" t_submit="851" t_schedule="6455" t_enter="6842" t_finish="1933" t_latest="1933" t_drive="279" t_est="0.7" t_late="5188" t_early="0"/>
+  <request time="7124" vehicle="taxi_0021" cmd="enter" req_id="217" distance="28.927" t_late="5368"/>
+  <dispatch vehicle="taxi_0008" reservations="['106']"/>
+  <request time="7151" vehicle="taxi_0008" cmd="schedule" req_id="131" submit_time="714"/>
+  <request time="7151" vehicle="taxi_0008" cmd="finished" req_id="278" dist_w_psg="3.125" t_submit="922" t_schedule="6019" t_enter="6529" t_finish="2048" t_latest="2048" t_drive="622" t_est="0.4" t_late="5103" t_early="0"/>
+  <dispatch vehicle="taxi_0019" reservations="['105']"/>
+  <request time="7208" vehicle="taxi_0019" cmd="schedule" req_id="91" submit_time="710"/>
+  <request time="7208" vehicle="taxi_0019" cmd="finished" req_id="242" dist_w_psg="1.757" t_submit="873" t_schedule="6312" t_enter="6820" t_finish="1939" t_latest="1939" t_drive="388" t_est="0.4" t_late="5269" t_early="0"/>
+  <dispatch vehicle="taxi_0003" reservations="['104']"/>
+  <request time="7218" vehicle="taxi_0003" cmd="schedule" req_id="31" submit_time="710"/>
+  <request time="7218" vehicle="taxi_0003" cmd="finished" req_id="28" dist_w_psg="2.287" t_submit="895" t_schedule="6220" t_enter="6673" t_finish="2034" t_latest="2034" t_drive="545" t_est="0.4" t_late="5184" t_early="0"/>
+  <request time="7228" vehicle="taxi_0007" cmd="enter" req_id="48" distance="34.075" t_late="5500"/>
+  <dispatch vehicle="taxi_0000" reservations="['103']"/>
+  <request time="7249" vehicle="taxi_0000" cmd="schedule" req_id="47" submit_time="706"/>
+  <request time="7249" vehicle="taxi_0000" cmd="finished" req_id="164" dist_w_psg="3.693" t_submit="850" t_schedule="6456" t_enter="6604" t_finish="2047" t_latest="2047" t_drive="645" t_est="0.5" t_late="5202" t_early="0"/>
+  <request time="7259" vehicle="taxi_0009" cmd="enter" req_id="104" distance="31.713" t_late="5545"/>
+  <dispatch vehicle="taxi_0004" reservations="['102']"/>
+  <request time="7260" vehicle="taxi_0004" cmd="schedule" req_id="287" submit_time="705"/>
+  <request time="7260" vehicle="taxi_0004" cmd="finished" req_id="175" dist_w_psg="1.373" t_submit="795" t_schedule="6759" t_enter="7098" t_finish="1821" t_latest="1821" t_drive="162" t_est="0.8" t_late="5439" t_early="0"/>
+  <request time="7262" vehicle="taxi_0023" cmd="enter" req_id="57" distance="33.858" t_late="5588"/>
+  <request time="7289" vehicle="taxi_0011" cmd="enter" req_id="199" distance="37.130" t_late="5587"/>
+  <request time="7292" vehicle="taxi_0017" cmd="enter" req_id="146" distance="36.113" t_late="5668"/>
+  <dispatch vehicle="taxi_0012" reservations="['99']"/>
+  <request time="7296" vehicle="taxi_0012" cmd="schedule" req_id="10" submit_time="678"/>
+  <request time="7296" vehicle="taxi_0012" cmd="finished" req_id="17" dist_w_psg="1.722" t_submit="839" t_schedule="6528" t_enter="6853" t_finish="1929" t_latest="1929" t_drive="443" t_est="0.4" t_late="5367" t_early="0"/>
+  <vehicle time="7297" vehicle="taxi_0012" cmd="left"/>
+  <request time="7315" vehicle="taxi_0001" cmd="enter" req_id="92" distance="32.276" t_late="5593"/>
+  <dispatch vehicle="taxi_0010" reservations="['98']"/>
+  <request time="7368" vehicle="taxi_0010" cmd="schedule" req_id="158" submit_time="675"/>
+  <request time="7368" vehicle="taxi_0010" cmd="finished" req_id="253" dist_w_psg="2.973" t_submit="802" t_schedule="6684" t_enter="6778" t_finish="1989" t_latest="1989" t_drive="590" t_est="0.5" t_late="5379" t_early="0"/>
+  <dispatch vehicle="taxi_0014" reservations="['97']"/>
+  <request time="7382" vehicle="taxi_0014" cmd="schedule" req_id="88" submit_time="673"/>
+  <request time="7382" vehicle="taxi_0014" cmd="finished" req_id="3" dist_w_psg="2.805" t_submit="872" t_schedule="6320" t_enter="6766" t_finish="1974" t_latest="1974" t_drive="616" t_est="0.3" t_late="5408" t_early="0"/>
+  <dispatch vehicle="taxi_0006" reservations="['96']"/>
+  <request time="7385" vehicle="taxi_0006" cmd="schedule" req_id="103" submit_time="665"/>
+  <request time="7385" vehicle="taxi_0006" cmd="finished" req_id="198" dist_w_psg="2.491" t_submit="888" t_schedule="6265" t_enter="7019" t_finish="2073" t_latest="2073" t_drive="366" t_est="0.8" t_late="5312" t_early="0"/>
+  <request time="7394" vehicle="taxi_0020" cmd="enter" req_id="51" distance="36.202" t_late="5776"/>
+  <dispatch vehicle="taxi_0002" reservations="['95']"/>
+  <request time="7396" vehicle="taxi_0002" cmd="schedule" req_id="235" submit_time="658"/>
+  <request time="7396" vehicle="taxi_0002" cmd="finished" req_id="196" dist_w_psg="3.334" t_submit="847" t_schedule="6490" t_enter="6992" t_finish="1963" t_latest="1963" t_drive="404" t_est="0.5" t_late="5433" t_early="0"/>
+  <dispatch vehicle="taxi_0023" reservations="['91']"/>
+  <request time="7474" vehicle="taxi_0023" cmd="schedule" req_id="27" submit_time="633"/>
+  <request time="7474" vehicle="taxi_0023" cmd="finished" req_id="57" dist_w_psg="1.408" t_submit="774" t_schedule="6910" t_enter="7262" t_finish="1790" t_latest="1790" t_drive="212" t_est="0.5" t_late="5684" t_early="0"/>
+  <request time="7477" vehicle="taxi_0018" cmd="enter" req_id="119" distance="41.294" t_late="5851"/>
+  <request time="7482" vehicle="taxi_0015" cmd="enter" req_id="260" distance="37.879" t_late="5863"/>
+  <request time="7492" vehicle="taxi_0008" cmd="enter" req_id="131" distance="33.059" t_late="5878"/>
+  <request time="7536" vehicle="taxi_0024" cmd="enter" req_id="45" distance="36.610" t_late="5888"/>
+  <request time="7546" vehicle="taxi_0022" cmd="enter" req_id="1" distance="40.955" t_late="5878"/>
+  <dispatch vehicle="taxi_0016" reservations="['90']"/>
+  <request time="7547" vehicle="taxi_0016" cmd="schedule" req_id="282" submit_time="620"/>
+  <request time="7547" vehicle="taxi_0016" cmd="finished" req_id="0" dist_w_psg="2.744" t_submit="858" t_schedule="6371" t_enter="6921" t_finish="2004" t_latest="2004" t_drive="626" t_est="0.4" t_late="5543" t_early="0"/>
+  <request time="7548" vehicle="taxi_0013" cmd="enter" req_id="29" distance="34.757" t_late="5858"/>
+  <request time="7564" vehicle="taxi_0004" cmd="enter" req_id="287" distance="33.130" t_late="5959"/>
+  <dispatch vehicle="taxi_0020" reservations="['89']"/>
+  <request time="7576" vehicle="taxi_0020" cmd="schedule" req_id="114" submit_time="619"/>
+  <dispatch vehicle="taxi_0007" reservations="['88']"/>
+  <request time="7576" vehicle="taxi_0007" cmd="schedule" req_id="115" submit_time="615"/>
+  <request time="7576" vehicle="taxi_0007" cmd="finished" req_id="48" dist_w_psg="1.787" t_submit="828" t_schedule="6542" t_enter="7228" t_finish="1937" t_latest="1937" t_drive="348" t_est="0.6" t_late="5639" t_early="0"/>
+  <request time="7576" vehicle="taxi_0020" cmd="finished" req_id="51" dist_w_psg="1.240" t_submit="718" t_schedule="7121" t_enter="7394" t_finish="1764" t_latest="1764" t_drive="182" t_est="0.8" t_late="5812" t_early="0"/>
+  <dispatch vehicle="taxi_0001" reservations="['87']"/>
+  <request time="7590" vehicle="taxi_0001" cmd="schedule" req_id="96" submit_time="581"/>
+  <request time="7590" vehicle="taxi_0001" cmd="finished" req_id="92" dist_w_psg="1.372" t_submit="822" t_schedule="6563" t_enter="7315" t_finish="1860" t_latest="1860" t_drive="275" t_est="0.5" t_late="5730" t_early="0"/>
+  <request time="7600" vehicle="taxi_0019" cmd="enter" req_id="91" distance="41.468" t_late="5990"/>
+  <dispatch vehicle="taxi_0017" reservations="['86']"/>
+  <request time="7659" vehicle="taxi_0017" cmd="schedule" req_id="144" submit_time="573"/>
+  <request time="7659" vehicle="taxi_0017" cmd="finished" req_id="146" dist_w_psg="1.829" t_submit="724" t_schedule="7070" t_enter="7292" t_finish="1831" t_latest="1831" t_drive="367" t_est="0.6" t_late="5828" t_early="0"/>
+  <request time="7720" vehicle="taxi_0005" cmd="enter" req_id="2" distance="34.266" t_late="6084"/>
+  <dispatch vehicle="taxi_0024" reservations="['85']"/>
+  <request time="7765" vehicle="taxi_0024" cmd="schedule" req_id="148" submit_time="570"/>
+  <request time="7765" vehicle="taxi_0024" cmd="finished" req_id="45" dist_w_psg="0.939" t_submit="748" t_schedule="6974" t_enter="7536" t_finish="1764" t_latest="1764" t_drive="229" t_est="0.5" t_late="6001" t_early="0"/>
+  <request time="7771" vehicle="taxi_0003" cmd="enter" req_id="31" distance="33.544" t_late="6161"/>
+  <dispatch vehicle="taxi_0009" reservations="['84']"/>
+  <request time="7777" vehicle="taxi_0009" cmd="schedule" req_id="142" submit_time="560"/>
+  <request time="7777" vehicle="taxi_0009" cmd="finished" req_id="104" dist_w_psg="3.266" t_submit="814" t_schedule="6599" t_enter="7259" t_finish="1949" t_latest="1949" t_drive="518" t_est="0.5" t_late="5828" t_early="0"/>
+  <request time="7779" vehicle="taxi_0023" cmd="enter" req_id="27" distance="37.317" t_late="6246"/>
+  <request time="7786" vehicle="taxi_0016" cmd="enter" req_id="282" distance="40.044" t_late="6266"/>
+  <dispatch vehicle="taxi_0004" reservations="['83']"/>
+  <request time="7792" vehicle="taxi_0004" cmd="schedule" req_id="159" submit_time="548"/>
+  <request time="7792" vehicle="taxi_0004" cmd="finished" req_id="287" dist_w_psg="1.207" t_submit="705" t_schedule="7260" t_enter="7564" t_finish="1778" t_latest="1778" t_drive="228" t_est="0.8" t_late="6014" t_early="0"/>
+  <dispatch vehicle="taxi_0021" reservations="['82']"/>
+  <request time="7799" vehicle="taxi_0021" cmd="schedule" req_id="113" submit_time="548"/>
+  <request time="7799" vehicle="taxi_0021" cmd="finished" req_id="217" dist_w_psg="3.109" t_submit="856" t_schedule="6392" t_enter="7124" t_finish="1978" t_latest="1978" t_drive="675" t_est="0.3" t_late="5821" t_early="0"/>
+  <dispatch vehicle="taxi_0018" reservations="['80']"/>
+  <request time="7823" vehicle="taxi_0018" cmd="schedule" req_id="275" submit_time="539"/>
+  <request time="7823" vehicle="taxi_0018" cmd="finished" req_id="119" dist_w_psg="1.787" t_submit="726" t_schedule="7059" t_enter="7477" t_finish="1835" t_latest="1835" t_drive="346" t_est="0.6" t_late="5988" t_early="0"/>
+  <request time="7843" vehicle="taxi_0007" cmd="enter" req_id="115" distance="37.581" t_late="6328"/>
+  <request time="7845" vehicle="taxi_0012" cmd="enter" req_id="10" distance="41.705" t_late="6267"/>
+  <request time="7853" vehicle="taxi_0010" cmd="enter" req_id="158" distance="36.266" t_late="6278"/>
+  <request time="7855" vehicle="taxi_0002" cmd="enter" req_id="235" distance="44.152" t_late="6297"/>
+  <dispatch vehicle="taxi_0015" reservations="['79']"/>
+  <request time="7859" vehicle="taxi_0015" cmd="schedule" req_id="43" submit_time="530"/>
+  <request time="7859" vehicle="taxi_0015" cmd="finished" req_id="260" dist_w_psg="1.886" t_submit="719" t_schedule="7099" t_enter="7482" t_finish="1780" t_latest="1780" t_drive="377" t_est="0.4" t_late="6079" t_early="0"/>
+  <request time="7893" vehicle="taxi_0000" cmd="enter" req_id="47" distance="40.470" t_late="6287"/>
+  <request time="7923" vehicle="taxi_0009" cmd="enter" req_id="142" distance="35.832" t_late="6463"/>
+  <request time="7935" vehicle="taxi_0001" cmd="enter" req_id="96" distance="35.189" t_late="6454"/>
+  <dispatch vehicle="taxi_0022" reservations="['78']"/>
+  <request time="7949" vehicle="taxi_0022" cmd="schedule" req_id="38" submit_time="527"/>
+  <request time="7949" vehicle="taxi_0022" cmd="finished" req_id="1" dist_w_psg="1.849" t_submit="768" t_schedule="6916" t_enter="7546" t_finish="1838" t_latest="1838" t_drive="403" t_est="0.4" t_late="6111" t_early="0"/>
+  <request time="7971" vehicle="taxi_0006" cmd="enter" req_id="103" distance="38.181" t_late="6406"/>
+  <dispatch vehicle="taxi_0003" reservations="['76']"/>
+  <request time="7978" vehicle="taxi_0003" cmd="schedule" req_id="129" submit_time="481"/>
+  <request time="7978" vehicle="taxi_0003" cmd="finished" req_id="31" dist_w_psg="1.625" t_submit="710" t_schedule="7218" t_enter="7771" t_finish="1763" t_latest="1763" t_drive="207" t_est="0.7" t_late="6215" t_early="0"/>
+  <request time="7986" vehicle="taxi_0017" cmd="enter" req_id="144" distance="39.667" t_late="6513"/>
+  <dispatch vehicle="taxi_0011" reservations="['75']"/>
+  <request time="7997" vehicle="taxi_0011" cmd="schedule" req_id="171" submit_time="478"/>
+  <request time="7997" vehicle="taxi_0011" cmd="finished" req_id="199" dist_w_psg="2.457" t_submit="802" t_schedule="6685" t_enter="7289" t_finish="1953" t_latest="1953" t_drive="708" t_est="0.4" t_late="6044" t_early="0"/>
+  <request time="8000" vehicle="taxi_0020" cmd="enter" req_id="114" distance="40.105" t_late="6481"/>
+  <dispatch vehicle="taxi_0019" reservations="['74']"/>
+  <request time="8011" vehicle="taxi_0019" cmd="schedule" req_id="116" submit_time="472"/>
+  <request time="8011" vehicle="taxi_0019" cmd="finished" req_id="91" dist_w_psg="2.134" t_submit="710" t_schedule="7208" t_enter="7600" t_finish="1727" t_latest="1727" t_drive="411" t_est="0.3" t_late="6284" t_early="0"/>
+  <dispatch vehicle="taxi_0013" reservations="['73']"/>
+  <request time="8019" vehicle="taxi_0013" cmd="schedule" req_id="184" submit_time="467"/>
+  <request time="8019" vehicle="taxi_0013" cmd="finished" req_id="29" dist_w_psg="1.839" t_submit="790" t_schedule="6851" t_enter="7548" t_finish="1857" t_latest="1857" t_drive="471" t_est="0.4" t_late="6162" t_early="0"/>
+  <vehicle time="8020" vehicle="taxi_0013" cmd="left"/>
+  <request time="8036" vehicle="taxi_0011" cmd="enter" req_id="171" distance="39.819" t_late="6658"/>
+  <request time="8056" vehicle="taxi_0004" cmd="enter" req_id="159" distance="36.143" t_late="6608"/>
+  <request time="8059" vehicle="taxi_0014" cmd="enter" req_id="88" distance="44.456" t_late="6486"/>
+  <dispatch vehicle="taxi_0016" reservations="['72']"/>
+  <request time="8071" vehicle="taxi_0016" cmd="schedule" req_id="153" submit_time="466"/>
+  <request time="8071" vehicle="taxi_0016" cmd="finished" req_id="282" dist_w_psg="2.016" t_submit="620" t_schedule="7547" t_enter="7786" t_finish="1691" t_latest="1691" t_drive="285" t_est="0.6" t_late="6380" t_early="0"/>
+  <dispatch vehicle="taxi_0011" reservations="['71']"/>
+  <request time="8114" vehicle="taxi_0011" cmd="schedule" req_id="112" submit_time="463"/>
+  <request time="8114" vehicle="taxi_0011" cmd="finished" req_id="171" dist_w_psg="0.532" t_submit="478" t_schedule="7997" t_enter="8036" t_finish="1419" t_latest="1419" t_drive="78" t_est="0.5" t_late="6695" t_early="0"/>
+  <request time="8124" vehicle="taxi_0021" cmd="enter" req_id="113" distance="34.557" t_late="6676"/>
+  <dispatch vehicle="taxi_0000" reservations="['70']"/>
+  <request time="8137" vehicle="taxi_0000" cmd="schedule" req_id="73" submit_time="460"/>
+  <request time="8137" vehicle="taxi_0000" cmd="finished" req_id="47" dist_w_psg="1.517" t_submit="706" t_schedule="7249" t_enter="7893" t_finish="1736" t_latest="1736" t_drive="244" t_est="0.5" t_late="6401" t_early="0"/>
+  <request time="8173" vehicle="taxi_0011" cmd="enter" req_id="112" distance="40.853" t_late="6810"/>
+  <request time="8196" vehicle="taxi_0018" cmd="enter" req_id="275" distance="44.889" t_late="6757"/>
+  <dispatch vehicle="taxi_0007" reservations="['69']"/>
+  <request time="8200" vehicle="taxi_0007" cmd="schedule" req_id="124" submit_time="442"/>
+  <request time="8200" vehicle="taxi_0007" cmd="finished" req_id="115" dist_w_psg="1.761" t_submit="615" t_schedule="7576" t_enter="7843" t_finish="1703" t_latest="1703" t_drive="357" t_est="0.5" t_late="6497" t_early="0"/>
+  <dispatch vehicle="taxi_0008" reservations="['68']"/>
+  <request time="8205" vehicle="taxi_0008" cmd="schedule" req_id="85" submit_time="437"/>
+  <request time="8205" vehicle="taxi_0008" cmd="finished" req_id="131" dist_w_psg="4.037" t_submit="714" t_schedule="7151" t_enter="7492" t_finish="1969" t_latest="1969" t_drive="713" t_est="0.5" t_late="6236" t_early="0"/>
+  <request time="8236" vehicle="taxi_0024" cmd="enter" req_id="148" distance="38.910" t_late="6766"/>
+  <dispatch vehicle="taxi_0010" reservations="['67']"/>
+  <request time="8270" vehicle="taxi_0010" cmd="schedule" req_id="223" submit_time="435"/>
+  <request time="8270" vehicle="taxi_0010" cmd="finished" req_id="158" dist_w_psg="1.771" t_submit="675" t_schedule="7368" t_enter="7853" t_finish="1783" t_latest="1783" t_drive="417" t_est="0.5" t_late="6487" t_early="0"/>
+  <dispatch vehicle="taxi_0005" reservations="['66']"/>
+  <request time="8274" vehicle="taxi_0005" cmd="schedule" req_id="72" submit_time="434"/>
+  <request time="8274" vehicle="taxi_0005" cmd="finished" req_id="2" dist_w_psg="2.357" t_submit="736" t_schedule="7024" t_enter="7720" t_finish="1835" t_latest="1835" t_drive="554" t_est="0.4" t_late="6439" t_early="0"/>
+  <dispatch vehicle="taxi_0023" reservations="['64']"/>
+  <request time="8292" vehicle="taxi_0023" cmd="schedule" req_id="285" submit_time="397"/>
+  <request time="8292" vehicle="taxi_0023" cmd="finished" req_id="27" dist_w_psg="1.453" t_submit="633" t_schedule="7474" t_enter="7779" t_finish="1680" t_latest="1680" t_drive="513" t_est="0.3" t_late="6612" t_early="0"/>
+  <request time="8327" vehicle="taxi_0005" cmd="enter" req_id="72" distance="36.940" t_late="6993"/>
+  <request time="8342" vehicle="taxi_0003" cmd="enter" req_id="129" distance="36.245" t_late="6961"/>
+  <request time="8354" vehicle="taxi_0000" cmd="enter" req_id="73" distance="43.493" t_late="6994"/>
+  <dispatch vehicle="taxi_0006" reservations="['63']"/>
+  <request time="8366" vehicle="taxi_0006" cmd="schedule" req_id="7" submit_time="375"/>
+  <request time="8366" vehicle="taxi_0006" cmd="finished" req_id="103" dist_w_psg="1.844" t_submit="665" t_schedule="7385" t_enter="7971" t_finish="1734" t_latest="1734" t_drive="395" t_est="0.4" t_late="6632" t_early="0"/>
+  <request time="8369" vehicle="taxi_0007" cmd="enter" req_id="124" distance="40.153" t_late="7027"/>
+  <dispatch vehicle="taxi_0014" reservations="['62']"/>
+  <request time="8385" vehicle="taxi_0014" cmd="schedule" req_id="291" submit_time="371"/>
+  <request time="8385" vehicle="taxi_0014" cmd="finished" req_id="88" dist_w_psg="1.486" t_submit="673" t_schedule="7382" t_enter="8059" t_finish="1728" t_latest="1728" t_drive="326" t_est="0.5" t_late="6657" t_early="0"/>
+  <request time="8410" vehicle="taxi_0019" cmd="enter" req_id="116" distance="45.587" t_late="7038"/>
+  <dispatch vehicle="taxi_0002" reservations="['61']"/>
+  <request time="8412" vehicle="taxi_0002" cmd="schedule" req_id="249" submit_time="370"/>
+  <request time="8412" vehicle="taxi_0002" cmd="finished" req_id="235" dist_w_psg="3.204" t_submit="658" t_schedule="7396" t_enter="7855" t_finish="1823" t_latest="1823" t_drive="557" t_est="0.5" t_late="6589" t_early="0"/>
+  <request time="8441" vehicle="taxi_0013" cmd="enter" req_id="184" distance="38.772" t_late="7074"/>
+  <dispatch vehicle="taxi_0001" reservations="['60']"/>
+  <request time="8464" vehicle="taxi_0001" cmd="schedule" req_id="101" submit_time="367"/>
+  <request time="8464" vehicle="taxi_0001" cmd="finished" req_id="96" dist_w_psg="2.776" t_submit="581" t_schedule="7590" t_enter="7935" t_finish="1696" t_latest="1696" t_drive="529" t_est="0.4" t_late="6768" t_early="0"/>
+  <request time="8467" vehicle="taxi_0023" cmd="enter" req_id="285" distance="39.820" t_late="7170"/>
+  <dispatch vehicle="taxi_0012" reservations="['59']"/>
+  <request time="8472" vehicle="taxi_0012" cmd="schedule" req_id="207" submit_time="366"/>
+  <request time="8472" vehicle="taxi_0012" cmd="finished" req_id="10" dist_w_psg="2.611" t_submit="678" t_schedule="7296" t_enter="7845" t_finish="1748" t_latest="1748" t_drive="627" t_est="0.3" t_late="6724" t_early="0"/>
+  <dispatch vehicle="taxi_0017" reservations="['58']"/>
+  <request time="8496" vehicle="taxi_0017" cmd="schedule" req_id="22" submit_time="357"/>
+  <request time="8496" vehicle="taxi_0017" cmd="finished" req_id="144" dist_w_psg="2.576" t_submit="573" t_schedule="7659" t_enter="7986" t_finish="1662" t_latest="1662" t_drive="510" t_est="0.4" t_late="6834" t_early="0"/>
+  <request time="8526" vehicle="taxi_0022" cmd="enter" req_id="38" distance="44.482" t_late="7099"/>
+  <dispatch vehicle="taxi_0005" reservations="['57']"/>
+  <request time="8543" vehicle="taxi_0005" cmd="schedule" req_id="68" submit_time="345"/>
+  <request time="8543" vehicle="taxi_0005" cmd="finished" req_id="72" dist_w_psg="1.232" t_submit="434" t_schedule="8274" t_enter="8327" t_finish="1507" t_latest="1507" t_drive="216" t_est="0.8" t_late="7036" t_early="0"/>
+  <request time="8560" vehicle="taxi_0010" cmd="enter" req_id="223" distance="39.804" t_late="7225"/>
+  <dispatch vehicle="taxi_0024" reservations="['56']"/>
+  <request time="8564" vehicle="taxi_0024" cmd="schedule" req_id="126" submit_time="332"/>
+  <request time="8564" vehicle="taxi_0024" cmd="finished" req_id="148" dist_w_psg="1.825" t_submit="570" t_schedule="7765" t_enter="8236" t_finish="1681" t_latest="1681" t_drive="328" t_est="0.6" t_late="6883" t_early="0"/>
+  <dispatch vehicle="taxi_0020" reservations="['55']"/>
+  <request time="8573" vehicle="taxi_0020" cmd="schedule" req_id="123" submit_time="331"/>
+  <request time="8573" vehicle="taxi_0020" cmd="finished" req_id="114" dist_w_psg="2.730" t_submit="619" t_schedule="7576" t_enter="8000" t_finish="1806" t_latest="1806" t_drive="573" t_est="0.5" t_late="6767" t_early="0"/>
+  <vehicle time="8574" vehicle="taxi_0020" cmd="left"/>
+  <request time="8580" vehicle="taxi_0015" cmd="enter" req_id="43" distance="42.406" t_late="7150"/>
+  <dispatch vehicle="taxi_0004" reservations="['54']"/>
+  <request time="8602" vehicle="taxi_0004" cmd="schedule" req_id="281" submit_time="325"/>
+  <request time="8602" vehicle="taxi_0004" cmd="finished" req_id="159" dist_w_psg="2.242" t_submit="548" t_schedule="7792" t_enter="8056" t_finish="1681" t_latest="1681" t_drive="546" t_est="0.4" t_late="6921" t_early="0"/>
+  <dispatch vehicle="taxi_0009" reservations="['53']"/>
+  <request time="8610" vehicle="taxi_0009" cmd="schedule" req_id="284" submit_time="316"/>
+  <request time="8610" vehicle="taxi_0009" cmd="finished" req_id="142" dist_w_psg="2.920" t_submit="560" t_schedule="7777" t_enter="7923" t_finish="1747" t_latest="1747" t_drive="687" t_est="0.4" t_late="6863" t_early="0"/>
+  <dispatch vehicle="taxi_0007" reservations="['52']"/>
+  <request time="8614" vehicle="taxi_0007" cmd="schedule" req_id="212" submit_time="310"/>
+  <request time="8614" vehicle="taxi_0016" cmd="enter" req_id="153" distance="44.404" t_late="7248"/>
+  <request time="8614" vehicle="taxi_0007" cmd="finished" req_id="124" dist_w_psg="1.261" t_submit="442" t_schedule="8200" t_enter="8369" t_finish="1516" t_latest="1516" t_drive="245" t_est="0.7" t_late="7098" t_early="0"/>
+  <dispatch vehicle="taxi_0021" reservations="['51']"/>
+  <request time="8621" vehicle="taxi_0021" cmd="schedule" req_id="288" submit_time="306"/>
+  <request time="8621" vehicle="taxi_0021" cmd="finished" req_id="113" dist_w_psg="1.720" t_submit="548" t_schedule="7799" t_enter="8124" t_finish="1575" t_latest="1575" t_drive="497" t_est="0.3" t_late="7046" t_early="0"/>
+  <dispatch vehicle="taxi_0018" reservations="['50']"/>
+  <request time="8660" vehicle="taxi_0018" cmd="schedule" req_id="34" submit_time="305"/>
+  <request time="8660" vehicle="taxi_0018" cmd="finished" req_id="275" dist_w_psg="2.083" t_submit="539" t_schedule="7823" t_enter="8196" t_finish="1659" t_latest="1659" t_drive="464" t_est="0.5" t_late="7001" t_early="0"/>
+  <request time="8662" vehicle="taxi_0006" cmd="enter" req_id="7" distance="41.554" t_late="7387"/>
+  <dispatch vehicle="taxi_0003" reservations="['49']"/>
+  <request time="8679" vehicle="taxi_0003" cmd="schedule" req_id="155" submit_time="303"/>
+  <request time="8679" vehicle="taxi_0003" cmd="finished" req_id="129" dist_w_psg="1.412" t_submit="481" t_schedule="7978" t_enter="8342" t_finish="1509" t_latest="1509" t_drive="337" t_est="0.4" t_late="7170" t_early="0"/>
+  <dispatch vehicle="taxi_0023" reservations="['48']"/>
+  <request time="8696" vehicle="taxi_0023" cmd="schedule" req_id="107" submit_time="300"/>
+  <request time="8696" vehicle="taxi_0023" cmd="finished" req_id="285" dist_w_psg="1.366" t_submit="397" t_schedule="8292" t_enter="8467" t_finish="1508" t_latest="1508" t_drive="229" t_est="0.9" t_late="7188" t_early="0"/>
+  <dispatch vehicle="taxi_0011" reservations="['47']"/>
+  <request time="8704" vehicle="taxi_0011" cmd="schedule" req_id="276" submit_time="293"/>
+  <request time="8704" vehicle="taxi_0011" cmd="finished" req_id="112" dist_w_psg="2.647" t_submit="463" t_schedule="8114" t_enter="8173" t_finish="1626" t_latest="1626" t_drive="531" t_est="0.5" t_late="7078" t_early="0"/>
+  <request time="8744" vehicle="taxi_0012" cmd="enter" req_id="207" distance="45.675" t_late="7478"/>
+  <dispatch vehicle="taxi_0019" reservations="['46']"/>
+  <request time="8765" vehicle="taxi_0019" cmd="schedule" req_id="189" submit_time="285"/>
+  <request time="8765" vehicle="taxi_0019" cmd="finished" req_id="116" dist_w_psg="1.900" t_submit="472" t_schedule="8011" t_enter="8410" t_finish="1552" t_latest="1552" t_drive="355" t_est="0.5" t_late="7213" t_early="0"/>
+  <request time="8803" vehicle="taxi_0002" cmd="enter" req_id="249" distance="49.434" t_late="7533"/>
+  <dispatch vehicle="taxi_0010" reservations="['45']"/>
+  <request time="8809" vehicle="taxi_0010" cmd="schedule" req_id="50" submit_time="284"/>
+  <request time="8809" vehicle="taxi_0010" cmd="finished" req_id="223" dist_w_psg="1.820" t_submit="435" t_schedule="8270" t_enter="8560" t_finish="1453" t_latest="1453" t_drive="249" t_est="0.5" t_late="7356" t_early="0"/>
+  <dispatch vehicle="taxi_0013" reservations="['44']"/>
+  <request time="8826" vehicle="taxi_0013" cmd="schedule" req_id="110" submit_time="282"/>
+  <request time="8826" vehicle="taxi_0013" cmd="finished" req_id="184" dist_w_psg="2.060" t_submit="467" t_schedule="8019" t_enter="8441" t_finish="1582" t_latest="1582" t_drive="385" t_est="0.6" t_late="7244" t_early="0"/>
+  <request time="8853" vehicle="taxi_0023" cmd="enter" req_id="107" distance="42.258" t_late="7653"/>
+  <request time="8868" vehicle="taxi_0008" cmd="enter" req_id="85" distance="39.479" t_late="7531"/>
+  <request time="8873" vehicle="taxi_0001" cmd="enter" req_id="101" distance="39.891" t_late="7606"/>
+  <request time="8914" vehicle="taxi_0005" cmd="enter" req_id="68" distance="40.250" t_late="7669"/>
+  <request time="8917" vehicle="taxi_0013" cmd="enter" req_id="110" distance="41.425" t_late="7735"/>
+  <request time="8930" vehicle="taxi_0018" cmd="enter" req_id="34" distance="48.104" t_late="7725"/>
+  <dispatch vehicle="taxi_0000" reservations="['43']"/>
+  <request time="8932" vehicle="taxi_0000" cmd="schedule" req_id="233" submit_time="276"/>
+  <request time="8932" vehicle="taxi_0000" cmd="finished" req_id="73" dist_w_psg="2.645" t_submit="460" t_schedule="8137" t_enter="8354" t_finish="1621" t_latest="1621" t_drive="578" t_est="0.5" t_late="7311" t_early="0"/>
+  <request time="8967" vehicle="taxi_0003" cmd="enter" req_id="155" distance="38.795" t_late="7764"/>
+  <dispatch vehicle="taxi_0012" reservations="['42']"/>
+  <request time="8990" vehicle="taxi_0012" cmd="schedule" req_id="125" submit_time="276"/>
+  <request time="8990" vehicle="taxi_0012" cmd="finished" req_id="207" dist_w_psg="1.485" t_submit="366" t_schedule="8472" t_enter="8744" t_finish="1489" t_latest="1489" t_drive="246" t_est="0.9" t_late="7501" t_early="0"/>
+  <request time="8993" vehicle="taxi_0007" cmd="enter" req_id="212" distance="44.023" t_late="7783"/>
+  <dispatch vehicle="taxi_0006" reservations="['41']"/>
+  <request time="9054" vehicle="taxi_0006" cmd="schedule" req_id="257" submit_time="274"/>
+  <request time="9054" vehicle="taxi_0006" cmd="finished" req_id="7" dist_w_psg="3.158" t_submit="375" t_schedule="8366" t_enter="8662" t_finish="1532" t_latest="1532" t_drive="392" t_est="0.7" t_late="7522" t_early="0"/>
+  <request time="9072" vehicle="taxi_0009" cmd="enter" req_id="284" distance="41.100" t_late="7856"/>
+  <request time="9089" vehicle="taxi_0021" cmd="enter" req_id="288" distance="38.793" t_late="7883"/>
+  <request time="9103" vehicle="taxi_0020" cmd="enter" req_id="123" distance="44.584" t_late="7872"/>
+  <dispatch vehicle="taxi_0022" reservations="['40']"/>
+  <request time="9105" vehicle="taxi_0022" cmd="schedule" req_id="140" submit_time="261"/>
+  <request time="9105" vehicle="taxi_0022" cmd="finished" req_id="38" dist_w_psg="2.059" t_submit="527" t_schedule="7949" t_enter="8526" t_finish="1626" t_latest="1626" t_drive="579" t_est="0.3" t_late="7479" t_early="0"/>
+  <request time="9138" vehicle="taxi_0024" cmd="enter" req_id="126" distance="43.610" t_late="7906"/>
+  <request time="9148" vehicle="taxi_0017" cmd="enter" req_id="22" distance="45.020" t_late="7891"/>
+  <dispatch vehicle="taxi_0001" reservations="['39']"/>
+  <request time="9171" vehicle="taxi_0001" cmd="schedule" req_id="39" submit_time="225"/>
+  <request time="9171" vehicle="taxi_0001" cmd="finished" req_id="101" dist_w_psg="1.877" t_submit="367" t_schedule="8464" t_enter="8873" t_finish="1441" t_latest="1441" t_drive="298" t_est="0.6" t_late="7730" t_early="0"/>
+  <dispatch vehicle="taxi_0002" reservations="['38']"/>
+  <request time="9181" vehicle="taxi_0002" cmd="schedule" req_id="135" submit_time="223"/>
+  <request time="9181" vehicle="taxi_0002" cmd="finished" req_id="249" dist_w_psg="2.352" t_submit="370" t_schedule="8412" t_enter="8803" t_finish="1489" t_latest="1489" t_drive="378" t_est="0.6" t_late="7692" t_early="0"/>
+  <dispatch vehicle="taxi_0013" reservations="['37']"/>
+  <request time="9191" vehicle="taxi_0013" cmd="schedule" req_id="283" submit_time="220"/>
+  <request time="9191" vehicle="taxi_0013" cmd="finished" req_id="110" dist_w_psg="1.473" t_submit="282" t_schedule="8826" t_enter="8917" t_finish="1342" t_latest="1342" t_drive="274" t_est="0.6" t_late="7849" t_early="0"/>
+  <request time="9205" vehicle="taxi_0022" cmd="enter" req_id="140" distance="47.239" t_late="8044"/>
+  <dispatch vehicle="taxi_0008" reservations="['36']"/>
+  <request time="9212" vehicle="taxi_0008" cmd="schedule" req_id="52" submit_time="209"/>
+  <request time="9212" vehicle="taxi_0008" cmd="finished" req_id="85" dist_w_psg="2.751" t_submit="437" t_schedule="8205" t_enter="8868" t_finish="1572" t_latest="1572" t_drive="344" t_est="0.7" t_late="7640" t_early="0"/>
+  <dispatch vehicle="taxi_0015" reservations="['35']"/>
+  <request time="9249" vehicle="taxi_0015" cmd="schedule" req_id="58" submit_time="203"/>
+  <request time="9249" vehicle="taxi_0015" cmd="finished" req_id="43" dist_w_psg="2.658" t_submit="530" t_schedule="7859" t_enter="8580" t_finish="1646" t_latest="1646" t_drive="669" t_est="0.3" t_late="7603" t_early="0"/>
+  <request time="9261" vehicle="taxi_0019" cmd="enter" req_id="189" distance="49.167" t_late="8076"/>
+  <request time="9272" vehicle="taxi_0011" cmd="enter" req_id="276" distance="46.445" t_late="8079"/>
+  <request time="9273" vehicle="taxi_0014" cmd="enter" req_id="291" distance="50.391" t_late="8002"/>
+  <request time="9318" vehicle="taxi_0012" cmd="enter" req_id="125" distance="49.151" t_late="8142"/>
+  <dispatch vehicle="taxi_0016" reservations="['34']"/>
+  <request time="9320" vehicle="taxi_0016" cmd="schedule" req_id="69" submit_time="191"/>
+  <request time="9320" vehicle="taxi_0016" cmd="finished" req_id="153" dist_w_psg="3.153" t_submit="466" t_schedule="8071" t_enter="8614" t_finish="1666" t_latest="1666" t_drive="706" t_est="0.4" t_late="7654" t_early="0"/>
+  <request time="9358" vehicle="taxi_0000" cmd="enter" req_id="233" distance="48.200" t_late="8182"/>
+  <request time="9359" vehicle="taxi_0010" cmd="enter" req_id="50" distance="43.729" t_late="8175"/>
+  <dispatch vehicle="taxi_0023" reservations="['33']"/>
+  <request time="9369" vehicle="taxi_0023" cmd="schedule" req_id="12" submit_time="189"/>
+  <request time="9369" vehicle="taxi_0023" cmd="finished" req_id="107" dist_w_psg="1.475" t_submit="300" t_schedule="8696" t_enter="8853" t_finish="1314" t_latest="1314" t_drive="516" t_est="0.2" t_late="8055" t_early="0"/>
+  <dispatch vehicle="taxi_0019" reservations="['32']"/>
+  <request time="9378" vehicle="taxi_0019" cmd="schedule" req_id="262" submit_time="186"/>
+  <request time="9378" vehicle="taxi_0019" cmd="finished" req_id="189" dist_w_psg="0.755" t_submit="285" t_schedule="8765" t_enter="9261" t_finish="1300" t_latest="1300" t_drive="117" t_est="1.0" t_late="8078" t_early="0"/>
+  <dispatch vehicle="taxi_0005" reservations="['31']"/>
+  <request time="9403" vehicle="taxi_0005" cmd="schedule" req_id="54" submit_time="186"/>
+  <request time="9403" vehicle="taxi_0005" cmd="finished" req_id="68" dist_w_psg="2.833" t_submit="345" t_schedule="8543" t_enter="8914" t_finish="1545" t_latest="1545" t_drive="489" t_est="0.6" t_late="7858" t_early="0"/>
+  <request time="9479" vehicle="taxi_0023" cmd="enter" req_id="12" distance="44.403" t_late="8390"/>
+  <dispatch vehicle="taxi_0024" reservations="['30']"/>
+  <request time="9512" vehicle="taxi_0024" cmd="schedule" req_id="176" submit_time="185"/>
+  <request time="9512" vehicle="taxi_0024" cmd="finished" req_id="126" dist_w_psg="2.363" t_submit="332" t_schedule="8564" t_enter="9138" t_finish="1460" t_latest="1460" t_drive="374" t_est="0.6" t_late="8052" t_early="0"/>
+  <dispatch vehicle="taxi_0021" reservations="['29']"/>
+  <request time="9513" vehicle="taxi_0021" cmd="schedule" req_id="277" submit_time="176"/>
+  <request time="9513" vehicle="taxi_0021" cmd="finished" req_id="288" dist_w_psg="2.474" t_submit="306" t_schedule="8621" t_enter="9089" t_finish="1503" t_latest="1503" t_drive="424" t_est="0.7" t_late="8010" t_early="0"/>
+  <dispatch vehicle="taxi_0000" reservations="['28']"/>
+  <request time="9522" vehicle="taxi_0000" cmd="schedule" req_id="11" submit_time="172"/>
+  <request time="9522" vehicle="taxi_0000" cmd="finished" req_id="233" dist_w_psg="1.151" t_submit="276" t_schedule="8932" t_enter="9358" t_finish="1303" t_latest="1303" t_drive="164" t_est="0.8" t_late="8219" t_early="0"/>
+  <request time="9559" vehicle="taxi_0024" cmd="enter" req_id="176" distance="46.241" t_late="8474"/>
+  <dispatch vehicle="taxi_0007" reservations="['27']"/>
+  <request time="9575" vehicle="taxi_0007" cmd="schedule" req_id="289" submit_time="161"/>
+  <request time="9575" vehicle="taxi_0007" cmd="finished" req_id="212" dist_w_psg="3.129" t_submit="310" t_schedule="8614" t_enter="8993" t_finish="1439" t_latest="1439" t_drive="582" t_est="0.4" t_late="8136" t_early="0"/>
+  <dispatch vehicle="taxi_0009" reservations="['26']"/>
+  <request time="9586" vehicle="taxi_0009" cmd="schedule" req_id="290" submit_time="159"/>
+  <request time="9586" vehicle="taxi_0009" cmd="finished" req_id="284" dist_w_psg="2.301" t_submit="316" t_schedule="8610" t_enter="9072" t_finish="1458" t_latest="1458" t_drive="514" t_est="0.5" t_late="8128" t_early="0"/>
+  <dispatch vehicle="taxi_0012" reservations="['25']"/>
+  <request time="9610" vehicle="taxi_0012" cmd="schedule" req_id="177" submit_time="159"/>
+  <request time="9610" vehicle="taxi_0012" cmd="finished" req_id="125" dist_w_psg="1.711" t_submit="276" t_schedule="8990" t_enter="9318" t_finish="1269" t_latest="1269" t_drive="292" t_est="0.3" t_late="8341" t_early="0"/>
+  <request time="9612" vehicle="taxi_0010" cmd="finished" req_id="50" dist_w_psg="1.400" t_submit="284" t_schedule="8809" t_enter="9359" t_finish="1322" t_latest="1322" t_drive="253" t_est="0.5" t_late="8290" t_early="0"/>
+  <request time="9628" vehicle="taxi_0004" cmd="enter" req_id="281" distance="41.597" t_late="8403"/>
+  <request time="9634" vehicle="taxi_0013" cmd="enter" req_id="283" distance="45.200" t_late="8514"/>
+  <request time="9682" vehicle="taxi_0020" cmd="finished" req_id="123" dist_w_psg="2.352" t_submit="331" t_schedule="8573" t_enter="9103" t_finish="1437" t_latest="1437" t_drive="579" t_est="0.4" t_late="8245" t_early="0"/>
+  <request time="9683" vehicle="taxi_0015" cmd="enter" req_id="58" distance="47.341" t_late="8580"/>
+  <request time="9714" vehicle="taxi_0003" cmd="finished" req_id="155" dist_w_psg="4.241" t_submit="303" t_schedule="8679" t_enter="8967" t_finish="1599" t_latest="1599" t_drive="747" t_est="0.5" t_late="8115" t_early="0"/>
+  <request time="9717" vehicle="taxi_0014" cmd="finished" req_id="291" dist_w_psg="3.159" t_submit="371" t_schedule="8385" t_enter="9273" t_finish="1538" t_latest="1538" t_drive="444" t_est="0.6" t_late="8179" t_early="0"/>
+  <request time="9725" vehicle="taxi_0002" cmd="enter" req_id="135" distance="54.570" t_late="8602"/>
+  <request time="9729" vehicle="taxi_0018" cmd="finished" req_id="34" dist_w_psg="2.618" t_submit="305" t_schedule="8660" t_enter="8930" t_finish="1417" t_latest="1417" t_drive="799" t_est="0.3" t_late="8312" t_early="0"/>
+  <request time="9761" vehicle="taxi_0001" cmd="enter" req_id="39" distance="43.746" t_late="8636"/>
+  <request time="9849" vehicle="taxi_0012" cmd="enter" req_id="177" distance="51.986" t_late="8790"/>
+  <request time="9871" vehicle="taxi_0024" cmd="finished" req_id="176" dist_w_psg="1.557" t_submit="185" t_schedule="9512" t_enter="9559" t_finish="1286" t_latest="1286" t_drive="312" t_est="0.6" t_late="8585" t_early="0"/>
+  <request time="9889" vehicle="taxi_0022" cmd="finished" req_id="140" dist_w_psg="1.341" t_submit="261" t_schedule="9105" t_enter="9205" t_finish="1309" t_latest="1309" t_drive="684" t_est="0.2" t_late="8580" t_early="0"/>
+  <request time="9949" vehicle="taxi_0008" cmd="enter" req_id="52" distance="45.339" t_late="8840"/>
+  <request time="9950" vehicle="taxi_0011" cmd="finished" req_id="276" dist_w_psg="2.137" t_submit="293" t_schedule="8704" t_enter="9272" t_finish="1428" t_latest="1428" t_drive="678" t_est="0.3" t_late="8522" t_early="0"/>
+  <request time="9951" vehicle="taxi_0017" cmd="finished" req_id="22" dist_w_psg="4.596" t_submit="357" t_schedule="8496" t_enter="9148" t_finish="1657" t_latest="1657" t_drive="803" t_est="0.5" t_late="8294" t_early="0"/>
+  <request time="9955" vehicle="taxi_0021" cmd="enter" req_id="277" distance="43.758" t_late="8879"/>
+  <request time="9967" vehicle="taxi_0019" cmd="enter" req_id="262" distance="52.120" t_late="8881"/>
+  <request time="9979" vehicle="taxi_0006" cmd="enter" req_id="257" distance="48.972" t_late="8805"/>
+  <request time="10026" vehicle="taxi_0016" cmd="enter" req_id="69" distance="50.526" t_late="8935"/>
+  <request time="10039" vehicle="taxi_0000" cmd="enter" req_id="11" distance="51.963" t_late="8967"/>
+  <request time="10049" vehicle="taxi_0001" cmd="finished" req_id="39" dist_w_psg="1.364" t_submit="225" t_schedule="9171" t_enter="9761" t_finish="1268" t_latest="1268" t_drive="288" t_est="0.5" t_late="8781" t_early="0"/>
+  <request time="10091" vehicle="taxi_0023" cmd="finished" req_id="12" dist_w_psg="1.543" t_submit="189" t_schedule="9369" t_enter="9479" t_finish="1244" t_latest="1244" t_drive="612" t_est="0.3" t_late="8847" t_early="0"/>
+  <request time="10096" vehicle="taxi_0005" cmd="enter" req_id="54" distance="46.947" t_late="9010"/>
+  <request time="10131" vehicle="taxi_0007" cmd="enter" req_id="289" distance="49.352" t_late="9070"/>
+  <request time="10136" vehicle="taxi_0002" cmd="finished" req_id="135" dist_w_psg="2.021" t_submit="223" t_schedule="9181" t_enter="9725" t_finish="1326" t_latest="1326" t_drive="411" t_est="0.5" t_late="8810" t_early="0"/>
+  <request time="10171" vehicle="taxi_0015" cmd="finished" req_id="58" dist_w_psg="2.540" t_submit="203" t_schedule="9249" t_enter="9683" t_finish="1372" t_latest="1372" t_drive="488" t_est="0.6" t_late="8799" t_early="0"/>
+  <request time="10247" vehicle="taxi_0021" cmd="finished" req_id="277" dist_w_psg="2.231" t_submit="176" t_schedule="9513" t_enter="9955" t_finish="1268" t_latest="1268" t_drive="292" t_est="0.7" t_late="8979" t_early="0"/>
+  <request time="10251" vehicle="taxi_0013" cmd="finished" req_id="283" dist_w_psg="3.350" t_submit="220" t_schedule="9191" t_enter="9634" t_finish="1384" t_latest="1384" t_drive="617" t_est="0.4" t_late="8867" t_early="0"/>
+  <request time="10285" vehicle="taxi_0012" cmd="finished" req_id="177" dist_w_psg="1.417" t_submit="159" t_schedule="9610" t_enter="9849" t_finish="1237" t_latest="1237" t_drive="436" t_est="0.4" t_late="9048" t_early="0"/>
+  <request time="10333" vehicle="taxi_0006" cmd="finished" req_id="257" dist_w_psg="2.153" t_submit="274" t_schedule="9054" t_enter="9979" t_finish="1417" t_latest="1417" t_drive="354" t_est="0.7" t_late="8916" t_early="0"/>
+  <request time="10340" vehicle="taxi_0019" cmd="finished" req_id="262" dist_w_psg="2.213" t_submit="186" t_schedule="9378" t_enter="9967" t_finish="1276" t_latest="1276" t_drive="373" t_est="0.5" t_late="9064" t_early="0"/>
+  <request time="10410" vehicle="taxi_0004" cmd="finished" req_id="281" dist_w_psg="1.577" t_submit="325" t_schedule="8602" t_enter="9628" t_finish="1417" t_latest="1417" t_drive="782" t_est="0.2" t_late="8993" t_early="0"/>
+  <request time="10429" vehicle="taxi_0007" cmd="finished" req_id="289" dist_w_psg="2.046" t_submit="161" t_schedule="9575" t_enter="10131" t_finish="1255" t_latest="1255" t_drive="298" t_est="0.7" t_late="9174" t_early="0"/>
+  <request time="10450" vehicle="taxi_0008" cmd="finished" req_id="52" dist_w_psg="2.082" t_submit="209" t_schedule="9212" t_enter="9949" t_finish="1343" t_latest="1343" t_drive="501" t_est="0.5" t_late="9107" t_early="0"/>
+  <request time="10484" vehicle="taxi_0000" cmd="finished" req_id="11" dist_w_psg="2.333" t_submit="172" t_schedule="9522" t_enter="10039" t_finish="1251" t_latest="1251" t_drive="445" t_est="0.4" t_late="9233" t_early="0"/>
+  <request time="10526" vehicle="taxi_0005" cmd="finished" req_id="54" dist_w_psg="1.627" t_submit="186" t_schedule="9403" t_enter="10096" t_finish="1226" t_latest="1226" t_drive="430" t_est="0.3" t_late="9300" t_early="0"/>
+  <request time="10638" vehicle="taxi_0009" cmd="enter" req_id="290" distance="46.617" t_late="9579"/>
+  <request time="10686" vehicle="taxi_0016" cmd="finished" req_id="69" dist_w_psg="3.027" t_submit="191" t_schedule="9320" t_enter="10026" t_finish="1384" t_latest="1384" t_drive="660" t_est="0.4" t_late="9302" t_early="0"/>
+  <request time="11380" vehicle="taxi_0009" cmd="finished" req_id="290" dist_w_psg="2.031" t_submit="159" t_schedule="9586" t_enter="10638" t_finish="1290" t_latest="1290" t_drive="742" t_est="0.3" t_late="10090" t_early="0"/>
+</logbook>
