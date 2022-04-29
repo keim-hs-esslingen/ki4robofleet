@@ -86,7 +86,8 @@ class PoiTypeList:
                     }
                 )
 
-    def applyViewSettings(self, keepOriginalPolys, keepOriginalPOIs):
+    def applyViewSettings(self, keepOriginalPolys, keepOriginalPOIs, osmPolyFile, viewSettingFile):
+        self.osmPolyFile = osmPolyFile
         print("Params:")
         print(" keepOriginalPolys: ", keepOriginalPolys)
         print(" keepOriginalPOIs: ", keepOriginalPOIs)
@@ -98,9 +99,9 @@ class PoiTypeList:
             polyTree = ET.parse(self.osmPolyFile)
             polyRoot = polyTree.getroot()
 
-            print("Reading POI_Settings.xml")
+            print("Reading " + viewSettingFile)
 
-            settingsTree = ET.parse("POI_View_Settings.xml")
+            settingsTree = ET.parse(viewSettingFile)
             settingsRoot = settingsTree.getroot()
 
             # read the color (and other) settings from POI_Settings.xml and write them to a dictionary
@@ -184,7 +185,7 @@ class PoiTypeList:
             tree = ET.ElementTree(xml_output)
 
              # formatting and writing the xml file
-            outputFile =  self.osmPolyFile.rsplit("/",0)+"osm.poly.customized.xml"
+            outputFile =  self.osmPolyFile.rsplit("/")[0]+"osm.poly.customized.xml"
             print("Writing ", outputFile)
             tree.write(
                 outputFile,

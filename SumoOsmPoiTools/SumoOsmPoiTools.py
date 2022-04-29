@@ -106,6 +106,8 @@ class PoiToolMainWindow(QWidget):
         )
         self.setGeometry(100, 100, 600, 870)
         self.uiInit()
+        self.viewSettingFile = ""
+        self.osmPolyFile = ""
         self.show()
 
     def uiInit(self):
@@ -212,6 +214,7 @@ class PoiToolMainWindow(QWidget):
         osmPolyFile, _ = QFileDialog.getOpenFileName(
             None, "select OSM Poly File", ".", "(*.xml)"
         )
+        self.osmPolyFile = osmPolyFile
         self.poiTypeList = PoiTypeList(osmPolyFile)
         
         randomColorGenerator = RandomColorGenerator()
@@ -272,6 +275,7 @@ class PoiToolMainWindow(QWidget):
         )
         if len(poiViewSettingsFile) > 0:
             poiViewSettingsFile+=".xml"
+            self.viewSettingFile = poiViewSettingsFile
             print("Writing POI View Settings to ", poiViewSettingsFile)
 
             xml_output = ET.Element("poisetting")
@@ -385,7 +389,7 @@ class PoiToolMainWindow(QWidget):
     def applyViewSettings(self):
         self.writeSettings()
         self.poiTypeList.applyViewSettings(
-            self.keepOriginalPolys.isChecked(), self.keepOriginalPOIs.isChecked()
+            self.keepOriginalPolys.isChecked(), self.keepOriginalPOIs.isChecked(), self.osmPolyFile, self.viewSettingFile
         )
 
     def convertPOIs2Edges(self):
