@@ -18,6 +18,7 @@
 # =============================================================================
 
 import sys
+import os
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
@@ -31,7 +32,6 @@ from PoiModules.ParkingAreaConverter import ParkingAreaConverter
 
 import random
 
-import os
 import webbrowser
 
 
@@ -108,6 +108,7 @@ class PoiToolMainWindow(QWidget):
         self.uiInit()
         self.viewSettingFile = ""
         self.osmPolyFile = ""
+        self.workingDirectory = ""
         self.show()
 
     def uiInit(self):
@@ -214,6 +215,7 @@ class PoiToolMainWindow(QWidget):
         osmPolyFile, _ = QFileDialog.getOpenFileName(
             None, "select OSM Poly File", ".", "(*.xml)"
         )
+        self.workingDirectory = os.path.dirname(osmPolyFile)       
         self.osmPolyFile = osmPolyFile
         self.poiTypeList = PoiTypeList(osmPolyFile)
         
@@ -378,7 +380,7 @@ class PoiToolMainWindow(QWidget):
                         fill=(255, 255, 255, 128),
                     )
                     lineCounter += 1
-        im.save("./POI_Legend.png", quality=95)
+        im.save(self.workingDirectory+"/POI_Legend.png", quality=95)
         print("READY!!!")
 
     def writeStatistics(self):

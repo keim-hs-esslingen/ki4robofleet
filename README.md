@@ -1,10 +1,8 @@
-![KI4RoboFleet](KI4RoboFleet.gif)
-
-# KI4RoboFleet
+# KI4RoboFleet (SUMO4AV)
 
 ![KI4RoboFleet](KI4RoboFleet.gif)
 
-#### A Simulation Environment based on SUMO to analyze Scenarios for autonomous driving vehicles in Cities
+#### The KI4RoboFleet (SUMO4AV) is a Simulation Environment based on SUMO to analyze Scenarios for autonomous driving vehicles in Cities
 
 ### Link to the Overview-Page: [KI4RoboFleet](https://keim-hs-esslingen.github.io/ki4robofleet/)
 
@@ -77,7 +75,6 @@ python3 KI4RoboFleetUI.py
 
 ### During the Simulation the Status is displayed on the Web Interface 
 http://localhost:8080/index.html
-
 
 
 
