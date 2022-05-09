@@ -32,7 +32,7 @@ class Poi2EdgeConverter:
     def __init__(self):
         self.edgeFilter = EdgeFilter()
 
-    def convertPois2Edges(self, filter):
+    def convertPois2Edges(self, filter, workingDir):
         try:
             api = osm.OsmApi()
 
@@ -59,7 +59,7 @@ class Poi2EdgeConverter:
             # all <poly> - Tags (which stands for "polygon") have an attribute "shape" that defines the border of the structure
             # if no filter is given the filter is read from POI_View_Settings.xml
             if len(filter) == 0:
-                settingsTree = ET.parse("POI_View_Settings.xml")
+                settingsTree = ET.parse(workingDir+"/POI_View_Settings.xml")
                 settingsRoot = settingsTree.getroot()
 
                 # read poly- Settings
@@ -197,14 +197,14 @@ class Poi2EdgeConverter:
             poisEdgesTree = ET.ElementTree(poisEdges)
             # formatting and writing the xml file
             edgePositionsTree.write(
-                "./EdgePositions.xml",
+                workingDir+"/EdgePositions.xml",
                 encoding="UTF-8",
                 xml_declaration=True,
                 pretty_print=True,
             )
 
             poisEdgesTree.write(
-                "./POIsEdges.xml",
+                workingDir+"/POIsEdges.xml",
                 encoding="UTF-8",
                 xml_declaration=True,
                 pretty_print=True,

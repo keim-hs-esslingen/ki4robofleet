@@ -14,6 +14,7 @@
 
 
 import lxml.etree as ET
+import os
 import csv
 
 
@@ -107,7 +108,6 @@ class PoiTypeList:
             # read the color (and other) settings from POI_Settings.xml and write them to a dictionary
 
             polySettings = {}
-
             for setting in settingsRoot.findall("poly"):
                 polySettings[setting.attrib.get("type")] = [
                     setting.attrib.get("color"),
@@ -126,7 +126,6 @@ class PoiTypeList:
             xml_output = ET.Element("additional")
 
             pois = {}
-
             # read the <poly> - Tags:
             for poly in polyRoot.findall("poly"):
                 polyType = poly.attrib.get("type")
@@ -154,7 +153,6 @@ class PoiTypeList:
                             layer=poly.attrib.get("layer"),
                             shape=poly.attrib.get("shape"),
                         )
-
             # read the <poi> - Tags:
             for poi in polyRoot.findall("poi"):
                 poiType = poi.attrib.get("type")
@@ -184,8 +182,8 @@ class PoiTypeList:
 
             tree = ET.ElementTree(xml_output)
 
-             # formatting and writing the xml file
-            outputFile =  self.osmPolyFile.rsplit("/")[0]+"osm.poly.customized.xml"
+            # formatting and writing the xml file
+            outputFile =  os.path.dirname(osmPolyFile)+"/osm.poly.customized.xml"
             print("Writing ", outputFile)
             tree.write(
                 outputFile,
