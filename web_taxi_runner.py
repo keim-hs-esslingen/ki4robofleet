@@ -86,7 +86,7 @@ if __name__ == "__main__":
         "-e",
         "--cleanedge",
         action="store",
-        dest="cleanedge",
+        dest="clean_edge",
         help="edged to start the cleaning process",
         default="45085545",
     )
