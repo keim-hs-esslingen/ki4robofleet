@@ -16,6 +16,7 @@ import random
 import numpy as np
 from PoiModules.Poi2EdgeConverter import Poi2EdgeConverter
 from PoiModules.PoiTypes import PoiTypeList
+import os
 
 
 class Scenario:
@@ -132,7 +133,7 @@ class RequestListGenerator:
                     toSubGroupList.append(scenario.toPoiSubGroup)
 
         # create EdgePositions.xml with all needed EdgePositions
-        poi2EdgeConverter.convertPois2Edges(typeList)
+        poi2EdgeConverter.convertPois2Edges(typeList,os.getcwd())
 
         # read the newly created EdgePositions.xml
         poiList = poi2EdgeConverter.readEdgeList()
