@@ -129,6 +129,9 @@ class Poi2EdgeConverter:
                         middlePos = format((startPos + endPos) / 2, ".2f")
                         print(way["tag"])
 
+                        ET.SubElement(edgePositions, 'poly', id=id, type = polyType, lane=laneToAssign, lane_position = str(middlePos), details = str(way['tag']))
+                        ET.SubElement(poisEdges, 'poi', id=id, type = polyType, edge_id= poi_Edge, lane_position = str(middlePos), lane_index = l_index)
+                        
                         # optionally we can use a reference Edge to check if our current POI has a valid route to the reference Edge, which should be in the center of the map
                         # poi_Edge = laneToAssign[:laneToAssign.index('_')]
                         # l_index = laneToAssign[laneToAssign.index('_'):]
@@ -174,6 +177,9 @@ class Poi2EdgeConverter:
                         if "tag" in nodeInfo:
                             nodeDetails = str(nodeInfo["tag"])
                         print(id, poiType, laneID, str(lanePosition))
+
+                        ET.SubElement(edgePositions, 'poi', id=id, type = poiType, lane=laneID, lane_position = str(format(lanePosition, '.2f')), details = nodeDetails)
+                        ET.SubElement(poisEdges, 'poi', id=id, type = poiType, edge_id= str(edgeID), lane_position = str(lanePosition), lane_index = str(laneIndex))
 
                         # optionally we can use a reference Edge to check if our current POI has a valid route to the reference Edge, which should be in the center of the map
                         # try:
