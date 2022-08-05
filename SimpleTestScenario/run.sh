@@ -1,0 +1,1 @@
+python3 ../web_taxi_runner.py -f ./CustomerRequests.xml -c ./osm.sumocfg -t 5600 -e 48002866#4 -g True  -s "simple" -n "1, 2, 3"

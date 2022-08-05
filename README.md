@@ -76,5 +76,20 @@ python3 KI4RoboFleetUI.py
 ### During the Simulation the Status is displayed on the Web Interface 
 http://localhost:8080/index.html
 
+### Hints:
+The current state of the Project ist still very prototypical and contains still many weak points which easily lead to errors
+
+If the following Error arises: DijkstraRouter spent ... answering queries ..."
+the following bash command may help:
+bash```
+sudo apt-get dist-upgrade
+```
+
+ 
+
+
+
+
+
 
 

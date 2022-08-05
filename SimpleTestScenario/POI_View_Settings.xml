@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<poisetting>
+  <poi type="amenity.bank" color="0,255,0" layer="1.00"/>
+  <poi type="amenity.biergarten" color="255,0,0" layer="1.00"/>
+</poisetting>
