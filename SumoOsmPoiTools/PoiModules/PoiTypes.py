@@ -27,7 +27,7 @@ class PoiTypeList:
         try:
             polyTree = ET.parse(osmPolyFile)
             polyRoot = polyTree.getroot()
-            print("Import osm.poly.xml ...")
+            print("Import ",osmPolyFile)
             # read the <poly> - Tags:
             for poly in polyRoot.findall("poly"):
                 polyType = poly.attrib.get("type")

@@ -32,7 +32,39 @@ class Poi2EdgeConverter:
     def __init__(self):
         self.edgeFilter = EdgeFilter()
 
+           
     def convertPois2Edges(self, filter, workingDir):
+        print("The current Working Directory is: ", workingDir)
+
+        print("Converting the following POIs to Edge Positions: ", filter)
+        print("Read reference Edge...")
+
+        reference_edge = ""
+
+        # reading the reference Edge from referenceEdge.xml to check if our current POI has a valid route to the reference Edge, which should be in the center of the map
+        # e.g. for the Mannheim Model we use the reference_edge "4087264" (Friedrich-Ebert-Straße) to check if routes to and from this edge can be found
+
+        try:
+            refEdgeTree = ET.parse(workingDir+"/referenceEdge.xml")
+            refEdgeRoot = refEdgeTree.getroot()
+            
+            reference_edge = refEdgeRoot.get("id")
+            print("The Edge Id "+ reference_edge + " was successfully set as reference Edge")
+
+        except:
+            print("----------------------------------------------------------------------------------")
+            print("Error: There is no valid referenceEdge.xml File in your current SUMO Model Directory !!!")
+            print("A reference needs to be specified to find valid routing paths ")
+            print("Please create therefore a File with the name referenceEdge.xml in your SUMO Model Directory") 
+            print("Specify there the reference edge Id (e.g. an Edge Id from the center of your Model)")
+            print("The File Content looks like the following example:")
+            print("----------------------------------------------------------------------------------")
+            print("<?xml version='1.0' encoding='UTF-8'?>")
+            print("<referenceEdge id = \"45085545\"/>")            
+            print("----------------------------------------------------------------------------------")
+        
+        # now we use the osm.OsmApi() to extract Information from the POIs:
+        
         try:
             api = osm.OsmApi()
 
@@ -41,7 +73,7 @@ class Poi2EdgeConverter:
                 [
                     checkBinary("sumo"),
                     "-c",
-                    "osm.sumocfg",
+                    workingDir+"/osm.sumocfg",
                     "--tripinfo-output",
                     "tripinfo.xml",
                 ]
@@ -52,9 +84,6 @@ class Poi2EdgeConverter:
             edgePositions = ET.Element("edgelist")
 
             poisEdges = ET.Element("poi_collection")
-
-            # optionally we can use a reference Edge to check if our current POI has a valid route to the reference Edge, which should be in the center of the map
-            # reference_edge = "4087264"  # Friedrich-Ebert-Straße, we use this Street as a reference to check if routes to and from this edge can be found
 
             # all <poly> - Tags (which stands for "polygon") have an attribute "shape" that defines the border of the structure
             # if no filter is given the filter is read from POI_View_Settings.xml
@@ -68,6 +97,8 @@ class Poi2EdgeConverter:
                 # read poi- Settings
                 for setting in settingsRoot.findall("poi"):
                     filter.append(setting.attrib.get("type"))
+
+            print("The current Working Directory is: ", workingDir)
 
             print("Converting the following POIs to Edge Positions: ", filter)
             # reading poly - Tags from osm.poly.xml
@@ -132,18 +163,22 @@ class Poi2EdgeConverter:
                         ET.SubElement(edgePositions, 'poly', id=id, type = polyType, lane=laneToAssign, lane_position = str(middlePos), details = str(way['tag']))
                         ET.SubElement(poisEdges, 'poi', id=id, type = polyType, edge_id= poi_Edge, lane_position = str(middlePos), lane_index = l_index)
                         
-                        # optionally we can use a reference Edge to check if our current POI has a valid route to the reference Edge, which should be in the center of the map
-                        # poi_Edge = laneToAssign[:laneToAssign.index('_')]
-                        # l_index = laneToAssign[laneToAssign.index('_'):]
-                        # try:
-                        #     toRoute = traci.simulation.findRoute(poi_Edge, reference_edge)
-                        #     fromRoute = traci.simulation.findRoute(reference_edge, poi_Edge)
-
-                        #     if toRoute and len(toRoute.edges) > 0 and fromRoute and len(fromRoute.edges) >0:
-                        #         ET.SubElement(edgePositions, 'poly', id=id, type = polyType, lane=laneToAssign, lane_position = str(middlePos), details = str(way['tag']))
-                        #         ET.SubElement(poisEdges, 'poi', id=id, type = polyType, edge_id= poi_Edge, lane_position = str(middlePos), lane_index = l_index)
-                        # except:
-                        #     print("Skipped Type ",polyType, "because no valid edge could be found")
+                        # now we use the reference Edge which was read before from referenceEdge.xml to check if our current POI has a valid route to the reference Edge (which should be in the center of the map)
+                        poi_Edge = laneToAssign[:laneToAssign.index('_')]
+                        l_index = laneToAssign[laneToAssign.index('_'):]
+                        
+                        print("Searching for Route from ",poi_Edge, " to ",reference_edge )
+                        
+                        try:
+                            toRoute = traci.simulation.findRoute(poi_Edge, reference_edge, vtype="taxi")
+                            fromRoute = traci.simulation.findRoute(reference_edge, poi_Edge, vtype="taxi")
+                            print("toRoutes: ",len(toRoute.edges))
+                            print("fromRoutes: ",len(fromRoute.edges))    
+                            if toRoute and len(toRoute.edges) > 0 and fromRoute and len(fromRoute.edges) >0:
+                                ET.SubElement(edgePositions, 'poly', id=id, type = polyType, lane=laneToAssign, lane_position = str(middlePos), details = str(way['tag']))
+                                ET.SubElement(poisEdges, 'poi', id=id, type = polyType, edge_id= poi_Edge, lane_position = str(middlePos), lane_index = l_index)
+                        except:
+                            print("Skipped Type ",polyType, "because no valid edge could be found")
                     except:
                         print(
                             "Skipped Type ",
@@ -177,20 +212,22 @@ class Poi2EdgeConverter:
                         if "tag" in nodeInfo:
                             nodeDetails = str(nodeInfo["tag"])
                         print(id, poiType, laneID, str(lanePosition))
-
                         ET.SubElement(edgePositions, 'poi', id=id, type = poiType, lane=laneID, lane_position = str(format(lanePosition, '.2f')), details = nodeDetails)
                         ET.SubElement(poisEdges, 'poi', id=id, type = poiType, edge_id= str(edgeID), lane_position = str(lanePosition), lane_index = str(laneIndex))
+                        # now we use the reference Edge which was read before from referenceEdge.xml to check if our current POI has a valid route to the reference Edge (which should be in the center of the map)
 
-                        # optionally we can use a reference Edge to check if our current POI has a valid route to the reference Edge, which should be in the center of the map
-                        # try:
-                        #     toRoute = traci.simulation.findRoute(edgeID, reference_edge)
-                        #     fromRoute = traci.simulation.findRoute(reference_edge, edgeID)
-
-                        #     if toRoute and len(toRoute.edges) > 0 and fromRoute and len(fromRoute.edges) >0:
-                        #         ET.SubElement(edgePositions, 'poi', id=id, type = poiType, lane=laneID, lane_position = str(format(lanePosition, '.2f')), details = nodeDetails)
-                        #         ET.SubElement(poisEdges, 'poi', id=id, type = poiType, edge_id= str(edgeID), lane_position = str(lanePosition), lane_index = str(laneIndex))
-                        # except:
-                        #     print("Skipped Type ",poiType, "because no valid edge could be found")
+                        print("-----------------------------------------------------------")
+                        print("Searching for Route from ",edgeID, " to ",reference_edge )
+                        try:
+                            toRoute = traci.simulation.findRoute(edgeID, reference_edge, vtype="taxi")
+                            print("toRoutes: ",len(toRoute.edges))
+                            fromRoute = traci.simulation.findRoute(reference_edge, edgeID, vtype="taxi")
+                            print("fromRoutes: ",len(fromRoute.edges))    
+                            if toRoute and len(toRoute.edges) > 0 and fromRoute and len(fromRoute.edges) >0:
+                                ET.SubElement(edgePositions, 'poi', id=id, type = poiType, lane=laneID, lane_position = str(format(lanePosition, '.2f')), details = nodeDetails)
+                                ET.SubElement(poisEdges, 'poi', id=id, type = poiType, edge_id= str(edgeID), lane_position = str(lanePosition), lane_index = str(laneIndex))
+                        except:
+                            print("Skipped Type ",poiType, "because no valid edge could be found")
 
                     except:
                         print(

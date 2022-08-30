@@ -76,10 +76,12 @@ class Request:
 
 
 class RequestListGenerator:
-    def writeRequestList(self, scenarioList, totalSimulationTime):
+    def writeRequestList(self, scenarioList, totalSimulationTime, workingDir):
         typeList = []
 
         poiGroupDict = PoiTypeList().getGroups()
+
+        self.workingDir = workingDir   
 
         poi2EdgeConverter = Poi2EdgeConverter()
 
@@ -133,7 +135,7 @@ class RequestListGenerator:
                     toSubGroupList.append(scenario.toPoiSubGroup)
 
         # create EdgePositions.xml with all needed EdgePositions
-        poi2EdgeConverter.convertPois2Edges(typeList,os.getcwd())
+        poi2EdgeConverter.convertPois2Edges(typeList,self.workingDir)
 
         # read the newly created EdgePositions.xml
         poiList = poi2EdgeConverter.readEdgeList()

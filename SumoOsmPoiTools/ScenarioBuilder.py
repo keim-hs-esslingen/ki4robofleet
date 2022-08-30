@@ -243,11 +243,15 @@ class ScenarioBuilderWindow(QWidget):
 
     def __init__(self):
         super().__init__()
+        osmPolyFile, _ = QFileDialog.getOpenFileName(
+            None, "select OSM Poly File in your SUMO Model Directory", "..", "(*.xml)"
+        )
+        self.workingDirectory = os.path.dirname(osmPolyFile)    
         self.requestListGenerator = RequestListGenerator()
-        self.poiGroup = PoiTypeList().getGroups()
+        self.poiGroup = PoiTypeList(osmPolyFile).getGroups()
 
         self.setWindowTitle(
-            "Anwendungszentrum KEIM Hochschule Esslingen - KI4ROBOFLEET Scenario Builder v1.0"
+            "Anwendungszentrum KEIM Hochschule Esslingen - KI4ROBOFLEET Scenario Builder v1.1"
         )
         self.setGeometry(100, 100, 1970, 850)
         self.uiInit()
@@ -289,14 +293,14 @@ class ScenarioBuilderWindow(QWidget):
         self.buttonWrite.move(190, 670)
         self.buttonWrite.clicked.connect(self.writeSettings)
 
-        self.buttonNewScenario = QPushButton("Add new Scenario", self)
-        self.buttonNewScenario.resize(160, 40)
+        self.buttonNewScenario = QPushButton("Add new SubScenario", self)
+        self.buttonNewScenario.resize(180, 40)
         self.buttonNewScenario.move(320, 670)
         self.buttonNewScenario.clicked.connect(self.addRow)
 
         self.buttonCreateList = QPushButton("Create List of Requests", self)
-        self.buttonCreateList.resize(160, 40)
-        self.buttonCreateList.move(490, 670)
+        self.buttonCreateList.resize(180, 40)
+        self.buttonCreateList.move(510, 670)
         self.buttonCreateList.clicked.connect(self.createListOfRequests)
 
         self.buttonCreateList = QPushButton("Help / Manual", self)
@@ -398,7 +402,7 @@ class ScenarioBuilderWindow(QWidget):
             scenarioList.append(scenario)
 
         totalSimulationTime = self.simTime.text()
-        self.requestListGenerator.writeRequestList(scenarioList, totalSimulationTime)
+        self.requestListGenerator.writeRequestList(scenarioList, totalSimulationTime, self.workingDirectory)
 
     def showManual(self):
         cwd = os.getcwd()
