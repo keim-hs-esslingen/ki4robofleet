@@ -216,8 +216,6 @@ class Poi2EdgeConverter:
                         ET.SubElement(poisEdges, 'poi', id=id, type = poiType, edge_id= str(edgeID), lane_position = str(lanePosition), lane_index = str(laneIndex))
                         # now we use the reference Edge which was read before from referenceEdge.xml to check if our current POI has a valid route to the reference Edge (which should be in the center of the map)
 
-                        print("-----------------------------------------------------------")
-                        print("Searching for Route from ",edgeID, " to ",reference_edge )
                         try:
                             toRoute = traci.simulation.findRoute(edgeID, reference_edge, "taxi")
                             print("toRoutes: ",len(toRoute.edges))
@@ -233,7 +231,7 @@ class Poi2EdgeConverter:
                         print(
                             "Skipped Type ",
                             poiType,
-                            "because no valid edge could be found AUSSEN",
+                            "because no valid edge could be found",
                         )
 
             edgePositionsTree = ET.ElementTree(edgePositions)

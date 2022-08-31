@@ -70,8 +70,8 @@ class PoiTypeList:
     def getGroups(self):
         return self.poiGroup
 
-    def writeStatistics(self):
-        with open("PoiStatistics.csv", mode="w") as csv_file:
+    def writeStatistics(self, workingDir):
+        with open(workingDir+"/PoiStatistics.csv", mode="w") as csv_file:
             fieldnames = ["poiType", "name", "occurrence"]
             writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
             writer.writeheader()

@@ -390,7 +390,7 @@ class PoiToolMainWindow(QWidget):
 
     def writeStatistics(self):
         print("Writing PoiStatistics.csv ...")
-        self.poiTypeList.writeStatistics()
+        self.poiTypeList.writeStatistics(self.workingDirectory)
         print("READY!!!")
 
     def applyViewSettings(self):

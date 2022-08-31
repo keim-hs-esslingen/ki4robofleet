@@ -279,13 +279,12 @@ class RequestListGenerator:
 
             # formatting and writing the xml file
             tree.write(
-                "./CustomerRequests.xml",
+                self.workingDir+"/CustomerRequests.xml",
                 encoding="UTF-8",
                 xml_declaration=True,
                 pretty_print=True,
             )
             print("\nREADY! CustomerRequests.xml was created")
         else:
-            print(
-                "ERROR: CustomerRequests.xml could not be created because for no Scenario could any valid POIs could be found"
-            )
+            print("ERROR: CustomerRequests.xml could not be created because for no Scenario any valid POIs could be found")
+            print("You can try again with other setting e.g. by using more common types of POIs")
