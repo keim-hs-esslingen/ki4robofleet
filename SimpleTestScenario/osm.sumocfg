@@ -7,7 +7,7 @@
 
     <input>
         <net-file value="osm.net.xml"/>
-        <additional-files value="osm.poly.customized.xml,parkingAreas.xml,vehicleTypes.xml"/>
+        <additional-files value="osm.poly.xml,parkingAreas.xml,vehicleTypes.xml"/>
     </input>
 
     <processing>
