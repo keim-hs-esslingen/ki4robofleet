@@ -138,7 +138,7 @@ class RequestListGenerator:
         poi2EdgeConverter.convertPois2Edges(typeList,self.workingDir)
 
         # read the newly created EdgePositions.xml
-        poiList = poi2EdgeConverter.readEdgeList()
+        poiList = poi2EdgeConverter.readEdgeList(self.workingDir)
 
         requestId = 0
 

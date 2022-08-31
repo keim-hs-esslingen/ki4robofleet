@@ -170,15 +170,15 @@ class Poi2EdgeConverter:
                         print("Searching for Route from ",poi_Edge, " to ",reference_edge )
                         
                         try:
-                            toRoute = traci.simulation.findRoute(poi_Edge, reference_edge, vtype="taxi")
-                            fromRoute = traci.simulation.findRoute(reference_edge, poi_Edge, vtype="taxi")
+                            toRoute = traci.simulation.findRoute(poi_Edge, reference_edge, "taxi")
+                            fromRoute = traci.simulation.findRoute(reference_edge, poi_Edge, "taxi")
                             print("toRoutes: ",len(toRoute.edges))
                             print("fromRoutes: ",len(fromRoute.edges))    
                             if toRoute and len(toRoute.edges) > 0 and fromRoute and len(fromRoute.edges) >0:
                                 ET.SubElement(edgePositions, 'poly', id=id, type = polyType, lane=laneToAssign, lane_position = str(middlePos), details = str(way['tag']))
                                 ET.SubElement(poisEdges, 'poi', id=id, type = polyType, edge_id= poi_Edge, lane_position = str(middlePos), lane_index = l_index)
                         except:
-                            print("Skipped Type ",polyType, "because no valid edge could be found")
+                            print("Skipped Type ",polyType, "because no valid route could be found")
                     except:
                         print(
                             "Skipped Type ",
@@ -219,21 +219,21 @@ class Poi2EdgeConverter:
                         print("-----------------------------------------------------------")
                         print("Searching for Route from ",edgeID, " to ",reference_edge )
                         try:
-                            toRoute = traci.simulation.findRoute(edgeID, reference_edge, vtype="taxi")
+                            toRoute = traci.simulation.findRoute(edgeID, reference_edge, "taxi")
                             print("toRoutes: ",len(toRoute.edges))
-                            fromRoute = traci.simulation.findRoute(reference_edge, edgeID, vtype="taxi")
+                            fromRoute = traci.simulation.findRoute(reference_edge, edgeID, "taxi")
                             print("fromRoutes: ",len(fromRoute.edges))    
                             if toRoute and len(toRoute.edges) > 0 and fromRoute and len(fromRoute.edges) >0:
                                 ET.SubElement(edgePositions, 'poi', id=id, type = poiType, lane=laneID, lane_position = str(format(lanePosition, '.2f')), details = nodeDetails)
                                 ET.SubElement(poisEdges, 'poi', id=id, type = poiType, edge_id= str(edgeID), lane_position = str(lanePosition), lane_index = str(laneIndex))
                         except:
-                            print("Skipped Type ",poiType, "because no valid edge could be found")
+                            print("Skipped Type ",poiType, "because no valid route could be found")
 
                     except:
                         print(
                             "Skipped Type ",
                             poiType,
-                            "because no valid edge could be found",
+                            "because no valid edge could be found AUSSEN",
                         )
 
             edgePositionsTree = ET.ElementTree(edgePositions)
@@ -305,10 +305,10 @@ class Poi2EdgeConverter:
             )
             return None
 
-    def readEdgeList(self):
+    def readEdgeList(self,workingDir):
         poiList = []
         try:
-            edgeTree = ET.parse("EdgePositions.xml")
+            edgeTree = ET.parse(workingDir+"/EdgePositions.xml")
             edgeRoot = edgeTree.getroot()
 
             for poi in edgeRoot.findall("poi"):
