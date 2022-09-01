@@ -21,9 +21,9 @@ class EdgeFilter:
     # dictionary: keys: valid EdgeIds values: EdgeLength
     validEdgeDict = {}
 
-    def __init__(self):
+    def __init__(self, workingDir):
         try:
-            netTree = ET.parse("./osm.net.xml")
+            netTree = ET.parse(workingDir+"/osm.net.xml")
             netRoot = netTree.getroot()
 
             edges = netRoot.findall("edge")

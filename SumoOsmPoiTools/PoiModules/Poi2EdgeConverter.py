@@ -30,10 +30,10 @@ import traci as traci
 
 class Poi2EdgeConverter:
     def __init__(self):
-        self.edgeFilter = EdgeFilter()
-
+        self.edgeFilter = None
            
     def convertPois2Edges(self, filter, workingDir):
+        self.edgeFilter = EdgeFilter(workingDir)
         print("The current Working Directory is: ", workingDir)
 
         print("Converting the following POIs to Edge Positions: ", filter)
@@ -62,7 +62,7 @@ class Poi2EdgeConverter:
             print("<?xml version='1.0' encoding='UTF-8'?>")
             print("<referenceEdge id = \"45085545\"/>")            
             print("----------------------------------------------------------------------------------")
-        
+            return None
         # now we use the osm.OsmApi() to extract Information from the POIs:
         
         try:
@@ -78,7 +78,7 @@ class Poi2EdgeConverter:
                     "tripinfo.xml",
                 ]
             )
-            polyTree = ET.parse("osm.poly.xml")
+            polyTree = ET.parse(workingDir+"/osm.poly.xml")
             polyRoot = polyTree.getroot()
 
             edgePositions = ET.Element("edgelist")
@@ -97,8 +97,6 @@ class Poi2EdgeConverter:
                 # read poi- Settings
                 for setting in settingsRoot.findall("poi"):
                     filter.append(setting.attrib.get("type"))
-
-            print("The current Working Directory is: ", workingDir)
 
             print("Converting the following POIs to Edge Positions: ", filter)
             # reading poly - Tags from osm.poly.xml
@@ -124,6 +122,7 @@ class Poi2EdgeConverter:
                         for node in nodes:
                             # for each node we have to use the OsmApi again to get the node - position
                             nodesInfo = api.NodeGet(node)
+
                             lon = nodesInfo["lon"]
                             lat = nodesInfo["lat"]
                             (
@@ -172,8 +171,8 @@ class Poi2EdgeConverter:
                         try:
                             toRoute = traci.simulation.findRoute(poi_Edge, reference_edge, "taxi")
                             fromRoute = traci.simulation.findRoute(reference_edge, poi_Edge, "taxi")
-                            print("toRoutes: ",len(toRoute.edges))
-                            print("fromRoutes: ",len(fromRoute.edges))    
+                            print("toRoutes found with ",len(toRoute.edges), " edges")
+                            print("fromRoutes found with ",len(fromRoute.edges)," edges")    
                             if toRoute and len(toRoute.edges) > 0 and fromRoute and len(fromRoute.edges) >0:
                                 ET.SubElement(edgePositions, 'poly', id=id, type = polyType, lane=laneToAssign, lane_position = str(middlePos), details = str(way['tag']))
                                 ET.SubElement(poisEdges, 'poi', id=id, type = polyType, edge_id= poi_Edge, lane_position = str(middlePos), lane_index = l_index)
@@ -218,9 +217,10 @@ class Poi2EdgeConverter:
 
                         try:
                             toRoute = traci.simulation.findRoute(edgeID, reference_edge, "taxi")
-                            print("toRoutes: ",len(toRoute.edges))
                             fromRoute = traci.simulation.findRoute(reference_edge, edgeID, "taxi")
-                            print("fromRoutes: ",len(fromRoute.edges))    
+                            print("toRoute found with ",len(toRoute.edges), " edges")
+                            print("fromRoute found with ",len(fromRoute.edges)," edges")    
+
                             if toRoute and len(toRoute.edges) > 0 and fromRoute and len(fromRoute.edges) >0:
                                 ET.SubElement(edgePositions, 'poi', id=id, type = poiType, lane=laneID, lane_position = str(format(lanePosition, '.2f')), details = nodeDetails)
                                 ET.SubElement(poisEdges, 'poi', id=id, type = poiType, edge_id= str(edgeID), lane_position = str(lanePosition), lane_index = str(laneIndex))

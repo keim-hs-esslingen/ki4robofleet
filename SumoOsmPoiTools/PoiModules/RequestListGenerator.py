@@ -79,7 +79,7 @@ class RequestListGenerator:
     def writeRequestList(self, scenarioList, totalSimulationTime, workingDir):
         typeList = []
 
-        poiGroupDict = PoiTypeList().getGroups()
+        poiGroupDict = PoiTypeList(workingDir+"/osm.poly.xml").getGroups()
 
         self.workingDir = workingDir   
 
