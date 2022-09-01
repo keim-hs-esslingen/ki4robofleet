@@ -287,4 +287,5 @@ class RequestListGenerator:
             print("\nREADY! CustomerRequests.xml was created")
         else:
             print("ERROR: CustomerRequests.xml could not be created because for no Scenario any valid POIs could be found")
-            print("You can try again with other setting e.g. by using more common types of POIs")
+            print("You can try again with other setting e.g. by using more common types of POIs or by adding new SubScenarios")
+            print("Checking the Any Checkbox could also help to get valid POIs for creating the CustomerRequests.xml File")
