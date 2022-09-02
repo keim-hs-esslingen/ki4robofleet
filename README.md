@@ -77,14 +77,22 @@ python3 KI4RoboFleetUI.py
 http://localhost:8080/index.html
 
 ### Hints:
-* The current state of the Project ist still very prototypical and contains still many weak points which easily lead to errors
+* The current state of the Project ist still very prototypical and contains still many weak points which easily lead to errors.
+
+* The Manual pages are not up to date and need some rework
 
 * If the following Error arises: DijkstraRouter spent ... answering queries ..." the following bash command may help:
 ```bash
 sudo apt-get dist-upgrade
 ```
 
- 
+### Setting up your own Model:
+
+* The easiest way is to use the files from the folder "SimpleTestScenario" 
+* Replace the osm.poly.xml File with your own file
+* Replace the osm.net.xml File with your own file (make sure that your osm.net.xml file contains lanes which allow taxis and lanes which allow pedestrians (sidewalks) at your Points of Interest, otherwise the Points of Interest can not be reached either by pedestrians or by taxis)
+* make sure, that you edit the referenceEdge.xml File by entering an edge id (ideally of the center) of you model
+
 
 
 
