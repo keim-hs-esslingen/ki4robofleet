@@ -17,6 +17,8 @@ from typing import List
 from Net.point_of_interest import Point_of_Interest
 from Moving.request import Request
 from Tools.logger import log
+import os
+import lxml.etree as ET
 
 
 class ProjectConfigData:
@@ -49,4 +51,18 @@ def project_config_from_options(options) -> ProjectConfigData:
         if att in c.__dict__:
             c.__dict__[att] = value
 
+    # The refenece Edge is read from the File referenceEdge.xml
+    try:
+        referenceEdgeFilePath = os.path.dirname(c.sumo_config_file)+"/referenceEdge.xml"
+        refEdgeTree = ET.parse(referenceEdgeFilePath)
+        refEdgeRoot = refEdgeTree.getroot()
+        reference_edge = refEdgeRoot.get("id")
+        c.clean_edge = reference_edge
+        print("--------------------------------------------------------------------------------------------------")
+        print("The Edge Id "+ reference_edge + " was successfully read from ",referenceEdgeFilePath+" and is set as reference Edge for routing checks")
+        print("--------------------------------------------------------------------------------------------------")
+    except:
+        print("----------------------------------------------------------------------------------")
+        print("There is no valid referenceEdge.xml File in your current SUMO Model Directory")
+        print("Therefore the reference edge 45085545 (Citycenter of Mannheim) is used")
     return c
