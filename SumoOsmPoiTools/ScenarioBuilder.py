@@ -128,7 +128,7 @@ class WidgetRow(QWidget):
         self.row.addWidget(self.targetPoiSubGroup)
 
         self.label3 = QLabel("Number of Requests:")
-        self.label3.setFixedWidth(140)
+        self.label3.setFixedWidth(160)
         self.label3.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
         self.row.addWidget(self.label3)
 
@@ -136,14 +136,14 @@ class WidgetRow(QWidget):
         inputValidator.setRange(0, 9999)
 
         self.numberOfRequests = QLineEdit("10")
-        self.numberOfRequests.setFixedWidth(20)
+        self.numberOfRequests.setFixedWidth(40)
         self.numberOfRequests.setValidator(inputValidator)
         if scenarioSetting:
             self.numberOfRequests.setText(scenarioSetting.numberOfRequests)
         self.row.addWidget(self.numberOfRequests)
 
         self.roundTrip = QCheckBox("RoundTrip")
-        self.roundTrip.setFixedWidth(80)
+        self.roundTrip.setFixedWidth(120)
         self.roundTrip.setChecked(True)
         if scenarioSetting:
             if scenarioSetting.roundTrip == "False":
@@ -152,7 +152,7 @@ class WidgetRow(QWidget):
         self.row.addWidget(self.roundTrip)
 
         self.label4 = QLabel("stayTime [s]:")
-        self.label4.setFixedWidth(85)
+        self.label4.setFixedWidth(100)
         self.label4.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
         self.row.addWidget(self.label4)
 
@@ -164,7 +164,7 @@ class WidgetRow(QWidget):
         self.row.addWidget(self.stayTime)
 
         self.normalDistributed = QCheckBox("normal distributed")
-        self.normalDistributed.setFixedWidth(140)
+        self.normalDistributed.setFixedWidth(160)
         self.normalDistributed.setChecked(True)
         if scenarioSetting:
             if scenarioSetting.normalDistributed == "False":
@@ -173,12 +173,12 @@ class WidgetRow(QWidget):
         self.row.addWidget(self.normalDistributed)
 
         self.label5 = QLabel("standardDeviation [s]:")
-        self.label5.setFixedWidth(140)
+        self.label5.setFixedWidth(180)
         self.label5.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
         self.row.addWidget(self.label5)
 
         self.standardDeviation = QLineEdit("600")
-        self.standardDeviation.setFixedWidth(40)
+        self.standardDeviation.setFixedWidth(35)
         if scenarioSetting:
             self.standardDeviation.setText(scenarioSetting.standardDeviation)
         self.standardDeviation.setValidator(inputValidator)
@@ -251,7 +251,7 @@ class ScenarioBuilderWindow(QWidget):
         self.poiGroup = PoiTypeList(osmPolyFile).getGroups()
 
         self.setWindowTitle(
-            "Anwendungszentrum KEIM Hochschule Esslingen - KI4ROBOFLEET Scenario Builder v1.1"
+            "Anwendungszentrum KEIM Hochschule Esslingen - KI4ROBOFLEET Scenario Builder v1.2"
         )
         self.setGeometry(100, 100, 1970, 850)
         self.uiInit()
@@ -259,7 +259,7 @@ class ScenarioBuilderWindow(QWidget):
 
     def uiInit(self):
         self.listWidget = QListWidget(self)
-        self.listWidget.setGeometry(60, 55, 1660, 600)
+        self.listWidget.setGeometry(60, 55, 1800, 600)
         self.listWidget.setStyleSheet("background-color:rgb(64,64,64);")
 
         scroll_bar = QScrollBar(self)
@@ -299,7 +299,7 @@ class ScenarioBuilderWindow(QWidget):
         self.buttonNewScenario.clicked.connect(self.addRow)
 
         self.buttonCreateList = QPushButton("Create List of Requests", self)
-        self.buttonCreateList.resize(180, 40)
+        self.buttonCreateList.resize(190, 40)
         self.buttonCreateList.move(510, 670)
         self.buttonCreateList.clicked.connect(self.createListOfRequests)
 

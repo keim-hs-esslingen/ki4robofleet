@@ -32,7 +32,7 @@ class SimulationInputWindow(QWidget):
         super().__init__()
 
         self.setWindowTitle("KI4ROBOFLEET Simulation Input UI v0.4")
-        self.setGeometry(100, 100, 500, 820)
+        self.setGeometry(100, 100, 500, 750)
         self.uiInit()
         self.show()
 
@@ -117,26 +117,19 @@ class SimulationInputWindow(QWidget):
         vboxSharing.addWidget(self.latenessFactorInput)
 
         self.simulationTimeLabel = QLabel("Simulation Time [s]", self)
-        self.simulationTimeLabel.move(148, 580)
+        self.simulationTimeLabel.move(138, 610)
 
         self.simulationTimeInput = QLineEdit("3600", self)
-        self.simulationTimeInput.setFixedWidth(100)
-        self.simulationTimeInput.move(270, 575)
+        self.simulationTimeInput.setFixedWidth(80)
+        self.simulationTimeInput.move(285, 610)
 
         self.sumoGui = QCheckBox("show SUMO GUI", self)
         self.sumoGui.setChecked(True)
-        self.sumoGui.move(148, 610)
-
-        self.cleanEdgeLabel = QLabel("ID of an arbitrary (ideally central) Edge", self)
-        self.cleanEdgeLabel.move(25, 650)
-
-        self.cleanEdgeInput = QLineEdit("45085545", self)
-        self.cleanEdgeInput.setFixedWidth(100)
-        self.cleanEdgeInput.move(270, 645)
+        self.sumoGui.move(148, 645)
 
         self.startSimulationButton = QPushButton("start Simulation", self)
         self.startSimulationButton.resize(200, 30)
-        self.startSimulationButton.move(160, 690)
+        self.startSimulationButton.move(140, 680)
         self.startSimulationButton.clicked.connect(self.startSimulation)
 
     def chooseConfigFile(self):
@@ -213,8 +206,6 @@ class SimulationInputWindow(QWidget):
                 + self.sumoConfigFile
                 + " -t "
                 + self.simulationTimeInput.text()
-                + " -e "
-                + self.cleanEdgeInput.text()
                 + showSumoGui
                 + additionalParams
             )
