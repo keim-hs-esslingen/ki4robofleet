@@ -38,15 +38,17 @@ export SUMO_HOME="/usr/share/sumo"
 
 ```
 
+### Clone the ki4robofleet Repo:
+
+```bash
+git clone https://github.com/keim-hs-esslingen/ki4robofleet
+cd ki4robofleet
+```
 
 ### Some Python Packages need to be installed:
 
 ```bash
-pip3 install osmapi
-pip3 install PyQt5
-pip3 install PyQtChart
-pip3 install pandas
-pip3 install termcolor
+pip3 install -r requirements.txt
 sudo apt-get install python3-lxml
 ```
 
