@@ -3,3 +3,7 @@ PyQt5
 PyQtChart
 pandas
 termcolor
+lxml
+Pillow
+sumolib
+traci
