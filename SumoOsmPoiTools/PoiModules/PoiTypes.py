@@ -23,6 +23,8 @@ class PoiTypeList:
     poiGroup = {}
 
     def __init__(self, osmPolyFile = "osm.poly.xml" ):
+        self.pois.clear() 
+        self.poiGroup.clear()
         self.osmPolyFile = osmPolyFile
         try:
             polyTree = ET.parse(osmPolyFile)

@@ -212,6 +212,10 @@ class PoiToolMainWindow(QWidget):
             widgetRow.check.setChecked(False)
 
     def createSettings(self):
+        #remove existing Elements (if this method is called more than once)
+        self.listWidget.clear()
+        
+        # open file dialog
         osmPolyFile, _ = QFileDialog.getOpenFileName(
             None, "select OSM Poly File", "..", "(*.xml)"
         )
