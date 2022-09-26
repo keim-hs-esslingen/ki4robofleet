@@ -29,7 +29,7 @@ import traci
 
 
 class ParkingAreaConverter:
-    def convertParkingAreas(self, workingDir, defaultCapacity=1, parkingLotLength=5.0):
+    def convertParkingAreas(self, osmPolyFile, defaultCapacity=1, parkingLotLength=5.0):
         # if the capacity of a parking Area can't be retrieved from the osmapi
         # we define here a defaultCapacity which will be assigned in this case
         self.defaultCapacity = defaultCapacity
@@ -49,7 +49,7 @@ class ParkingAreaConverter:
                     "tripinfo.xml",
                 ]
             )
-            polyTree = ET.parse("osm.poly.xml")
+            polyTree = ET.parse(osmPolyFile)
             polyRoot = polyTree.getroot()
 
             xml_output = ET.Element("additional")
@@ -176,7 +176,7 @@ class ParkingAreaConverter:
 
             # formatting and writing the xml file
             tree.write(
-                workingDir+"/parkingAreas.xml",
+                os.path.dirname(osmPolyFile)+"/parkingAreas.xml",
                 encoding="UTF-8",
                 xml_declaration=True,
                 pretty_print=True,

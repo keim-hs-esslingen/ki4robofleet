@@ -407,7 +407,7 @@ class PoiToolMainWindow(QWidget):
         self.poi2EdgeConverter.convertPois2Edges([], self.workingDirectory)
 
     def convertParkingAreas(self):
-        self.parkingAreaConverter.convertParkingAreas(self.workingDirectory)
+        self.parkingAreaConverter.convertParkingAreas(self.osmPolyFile)
 
     def showManual(self):
         cwd = os.getcwd()
