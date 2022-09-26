@@ -235,50 +235,49 @@ class PoiToolMainWindow(QWidget):
             self.row = WidgetRow(poiSetting)
             self.item.setSizeHint(self.row.minimumSizeHint())
             self.listWidget.setItemWidget(self.item, self.row)
+        self.loadSettings(osmPolyFile)
 
-    def loadSettings(self):
-        poiViewSettingsFile, _ = QFileDialog.getOpenFileName(
-            None, "select POI View Settings File", ".", "(*.xml)"
-        )
-        if len(poiViewSettingsFile) > 0:
-            print("loading POI View Settings from ", poiViewSettingsFile)
+
+    def loadSettings(self, poiViewSettingsFile = ''):
+        if isinstance(poiViewSettingsFile, bool):
+            poiViewSettingsFile, _ = QFileDialog.getOpenFileName(
+                None, "select POI View Settings File", self.workingDirectory, "(*.xml)"
+            )
+        try:
+            print("Loading POI View Settings from ", poiViewSettingsFile)
             settingsTree = ET.parse(poiViewSettingsFile)
             settingsRoot = settingsTree.getroot()
 
             # read poly- Settings
             for setting in settingsRoot.findall("poly"):
-                poiSetting = PoiSetting(
-                    "POLY",
-                    "POLY: " + setting.attrib.get("type"),
-                    setting.attrib.get("color"),
-                    setting.attrib.get("fill"),
-                    setting.attrib.get("layer"),
-                )
-                self.item = QListWidgetItem(self.listWidget)
-                self.listWidget.addItem(self.item)
-                self.row = WidgetRow(poiSetting)
-                self.item.setSizeHint(self.row.minimumSizeHint())
-                self.listWidget.setItemWidget(self.item, self.row)
+                for index in range(self.listWidget.count()):
+                    item = self.listWidget.item(index)
+                    widgetRow = self.listWidget.itemWidget(item)
+                    if "POLY" in widgetRow.poiName.text() and setting.attrib.get("type") in widgetRow.poiName.text():
+                        widgetRow.r.setText(setting.attrib.get("color").split(",")[0])
+                        widgetRow.g.setText(setting.attrib.get("color").split(",")[1])
+                        widgetRow.b.setText(setting.attrib.get("color").split(",")[2])
 
             # read poi- Settings
             for setting in settingsRoot.findall("poi"):
-                poiSetting = PoiSetting(
-                    "POI",
-                    "POI: " + setting.attrib.get("type"),
-                    setting.attrib.get("color"),
-                    "",
-                    setting.attrib.get("layer"),
-                )
-                self.item = QListWidgetItem(self.listWidget)
-                self.listWidget.addItem(self.item)
-                self.row = WidgetRow(poiSetting)
-                self.item.setSizeHint(self.row.minimumSizeHint())
-                self.listWidget.setItemWidget(self.item, self.row)
+                for index in range(self.listWidget.count()):
+                    item = self.listWidget.item(index)
+                    widgetRow = self.listWidget.itemWidget(item)
+                    if "POI" in widgetRow.poiName.text() and setting.attrib.get("type") in widgetRow.poiName.text():
+                        widgetRow.r.setText(setting.attrib.get("color").split(",")[0])
+                        widgetRow.g.setText(setting.attrib.get("color").split(",")[1])
+                        widgetRow.b.setText(setting.attrib.get("color").split(",")[2])
+            self.colorRefresh()
+        except:
+            print(
+                "Error: The View Settings couldn't be read, please check if the selected POI_View_Settings.xml File is valid"
+            )
 
-    def writeSettings(self, workingDirectory = ""):
+
+    def writeSettings(self):
         poiViewSettingsFile = ""
-        if len(workingDirectory) > 0:
-            poiViewSettingsFile = workingDirectory + "/POI_View_Settings.xml"
+        if len(self.workingDirectory) > 0:
+            poiViewSettingsFile = self.workingDirectory + "/POI_View_Settings.xml"
             self.viewSettingFile = poiViewSettingsFile    
         else:
             poiViewSettingsFile, _ = QtWidgets.QFileDialog.getSaveFileName(self, "Save POI View Settings", ".", "*.xml")
@@ -398,13 +397,13 @@ class PoiToolMainWindow(QWidget):
         print("READY!!!")
 
     def applyViewSettings(self):
-        self.writeSettings(self.workingDirectory)
+        self.writeSettings()
         self.poiTypeList.applyViewSettings(
             self.keepOriginalPolys.isChecked(), self.keepOriginalPOIs.isChecked(), self.osmPolyFile, self.viewSettingFile
         )
 
     def convertPOIs2Edges(self):
-        self.writeSettings(self.workingDirectory)
+        self.writeSettings()
         self.poi2EdgeConverter.convertPois2Edges([], self.workingDirectory)
 
     def convertParkingAreas(self):
