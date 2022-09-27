@@ -44,7 +44,7 @@ class ParkingAreaConverter:
                 [
                     checkBinary("sumo"),
                     "-c",
-                    "osm.sumocfg",
+                    os.path.dirname(osmPolyFile)+"/osm.sumocfg",
                     "--tripinfo-output",
                     "tripinfo.xml",
                 ]
