@@ -36,37 +36,39 @@ class ParkingAreaConverter:
 
         # here we define how long a parking lot will be drawn in the map
         self.parkingLotLength = parkingLotLength
-        try:
-            api = osm.OsmApi()
 
-            # SUMO has to be started otherwise we cant use the method "traci.simulation.convertRoad()"
-            traci.start(
-                [
-                    checkBinary("sumo"),
-                    "-c",
-                    os.path.dirname(osmPolyFile)+"/osm.sumocfg",
-                    "--tripinfo-output",
-                    "tripinfo.xml",
-                ]
-            )
-            polyTree = ET.parse(osmPolyFile)
-            polyRoot = polyTree.getroot()
+        api = osm.OsmApi()
 
-            xml_output = ET.Element("additional")
+        # SUMO has to be started otherwise we cant use the method "traci.simulation.convertRoad()"
+        traci.start(
+            [
+                checkBinary("sumo"),
+                "-c",
+                os.path.dirname(osmPolyFile)+"/osm.sumocfg",
+                "--tripinfo-output",
+                "tripinfo.xml",
+            ]
+        )
+        polyTree = ET.parse(osmPolyFile)
+        polyRoot = polyTree.getroot()
 
-            parkingAreaDict = {}
+        xml_output = ET.Element("additional")
 
-            # since the "parking" entities are not located in the <poi> tags b
-            # but in the <poly> tags we iterate over all these tags
-            for poly in polyRoot.findall("poly"):
-                polyType = poly.attrib.get("type")
-                # filter all "parking" entities
-                if ("parking" in polyType) and ("bicycle_parking" not in polyType):
-                    id = poly.attrib.get("id")
+        parkingAreaDict = {}
+
+        # since the "parking" entities are not located in the <poi> tags b
+        # but in the <poly> tags we iterate over all these tags
+        for poly in polyRoot.findall("poly"):
+            polyType = poly.attrib.get("type")
+            # filter all "parking" entities
+            if ("parking" in polyType) and ("bicycle_parking" not in polyType):
+                id = poly.attrib.get("id")
+
+                print("parking entity with ID ", id, " is being converted...")
+                try:
                     # exctract additional information for the current "parking" entity via the OsmApi
                     way = api.WayGet(id)
-
-                    print("parking entity with ID ", id, " is being converted...")
+                    
                     # now we can extract the corner- points (nodes) for the current "parking" entity
                     nodes = way["nd"]
 
@@ -126,68 +128,68 @@ class ParkingAreaConverter:
                     }
 
                     parkingAreaDict[id] = parkingArea
+                except:
+                    print("The parking Area with Id ",id," was skipped due to OSM API Problems")
 
-            # now we iterate over parkingAreaDict and we remove multiple occurance of parking Areas in one lane
-            laneCheckDict = {}
-            uniqueLaneParkingAreaDict = {}
 
-            for parkingAreaId in parkingAreaDict.keys():
-                currentLane = parkingAreaDict[parkingAreaId]["lane"]
-                if currentLane in laneCheckDict:
-                    # neglect the current parkingArea and add the capacity to the existing one
-                    uniqueLaneParkingAreaDict[laneCheckDict[currentLane]][
-                        "capacity"
-                    ] = str(
-                        int(parkingAreaDict[laneCheckDict[currentLane]]["capacity"])
-                        + int(parkingAreaDict[parkingAreaId]["capacity"])
-                    )
-                else:
-                    uniqueLaneParkingAreaDict[parkingAreaId] = parkingAreaDict[
-                        parkingAreaId
-                    ]
-                    laneCheckDict[currentLane] = parkingAreaId
+        # now we iterate over parkingAreaDict and we remove multiple occurance of parking Areas in one lane
+        laneCheckDict = {}
+        uniqueLaneParkingAreaDict = {}
 
-            # now we write the xml Entries from the clean uniqueLaneParkingAreaDict
-            for parkingAreaId in uniqueLaneParkingAreaDict.keys():
-                uniqueLaneParkingArea = uniqueLaneParkingAreaDict[parkingAreaId]
-                capacity = uniqueLaneParkingArea["capacity"]
-                startPos = uniqueLaneParkingArea["startPos"]
-
-                # this step helps to avoid too narrow parking Lots
-                if int(capacity) > 5:
-                    startPos = "0"
-
-                # since it is very hard to determine the lane length we just calculate the endPos of the ParkingArea
-                # if the calculated value is higher than the whole lane length it causes no problems and is cut by SUMO
-                # to the lane length
-                endPos = float(startPos) + int(capacity) * self.parkingLotLength
-                ET.SubElement(
-                    xml_output,
-                    "parkingArea",
-                    id=parkingAreaId,
-                    lane=uniqueLaneParkingArea["lane"],
-                    friendlyPos="true",
-                    roadsideCapacity=str(capacity),
-                    startPos=startPos,
-                    endPos=str(endPos),
+        for parkingAreaId in parkingAreaDict.keys():
+            currentLane = parkingAreaDict[parkingAreaId]["lane"]
+            if currentLane in laneCheckDict:
+                # neglect the current parkingArea and add the capacity to the existing one
+                uniqueLaneParkingAreaDict[laneCheckDict[currentLane]][
+                    "capacity"
+                ] = str(
+                    int(parkingAreaDict[laneCheckDict[currentLane]]["capacity"])
+                    + int(parkingAreaDict[parkingAreaId]["capacity"])
                 )
+            else:
+                uniqueLaneParkingAreaDict[parkingAreaId] = parkingAreaDict[
+                    parkingAreaId
+                ]
+                laneCheckDict[currentLane] = parkingAreaId
 
-            tree = ET.ElementTree(xml_output)
+        # now we write the xml Entries from the clean uniqueLaneParkingAreaDict
+        for parkingAreaId in uniqueLaneParkingAreaDict.keys():
+            uniqueLaneParkingArea = uniqueLaneParkingAreaDict[parkingAreaId]
+            capacity = uniqueLaneParkingArea["capacity"]
+            startPos = uniqueLaneParkingArea["startPos"]
 
-            # formatting and writing the xml file
-            tree.write(
-                os.path.dirname(osmPolyFile)+"/parkingAreas.xml",
-                encoding="UTF-8",
-                xml_declaration=True,
-                pretty_print=True,
-            )
-            traci.close()
-            sys.stdout.flush()
-            print(
-                "READY: 'parkingAreas.xml' was created, please include this file in osm.sumocfg as additional file"
+            # this step helps to avoid too narrow parking Lots
+            if int(capacity) > 5:
+                startPos = "0"
+
+            # since it is very hard to determine the lane length we just calculate the endPos of the ParkingArea
+            # if the calculated value is higher than the whole lane length it causes no problems and is cut by SUMO
+            # to the lane length
+            endPos = float(startPos) + int(capacity) * self.parkingLotLength
+            ET.SubElement(
+                xml_output,
+                "parkingArea",
+                id=parkingAreaId,
+                lane=uniqueLaneParkingArea["lane"],
+                friendlyPos="true",
+                roadsideCapacity=str(capacity),
+                startPos=startPos,
+                endPos=str(endPos),
             )
 
-        except:
-            print(
-                "An Error has occurred: please check if the input file is a valid xml file"
-            )
+        tree = ET.ElementTree(xml_output)
+
+        # formatting and writing the xml file
+        tree.write(
+            os.path.dirname(osmPolyFile)+"/parkingAreas.xml",
+            encoding="UTF-8",
+            xml_declaration=True,
+            pretty_print=True,
+        )
+        traci.close()
+        sys.stdout.flush()
+        print(
+            "READY: 'parkingAreas.xml' was created, please include this file in osm.sumocfg as additional file"
+        )
+
+
