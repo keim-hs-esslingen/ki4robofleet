@@ -52,10 +52,10 @@ class WidgetRow(QWidget):
         self.row = customRow
 
         self.poiName = QLabel(poiSetting.name.ljust(30))
-        self.poiName.setFixedWidth(180)
+        self.poiName.setFixedWidth(210)
 
         self.row.addWidget(self.poiName)
-        self.check = QCheckBox(" isVisible")
+        self.check = QCheckBox(" use")
         self.check.setChecked(True)
 
         self.row.addWidget(self.check)
@@ -64,15 +64,15 @@ class WidgetRow(QWidget):
         inputValidator.setRange(0, 255)
 
         self.r = QLineEdit(poiSetting.rgb.split(",")[0])
-        self.r.setFixedWidth(30)
+        self.r.setFixedWidth(45)
         self.r.setValidator(inputValidator)
         self.row.addWidget(self.r)
         self.g = QLineEdit(poiSetting.rgb.split(",")[1])
-        self.g.setFixedWidth(30)
+        self.g.setFixedWidth(45)
         self.g.setValidator(inputValidator)
         self.row.addWidget(self.g)
         self.b = QLineEdit(poiSetting.rgb.split(",")[2])
-        self.b.setFixedWidth(30)
+        self.b.setFixedWidth(45)
         self.b.setValidator(inputValidator)
         self.row.addWidget(self.b)
 
@@ -88,7 +88,7 @@ class WidgetRow(QWidget):
         self.row.addWidget(self.fill)
 
         self.layer = QLineEdit(poiSetting.layer)
-        self.layer.setFixedWidth(35)
+        self.layer.setFixedWidth(50)
         self.row.addWidget(self.layer)
 
 
@@ -102,9 +102,9 @@ class PoiToolMainWindow(QWidget):
         self.poi2EdgeConverter = Poi2EdgeConverter()
         self.parkingAreaConverter = ParkingAreaConverter()
         self.setWindowTitle(
-            "Anwendungszentrum KEIM Hochschule Esslingen - SUMO OSM POI-Tools v0.3"
+            "Anwendungszentrum KEIM Hochschule Esslingen - SUMO OSM POI-Tools v0.4"
         )
-        self.setGeometry(100, 100, 600, 870)
+        self.setGeometry(100, 100, 700, 870)
         self.uiInit()
         self.viewSettingFile = ""
         self.osmPolyFile = ""
@@ -113,81 +113,81 @@ class PoiToolMainWindow(QWidget):
 
     def uiInit(self):
         self.listWidget = QListWidget(self)
-        self.listWidget.setGeometry(60, 60, 500, 600)
+        self.listWidget.setGeometry(60, 60, 580, 600)
         self.listWidget.setStyleSheet("background-color:rgb(64,64,64);")
 
         scroll_bar = QScrollBar(self)
         self.listWidget.setVerticalScrollBar(scroll_bar)
 
         self.buttonCreate = QPushButton("Create Settings from osm.poly", self)
-        self.buttonCreate.resize(220, 40)
+        self.buttonCreate.resize(300, 40)
         self.buttonCreate.move(60, 10)
         self.buttonCreate.clicked.connect(self.createSettings)
 
         self.buttonLoad = QPushButton("Load Settings", self)
         self.buttonLoad.resize(120, 40)
-        self.buttonLoad.move(300, 10)
+        self.buttonLoad.move(380, 10)
         self.buttonLoad.clicked.connect(self.loadSettings)
 
         self.buttonWrite = QPushButton("Save Settings", self)
         self.buttonWrite.resize(120, 40)
-        self.buttonWrite.move(440, 10)
+        self.buttonWrite.move(520, 10)
         self.buttonWrite.clicked.connect(self.writeSettings)
 
         self.buttonColorRefresh = QPushButton("ColorRefresh", self)
-        self.buttonColorRefresh.resize(160, 40)
+        self.buttonColorRefresh.resize(180, 40)
         self.buttonColorRefresh.move(60, 670)
         self.buttonColorRefresh.clicked.connect(self.colorRefresh)
 
         self.buttonUnCheckAll = QPushButton("unCheck all", self)
-        self.buttonUnCheckAll.resize(160, 40)
-        self.buttonUnCheckAll.move(230, 670)
+        self.buttonUnCheckAll.resize(180, 40)
+        self.buttonUnCheckAll.move(260, 670)
         self.buttonUnCheckAll.clicked.connect(self.unCheckAll)
 
         self.buttonCheckAll = QPushButton("check all", self)
-        self.buttonCheckAll.resize(160, 40)
-        self.buttonCheckAll.move(400, 670)
+        self.buttonCheckAll.resize(180, 40)
+        self.buttonCheckAll.move(460, 670)
         self.buttonCheckAll.clicked.connect(self.checkAll)
 
         self.buttonLegend = QPushButton("Create Map Legend", self)
-        self.buttonLegend.resize(160, 40)
+        self.buttonLegend.resize(180, 40)
         self.buttonLegend.move(60, 720)
         self.buttonLegend.clicked.connect(self.createMapLegend)
 
         self.buttonEdgePos = QPushButton("Create Edge Positions", self)
-        self.buttonEdgePos.resize(160, 40)
-        self.buttonEdgePos.move(230, 720)
+        self.buttonEdgePos.resize(180, 40)
+        self.buttonEdgePos.move(260, 720)
         self.buttonEdgePos.clicked.connect(self.convertPOIs2Edges)
 
         self.buttonParkingAreas = QPushButton("Convert Parking Areas", self)
-        self.buttonParkingAreas.resize(160, 40)
-        self.buttonParkingAreas.move(400, 720)
+        self.buttonParkingAreas.resize(180, 40)
+        self.buttonParkingAreas.move(460, 720)
         self.buttonParkingAreas.clicked.connect(self.convertParkingAreas)
 
         self.buttonStatistics = QPushButton("Create POI Statistics", self)
-        self.buttonStatistics.resize(160, 40)
+        self.buttonStatistics.resize(180, 40)
         self.buttonStatistics.move(60, 770)
         self.buttonStatistics.clicked.connect(self.writeStatistics)
 
         self.buttonApply = QPushButton("Apply View Settings", self)
-        self.buttonApply.resize(160, 40)
-        self.buttonApply.move(230, 770)
+        self.buttonApply.resize(180, 40)
+        self.buttonApply.move(260, 770)
         self.buttonApply.clicked.connect(self.applyViewSettings)
 
         self.buttonApply = QPushButton("Help / Manual", self)
-        self.buttonApply.resize(160, 30)
-        self.buttonApply.move(230, 820)
+        self.buttonApply.resize(180, 30)
+        self.buttonApply.move(260, 820)
         self.buttonApply.clicked.connect(self.showManual)
 
         self.keepOriginalPolys = QCheckBox(" keep original Polys", self)
         self.keepOriginalPolys.setChecked(True)
         self.keepOriginalPolys.resize(160, 40)
-        self.keepOriginalPolys.move(400, 760)
+        self.keepOriginalPolys.move(460, 760)
 
         self.keepOriginalPOIs = QCheckBox(" keep original POIs", self)
         self.keepOriginalPOIs.setChecked(True)
         self.keepOriginalPOIs.resize(160, 40)
-        self.keepOriginalPOIs.move(400, 780)
+        self.keepOriginalPOIs.move(460, 780)
 
     def colorRefresh(self):
         for index in range(self.listWidget.count()):
