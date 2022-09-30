@@ -262,7 +262,6 @@ class PoiToolMainWindow(QWidget):
                         widgetRow.r.setText(setting.attrib.get("color").split(",")[0])
                         widgetRow.g.setText(setting.attrib.get("color").split(",")[1])
                         widgetRow.b.setText(setting.attrib.get("color").split(",")[2])
-            self.colorRefresh()
         except:
             print(
                 "Error: The View Settings couldn't be read, please check if the selected POI_View_Settings.xml File is valid"
