@@ -81,8 +81,6 @@ class Poi2EdgeConverter:
             polyTree = ET.parse(workingDir+"/osm.poly.xml")
             polyRoot = polyTree.getroot()
 
-            edgePositions = ET.Element("edgelist")
-
             poisEdges = ET.Element("poi_collection")
 
             # all <poly> - Tags (which stands for "polygon") have an attribute "shape" that defines the border of the structure
@@ -174,8 +172,7 @@ class Poi2EdgeConverter:
                             print("toRoutes found with ",len(toRoute.edges), " edges")
                             print("fromRoutes found with ",len(fromRoute.edges)," edges")    
                             if toRoute and len(toRoute.edges) > 0 and fromRoute and len(fromRoute.edges) >0:
-                                ET.SubElement(edgePositions, 'poly', id=id, type = polyType, lane=laneToAssign, lane_position = str(middlePos), details = str(way['tag']))
-                                ET.SubElement(poisEdges, 'poi', id=id, type = polyType, edge_id= poi_Edge, lane_position = str(middlePos), lane_index = l_index)
+                                ET.SubElement(poisEdges, 'poly', id=id, type = polyType, edge_id= poi_Edge, lane=laneToAssign, lane_position = str(middlePos), lane_index = l_index, details = str(way['tag']))
                                 ConvertSuccess += 1
                         except:
                             print("Skipped POLY ",polyType," with Id ", id," because there is no valid route for vehicle type 'taxi' to / from this POLY")
@@ -222,8 +219,7 @@ class Poi2EdgeConverter:
                             print("fromRoute found with ",len(fromRoute.edges)," edges")    
 
                             if toRoute and len(toRoute.edges) > 0 and fromRoute and len(fromRoute.edges) >0:
-                                ET.SubElement(edgePositions, 'poi', id=id, type = poiType, lane=laneID, lane_position = str(format(lanePosition, '.2f')), details = nodeDetails)
-                                ET.SubElement(poisEdges, 'poi', id=id, type = poiType, edge_id= str(edgeID), lane_position = str(lanePosition), lane_index = str(laneIndex))
+                                ET.SubElement(poisEdges, 'poi', id=id, type = poiType, edge_id= str(edgeID), lane=laneID, lane_position = str(lanePosition), lane_index = str(laneIndex), details = str(way['tag']))
                                 ConvertSuccess += 1
                         except:
                             print("Skipped POI ",poiType," with Id ", id," because there is no valid route for vehicle type 'taxi' to / from this POI")
@@ -236,33 +232,45 @@ class Poi2EdgeConverter:
                             "because no valid edge could be found",
                         )
 
-            edgePositionsTree = ET.ElementTree(edgePositions)
-            poisEdgesTree = ET.ElementTree(poisEdges)
-            # formatting and writing the xml file
-            edgePositionsTree.write(
-                workingDir+"/EdgePositions.xml",
-                encoding="UTF-8",
-                xml_declaration=True,
-                pretty_print=True,
-            )
-
-            poisEdgesTree.write(
-                workingDir+"/POIsEdges.xml",
-                encoding="UTF-8",
-                xml_declaration=True,
-                pretty_print=True,
-            )
+            # closing TraCI:
             try:
                 traci.close()
                 sys.stdout.flush()
             except:
-                print("closing traci caused Problems")
+                print("closing TraCI caused Problems")
 
-            print("READY! ",ConvertSuccess, "of the selected ",ConvertFail, "POIs / POLYs were successfully converted")
+
             print("----------------------------------------------------------------------------------------------------------------")
-            print("Hint: To increase the number of successfully converted POIs / POLYs make sure that these POIs / POLYs are accessible by vehicle type 'taxi'.")
-            print("      This can be achieved by changing the 'allow' attribute in the corresponding <lane> Tags. ")
+            if ConvertSuccess > 0:
+                poisEdgesTree = ET.ElementTree(poisEdges)
+                # formatting and writing the xml file
 
+                poisEdgesTree.write(
+                    workingDir+"/POIsEdges.xml",
+                    encoding="UTF-8",
+                    xml_declaration=True,
+                    pretty_print=True,
+                )
+                print("READY! ",ConvertSuccess, "of the selected ",ConvertSuccess + ConvertFail, "POIs / POLYs were successfully converted")
+                print("----------------------------------------------------------------------------------------------------------------")
+                print("Hint: To increase the number of successfully converted POIs / POLYs make sure that these POIs / POLYs are accessible by vehicle type 'taxi'.")
+                print("      This can be achieved by changing the 'allow' attribute in the corresponding <lane> Tags.")
+
+            else:
+                print("Error: none of the selected POIs / POLYs are accessible by vehicle type 'taxi' therefore the POIsEdges.xml File could not be written.")
+                print("----------------------------------------------------------------------------------------------------------------")
+                print("Hints 1:")
+                print("Please make sure that the vehicle Type 'taxi' is specified in the File vehicleTypes.xml")
+                print("<vType id=\"taxi\" vClass=\"taxi\">")
+                print("     <param key=\"has.taxi.device\" value=\"true\"/>")
+                print("</vType> ")
+                print("If you don't have the vehicleTypes.xml File in your Model File, you can copy it from ki4robofleet/SimpleTestScenario")
+                print("----------------------------------------------------------------------------------------------------------------")
+
+                print("Hints 2:")
+                print("Make sure that your selected POIs / POLYs are accessible by vehicle type 'taxi'.")
+                print("This can be achieved by changing the 'allow' attribute in the corresponding <lane> Tags.")
+            print("----------------------------------------------------------------------------------------------------------------")
 
         except:
             print(
@@ -312,7 +320,7 @@ class Poi2EdgeConverter:
     def readEdgeList(self,workingDir):
         poiList = []
         try:
-            edgeTree = ET.parse(workingDir+"/EdgePositions.xml")
+            edgeTree = ET.parse(workingDir+"/POIsEdges.xml")
             edgeRoot = edgeTree.getroot()
 
             for poi in edgeRoot.findall("poi"):

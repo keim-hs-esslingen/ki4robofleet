@@ -243,15 +243,22 @@ class ScenarioBuilderWindow(QWidget):
 
     def __init__(self):
         super().__init__()
-        osmPolyFile, _ = QFileDialog.getOpenFileName(
-            None, "select OSM Poly File in your SUMO Model Directory", "..", "(*.xml)"
+        poisEdgesFile, _ = QFileDialog.getOpenFileName(
+            None, "select the previous created POIsEdges.xml File in your SUMO Model Directory", "..", "(*.xml)"
         )
-        self.workingDirectory = os.path.dirname(osmPolyFile)    
+        if "POIsEdges" not in poisEdgesFile:
+            print("----------------------------------------------------------------------------------------------------------------")
+            print("Please start the ScenarioBuilder again and select the previous create POIsEdges.xml File in your Model Directory")
+            print("If you did't create the POIsEdges.xml File yet, please do so by using the OSM POI Tools")
+            print("----------------------------------------------------------------------------------------------------------------")
+            self.quit
+
+        self.workingDirectory = os.path.dirname(poisEdgesFile)    
         self.requestListGenerator = RequestListGenerator()
-        self.poiGroup = PoiTypeList(osmPolyFile).getGroups()
+        self.poiGroup = PoiTypeList(poisEdgesFile).getGroups()
 
         self.setWindowTitle(
-            "Anwendungszentrum KEIM Hochschule Esslingen - KI4ROBOFLEET Scenario Builder v1.2"
+            "Anwendungszentrum KEIM Hochschule Esslingen - KI4ROBOFLEET Scenario Builder v1.3"
         )
         self.setGeometry(100, 100, 1970, 850)
         self.uiInit()

@@ -102,7 +102,7 @@ class PoiToolMainWindow(QWidget):
         self.poi2EdgeConverter = Poi2EdgeConverter()
         self.parkingAreaConverter = ParkingAreaConverter()
         self.setWindowTitle(
-            "Anwendungszentrum KEIM Hochschule Esslingen - SUMO OSM POI-Tools v0.4"
+            "Anwendungszentrum KEIM Hochschule Esslingen - SUMO OSM POI-Tools v0.5"
         )
         self.setGeometry(100, 100, 700, 870)
         self.uiInit()
@@ -154,7 +154,7 @@ class PoiToolMainWindow(QWidget):
         self.buttonLegend.move(60, 720)
         self.buttonLegend.clicked.connect(self.createMapLegend)
 
-        self.buttonEdgePos = QPushButton("Create Edge Positions", self)
+        self.buttonEdgePos = QPushButton("Create POIsEdges.xml", self)
         self.buttonEdgePos.resize(180, 40)
         self.buttonEdgePos.move(260, 720)
         self.buttonEdgePos.clicked.connect(self.convertPOIs2Edges)
