@@ -98,7 +98,10 @@ class Poi2EdgeConverter:
                 for setting in settingsRoot.findall("poi"):
                     filter.append(setting.attrib.get("type"))
 
-            print("Converting the following POIs to Edge Positions: ", filter)
+            ConvertSuccess = 0
+            ConvertFail = 0
+
+            print("Converting the POIs and POLYs to Edge Positions: ", filter)
             # reading poly - Tags from osm.poly.xml
             for poly in polyRoot.findall("poly"):
                 polyType = poly.attrib.get("type")
@@ -158,10 +161,7 @@ class Poi2EdgeConverter:
 
                         middlePos = format((startPos + endPos) / 2, ".2f")
                         print(way["tag"])
-
-                        ET.SubElement(edgePositions, 'poly', id=id, type = polyType, lane=laneToAssign, lane_position = str(middlePos), details = str(way['tag']))
-                        ET.SubElement(poisEdges, 'poi', id=id, type = polyType, edge_id= poi_Edge, lane_position = str(middlePos), lane_index = l_index)
-                        
+     
                         # now we use the reference Edge which was read before from referenceEdge.xml to check if our current POI has a valid route to the reference Edge (which should be in the center of the map)
                         poi_Edge = laneToAssign[:laneToAssign.index('_')]
                         l_index = laneToAssign[laneToAssign.index('_'):]
@@ -176,8 +176,10 @@ class Poi2EdgeConverter:
                             if toRoute and len(toRoute.edges) > 0 and fromRoute and len(fromRoute.edges) >0:
                                 ET.SubElement(edgePositions, 'poly', id=id, type = polyType, lane=laneToAssign, lane_position = str(middlePos), details = str(way['tag']))
                                 ET.SubElement(poisEdges, 'poi', id=id, type = polyType, edge_id= poi_Edge, lane_position = str(middlePos), lane_index = l_index)
+                                ConvertSuccess += 1
                         except:
-                            print("Skipped Type ",polyType, "because no valid route could be found")
+                            print("Skipped POLY ",polyType," with Id ", id," because there is no valid route for vehicle type 'taxi' to / from this POLY")
+                            ConvertFail += 1
                     except:
                         print(
                             "Skipped Type ",
@@ -210,11 +212,9 @@ class Poi2EdgeConverter:
 
                         if "tag" in nodeInfo:
                             nodeDetails = str(nodeInfo["tag"])
-                        print(id, poiType, laneID, str(lanePosition))
-                        ET.SubElement(edgePositions, 'poi', id=id, type = poiType, lane=laneID, lane_position = str(format(lanePosition, '.2f')), details = nodeDetails)
-                        ET.SubElement(poisEdges, 'poi', id=id, type = poiType, edge_id= str(edgeID), lane_position = str(lanePosition), lane_index = str(laneIndex))
-                        # now we use the reference Edge which was read before from referenceEdge.xml to check if our current POI has a valid route to the reference Edge (which should be in the center of the map)
+                            print(id, poiType, laneID, str(lanePosition))
 
+                        # now we use the reference Edge which was read before from referenceEdge.xml to check if our current POI has a valid route to the reference Edge (which should be in the center of the map)
                         try:
                             toRoute = traci.simulation.findRoute(edgeID, reference_edge, "taxi")
                             fromRoute = traci.simulation.findRoute(reference_edge, edgeID, "taxi")
@@ -224,8 +224,10 @@ class Poi2EdgeConverter:
                             if toRoute and len(toRoute.edges) > 0 and fromRoute and len(fromRoute.edges) >0:
                                 ET.SubElement(edgePositions, 'poi', id=id, type = poiType, lane=laneID, lane_position = str(format(lanePosition, '.2f')), details = nodeDetails)
                                 ET.SubElement(poisEdges, 'poi', id=id, type = poiType, edge_id= str(edgeID), lane_position = str(lanePosition), lane_index = str(laneIndex))
+                                ConvertSuccess += 1
                         except:
-                            print("Skipped Type ",poiType, "because no valid route could be found")
+                            print("Skipped POI ",poiType," with Id ", id," because there is no valid route for vehicle type 'taxi' to / from this POI")
+                            ConvertFail += 1
 
                     except:
                         print(
@@ -256,7 +258,11 @@ class Poi2EdgeConverter:
             except:
                 print("closing traci caused Problems")
 
-            print("READY!")
+            print("READY! ",ConvertSuccess, "of the selected ",ConvertFail, "POIs / POLYs were successfully converted")
+            print("----------------------------------------------------------------------------------------------------------------")
+            print("Hint: To increase the number of successfully converted POIs / POLYs make sure that these POIs / POLYs are accessible by vehicle type 'taxi'.")
+            print("      This can be achieved by changing the 'allow' attribute in the corresponding <lane> Tags. ")
+
 
         except:
             print(
