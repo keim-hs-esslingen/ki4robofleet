@@ -66,15 +66,19 @@ class WidgetRow(QWidget):
         self.r = QLineEdit(poiSetting.rgb.split(",")[0])
         self.r.setFixedWidth(45)
         self.r.setValidator(inputValidator)
+        self.r.textChanged.connect(self.colorRefresh)
         self.row.addWidget(self.r)
         self.g = QLineEdit(poiSetting.rgb.split(",")[1])
         self.g.setFixedWidth(45)
         self.g.setValidator(inputValidator)
+        self.g.textChanged.connect(self.colorRefresh)
         self.row.addWidget(self.g)
         self.b = QLineEdit(poiSetting.rgb.split(",")[2])
         self.b.setFixedWidth(45)
         self.b.setValidator(inputValidator)
+        self.b.textChanged.connect(self.colorRefresh)
         self.row.addWidget(self.b)
+
 
         self.styleString = "background-color : rgb(" + poiSetting.rgb + ");"
         self.colorButton = QPushButton(" ")
@@ -90,6 +94,12 @@ class WidgetRow(QWidget):
         self.layer = QLineEdit(poiSetting.layer)
         self.layer.setFixedWidth(50)
         self.row.addWidget(self.layer)
+
+    def colorRefresh(self):
+        rgb = (
+                self.r.text() + "," + self.g.text() + "," + self.b.text()
+            )
+        self.colorButton.setStyleSheet("background-color : rgb(" + rgb + ");")
 
 
 class PoiToolMainWindow(QWidget):
@@ -134,10 +144,10 @@ class PoiToolMainWindow(QWidget):
         self.buttonWrite.move(520, 10)
         self.buttonWrite.clicked.connect(self.writeSettings)
 
-        self.buttonColorRefresh = QPushButton("ColorRefresh", self)
-        self.buttonColorRefresh.resize(180, 40)
-        self.buttonColorRefresh.move(60, 670)
-        self.buttonColorRefresh.clicked.connect(self.colorRefresh)
+        self.buttonHelp = QPushButton("Help / Manual", self)
+        self.buttonHelp.resize(180, 40)
+        self.buttonHelp.move(60, 670)
+        self.buttonHelp.clicked.connect(self.showManual)
 
         self.buttonUnCheckAll = QPushButton("unCheck all", self)
         self.buttonUnCheckAll.resize(180, 40)
@@ -174,11 +184,6 @@ class PoiToolMainWindow(QWidget):
         self.buttonApply.move(260, 770)
         self.buttonApply.clicked.connect(self.applyViewSettings)
 
-        self.buttonApply = QPushButton("Help / Manual", self)
-        self.buttonApply.resize(180, 30)
-        self.buttonApply.move(260, 820)
-        self.buttonApply.clicked.connect(self.showManual)
-
         self.keepOriginalPolys = QCheckBox(" keep original Polys", self)
         self.keepOriginalPolys.setChecked(True)
         self.keepOriginalPolys.resize(160, 40)
@@ -188,16 +193,6 @@ class PoiToolMainWindow(QWidget):
         self.keepOriginalPOIs.setChecked(True)
         self.keepOriginalPOIs.resize(160, 40)
         self.keepOriginalPOIs.move(460, 780)
-
-    def colorRefresh(self):
-        for index in range(self.listWidget.count()):
-            item = self.listWidget.item(index)
-            widgetRow = self.listWidget.itemWidget(item)
-            rgb = (
-                widgetRow.r.text() + "," + widgetRow.g.text() + "," + widgetRow.b.text()
-            )
-            widgetRow.colorButton.setStyleSheet("background-color : rgb(" + rgb + ");")
-        print("All colors in the List were refreshed...")
 
     def checkAll(self):
         for index in range(self.listWidget.count()):
@@ -272,7 +267,6 @@ class PoiToolMainWindow(QWidget):
             print(
                 "Error: The View Settings couldn't be read, please check if the selected POI_View_Settings.xml File is valid"
             )
-
 
     def writeSettings(self):
         poiViewSettingsFile = ""
