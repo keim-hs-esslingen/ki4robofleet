@@ -156,6 +156,7 @@ class POI_Manager:
 
         len_of_poi = len(self.poi_arr)
         for i, from_poi in enumerate(self.poi_arr):
+            continue
             sum = 0
             if i % 10 == 0:
                 dlog(f"distance {i:4d}:{len_of_poi}")
@@ -189,7 +190,7 @@ class POI_Manager:
         obj.dist_array = dist_array
         obj.time_array = time_array
         obj.edges_array = edges_array
-        self.average_speed = distances / travel_times
+        self.average_speed = 0
         return obj
 
     def same_edges(self):
