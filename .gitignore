@@ -183,3 +183,7 @@ fabric.properties
 
 # idea folder, uncomment if you don't need it
 .idea
+
+# ki4robofleet files
+Results
+*.pickle
