@@ -42,7 +42,7 @@ mtime_string = dt_mtime.strftime("%Y-%m-%d %H:%M:%S")
 
 
 # Default input parameters can be defined here:
-data_set = "MannheimBig-Evening"
+data_set = "MannheimMorningScenario"
 requests_file = os.path.abspath(os.path.join(dir, data_set, "CustomerRequests.xml"))
 
 # If the Simulation is performed many times, using a pickle file speeds up the Simulation, because the initial Steps can be skipped:
@@ -138,9 +138,8 @@ if __name__ == "__main__":
         action="store",
         dest="realistic_times",
         help="travel_time = sumo_estimate * realistic_time",
-        default="1.5, 2.0",
+        default="2.0",
     )
-
     # List with Strategies
     parser.add_option(
         "-s",
@@ -148,7 +147,7 @@ if __name__ == "__main__":
         action="store",
         dest="strategy_list",
         help="strategy used",
-        default="look_ahead, simple, shared",
+        default="simple",
     )
     parser.add_option(
         "-t",
@@ -156,7 +155,7 @@ if __name__ == "__main__":
         action="store",
         dest="epoch_timeout",
         help="time out in secs; default 1 hour = 3600",
-        default="10000",
+        default="36000",
     )
 
     options, args = parser.parse_args()
