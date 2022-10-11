@@ -242,7 +242,10 @@ class SumoReader:
         valid_edges = []
 
         # fix for #9
-        for edge in filtered:
+        for i, edge in enumerate(filtered):
+            valid_edges.append(edge.eid)
+            roads.valid.append(edge.dd())
+            continue
             stage_to = traci.simulation.findRoute(start_edge, edge.eid)
             stage_from = traci.simulation.findRoute(edge.eid, start_edge)
             if (
