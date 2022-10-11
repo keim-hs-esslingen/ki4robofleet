@@ -42,14 +42,14 @@ mtime_string = dt_mtime.strftime("%Y-%m-%d %H:%M:%S")
 
 
 # Default input parameters can be defined here:
-data_set = "MannheimMorningScenario"
-requests_file = os.path.abspath(os.path.join(dir, data_set, "CustomerRequests.xml"))
+data_set = ""
+#requests_file = os.path.abspath(os.path.join(dir, data_set, "CustomerRequests.xml"))
 
 # If the Simulation is performed many times, using a pickle file speeds up the Simulation, because the initial Steps can be skipped:
-project_file = os.path.abspath(os.path.join(dir, data_set, "morning_web.pickle"))
+#project_file = os.path.abspath(os.path.join(dir, data_set, "morning_web.pickle"))
 
 # the sumo_config_file is an xml file containing all data which are read by SUMO
-sumo_config_file = os.path.abspath(os.path.join(dir, data_set, "osm.sumocfg"))
+#sumo_config_file = os.path.abspath(os.path.join(dir, data_set, "osm.sumocfg"))
 
 # All Simulation- Results will be collected into this directory
 results_dir = os.path.join(dir, "Results")
@@ -80,7 +80,7 @@ if __name__ == "__main__":
         action="store",
         dest="sumo_config_file",
         help="SUMO config file to load",
-        default=sumo_config_file,
+        default="./../KI4RoboRouting/SUMO/SeattleModel/osm.sumocfg",
     )
     parser.add_option(
         "-e",
@@ -96,7 +96,7 @@ if __name__ == "__main__":
         action="store",
         dest="requests_file",
         help="requests file to load",
-        default=requests_file,
+        default="./../KI4RoboRouting/SUMO/SeattleModel/CustomerRequests.xml",
     )
 
     parser.add_option(
