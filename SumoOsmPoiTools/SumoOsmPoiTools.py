@@ -238,6 +238,9 @@ class PoiToolMainWindow(QWidget):
             poiViewSettingsFile, _ = QFileDialog.getOpenFileName(
                 None, "select POI View Settings File", self.workingDirectory, "(*.xml)"
             )
+
+        # first we uncheck all POIs / POLYs and later we activate those which are contained in the POI_View_Settings.xml
+        self.unCheckAll()    
         try:
             print("Loading POI View Settings from ", poiViewSettingsFile)
             settingsTree = ET.parse(poiViewSettingsFile)
@@ -249,6 +252,7 @@ class PoiToolMainWindow(QWidget):
                     item = self.listWidget.item(index)
                     widgetRow = self.listWidget.itemWidget(item)
                     if "POLY" in widgetRow.poiName.text() and setting.attrib.get("type") in widgetRow.poiName.text():
+                        widgetRow.check.setChecked(True)
                         widgetRow.r.setText(setting.attrib.get("color").split(",")[0])
                         widgetRow.g.setText(setting.attrib.get("color").split(",")[1])
                         widgetRow.b.setText(setting.attrib.get("color").split(",")[2])
@@ -259,6 +263,7 @@ class PoiToolMainWindow(QWidget):
                     item = self.listWidget.item(index)
                     widgetRow = self.listWidget.itemWidget(item)
                     if "POI" in widgetRow.poiName.text() and setting.attrib.get("type") in widgetRow.poiName.text():
+                        widgetRow.check.setChecked(True)
                         widgetRow.r.setText(setting.attrib.get("color").split(",")[0])
                         widgetRow.g.setText(setting.attrib.get("color").split(",")[1])
                         widgetRow.b.setText(setting.attrib.get("color").split(",")[2])
