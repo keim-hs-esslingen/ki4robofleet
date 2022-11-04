@@ -136,7 +136,10 @@ class Project:
         poi_mgr = POI_Manager()
         reader = SumoReader(poi_mgr)
         reader.read_config(self.data.sumo_config_file)
-        reader.clean_roads(traci, self.data.clean_edge)
+        
+        # this takes a lot of time, therefore we skip this method
+        # we assume, that we have a working net 
+        # reader.clean_roads(traci, self.data.clean_edge)
         return poi_mgr
 
     def select_poi_and_create_requests(self):
@@ -186,14 +189,36 @@ class Project:
         requests = netRoot.findall("request")
 
         checked_requests = []
+        genericPoiIdCounter = 0
+
         # iterate XML-requests
         for req in requests:
-            from_poi = poi_mgr.find_poi(
-                req.attrib.get("fromEdge"), float(req.attrib.get("fromEdgePosition"))
-            )
-            to_poi = poi_mgr.find_poi(
-                req.attrib.get("toEdge"), float(req.attrib.get("toEdgePosition"))
-            )
+     
+            from_poi = None
+            to_poi = None
+            # here we check if the current customer request is assigned to a certain POI 
+            if req.attrib.get("fromPOI"):
+                from_poi = poi_mgr.find_poi(
+                    req.attrib.get("fromEdge"), float(req.attrib.get("fromEdgePosition"))
+                )
+                to_poi = poi_mgr.find_poi(
+                    req.attrib.get("toEdge"), float(req.attrib.get("toEdgePosition"))
+                )
+
+            # if the current customer request is not assigned to a certain POIs, we create a generic POIs
+            else:
+                genericPoiId = "generic_"+str(genericPoiIdCounter)
+                from_poi = Point_of_Interest(genericPoiId, req.attrib.get("fromEdge"))
+                from_poi.pos = float(req.attrib.get("fromEdgePosition"))
+                from_poi.poi_type = "genericPOI"
+                from_poi.road = req.attrib.get("fromEdge")
+                genericPoiId = "generic_"+str(genericPoiIdCounter + 1)
+                genericPoiIdCounter += 1
+                to_poi = Point_of_Interest(genericPoiId, req.attrib.get("toEdge"))
+                to_poi.pos = float(req.attrib.get("toEdgePosition"))                
+                to_poi.poi_type = "genericPOI"
+                to_poi.road = req.attrib.get("toEdge")
+                
             if from_poi and to_poi:
                 dreq = DotDict()
                 dreq.from_poi = from_poi
@@ -207,6 +232,7 @@ class Project:
                 if to_poi not in poi_arr:
                     to_poi.idx = len(poi_arr)
                     poi_arr.append(to_poi)
+                
 
         self.data.poi = poi_arr + parking
         for i, poi in enumerate(self.data.poi):
