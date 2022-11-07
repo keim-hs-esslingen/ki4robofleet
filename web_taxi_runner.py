@@ -130,7 +130,7 @@ if __name__ == "__main__":
         action="store",
         dest="project_file",
         help="project/pickle-file to load",
-        default=project_file,
+        default="/",
     )
     parser.add_option(
         "-r",

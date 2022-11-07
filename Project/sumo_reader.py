@@ -204,7 +204,7 @@ class SumoReader:
         print(f"SUMO add {filename}")
         netTree = ET.parse(filename)
         netRoot = netTree.getroot()
-        point_of_interest = netRoot.findall("poi")
+        point_of_interest = netRoot.findall("poi") + netRoot.findall("poly")
         no_road_counter = 0
         road_counter = 0
         for poi in point_of_interest:
