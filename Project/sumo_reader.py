@@ -261,6 +261,7 @@ class SumoReader:
         roads.poi = [poi.dd() for poi in self.poi_mgr.poi_arr]
         parking = [poi for poi in self.poi_mgr.poi_arr if poi.poi_type == PARKING_POI]
 
+        log(f"{len(valid_edges)} valid edges from filtered {len(filtered)}")
         log(f"{len(roads.valid)} valid road edges; from {start_edge}")
         log(f"{len(parking)} valid parking")
         log(f"{len(roads.poi)} valid POI")
