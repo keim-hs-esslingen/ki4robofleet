@@ -41,16 +41,6 @@ dt_mtime = datetime.fromtimestamp(mtime)
 mtime_string = dt_mtime.strftime("%Y-%m-%d %H:%M:%S")
 
 
-# Default input parameters can be defined here:
-data_set = "MannheimBig-Evening"
-requests_file = os.path.abspath(os.path.join(dir, data_set, "CustomerRequests.xml"))
-
-# If the Simulation is performed many times, using a pickle file speeds up the Simulation, because the initial Steps can be skipped:
-project_file = os.path.abspath(os.path.join(dir, data_set, "morning_web.pickle"))
-
-# the sumo_config_file is an xml file containing all data which are read by SUMO
-sumo_config_file = os.path.abspath(os.path.join(dir, data_set, "osm.sumocfg"))
-
 # All Simulation- Results will be collected into this directory
 results_dir = os.path.join(dir, "Results")
 Path(results_dir).mkdir(parents=True, exist_ok=True)
@@ -80,7 +70,7 @@ if __name__ == "__main__":
         action="store",
         dest="sumo_config_file",
         help="SUMO config file to load",
-        default=sumo_config_file,
+        default="no-sumo-config-file-passed",
     )
     parser.add_option(
         "-e",
@@ -96,7 +86,7 @@ if __name__ == "__main__":
         action="store",
         dest="requests_file",
         help="requests file to load",
-        default=requests_file,
+        default="no-requests-file-passed",
     )
 
     parser.add_option(
@@ -130,7 +120,7 @@ if __name__ == "__main__":
         action="store",
         dest="project_file",
         help="project/pickle-file to load",
-        default=project_file,
+        default="project.pickle",
     )
     parser.add_option(
         "-r",
