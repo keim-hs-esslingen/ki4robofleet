@@ -79,7 +79,9 @@ class SumoReader:
         self.read_poi_colors(addViewSettings, dbg)
 
         addilepath = Path(parent).joinpath("POIsEdges.xml")
-        self.read_poi_edges(addilepath, dbg)
+        
+        if os.path.isfile(addilepath):
+            self.read_poi_edges(addilepath, dbg)
 
     def read_net(self, filename, dbg=False):
         print(f"SUMO net {filename}")
