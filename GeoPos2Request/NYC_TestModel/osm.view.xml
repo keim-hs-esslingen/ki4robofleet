@@ -1,0 +1,11 @@
+
+<viewsettings>
+    <scheme name="larger">
+        <vehicles vehicleQuality="2" vehicle_exaggeration="3" vehicle_constantSize="1" vehicleName_show="1" vehicleName_size="60.00" vehicleName_color="black"/>
+        <persons person_exaggeration="3" person_constantSize="1" personQuality="2" personName_show="1"/>
+    </scheme>
+    <viewport zoom="1650.64" x="14871.20" y="55617.98" angle="0.00"/>   
+    <delay value="50"/>
+</viewsettings>
+
+
