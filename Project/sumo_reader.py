@@ -78,8 +78,9 @@ class SumoReader:
         addViewSettings = Path(parent).joinpath("POI_View_Settings.xml")
         self.read_poi_colors(addViewSettings, dbg)
 
+        # read the Edges which were assigned to the considered POIs and POLYs
+        # this is optional, because if we are using Geo Position (lon,lat), we don't need the POIsEdges.xml file
         addilepath = Path(parent).joinpath("POIsEdges.xml")
-        
         if os.path.isfile(addilepath):
             self.read_poi_edges(addilepath, dbg)
 
