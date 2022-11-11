@@ -137,9 +137,9 @@ class Project:
         reader = SumoReader(poi_mgr)
         reader.read_config(self.data.sumo_config_file)
         
-        # this takes a lot of time, therefore we skip this method
-        # we assume, that we have a working net 
-        # reader.clean_roads(traci, self.data.clean_edge)
+        # clean_roads takes a lot of time, therefore it should be considered to skip this method
+        reader.clean_roads(traci, self.data.clean_edge)
+        
         return poi_mgr
 
     def select_poi_and_create_requests(self):

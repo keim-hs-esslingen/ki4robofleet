@@ -70,7 +70,7 @@ if __name__ == "__main__":
         action="store",
         dest="sumo_config_file",
         help="SUMO config file to load",
-        default="no-sumo-config-file-passed",
+        default="/",
     )
     parser.add_option(
         "-e",
@@ -86,7 +86,7 @@ if __name__ == "__main__":
         action="store",
         dest="requests_file",
         help="requests file to load",
-        default="no-requests-file-passed",
+        default="/",
     )
 
     parser.add_option(
@@ -120,7 +120,7 @@ if __name__ == "__main__":
         action="store",
         dest="project_file",
         help="project/pickle-file to load",
-        default="project.pickle",
+        default="/",
     )
     parser.add_option(
         "-r",
