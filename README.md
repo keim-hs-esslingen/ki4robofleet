@@ -58,6 +58,12 @@ sudo apt-get install python3-lxml
 sudo apt-get dist-upgrade
 ```
 
+### Probably you need to perforn a pyqt5 upgrade if some pyqt related Errors arise:
+
+```bash
+python3 -m pip install pyqt5 --upgrade
+```
+
 ### Test the Setup with the provided Scipt to see if SUMO is working properly
 ```bash
 ./testRun.sh
