@@ -16,6 +16,7 @@ from typing import List
 
 from Net.point_of_interest import Point_of_Interest
 from Moving.request import Request
+from Tools.logger import log
 import os
 import lxml.etree as ET
 
@@ -41,7 +42,6 @@ class ProjectConfigData:
         self.speed = None
         self.requests: List[Request] = None
         self.routes = None
-        self.create_diff_matrix = kwargs.get("create_diff_matrix", False)
 
 
 def project_config_from_options(options) -> ProjectConfigData:

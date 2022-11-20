@@ -150,7 +150,6 @@ class POI_Manager:
         if poi_arr:
             self.poi_arr = poi_arr
         length = len(self.poi_arr)
-        dlog(f"Calculating distance matrix ({length}x{length}).")
         dist_array = [[0 for i in range(length)] for j in range(length)]
         time_array = [[0 for i in range(length)] for j in range(length)]
         edges_array = [[0 for i in range(length)] for j in range(length)]
@@ -191,17 +190,6 @@ class POI_Manager:
         obj.time_array = time_array
         obj.edges_array = edges_array
         self.average_speed = distances / travel_times
-        return obj
-
-    def empty_diff_matrix(self, poi_arr=None):
-        if poi_arr:
-            self.poi_arr = poi_arr
-        length = len(self.poi_arr)
-        dlog(f"Distance matrix ({length}x{length}) creation skipped. No 'shared' strategy available!")
-        obj = DotDict()
-        obj.dist_array = [[0 for i in range(length)] for j in range(length)]
-        obj.time_array = [[0 for i in range(length)] for j in range(length)]
-        obj.edges_array = [[0 for i in range(length)] for j in range(length)]
         return obj
 
     def same_edges(self):
