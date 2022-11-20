@@ -234,7 +234,7 @@ class SumoReader:
                 road_counter += 1
             else:
                 no_road_counter += 1
-        print(f"road poi {road_counter} / {no_road_counter}")
+        print(f"road poi Road cnt:{road_counter} / No road cnt:{no_road_counter}")
 
     def clean_roads(self, traci, start_edge):
         filtered = [v for k, v in self.edge_dict.items() if v.vehicle_lane]
@@ -243,6 +243,8 @@ class SumoReader:
 
         roads.valid = []
         valid_edges = []
+
+        log(f"Cleaning roads ({len(filtered)}). Check if route to 'clean_edge'({start_edge}) exists.")
 
         # fix for #9
         for edge in filtered:
@@ -261,7 +263,7 @@ class SumoReader:
         roads.poi = [poi.dd() for poi in self.poi_mgr.poi_arr]
         parking = [poi for poi in self.poi_mgr.poi_arr if poi.poi_type == PARKING_POI]
 
-        log(f"{len(roads.valid)} valid road edges; from {start_edge}")
+        log(f"{len(roads.valid)}/{len(filtered)} valid road edges")
         log(f"{len(parking)} valid parking")
         log(f"{len(roads.poi)} valid POI")
 
