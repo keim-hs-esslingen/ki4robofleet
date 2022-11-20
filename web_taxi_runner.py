@@ -149,6 +149,15 @@ if __name__ == "__main__":
         default="10000",
     )
 
+    parser.add_option(
+        "-m",
+        "--create_diff_matrix",
+        action="store",
+        dest="create_diff_matrix",
+        help="create diff matrix for shared strategy",
+        default=False
+    )
+
     options, args = parser.parse_args()
     config: ProjectConfigData = project_config_from_options(options)
 

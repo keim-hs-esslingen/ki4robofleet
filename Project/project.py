@@ -152,8 +152,10 @@ class Project:
         self.data.parking = [
             poi for poi in self.data.poi if poi.poi_type == PARKING_POI
         ]
-
-        self.data.distances = poi_mgr.dist_matrix(traci, poi_arr=self.data.poi)
+        if self.data.create_diff_matrix:
+            self.data.distances = poi_mgr.dist_matrix(traci, poi_arr=self.data.poi)
+        else:
+            self.data.distances = poi_mgr.empty_diff_matrix(poi_arr=self.data.poi)
         self.data.speed = poi_mgr.get_speed()
 
         unsorted = []
@@ -244,7 +246,10 @@ class Project:
         self.data.parking = [
             poi for poi in self.data.poi if poi.poi_type == PARKING_POI
         ]
-        self.data.distances = poi_mgr.dist_matrix(traci, poi_arr=self.data.poi)
+        if self.data.create_diff_matrix:
+            self.data.distances = poi_mgr.dist_matrix(traci, poi_arr=self.data.poi)
+        else:
+            self.data.distances = poi_mgr.empty_diff_matrix(poi_arr=self.data.poi)
 
         unsorted = []
         # iterate XML-requests a second time, now they have already valid POIs
