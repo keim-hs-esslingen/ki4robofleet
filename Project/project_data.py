@@ -41,7 +41,7 @@ class ProjectConfigData:
         self.speed = None
         self.requests: List[Request] = None
         self.routes = None
-        self.create_diff_matrix = kwargs.get("create_diff_matrix", False)
+        self.create_dist_matrix = kwargs.get("create_dist_matrix", False)
 
 
 def project_config_from_options(options) -> ProjectConfigData:

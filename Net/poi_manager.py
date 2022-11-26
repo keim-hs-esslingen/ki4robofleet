@@ -193,7 +193,7 @@ class POI_Manager:
         self.average_speed = distances / travel_times
         return obj
 
-    def empty_diff_matrix(self, poi_arr=None):
+    def empty_dist_matrix(self, poi_arr=None):
         if poi_arr:
             self.poi_arr = poi_arr
         length = len(self.poi_arr)

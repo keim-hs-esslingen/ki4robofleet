@@ -151,10 +151,10 @@ if __name__ == "__main__":
 
     parser.add_option(
         "-m",
-        "--create_diff_matrix",
+        "--create_dist_matrix",
         action="store",
-        dest="create_diff_matrix",
-        help="create diff matrix for shared strategy",
+        dest="create_dist_matrix",
+        help="create dist matrix for shared strategy",
         default=False
     )
 
