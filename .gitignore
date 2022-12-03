@@ -187,3 +187,4 @@ fabric.properties
 # ki4robofleet files
 Results
 *.pickle
+cleaned_POI.txt
