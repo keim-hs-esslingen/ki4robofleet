@@ -21,8 +21,9 @@ from Tools.XMLogger import xlog
 from Tools.check_sumo import sumo_available
 from Moving.request import Request
 import Moving.sumo_functions as sf
-from Moving.passengers import current_passengers
+from Moving.passengers import update_entering_and_leaving
 from Moving.vehicles import Vehicle
+from Moving.vehicle_monitoring import VehicleMonitoring, State
 
 from Project.project_data import ProjectConfigData
 
@@ -47,7 +48,7 @@ def check_requests(requests: List[Request], logging: bool = False):
         except Exception as e:
             pass
 
-    elog(f"{sumo_time} getTaxiReservations: {len(all)}")
+    elog(f"t={sumo_time} getTaxiReservations - cnt= {len(all)}")
     assert len(all) > 0
     reservations = sorted(all, key=lambda r: int(r.id))
 
@@ -65,6 +66,7 @@ def check_requests(requests: List[Request], logging: bool = False):
                         reservation=res.id,
                         request=req.idx,
                     )
+                break
 
     return clean_requests
 
@@ -228,7 +230,7 @@ def shared_strategy(data: ProjectConfigData):
                 vehicle_positions[vehID].update()
 
         # check entering and leaving passengers
-        driving = current_passengers(
+        driving, entered, left = update_entering_and_leaving(
             driving=driving,
             open_requests=open_requests,
             vehicle_positions=vehicle_positions,
@@ -273,6 +275,7 @@ def simple_strategy(data: ProjectConfigData):
         requests_dict[r.idx] = r
 
     # list of all vehicle IDs
+    monitoring = VehicleMonitoring()
     vehicle_ids = []
     no_of_parking = len(parking)
     for i in range(data.no_of_vehicles):
@@ -282,6 +285,7 @@ def simple_strategy(data: ProjectConfigData):
         sf.add_and_route_vehicle(vehID, parking_poi)
         vehicle_ids.append(vehID)
         vehicle_positions[vehID] = Vehicle(vehID=vehID)
+        monitoring.update_veh_state(vehID=vehID, state=State.idling, sumo_time=0)
 
     open_requests = check_requests(requests)
     sumo_time = 0
@@ -314,6 +318,7 @@ def simple_strategy(data: ProjectConfigData):
             sf.dispatch(vehID, [req.reservation.id])
             # schedule the request --> logging
             req.schedule(vehID, sumo_time)
+            monitoring.update_veh_state(vehID=vehID, state=State.to_passenger, sumo_time=sumo_time)
 
         left_vehicles = [
             vehID for vehID in vehicle_ids if vehID not in full_vehicle_id_list
@@ -328,11 +333,15 @@ def simple_strategy(data: ProjectConfigData):
                 vehicle_positions[vehID].update()
 
         # check entering and leaving passengers
-        driving = current_passengers(
+        driving, entered, left = update_entering_and_leaving(
             driving=driving,
             open_requests=open_requests,
             vehicle_positions=vehicle_positions,
         )
+        [monitoring.update_veh_state(vehID=vehID, state=State.with_passenger, sumo_time=sumo_time)
+         for vehID in entered.keys()]
+        [monitoring.update_veh_state(vehID=vehID, state=State.idling, sumo_time=sumo_time)
+         for vehID in left.keys()]
 
         # check if we have fullfilled all requests
         un_fullfilled = [r for r in open_requests if r.exit_time == 0]
@@ -456,7 +465,7 @@ def look_ahead_strategy(data: ProjectConfigData):
             vehicle_ids.remove(vehID)
 
         # check entering and leaving passengers
-        driving = current_passengers(
+        driving, entered, left = update_entering_and_leaving(
             driving=driving,
             open_requests=open_requests,
             vehicle_positions=vehicle_positions,
