@@ -2,7 +2,7 @@
 <!-- generated on 2021-02-19 15:59:40.650106 by $Id$ UNKNOWN
   options: -r sampleRoutes.rou.xml <doubleminus>edgedata-files edgedata.xml -o routesLKW.xml -v <doubleminus>edgedata-attribute qLKW <doubleminus>prefix lkw_ <doubleminus>attributes=type="truck_truck" departLane="best" departSpeed="max" departPos="random"
 -->
-<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+<routes xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://sumo.dlr.de/xsd/routes_file.xsd">
 <!-- begin="0.0" end="1800.0" -->
     <vehicle id="lkw_0_0" depart="0.00" type="truck_truck" departLane="best" departSpeed="max" departPos="random">
         <route edges="-245941530#4 -245941530#3 -245941530#2 -364080660#3 -364080660#1 -364080660#0 -364080659#1 -364080659#0 -108404028 253488943 253488947 -150697173#1 -150697173#0 366073489#3 366073490#1 366073490#2 366073490#3 230602997#0 230602997#1 230602997#2 24666916 366073460#1 366073459#0 189032454 269040914 385970249#2 385970249#3 305792174#2 305792174#3 -305792174#3"/>

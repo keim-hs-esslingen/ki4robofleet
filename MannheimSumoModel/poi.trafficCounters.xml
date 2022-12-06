@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- generated on Wed Feb 10 14:21:13 2021 by Eclipse SUMO dfrouter Version 1.8.0
-<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/dfrouterConfiguration.xsd">
+<configuration xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://sumo.dlr.de/xsd/dfrouterConfiguration.xsd">
 
     <input>
         <net-file value="../osm.net.xml"/>
@@ -32,7 +32,7 @@
 </configuration>
 -->
 
-<additional xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/additional_file.xsd">
+<additional xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://sumo.dlr.de/xsd/additional_file.xsd">
     <poi id="gelb1_12.1" type="between_detector_position" color="green" lane="164086589_3" pos="0.00"/>
     <poi id="gelb1_13.1" type="between_detector_position" color="green" lane="204207291_1" pos="0.00"/>
     <poi id="gelb1_13.2" type="between_detector_position" color="green" lane="164086589_1" pos="0.00"/>

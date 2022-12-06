@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- generated on 2022-09-01 15:36:17 by Eclipse SUMO polyconvert Version v1_13_0+1451-11b6e706080
-<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/polyconvertConfiguration.xsd">
+<configuration xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://sumo.dlr.de/xsd/polyconvertConfiguration.xsd">
 
     <input>
         <net-file value="osm.net.xml"/>
@@ -21,7 +21,7 @@
 </configuration>
 -->
 
-<additional xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/additional_file.xsd">
+<additional xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://sumo.dlr.de/xsd/additional_file.xsd">
     <location netOffset="-512052.41,-5393459.75" convBoundary="-2103.52,-129.86,11717.07,3751.78" origBoundary="9.135277,48.692556,9.322992,48.727750" projParameter="+proj=utm +zone=32 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"/>
 
     <poly id="1013165941" type="man_made.works" color="255,230,230" fill="1" layer="-1.00" shape="4253.537155,3257.799691 4404.985646,3240.389749 4409.441615,3233.221845 4410.061889,3224.864379 4415.215725,3147.867360 4415.859979,3131.350769 4424.996626,3130.721762 4426.164295,3103.790952 4425.674541,3095.252370 4420.591935,3090.357481 4415.800850,3088.876086 4413.039117,3077.585164 4358.647960,3095.544910 4327.351412,3108.548133 4322.136174,3111.267454 4323.799791,3141.007802 4255.467352,3216.220078 4254.420622,3252.433197 4253.537155,3257.799691"/>
