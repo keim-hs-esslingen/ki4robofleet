@@ -23,6 +23,7 @@ from Moving.request import Request
 import Moving.sumo_functions as sf
 from Moving.passengers import current_passengers
 from Moving.vehicles import Vehicle
+from Moving.taxi_fleet_state_wrapper import TaxiFleetStateWrapper, TaxiState
 
 from Project.project_data import ProjectConfigData
 
@@ -67,10 +68,6 @@ def check_requests(requests: List[Request], logging: bool = False):
                     )
 
     return clean_requests
-
-
-EMPTY_TAXIS = 0
-
 
 def add_route_to_poi(start, poi: Point_of_Interest):
     """
@@ -164,7 +161,7 @@ def shared_strategy(data: ProjectConfigData):
         if sumo_time % 100 == 0:
             dlog(f"step {sumo_time}")
         full_vehicle_id_list = traci.vehicle.getIDList()
-        empty_fleet = list(traci.vehicle.getTaxiFleet(EMPTY_TAXIS))
+        empty_fleet = list(traci.vehicle.getTaxiFleet(TaxiState.Empty))
 
         current_reservations = traci.person.getTaxiReservations(0)
         new_reservation_ids = [r.id for r in current_reservations]
@@ -290,11 +287,13 @@ def simple_strategy(data: ProjectConfigData):
     driving = []
     un_fullfilled = []
 
+    taxi_fleet_state = TaxiFleetStateWrapper()
+
     timeout = int(data.epoch_timeout)
     while sumo_time < timeout:
         sumo_time = sf.simulation_step()
         full_vehicle_id_list = traci.vehicle.getIDList()
-        empty_fleet = list(traci.vehicle.getTaxiFleet(EMPTY_TAXIS))
+        empty_fleet = taxi_fleet_state.get_taxi_fleet(taxiState=TaxiState.Empty)
 
         current_open_requests = [
             req
@@ -404,7 +403,7 @@ def look_ahead_strategy(data: ProjectConfigData):
     while sumo_time < timeout:
         sumo_time = sf.simulation_step()
         full_vehicle_id_list = traci.vehicle.getIDList()
-        empty_fleet = list(traci.vehicle.getTaxiFleet(EMPTY_TAXIS))
+        empty_fleet = list(traci.vehicle.getTaxiFleet(TaxiState.Empty))
 
         current_reservations = traci.person.getTaxiReservations(0)
         new_reservation_ids = [r.id for r in current_reservations]
@@ -454,6 +453,111 @@ def look_ahead_strategy(data: ProjectConfigData):
         for vehID in left_vehicles:
             xlog(name="vehicle", time=sumo_time, vehicle=vehID, cmd="left")
             vehicle_ids.remove(vehID)
+
+        # check entering and leaving passengers
+        driving = current_passengers(
+            driving=driving,
+            open_requests=open_requests,
+            vehicle_positions=vehicle_positions,
+        )
+
+        # check if we have fullfilled all requests
+        un_fullfilled = [r for r in open_requests if r.exit_time == 0]
+        if not un_fullfilled:
+            sumo_time = timeout
+
+    if Request.manager:
+        d_full_mileage = 0
+        for vehID, vehicle in vehicle_positions.items():
+            d_full_mileage += vehicle.dist
+        Request.manager.requests_finished(d_full_mileage)
+
+    log(f"Stop at {sumo_time} with {len(un_fullfilled)} unfullfilled requests")
+
+
+def sup_learn_strategy(data: ProjectConfigData):
+    """
+    using supervised learning to optimize dispatching
+    - taxi can get in "optimizing" state (drives without passenger to strategically good position)
+    - taxi can only carry one passenger
+
+    """
+    parking = data.parking
+    requests = data.requests
+
+    # add routes to sumo and store route-id in poi
+    # used to initially send taxis to parking places
+    for poi in parking:
+        poi.route = add_route_to_poi(data.clean_edge, poi)
+
+    vehicle_positions: Dict[Vehicle] = {}
+    requests_dict = {}
+
+    # map req.idx to requests
+    for r in requests:
+        r.schedule_time = None
+        requests_dict[r.idx] = r
+
+    # list of all vehicle IDs
+    vehicle_ids = []
+    no_of_parking = len(parking)
+    for i in range(data.no_of_vehicles):
+        pidx = i % no_of_parking
+        parking_poi = parking[pidx]
+        vehID = f"taxi_{i:04d}"
+        sf.add_and_route_vehicle(vehID, parking_poi)
+        vehicle_ids.append(vehID)
+        vehicle_positions[vehID] = Vehicle(vehID=vehID)
+
+    # PRED_MODEL initialize prediction model here
+
+    open_requests = check_requests(requests)
+    sumo_time = 0
+
+    # list of passengers currently driving in vehicles
+    driving = []
+    un_fullfilled = []
+
+    timeout = int(data.epoch_timeout)
+    while sumo_time < timeout:
+        sumo_time = sf.simulation_step()
+        full_vehicle_id_list = traci.vehicle.getIDList()
+        empty_fleet = list(traci.vehicle.getTaxiFleet(TaxiState.Empty))
+
+        current_open_requests = [
+            req
+            for req in open_requests
+            if not req.schedule_time and req.submit_time <= sumo_time
+        ]
+        while current_open_requests and empty_fleet:
+            vehID = empty_fleet.pop()
+            req = current_open_requests.pop()
+            fromPoiColor = req.from_poi.color
+            # set vehicle color according to POI color
+
+            traci.vehicle.setColor(
+                vehID, (int(fromPoiColor[0]), int(fromPoiColor[1]), int(fromPoiColor[2]))
+            )
+
+            sf.dispatch(vehID, [req.reservation.id])
+            # PRED_MODEL update position of vehicle to target position of this request
+
+            # schedule the request --> logging
+            req.schedule(vehID, sumo_time)
+
+        # PRED_MODEL if there are still unassigned vehicles, optimize their position
+
+        left_vehicles = [
+            vehID for vehID in vehicle_ids if vehID not in full_vehicle_id_list
+        ]
+        for vehID in left_vehicles:
+            xlog(name="vehicle", time=sumo_time, vehicle=vehID, cmd="left")
+            vehicle_ids.remove(vehID)
+
+        # monitor the distances driven
+        for vehID in full_vehicle_id_list:
+            if vehID in vehicle_positions:
+                vehicle_positions[vehID].update()
 
         # check entering and leaving passengers
         driving = current_passengers(

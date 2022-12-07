@@ -19,6 +19,7 @@ from Tools.XMLogger import xlog
 from Tools.check_sumo import sumo_available
 from Moving.request import Request
 from Moving.vehicles import Vehicle
+from Moving.taxi_fleet_state_wrapper import TaxiFleetStateWrapper, TaxiState
 
 sumo_available()
 import traci  # noqa
@@ -56,7 +57,6 @@ def dispatch(taxi, reservations):
         )
         return False
     return True
-
 
 def add_route(req: Request):
     """
@@ -176,3 +176,21 @@ def add_person_request(personID, req: Request):
     req.personID = personID
     req.reservation = None
     return True
+
+def route_to_edge(vehID: str, target_edge: str):
+    """
+    generate a route to target_edge and set it for vehID
+    """
+    stage = traci.simulation.findRoute(traci.vehicle.getRoadID(vehID), target_edge)
+    assert stage and len(stage.edges) > 2
+    rid = f"rt_{vehID}"
+    traci.route.add(rid, stage.edges)
+    traci.vehicle.setRouteID(vehID, rid)
+    return rid
+
+def route_to_edge_for_optimization(taxi_fleet_state_wrapper: TaxiFleetStateWrapper, vehID: str, target_edge: str):
+    """
+    generate a route to target_edge and set it for vehID
+    """
+    taxi_fleet_state_wrapper.set_optimizing_state(vehID)
+    return route_to_edge(vehID, target_edge)

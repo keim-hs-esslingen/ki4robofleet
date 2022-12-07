@@ -424,6 +424,10 @@ class Project:
             look_ahead_strategy(self.data)
             num_of_vehicles = self.data.no_of_vehicles
 
+        if strategy == "sup_learn":
+            sup_learn_strategy(self.data)
+            num_of_vehicles = self.data.no_of_vehicles
+
         if Request.manager:
             res = Request.manager.get_result()
             res["num_of_vehicles"] = num_of_vehicles
