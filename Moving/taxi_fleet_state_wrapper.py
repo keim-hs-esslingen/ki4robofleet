@@ -39,6 +39,11 @@ class TaxiFleetStateWrapper:
             self.__update_state(vehID, TaxiState.Occupied)
         for vehID in list(traci.vehicle.getTaxiFleet(TaxiState.PickupAndOccupied)):
             self.__update_state(vehID, TaxiState.PickupAndOccupied)
+        # if empty but optimizing, keep state.
+        # TO-DO: Only allow update to TaxiState.Empty when taxi: is not moving anymore or has no route...
+        for vehID in list(traci.vehicle.getTaxiFleet(TaxiState.Empty)):
+            if self.fleet[vehID] != TaxiState.EmptyButOptimizing:
+                self.__update_state(vehID, TaxiState.Empty)
 
     def set_optimizing_state(self, vehID: str):
         self.__update_state(vehID, TaxiState.EmptyButOptimizing)
@@ -46,12 +51,10 @@ class TaxiFleetStateWrapper:
     # update state of all taxis and return requested state
     def get_taxi_fleet(self, taxiState: TaxiState) -> list:
         self.__update()
-        concat_list = []
         # empty state contains also TaxiState.EmptyButOptimizing
         if taxiState == TaxiState.Empty:
-            concat_list.append(list(traci.vehicle.getTaxiFleet(TaxiState.Empty)))
-            concat_list.append(list(traci.vehicle.getTaxiFleet(TaxiState.EmptyButOptimizing)))
-            return concat_list
+            return [vehID for vehID, state in self.fleet.items() if
+                    state == TaxiState.Empty or state == TaxiState.EmptyButOptimizing]
         else:
             return list(traci.vehicle.getTaxiFleet(taxiState))
 
