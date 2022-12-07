@@ -42,6 +42,9 @@ class ProjectConfigData:
         self.requests: List[Request] = None
         self.routes = None
         self.create_dist_matrix = kwargs.get("create_dist_matrix", False)
+        self.edge_coords = kwargs.get("edge_coords", None)
+        self.sector_coords = kwargs.get("sector_coords", None)
+        self.sup_learn_training_data = kwargs.get("sup_learn_training_data", None)
 
 
 def project_config_from_options(options) -> ProjectConfigData:

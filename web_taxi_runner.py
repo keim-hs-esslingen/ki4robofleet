@@ -148,7 +148,6 @@ if __name__ == "__main__":
         help="time out in secs; default 1 hour = 3600",
         default="10000",
     )
-
     parser.add_option(
         "-m",
         "--create_dist_matrix",
@@ -157,6 +156,28 @@ if __name__ == "__main__":
         help="create dist matrix for shared strategy",
         default=False
     )
+    parser.add_option(
+        "--edge_coords",
+        action="store",
+        dest="edge_coords",
+        help="edge coords file to load",
+        default="/",
+    )
+    parser.add_option(
+        "--sector_coords",
+        action="store",
+        dest="sector_coords",
+        help="sector coords file to load",
+        default="/",
+    )
+    parser.add_option(
+        "--sup_learn_training_data",
+        action="store",
+        dest="sup_learn_training_data",
+        help="supervised learning training data file to load xml with (weekday, hour, row, col, requests)",
+        default="/",
+    )
+
 
     options, args = parser.parse_args()
     config: ProjectConfigData = project_config_from_options(options)
@@ -186,6 +207,7 @@ if __name__ == "__main__":
 
     # here the simulation loops over all strategies and parameters are performed:
     for strategy in strategy_list:
+        # simple, look_ahead, sup_learn
         if strategy != "shared":
             for n in NUM_OF_VEHICLES:
                 p.set_max_delay(
@@ -209,6 +231,7 @@ if __name__ == "__main__":
                         )
                     )
                 )
+        # shared strategy
         else:
             for realistic_time in REALISTIC_TIMES:
                 for lateness_factor in LATENESS_FACTORS:
