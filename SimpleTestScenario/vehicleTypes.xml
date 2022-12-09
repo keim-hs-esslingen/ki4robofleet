@@ -4,7 +4,12 @@
     <vType id="truck_truck" vClass="truck"/> 
     <vType id="car" accel="0.8" decel="4.5" sigma="0.5" length="5" minGap="2.5" maxSpeed="16.67" guiShape="passenger"/>
     <vType id="person" length="2" minGap="0" guiShape="pedestrian" width="3" maxSpeed="0.3" color="1,0.2,0.2"/>
-    <vType id="taxi" vClass="taxi">
+    <vType id="taxi" vClass="taxi" guiShape="truck/trailer">
         <param key="has.taxi.device" value="true"/>
+	<param key="device.taxi.pickUpDuration" value="60"/>
+ 	<param key="device.taxi.dropOffDuration" value="120"/>
+	<param key="carriageLength" value="3"/>
+ 	<param key="carriageGap" value="3"/>
+ 	<param key="locomotiveLength" value="5"/>
     </vType>  
 </routes>
