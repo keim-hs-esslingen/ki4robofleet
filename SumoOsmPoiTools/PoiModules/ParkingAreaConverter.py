@@ -119,7 +119,13 @@ class ParkingAreaConverter:
                     # else try to extract the capacity from the tag
                     if "tag" in way:
                         if "capacity" in way["tag"]:
-                            capacity = way["tag"]["capacity"]
+                            capacityFromTag = way["tag"]["capacity"]
+                            if capacityFromTag.isnumeric():
+                                capacity = capacityFromTag
+                                print("Capacity was retieved from the OSM API: ",capacity)  
+                            else:
+                                print("Warning: a non numeric Capacity was retrieved from the OSM API: ",capacityFromTag) 
+                                print("-> The default Capacity was set") 
 
                     parkingArea = {
                         "capacity": capacity,
@@ -152,6 +158,7 @@ class ParkingAreaConverter:
                 ]
                 laneCheckDict[currentLane] = parkingAreaId
 
+        print("READY with converting, now the parkingAreas.xml is being written...")
         # now we write the xml Entries from the clean uniqueLaneParkingAreaDict
         for parkingAreaId in uniqueLaneParkingAreaDict.keys():
             uniqueLaneParkingArea = uniqueLaneParkingAreaDict[parkingAreaId]
