@@ -157,23 +157,23 @@ if __name__ == "__main__":
         default=False
     )
     parser.add_option(
-        "--edge_coords",
+        "--edge_coords_file",
         action="store",
-        dest="edge_coords",
+        dest="edge_coords_file",
         help="edge coords file to load",
         default="/",
     )
     parser.add_option(
-        "--sector_coords",
+        "--sector_coords_file",
         action="store",
-        dest="sector_coords",
+        dest="sector_coords_file",
         help="sector coords file to load",
         default="/",
     )
     parser.add_option(
-        "--sup_learn_training_data",
+        "--sup_learn_training_data_file",
         action="store",
-        dest="sup_learn_training_data",
+        dest="sup_learn_training_data_file",
         help="supervised learning training data file to load xml with (weekday, hour, row, col, requests)",
         default="/",
     )

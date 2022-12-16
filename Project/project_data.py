@@ -14,8 +14,12 @@
 
 from typing import List
 
+import pandas as pd
+
 from Net.point_of_interest import Point_of_Interest
 from Moving.request import Request
+from KI4RoboFleetTools.Request_Creation.sumohelper.EdgeCoordsAccess import EdgeCoord
+from KI4RoboFleetTools.Request_Creation.sumohelper.SectorCoordsAccess import SectorCoord
 import os
 import lxml.etree as ET
 
@@ -34,6 +38,10 @@ class ProjectConfigData:
         self.clean_edge = kwargs.get("clean_edge", "45085545")
         self.sumo_config_file = sumo_config_file
         self.project_file = project_file
+        self.create_dist_matrix = kwargs.get("create_dist_matrix", False)
+        self.edge_coords_file = kwargs.get("edge_coords_file", None)
+        self.sector_coords_file = kwargs.get("sector_coords_file", None)
+        self.sup_learn_training_data_file = kwargs.get("sup_learn_training_data_file", None)
 
         self.poi: List[Point_of_Interest] = None
         self.parking: List[Point_of_Interest] = None
@@ -41,10 +49,9 @@ class ProjectConfigData:
         self.speed = None
         self.requests: List[Request] = None
         self.routes = None
-        self.create_dist_matrix = kwargs.get("create_dist_matrix", False)
-        self.edge_coords = kwargs.get("edge_coords", None)
-        self.sector_coords = kwargs.get("sector_coords", None)
-        self.sup_learn_training_data = kwargs.get("sup_learn_training_data", None)
+        self.edge_coords: List[EdgeCoord] = None
+        self.sector_coords: List[SectorCoord] = None
+        self.sup_learn_training_data: pd.DataFrame = None
 
 
 def project_config_from_options(options) -> ProjectConfigData:
