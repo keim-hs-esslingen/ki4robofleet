@@ -25,6 +25,7 @@ from Moving.passengers import update_entering_and_leaving
 from Moving.vehicles import Vehicle
 from Moving.taxi_fleet_state_wrapper import TaxiFleetStateWrapper, TaxiState
 from Moving.vehicle_monitoring import VehicleMonitoring, State
+from KI4RoboRoutingTools.Prediction_Model.Algorithms.algorithm_factory import AlgorithmFactory
 
 from Project.project_data import ProjectConfigData
 
@@ -390,6 +391,7 @@ def look_ahead_strategy(data: ProjectConfigData):
         requests_dict[r.idx] = r
 
     # list of all vehicle IDs
+    monitoring = VehicleMonitoring()
     vehicle_ids = []
     no_of_parking = len(parking)
     for i in range(data.no_of_vehicles):
@@ -408,11 +410,13 @@ def look_ahead_strategy(data: ProjectConfigData):
 
     reservations = []
 
+    taxi_fleet_state = TaxiFleetStateWrapper()
+
     timeout = int(data.epoch_timeout)
     while sumo_time < timeout:
         sumo_time = sf.simulation_step()
         full_vehicle_id_list = traci.vehicle.getIDList()
-        empty_fleet = list(traci.vehicle.getTaxiFleet(TaxiState.Empty))
+        empty_fleet = taxi_fleet_state.get_taxi_fleet(taxiState=TaxiState.Empty)
 
         current_reservations = traci.person.getTaxiReservations(0)
         new_reservation_ids = [r.id for r in current_reservations]
@@ -455,6 +459,7 @@ def look_ahead_strategy(data: ProjectConfigData):
                 sf.dispatch(bestVehID, [req.reservation.id])
                 # schedule the request --> logging
                 req.schedule(vehID, sumo_time)
+                monitoring.update_veh_state(vehID=vehID, state=State.to_passenger, sumo_time=sumo_time)
 
         left_vehicles = [
             vehID for vehID in vehicle_ids if vehID not in full_vehicle_id_list
@@ -469,6 +474,10 @@ def look_ahead_strategy(data: ProjectConfigData):
             open_requests=open_requests,
             vehicle_positions=vehicle_positions,
         )
+        [monitoring.update_veh_state(vehID=vehID, state=State.with_passenger, sumo_time=sumo_time)
+         for vehID in entered.keys()]
+        [monitoring.update_veh_state(vehID=vehID, state=State.idling, sumo_time=sumo_time)
+         for vehID in left.keys()]
 
         # check if we have fullfilled all requests
         un_fullfilled = [r for r in open_requests if r.exit_time == 0]
@@ -508,6 +517,7 @@ def sup_learn_strategy(data: ProjectConfigData):
         requests_dict[r.idx] = r
 
     # list of all vehicle IDs
+    monitoring = VehicleMonitoring()
     vehicle_ids = []
     no_of_parking = len(parking)
     for i in range(data.no_of_vehicles):
@@ -527,11 +537,34 @@ def sup_learn_strategy(data: ProjectConfigData):
     driving = []
     un_fullfilled = []
 
+    taxi_fleet_state = TaxiFleetStateWrapper()
+
+    vid_pos = {}
+    for vid, veh in vehicle_positions:
+        vid_pos[vid] = veh.edge
+    factory = AlgorithmFactory(edge_coordinates=data.edge_coords,
+                               sector_coordinates=data.sector_coords,
+                               init_vehicle_pos_edges=vid_pos,
+                               training_data=data.sup_learn_training_data)
+    algorithm = factory.get_algorithm(algorithm_name="simple_distribution")
+
     timeout = int(data.epoch_timeout)
     while sumo_time < timeout:
         sumo_time = sf.simulation_step()
         full_vehicle_id_list = traci.vehicle.getIDList()
-        empty_fleet = list(traci.vehicle.getTaxiFleet(TaxiState.Empty))
+        empty_fleet = taxi_fleet_state.get_taxi_fleet(taxiState=TaxiState.Empty)
+
+        current_reservations = traci.person.getTaxiReservations(0)
+        new_reservation_ids = [r.id for r in current_reservations]
+        scheduled = [r for r in reservations if r not in new_reservation_ids]
+        if scheduled:
+            xlog(name="scheduled", time=sumo_time, scheduled=scheduled)
+        reservations = new_reservation_ids
+
+        # monitor the distances driven
+        for vehID in full_vehicle_id_list:
+            if vehID in vehicle_positions:
+                vehicle_positions[vehID].update()
 
         current_open_requests = [
             req
@@ -539,22 +572,40 @@ def sup_learn_strategy(data: ProjectConfigData):
             if not req.schedule_time and req.submit_time <= sumo_time
         ]
         while current_open_requests and empty_fleet:
-            vehID = empty_fleet.pop()
-            req = current_open_requests.pop()
-            fromPoiColor = req.from_poi.color
-            # set vehicle color according to POI color
+            req = current_open_requests.pop(0)
 
-            traci.vehicle.setColor(
-                vehID, (int(fromPoiColor[0]), int(fromPoiColor[1]), int(fromPoiColor[2]))
-            )
+            # find vehicle next to req.from_edge
+            bestVehID = None
+            min_dist = 100000
+            for vehID in empty_fleet:
+                vehicle_edge = vehicle_positions[vehID].edge
+                stage_to = traci.simulation.findRoute(vehicle_edge, req.from_edge)
+                if stage_to and len(stage_to.edges):
+                    if stage_to.length < min_dist:
+                        min_dist = stage_to.length
+                        bestVehID = vehID
+            if bestVehID:
+                empty_fleet.remove(bestVehID)
+                fromPoiColor = req.from_poi.color
+                # set vehicle color according to POI color
+                traci.vehicle.setColor(
+                    bestVehID, (int(fromPoiColor[0]), int(fromPoiColor[1]), int(fromPoiColor[2]))
+                )
 
-            sf.dispatch(vehID, [req.reservation.id])
-            # PRED_MODEL update position of vehicle to target position of this request
-
-            # schedule the request --> logging
-            req.schedule(vehID, sumo_time)
+                sf.dispatch(bestVehID, [req.reservation.id])
+                # schedule the request --> logging
+                req.schedule(bestVehID, sumo_time)
+                monitoring.update_veh_state(vehID=bestVehID, state=State.to_passenger, sumo_time=sumo_time)
+                algorithm.push_edge(vid=bestVehID, edge_id=req.from_edge, time=sumo_time)
 
         # PRED_MODEL if there are still unassigned vehicles, optimize their position
+        for vehID in empty_fleet:
+            # PRED_MODEL predict next edge
+            better_pos_edge = algorithm.get_edge(vid=vehID)
+            if better_pos_edge:
+                # traci.vehicle.changeTarget(vehID, better_pos_edge)
+                sf.route_to_edge_for_optimization(taxi_fleet_state_wrapper=taxi_fleet_state, vehID=vehID,
+                                                  target_edge=better_pos_edge)
 
         left_vehicles = [
             vehID for vehID in vehicle_ids if vehID not in full_vehicle_id_list
@@ -569,11 +620,15 @@ def sup_learn_strategy(data: ProjectConfigData):
                 vehicle_positions[vehID].update()
 
         # check entering and leaving passengers
-        driving = current_passengers(
+        driving, entered, left = update_entering_and_leaving(
             driving=driving,
             open_requests=open_requests,
             vehicle_positions=vehicle_positions,
         )
+        [monitoring.update_veh_state(vehID=vehID, state=State.with_passenger, sumo_time=sumo_time)
+         for vehID in entered.keys()]
+        [monitoring.update_veh_state(vehID=vehID, state=State.idling, sumo_time=sumo_time)
+         for vehID in left.keys()]
 
         # check if we have fullfilled all requests
         un_fullfilled = [r for r in open_requests if r.exit_time == 0]
