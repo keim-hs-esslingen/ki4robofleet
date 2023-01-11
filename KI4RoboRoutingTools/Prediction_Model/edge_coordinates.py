@@ -15,7 +15,7 @@ class EdgeCoordinates:
         self.__check_duplicates(edge_id)
         self.__edge_cooridnates.append({"edge_id": edge_id, "coords": coords})
 
-    def get_coord(self, edge_id: str):
+    def get_coord(self, edge_id: str) -> Coordinates:
         for edge_coord in self.__edge_cooridnates:
             if edge_coord["edge_id"] == edge_id:
                 return edge_coord["coords"]
