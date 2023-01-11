@@ -1,5 +1,5 @@
 import pandas as pd
-from Python_Tools.Prediction_Model.sector import Sector
+from KI4RoboRoutingTools.Prediction_Model.sector import Sector
 
 class SectorDistributionModel:
     def __init__(self, vehicle_pos_sectors: dict, sectors_shape: tuple):

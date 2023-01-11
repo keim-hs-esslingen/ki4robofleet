@@ -1,8 +1,8 @@
 import pandas as pd
-from Python_Tools.Prediction_Model.Algorithms.base_algorithm import BaseAlgorithm
-from Python_Tools.Prediction_Model.Algorithms.Distribution.sector_distribution_model import SectorDistributionModel
-from Python_Tools.Prediction_Model.edge_sector_converter import EdgeSectorConverter, EdgeCoordinates, Coordinates, SectorCoordinates, Sector
-from Python_Tools.Prediction_Model.TrainingData.training_data import TrainingData
+from KI4RoboRoutingTools.Prediction_Model.Algorithms.base_algorithm import BaseAlgorithm
+from KI4RoboRoutingTools.Prediction_Model.Algorithms.Distribution.sector_distribution_model import SectorDistributionModel
+from KI4RoboRoutingTools.Prediction_Model.edge_sector_converter import EdgeSectorConverter, EdgeCoordinates, Coordinates, SectorCoordinates, Sector
+from KI4RoboRoutingTools.Prediction_Model.TrainingData.training_data import TrainingData
 
 STATIC_THRESHOLD_ADDITION = 0.0000000001
 class SimpleDistributionAlgorithm(BaseAlgorithm):
@@ -32,6 +32,7 @@ class SimpleDistributionAlgorithm(BaseAlgorithm):
         lowest_diff_sector = diff_list.iloc[-1].to_dict()
         greatest_diff_value = greatest_diff_sector["DIFF"]
         lowest_diff_value = lowest_diff_sector["DIFF"]
+        diff = greatest_diff_value - lowest_diff_value
         diff_threshold = self.__distribution_model.calculate_diff_threshold() + STATIC_THRESHOLD_ADDITION
         sector = Sector(row=greatest_diff_sector["ROW"], col=greatest_diff_sector["COL"])
         # check if all values in diff are 0, so there is no underserved sector
@@ -42,7 +43,7 @@ class SimpleDistributionAlgorithm(BaseAlgorithm):
                 return
         # equal distribution, but not all values are 0, see calculation in distribution model
         # abs values because of boundary case
-        elif greatest_diff_value <= diff_threshold and abs(greatest_diff_value) != abs(lowest_diff_value):
+        elif diff <= diff_threshold and abs(greatest_diff_value) != abs(lowest_diff_value):
             if self.__most_underserved_sector is not None:
                 print("Update: No underserved sector, distribution diff is below threshold (#vehicles - #sectors / #vehicles * #sectors)")
                 self.__most_underserved_sector = None
