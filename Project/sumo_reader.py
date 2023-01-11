@@ -236,7 +236,7 @@ class SumoReader:
                 no_road_counter += 1
         print(f"road poi Road cnt:{road_counter} / No road cnt:{no_road_counter}")
 
-    def clean_roads(self, traci, start_edge):
+    def clean_roads(self, traci, start_edge, skip_find_route_to_clean_edge):
         filtered = [v for k, v in self.edge_dict.items() if v.vehicle_lane]
 
         roads = DotDict()
@@ -248,16 +248,21 @@ class SumoReader:
 
         # fix for #9
         for edge in filtered:
-            stage_to = traci.simulation.findRoute(start_edge, edge.eid)
-            stage_from = traci.simulation.findRoute(edge.eid, start_edge)
-            if (
-                stage_to
-                and len(stage_to.edges) > 0
-                and stage_from
-                and len(stage_from.edges) > 0
-            ):
+            if skip_find_route_to_clean_edge:
                 valid_edges.append(edge.eid)
                 roads.valid.append(edge.dd())
+                continue
+            else:
+                stage_to = traci.simulation.findRoute(start_edge, edge.eid)
+                stage_from = traci.simulation.findRoute(edge.eid, start_edge)
+                if (
+                    stage_to
+                    and len(stage_to.edges) > 0
+                    and stage_from
+                    and len(stage_from.edges) > 0
+                ):
+                    valid_edges.append(edge.eid)
+                    roads.valid.append(edge.dd())
 
         self.poi_mgr.clean(valid_edges)
         roads.poi = [poi.dd() for poi in self.poi_mgr.poi_arr]

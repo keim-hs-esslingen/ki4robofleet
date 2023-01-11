@@ -170,7 +170,8 @@ class Project:
         reader.read_config(self.data.sumo_config_file)
         
         # clean_roads takes a lot of time, therefore it should be considered to skip this method
-        reader.clean_roads(traci, self.data.clean_edge)
+        reader.clean_roads(traci, self.data.clean_edge,
+                           skip_find_route_to_clean_edge=self.data.skip_find_route_to_clean_edge)
         
         return poi_mgr
 

@@ -177,7 +177,13 @@ if __name__ == "__main__":
         help="supervised learning training data file to load xml with (weekday, hour, row, col, requests)",
         default="/",
     )
-
+    parser.add_option(
+        "--skip_find_route_to_clean_edge",
+        action="store",
+        dest="skip_find_route_to_clean_edge",
+        help="skip find route to clean edge (takes a lot of time and can be done before simulation)",
+        default=False
+    )
 
     options, args = parser.parse_args()
     config: ProjectConfigData = project_config_from_options(options)

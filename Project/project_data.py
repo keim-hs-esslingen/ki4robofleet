@@ -39,6 +39,7 @@ class ProjectConfigData:
         self.sumo_config_file = sumo_config_file
         self.project_file = project_file
         self.create_dist_matrix = kwargs.get("create_dist_matrix", False)
+        self.skip_find_route_to_clean_edge = kwargs.get("skip_find_route_to_clean_edge", False)
         self.edge_coords_file = kwargs.get("edge_coords_file", None)
         self.sector_coords_file = kwargs.get("sector_coords_file", None)
         self.sup_learn_training_data_file = kwargs.get("sup_learn_training_data_file", None)
