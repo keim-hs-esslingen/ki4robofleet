@@ -130,8 +130,7 @@ def add_and_route_vehicle(vehID, to_poi: Point_of_Interest, t=0):
     generate taxi and move taxi to start-poi of request
     """
     try:
-        traci.vehicle.add(vehID, routeID=to_poi.route, typeID="taxi")
-        
+        traci.vehicle.add(vehID, routeID=to_poi.route, typeID="taxi") # to_poi.route is not known
         # log(f"new vehicle {vehID}")
     except Exception as e:
         elog(f"new vehicle error {e}")
@@ -183,14 +182,15 @@ def route_to_edge(vehID: str, target_edge: str):
     """
     stage = traci.simulation.findRoute(traci.vehicle.getRoadID(vehID), target_edge)
     assert stage and len(stage.edges) > 2
-    rid = f"rt_{vehID}"
-    traci.route.add(rid, stage.edges)
-    traci.vehicle.setRouteID(vehID, rid)
-    return rid
+    traci.vehicle.setRoute(vehID, stage.edges)
+    #traci.vehicle.resume(vehID)
+    # TODO How to dispatch taxi to target edge without using dispatchTaxi()
+    # dispatchTaxi() requires a reservationID, which needs a person
+    return
 
 def route_to_edge_for_optimization(taxi_fleet_state_wrapper: TaxiFleetStateWrapper, vehID: str, target_edge: str):
     """
     generate a route to target_edge and set it for vehID
     """
     taxi_fleet_state_wrapper.set_optimizing_state(vehID)
-    return route_to_edge(vehID, target_edge)
+    route_to_edge(vehID, target_edge)
