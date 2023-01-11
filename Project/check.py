@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+import datetime
 # =============================================================================
 # Created at Hochschule Esslingen - University of Applied Sciences
 # Department: Anwendungszentrum KEIM
@@ -26,6 +26,9 @@ from Moving.vehicles import Vehicle
 from Moving.taxi_fleet_state_wrapper import TaxiFleetStateWrapper, TaxiState
 from Moving.vehicle_monitoring import VehicleMonitoring, State
 from KI4RoboRoutingTools.Prediction_Model.Algorithms.algorithm_factory import AlgorithmFactory
+from KI4RoboRoutingTools.Prediction_Model.edge_coordinates import EdgeCoordinates, Coordinates
+from KI4RoboRoutingTools.Prediction_Model.sector_coordinates import SectorCoordinates, Sector
+from KI4RoboRoutingTools.Prediction_Model.TrainingData.training_data import TrainingData
 
 from Project.project_data import ProjectConfigData
 
@@ -401,6 +404,8 @@ def look_ahead_strategy(data: ProjectConfigData):
         sf.add_and_route_vehicle(vehID, parking_poi)
         vehicle_ids.append(vehID)
         vehicle_positions[vehID] = Vehicle(vehID=vehID)
+        monitoring.update_veh_state(vehID=vehID, state=State.idling, sumo_time=0)
+        vehicle_positions[vehID].update()
 
     sumo_time = 0
 
@@ -459,7 +464,7 @@ def look_ahead_strategy(data: ProjectConfigData):
                 sf.dispatch(bestVehID, [req.reservation.id])
                 # schedule the request --> logging
                 req.schedule(vehID, sumo_time)
-                monitoring.update_veh_state(vehID=vehID, state=State.to_passenger, sumo_time=sumo_time)
+                monitoring.update_veh_state(vehID=bestVehID, state=State.to_passenger, sumo_time=sumo_time)
 
         left_vehicles = [
             vehID for vehID in vehicle_ids if vehID not in full_vehicle_id_list
@@ -527,6 +532,8 @@ def sup_learn_strategy(data: ProjectConfigData):
         sf.add_and_route_vehicle(vehID, parking_poi)
         vehicle_ids.append(vehID)
         vehicle_positions[vehID] = Vehicle(vehID=vehID)
+        vehicle_positions[vehID].update()
+        monitoring.update_veh_state(vehID=vehID, state=State.idling, sumo_time=0)
 
     # PRED_MODEL initialize prediction model here
 
@@ -540,13 +547,34 @@ def sup_learn_strategy(data: ProjectConfigData):
     taxi_fleet_state = TaxiFleetStateWrapper()
 
     vid_pos = {}
-    for vid, veh in vehicle_positions:
+    for vid, veh in vehicle_positions.items():
         vid_pos[vid] = veh.edge
-    factory = AlgorithmFactory(edge_coordinates=data.edge_coords,
-                               sector_coordinates=data.sector_coords,
+    edge_coords = EdgeCoordinates()
+    for edge_coord in data.edge_coords:
+        try:
+            edge_coords.add_edge_coordinates(edge_id=edge_coord.edge_id ,
+                                            coords=Coordinates(lat=edge_coord.lat, lon=edge_coord.long))
+        except ValueError as e:
+            pass
+    # TODO - echte Koordinate der edge suchen
+    edge_coords.add_edge_coordinates(edge_id=parking[0].edge_id,
+                                     coords=Coordinates(lat=47.64675, lon=-122.33633))
+
+    sector_coords = SectorCoordinates()
+    for sector_coord in data.sector_coords:
+        sector_coords.add_sector_coordinates(sector=Sector(row=sector_coord.row, col=sector_coord.col),
+                                             bbox=tuple(sector_coord.bbox),
+                                             representative_edge=sector_coord.representative_edge)
+    training_data = TrainingData.from_weekday_hour_df(df=data.sup_learn_training_data,
+                                                      abs_start_dt=datetime.datetime(2014,10,10,12,00),
+                                                      normalize_cols=['REQUESTS'])
+    factory = AlgorithmFactory(edge_coordinates=edge_coords,
+                               sector_coordinates=sector_coords,
                                init_vehicle_pos_edges=vid_pos,
-                               training_data=data.sup_learn_training_data)
+                               training_data=training_data)
     algorithm = factory.get_algorithm(algorithm_name="simple_distribution")
+
+    reservations = []
 
     timeout = int(data.epoch_timeout)
     while sumo_time < timeout:
@@ -606,6 +634,8 @@ def sup_learn_strategy(data: ProjectConfigData):
                 # traci.vehicle.changeTarget(vehID, better_pos_edge)
                 sf.route_to_edge_for_optimization(taxi_fleet_state_wrapper=taxi_fleet_state, vehID=vehID,
                                                   target_edge=better_pos_edge)
+                monitoring.update_veh_state(vehID=vehID, state=State.positioning, sumo_time=sumo_time)
+                algorithm.push_edge(vid=vehID, edge_id=better_pos_edge, time=sumo_time)
 
         left_vehicles = [
             vehID for vehID in vehicle_ids if vehID not in full_vehicle_id_list
