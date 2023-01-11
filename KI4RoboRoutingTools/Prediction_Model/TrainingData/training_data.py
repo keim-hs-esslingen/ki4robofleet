@@ -27,7 +27,10 @@ class TrainingData:
     @classmethod
     # Dataframe columns: WEEKDAY, HOUR, ROW, COL, REQUESTS
     def from_weekday_hour_df(cls, df: pd.DataFrame, abs_start_dt: datetime = None, normalize_cols: [] = None):
-        df['REL_TIME_SECONDS'] = df.apply(lambda row: (row['WEEKDAY'] * 24 + row['HOUR']) * 3600, axis=1)
+        # TODO get first time in a better way instead of iloc[0]
+        first_time = df.iloc[0]
+        delta = (first_time['WEEKDAY'] * 24 + first_time['HOUR']) * 3600
+        df['REL_TIME_SECONDS'] = df.apply(lambda row: (row['WEEKDAY'] * 24 + row['HOUR']) * 3600 - delta, axis=1)
         df.drop(columns=['WEEKDAY', 'HOUR'], inplace=True)
         return cls(df, abs_start_dt, normalize_cols)
 
@@ -60,9 +63,19 @@ class TrainingData:
                     record = previous_records.copy()
                 else:
                     # interpolate REQUESTS of prev_record and next_record depending on the distance to rel_time_seconds
-                    record = previous_records.copy()
                     diff = next_records['REL_TIME_SECONDS'].values[0] - previous_records['REL_TIME_SECONDS'].values[0]
                     part = (rel_time_seconds - previous_records['REL_TIME_SECONDS'].values[0]) / diff
-                    record['REQUESTS'] = previous_records['REQUESTS'] + (next_records['REQUESTS'] - previous_records['REQUESTS']) * part
+                    record = previous_records.copy()
+                    for row in range(record['ROW'].min(), record['ROW'].max() + 1):
+                        for col in range(record['COL'].min(), record['COL'].max() + 1):
+                            previous_record = previous_records[(previous_records['ROW'] == row) & (previous_records['COL'] == col)]
+                            next_record = next_records[(next_records['ROW'] == row) & (next_records['COL'] == col)]
+                            if previous_record is None or next_record is None:
+                                print(f"WARNING: entry for row({row}), col({col}) does not exist")
+                                record['REQUESTS'] = None
+                                continue
+                            record.loc[(record['ROW'] == row) & (record['COL'] == col), 'REQUESTS'] = \
+                                previous_record.iloc[0]['REQUESTS'] + \
+                                  (next_record.iloc[0]['REQUESTS'] - previous_record.iloc[0]['REQUESTS']) * part
                 record['REL_TIME_SECONDS'] = int(rel_time_seconds)
         return record
