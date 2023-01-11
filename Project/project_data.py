@@ -18,8 +18,8 @@ import pandas as pd
 
 from Net.point_of_interest import Point_of_Interest
 from Moving.request import Request
-from KI4RoboFleetTools.Request_Creation.sumohelper.EdgeCoordsAccess import EdgeCoord
-from KI4RoboFleetTools.Request_Creation.sumohelper.SectorCoordsAccess import SectorCoord
+from KI4RoboRoutingTools.Request_Creation.sumohelper.EdgeCoordsAccess import EdgeCoord
+from KI4RoboRoutingTools.Request_Creation.sumohelper.SectorCoordsAccess import SectorCoord
 import os
 import lxml.etree as ET
 

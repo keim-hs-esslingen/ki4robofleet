@@ -32,6 +32,7 @@ from Project.check import (
     shared_strategy,
     simple_strategy,
     look_ahead_strategy,
+    sup_learn_strategy
 )
 from Project.project_data import ProjectConfigData
 
@@ -42,8 +43,8 @@ from Opt.optimizer import routing_with_variants
 from Opt.sharing import sharing
 
 from Tools.check_sumo import sumo_available
-from KI4RoboFleetTools.Request_Creation.sumohelper.EdgeCoordsAccess import EdgeCoordsAccess
-from KI4RoboFleetTools.Request_Creation.sumohelper.SectorCoordsAccess import SectorCoordsAccess
+from KI4RoboRoutingTools.Request_Creation.sumohelper.EdgeCoordsAccess import EdgeCoordsAccess
+from KI4RoboRoutingTools.Request_Creation.sumohelper.SectorCoordsAccess import SectorCoordsAccess
 
 sumo_available()
 from sumolib import checkBinary  # noqa
