@@ -21,7 +21,7 @@
 ### Reqirements to run the Simulation:
 
 - ubuntu 20.04
-- Python 3.8.5 or higher
+- Python 3.8.5 or higher (Hint: Python 3.11 faces some issues and is not recommended)
 - Eclipse SUMO Version 1.9.0 or higher (Download from https://www.eclipse.org/sumo/)
 
 
