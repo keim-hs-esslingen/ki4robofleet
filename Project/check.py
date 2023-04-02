@@ -36,7 +36,7 @@ sumo_available()
 import traci  # noqa
 
 
-def check_requests(requests: List[Request], logging: bool = False):
+def check_requests(requests: List[Request], logging: bool = False, clean_edge = None):
     open_requests = []
     sumo_time = sf.simulation_step()
     for i, req in enumerate(requests):
@@ -44,6 +44,11 @@ def check_requests(requests: List[Request], logging: bool = False):
         req.reset()
         if sf.add_person_request(personID, req):
             open_requests.append(req)
+    # add dummy request
+    if clean_edge is not None:
+        if not sf.add_dummy_reservation(clean_edge=clean_edge):
+            elog("Could not add dummy_person reservation.")
+            assert False
 
     all = []
     while sumo_time < 100 and len(all) < len(open_requests):
@@ -537,7 +542,7 @@ def sup_learn_strategy(data: ProjectConfigData):
 
     # PRED_MODEL initialize prediction model here
 
-    open_requests = check_requests(requests)
+    open_requests = check_requests(requests=requests, clean_edge=data.clean_edge)
     sumo_time = 0
 
     # list of passengers currently driving in vehicles
@@ -565,8 +570,15 @@ def sup_learn_strategy(data: ProjectConfigData):
         sector_coords.add_sector_coordinates(sector=Sector(row=sector_coord.row, col=sector_coord.col),
                                              bbox=tuple(sector_coord.bbox),
                                              representative_edge=sector_coord.representative_edge)
+        # bullshit start
+        #if sf.route_to_edge("taxi_0001", sector_coord.representative_edge):
+        #    dlog(f"edge {sector_coord.representative_edge} is found")
+        #else:
+        #    elog(f"edge {sector_coord.representative_edge} is invalid")
+
+        # bullshit end
     training_data = TrainingData.from_weekday_hour_df(df=data.sup_learn_training_data,
-                                                      abs_start_dt=datetime.datetime(2014,10,10,12,00),
+                                                      abs_start_dt=datetime.datetime(2014,10,10,00,00),
                                                       normalize_cols=['REQUESTS'])
     factory = AlgorithmFactory(edge_coordinates=edge_coords,
                                sector_coordinates=sector_coords,
@@ -613,29 +625,33 @@ def sup_learn_strategy(data: ProjectConfigData):
                         min_dist = stage_to.length
                         bestVehID = vehID
             if bestVehID:
-                empty_fleet.remove(bestVehID)
-                fromPoiColor = req.from_poi.color
-                # set vehicle color according to POI color
-                traci.vehicle.setColor(
-                    bestVehID, (int(fromPoiColor[0]), int(fromPoiColor[1]), int(fromPoiColor[2]))
-                )
-
-                sf.dispatch(bestVehID, [req.reservation.id])
-                # schedule the request --> logging
-                req.schedule(bestVehID, sumo_time)
-                monitoring.update_veh_state(vehID=bestVehID, state=State.to_passenger, sumo_time=sumo_time)
-                algorithm.push_edge(vid=bestVehID, edge_id=req.from_edge, time=sumo_time)
+                if sf.dispatch_reset_optimization(bestVehID, [req.reservation.id], taxi_fleet_state_wrapper=taxi_fleet_state):
+                    empty_fleet.remove(bestVehID)
+                    fromPoiColor = req.from_poi.color
+                    # set vehicle color according to POI color
+                    traci.vehicle.setColor(
+                        bestVehID, (int(fromPoiColor[0]), int(fromPoiColor[1]), int(fromPoiColor[2]))
+                    )
+                    dlog(f"Dispatched {bestVehID} to {req.to_edge} (res={req.reservation.id})")
+                    # schedule the request --> logging
+                    req.schedule(bestVehID, sumo_time)
+                    monitoring.update_veh_state(vehID=bestVehID, state=State.to_passenger, sumo_time=sumo_time)
+                    algorithm.push_edge(vid=bestVehID, edge_id=req.from_edge, time=sumo_time)
 
         # PRED_MODEL if there are still unassigned vehicles, optimize their position
-        for vehID in empty_fleet:
+        optimizing_fleet = taxi_fleet_state.get_taxi_fleet(taxiState=TaxiState.EmptyButOptimizing)
+        real_empty_fleet = []
+        [real_empty_fleet.append(vehID) for vehID in empty_fleet if vehID not in optimizing_fleet]
+        for vehID in real_empty_fleet:
             # PRED_MODEL predict next edge
             better_pos_edge = algorithm.get_edge(vid=vehID)
             if better_pos_edge:
                 # traci.vehicle.changeTarget(vehID, better_pos_edge)
-                sf.route_to_edge_for_optimization(taxi_fleet_state_wrapper=taxi_fleet_state, vehID=vehID,
-                                                  target_edge=better_pos_edge)
-                monitoring.update_veh_state(vehID=vehID, state=State.positioning, sumo_time=sumo_time)
-                algorithm.push_edge(vid=vehID, edge_id=better_pos_edge, time=sumo_time)
+                if sf.route_to_edge_for_optimization(taxi_fleet_state_wrapper=taxi_fleet_state, vehID=vehID,
+                                                    target_edge=better_pos_edge):
+                    dlog(f"({sumo_time}) Successfully send {vehID} for optimization to edge {better_pos_edge}")
+                    monitoring.update_veh_state(vehID=vehID, state=State.positioning, sumo_time=sumo_time)
+                    algorithm.push_edge(vid=vehID, edge_id=better_pos_edge, time=sumo_time)
 
         left_vehicles = [
             vehID for vehID in vehicle_ids if vehID not in full_vehicle_id_list

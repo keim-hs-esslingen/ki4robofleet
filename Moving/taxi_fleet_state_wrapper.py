@@ -1,5 +1,6 @@
 import traci
 from enum import IntEnum
+from Tools.logger import log, elog, dlog
 
 class TaxiState(IntEnum):
     # from https://sumo.dlr.de/docs/Simulation/Taxi.html#gettaxifleet
@@ -8,7 +9,8 @@ class TaxiState(IntEnum):
     Occupied = 2,
     PickupAndOccupied = 3,
     # custom state
-    EmptyButOptimizing = 4
+    EmptyButOptimizing = 4,
+    Unknown = -1
 
     def __str__(self):
         return str(self.name)
@@ -30,11 +32,21 @@ class TaxiFleetStateWrapper:
             self.__update_state(vehID, TaxiState.Empty)
 
     def __update_state(self, vehID: str, state: TaxiState):
+        if vehID in self.fleet and self.fleet[vehID] != state:
+            dlog(f"vehID({vehID}) changes state: '{self.fleet[vehID]}' to '{state}' ")
+            dlog(f"vehID({vehID}) is on route: '{traci.vehicle.getRouteID(vehID)}' "
+                 f"with {len(traci.vehicle.getRoute(vehID))} edges")
+        elif vehID not in self.fleet:
+            dlog(f"vehID({vehID}) init state: ''{state}'")
+        else:
+            pass
         self.fleet[vehID] = state
 
     def __update(self):
         for vehID in list(traci.vehicle.getTaxiFleet(TaxiState.Pickup)):
-            self.__update_state(vehID, TaxiState.Pickup)
+            # needed because of workaround with reservationId. SUMO thinks Taxi is picking up.
+            if self.fleet[vehID] != TaxiState.EmptyButOptimizing:
+                self.__update_state(vehID, TaxiState.Pickup)
         for vehID in list(traci.vehicle.getTaxiFleet(TaxiState.Occupied)):
             self.__update_state(vehID, TaxiState.Occupied)
         for vehID in list(traci.vehicle.getTaxiFleet(TaxiState.PickupAndOccupied)):
@@ -44,9 +56,15 @@ class TaxiFleetStateWrapper:
         for vehID in list(traci.vehicle.getTaxiFleet(TaxiState.Empty)):
             if self.fleet[vehID] != TaxiState.EmptyButOptimizing:
                 self.__update_state(vehID, TaxiState.Empty)
+        for vehID in self.fleet.keys():
+            if self.fleet[vehID] == TaxiState.EmptyButOptimizing and traci.vehicle.isStopped(vehID):
+                self.__update_state(vehID, TaxiState.Empty)
 
     def set_optimizing_state(self, vehID: str):
         self.__update_state(vehID, TaxiState.EmptyButOptimizing)
+
+    def reset_optimizing_state(self, vehID: str):
+        self.__update_state(vehID, TaxiState.Unknown)
 
     # update state of all taxis and return requested state
     def get_taxi_fleet(self, taxiState: TaxiState) -> list:
@@ -55,6 +73,8 @@ class TaxiFleetStateWrapper:
         if taxiState == TaxiState.Empty:
             return [vehID for vehID, state in self.fleet.items() if
                     state == TaxiState.Empty or state == TaxiState.EmptyButOptimizing]
+        elif taxiState == TaxiState.EmptyButOptimizing:
+            return [vehID for vehID, state in self.fleet.items() if state == TaxiState.EmptyButOptimizing]
         else:
             return list(traci.vehicle.getTaxiFleet(taxiState))
 
