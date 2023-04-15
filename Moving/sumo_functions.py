@@ -212,6 +212,7 @@ def route_to_edge(vehID: str, target_edge: str) -> bool:
     stage = None
     try:
         stage = traci.simulation.findRoute(fromEdge=traci.vehicle.getRoadID(vehID), toEdge=target_edge)
+        dlog(f"Curr pos: {traci.vehicle.getRoadID(vehID)}")
     except exceptions.TraCIException as e:
         elog(e)
         return False
@@ -220,20 +221,16 @@ def route_to_edge(vehID: str, target_edge: str) -> bool:
         dlog(f"stage too short {len(stage.edges)} for vehID({vehID})")
         return False
     try:
-        traci.vehicle.setRoute(vehID, stage.edges)
+        pass
+        #traci.vehicle.setRoute(vehID, stage.edges)
     except Exception as e:
         elog(e)
         return False
-    reservations = traci.person.getTaxiReservations(0)
-    for res in reservations:
-        if res.persons[0] == 'dummy_person':
-            #traci.vehicle.dispatchTaxi(vehID, res.id)
-            traci.vehicle.dispatchTaxi(vehID, ['0'])
-            break
-    #traci.vehicle.dispatchTaxi(vehID, [reservations[-1].id])
-
+    dlog(f"Before {traci.vehicle.getRoute(vehID)}")
     traci.vehicle.changeTarget(vehID, target_edge)
+    dlog(f"After {traci.vehicle.getRoute(vehID)}")
     traci.vehicle.setStop(vehID, target_edge, 1.0, 0, 1.0)
+    traci.vehicle.resume(vehID=vehID)
     return True
 
 def route_to_edge_for_optimization(taxi_fleet_state_wrapper: TaxiFleetStateWrapper, vehID: str, target_edge: str) -> bool:

@@ -640,8 +640,9 @@ def sup_learn_strategy(data: ProjectConfigData):
 
         # PRED_MODEL if there are still unassigned vehicles, optimize their position
         optimizing_fleet = taxi_fleet_state.get_taxi_fleet(taxiState=TaxiState.EmptyButOptimizing)
+        no_reservations_had_fleet = taxi_fleet_state.get_taxi_fleet(taxiState=TaxiState.NoReservationsHad)
         real_empty_fleet = []
-        [real_empty_fleet.append(vehID) for vehID in empty_fleet if vehID not in optimizing_fleet]
+        [real_empty_fleet.append(vehID) for vehID in empty_fleet if vehID not in optimizing_fleet and vehID not in no_reservations_had_fleet]
         for vehID in real_empty_fleet:
             # PRED_MODEL predict next edge
             better_pos_edge = algorithm.get_edge(vid=vehID)
