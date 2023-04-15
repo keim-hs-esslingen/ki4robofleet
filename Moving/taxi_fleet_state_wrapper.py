@@ -10,7 +10,6 @@ class TaxiState(IntEnum):
     PickupAndOccupied = 3,
     # custom state
     EmptyButOptimizing = 4,
-    NoReservationsHad = 5
     Unknown = -1
 
     def __str__(self):
@@ -30,7 +29,7 @@ class TaxiFleetStateWrapper:
                                 f"Invalid start state: {str(invalid_start_state)} of taxis {invalid_vehIDs}")
         fleet = list(traci.vehicle.getTaxiFleet(TaxiState.Empty))
         for vehID in fleet:
-            self.__update_state(vehID, TaxiState.NoReservationsHad)
+            self.__update_state(vehID, TaxiState.Empty)
 
     def __update_state(self, vehID: str, state: TaxiState):
         if vehID in self.fleet and self.fleet[vehID] != state:
@@ -55,12 +54,11 @@ class TaxiFleetStateWrapper:
         # if empty but optimizing, keep state.
         # TO-DO: Only allow update to TaxiState.Empty when taxi: is not moving anymore or has no route...
         for vehID in list(traci.vehicle.getTaxiFleet(TaxiState.Empty)):
-            if self.fleet[vehID] != TaxiState.EmptyButOptimizing\
-                    and self.fleet[vehID] != TaxiState.NoReservationsHad:
+            if self.fleet[vehID] != TaxiState.EmptyButOptimizing:
                 self.__update_state(vehID, TaxiState.Empty)
-        #for vehID in self.fleet.keys():
-            #if self.fleet[vehID] == TaxiState.EmptyButOptimizing and traci.vehicle.isStopped(vehID):
-            #    self.__update_state(vehID, TaxiState.Empty)
+        for vehID in self.fleet.keys():
+            if self.fleet[vehID] == TaxiState.EmptyButOptimizing and traci.vehicle.isStopped(vehID):
+                self.__update_state(vehID, TaxiState.Empty)
 
     def set_optimizing_state(self, vehID: str):
         self.__update_state(vehID, TaxiState.EmptyButOptimizing)
@@ -74,11 +72,9 @@ class TaxiFleetStateWrapper:
         # empty state contains also TaxiState.EmptyButOptimizing
         if taxiState == TaxiState.Empty:
             return [vehID for vehID, state in self.fleet.items() if
-                    state == TaxiState.Empty or state == TaxiState.EmptyButOptimizing or state == TaxiState.NoReservationsHad]
+                    state == TaxiState.Empty or state == TaxiState.EmptyButOptimizing]
         elif taxiState == TaxiState.EmptyButOptimizing:
             return [vehID for vehID, state in self.fleet.items() if state == TaxiState.EmptyButOptimizing]
-        elif taxiState == TaxiState.NoReservationsHad:
-            return [vehID for vehID, state in self.fleet.items() if state == TaxiState.NoReservationsHad]
         else:
             return list(traci.vehicle.getTaxiFleet(taxiState))
 

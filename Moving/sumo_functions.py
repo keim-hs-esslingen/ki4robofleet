@@ -212,23 +212,13 @@ def route_to_edge(vehID: str, target_edge: str) -> bool:
     stage = None
     try:
         stage = traci.simulation.findRoute(fromEdge=traci.vehicle.getRoadID(vehID), toEdge=target_edge)
-        dlog(f"Curr pos: {traci.vehicle.getRoadID(vehID)}")
     except exceptions.TraCIException as e:
         elog(e)
         return False
-
     if not stage or len(stage.edges) <= 2:
-        dlog(f"stage too short {len(stage.edges)} for vehID({vehID})")
+        dlog(f"Optimization target is too close (less than 3 edges) for vehID({vehID}). Will not route to target")
         return False
-    try:
-        pass
-        #traci.vehicle.setRoute(vehID, stage.edges)
-    except Exception as e:
-        elog(e)
-        return False
-    dlog(f"Before {traci.vehicle.getRoute(vehID)}")
     traci.vehicle.changeTarget(vehID, target_edge)
-    dlog(f"After {traci.vehicle.getRoute(vehID)}")
     traci.vehicle.setStop(vehID, target_edge, 1.0, 0, 1.0)
     traci.vehicle.resume(vehID=vehID)
     return True
