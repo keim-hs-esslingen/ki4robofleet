@@ -29,6 +29,23 @@ def build_output_path(city: str, filename: str):
         os.makedirs(basepath)
     return basepath + filename
 
+# input format of the csv
+#|-------|------------|-------------------|---------------------|----------|----------|------------------|-------------------|------------------|-------------------|
+#|       | LOCATIONID | VEHICLE_VIN       | STARTED_LOCAL       | DURATION | DISTANCE | STARTLAT         | STARTLONG         | FINISHLAT        | FINISHLONG        |
+#|-------|------------|-------------------|---------------------|----------|----------|------------------|-------------------|------------------|-------------------|
+#|     1 |         21 | WMEEJ3BA1CK569248 | 2014-10-10 08:17:43 |      572 |        2 |  47.605677717487 |  -122.31457969117 |  47.598724628692 |  -122.32936565843 |
+#|-------|------------|-------------------|---------------------|----------|----------|------------------|-------------------|------------------|-------------------|
+#|     2 |         21 | WMEEJ3BA2DK655962 | 2014-10-10 08:59:37 |      775 |        4 | 47.6384753901182 | -122.319772520717 |  47.612720772532 |  -122.34152449399 |
+#|-------|------------|-------------------|---------------------|----------|----------|------------------|-------------------|------------------|-------------------|
+#|     4 |         21 | WMEEJ3BA1DK683381 | 2014-10-10 08:59:54 |     1359 |        5 | 47.6622810152178 | -122.314231978052 |  47.625007918311 |  -122.33499524964 |
+#|-------|------------|-------------------|---------------------|----------|----------|------------------|-------------------|------------------|-------------------|
+#|     6 |         21 | WMEEJ3BA8DK655321 | 2014-10-10 06:53:27 |      439 |        3 | 47.6928912709091 | -122.306901580199 |  47.709615453682 |  -122.31787668988 |
+#|-------|------------|-------------------|---------------------|----------|----------|------------------|-------------------|------------------|-------------------|
+#|     7 |         21 | WMEEJ3BA5CK575165 | 2014-10-10 07:43:58 |      828 |        4 |  47.648829314253 |  -122.34772824806 |  47.623967283971 |  -122.33265563173 |
+#|-------|------------|-------------------|---------------------|----------|----------|------------------|-------------------|------------------|-------------------|
+#|    10 |         21 | WMEEJ3BA1CK573655 | 2014-10-10 07:44:25 |      281 |        1 | 47.6547255606243 | -122.373674595368 | 47.6629051839964 | -122.369596853198 |
+
+STEP_SIZE_SECTORS = 3000
 
 KEY_WEEKDAY = 'WEEKDAY'
 KEY_HOUR = 'HOUR'
@@ -43,7 +60,7 @@ COLUMNS = ['idx', 'start_lat', 'start_long',
 COLUMNS_LATLONG_EDGES = ["edge_id", "lat", "long"]
 
 SIMU_START_DATETIME = datetime(year=2014, month=10, day=10, hour=12, minute=0, second=0)
-SIMU_END_DATETIME = datetime(year=2014, month=10, day=10, hour=23, minute=59, second=59)
+SIMU_END_DATETIME = datetime(year=2014, month=10, day=10, hour=13, minute=59, second=59)
 
 
 # 1 Find Edges that are reachable both from pedestrians as well as cars --> List
@@ -111,11 +128,13 @@ def main(sumo_working_dir: str, trips: str):
         distance_NS_km=int(metrics['distance_northsouth']),
         distance_EW_km=int(metrics['distance_eastwest']),
         row_count=len(trips),
-        hours=(trips['WEEKDAY'].max() - trips['WEEKDAY'].min() + 1) * 24)
+        hours=(trips['WEEKDAY'].max() - trips['WEEKDAY'].min() + 1) * 24,
+        step_meters=STEP_SIZE_SECTORS)
     print(f"Taking {rows} rows & {cols} cols")
     sectorizer = Sectorizing.Sectorizer(df=trips, row_count=rows, col_count=cols, edge_finder=edge_finder)
     trips = sectorizer.enrich_sectors()
     list_sector_coords = sectorizer.bbox_of_sectors()
+    additional_edge_coords = sectorizer.additional_edge_coords()
     sector_coords_creator = SectorCoordsAccess()
     for sector_dict in list_sector_coords:
         sector_coords_creator.add_sector_coord(SectorCoord(row=sector_dict['row'],
@@ -259,6 +278,12 @@ def main(sumo_working_dir: str, trips: str):
             edge_id=edge["edge_id"],
             lat=edge["lat"],
             long=edge["long"]
+        ))
+    for edge_coords in additional_edge_coords:
+        edge_coords_creator.add_edge_coord(EdgeCoord(
+            edge_id=edge_coords["edge_id"],
+            lat=edge_coords["lat"],
+            long=edge_coords["lon"]
         ))
     edge_coords_creator.dump(build_output_path(city, "EdgeCoords.xml"))
 

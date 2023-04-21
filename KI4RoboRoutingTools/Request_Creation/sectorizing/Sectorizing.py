@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import math
-from Python_Tools.Request_Creation.sumohelper.Coord2EdgeConverter import EdgeFinder
+from KI4RoboRoutingTools.Request_Creation.sumohelper.Coord2EdgeConverter import EdgeFinder
 
 
 PERCENTAGE_OF_NONEMPTY_SECTORS = 20
@@ -43,7 +43,7 @@ def aggregated_requests(df: pd.DataFrame, zero_req_padding: bool, fix_row_col_co
                     for hour in range(0, 24):
                         count = df.query(
                             f"WEEKDAY == {weekday} and HOUR == {hour} and COL == {col} and ROW == {row}").shape[0]
-                        df_ret.loc[i, ['WEEKDAY', 'HOUR', 'ROW', 'COL', 'REQUESTS']] = [weekday, hour, col, row,
+                        df_ret.loc[i, ['WEEKDAY', 'HOUR', 'ROW', 'COL', 'REQUESTS']] = [weekday, hour, row, col,
                                                                                           count]
                         i += 1
     else:
@@ -52,7 +52,7 @@ def aggregated_requests(df: pd.DataFrame, zero_req_padding: bool, fix_row_col_co
             weekday, hour, row, col = item['WEEKDAY'], item['HOUR'], item['ROW'], item['COL']
             if df_ret.query(f"WEEKDAY == {weekday} and HOUR == {hour} and COL == {col} and ROW == {row}").shape[0] == 0:
                 count = df.query(f"WEEKDAY == {weekday} and HOUR == {hour} and COL == {col} and ROW == {row}").shape[0]
-                temp_df_sector = pd.DataFrame(data=[[weekday, hour, col, row, count]],
+                temp_df_sector = pd.DataFrame(data=[[weekday, hour, row, col, count]],
                                               columns=['WEEKDAY', 'HOUR', 'ROW', 'COL', 'REQUESTS'], dtype="int32")
                 df_ret = pd.concat([df_ret, temp_df_sector])
                 continue
@@ -77,12 +77,15 @@ class Sectorizer():
         self._start_lon_min, self._start_lon_max = df['STARTLONG'].min(), df['STARTLONG'].max()
         self._lat_step = (self._start_lat_max - self._start_lat_min) / self._row_count
         self._lon_step = (self._start_lon_max - self._start_lon_min) / self._col_count
+        self._repr_edge_coords = []
 
     def _find_edge_in_center_of_sector(self, row, col):
         # get center of sector
         lat = self._start_lat_min + self._lat_step * (row + 0.5)
         lon = self._start_lon_min + self._lon_step * (col + 0.5)
         edge, _, _ = self._edge_finder.findNearestEdge(lat=lat, long=lon)
+        if edge not in self._repr_edge_coords:
+            self._repr_edge_coords.append({"edge_id": edge, "lat": lat, "lon": lon})
         return edge
 
     def enrich_sectors(self) -> pd.DataFrame:
@@ -93,7 +96,11 @@ class Sectorizer():
         for idx, item in self._df.iterrows():
             # Calculate row and col from lat and long
             row = int((item["STARTLAT"] - self._start_lat_min) / self._lat_step)
+            if row == self._row_count:
+                row -= 1
             col = int((item["STARTLONG"] - self._start_lon_min) / self._lat_step)
+            if col == self._col_count:
+                col -= 1
             temp_df_sector = pd.DataFrame(data=[[row, col]], index=[idx], columns=['ROW', 'COL'],
                                           dtype="int32")
             df_sector = pd.concat([df_sector, temp_df_sector])
@@ -127,3 +134,6 @@ class Sectorizer():
                     "representative_edge": self._find_edge_in_center_of_sector(row, col)
                 })
         return bbox_list
+
+    def additional_edge_coords(self) -> list:
+        return self._repr_edge_coords
