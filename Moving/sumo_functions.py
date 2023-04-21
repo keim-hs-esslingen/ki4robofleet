@@ -219,7 +219,7 @@ def route_to_edge(vehID: str, target_edge: str) -> bool:
         dlog(f"Optimization target is too close (less than 3 edges) for vehID({vehID}). Will not route to target")
         return False
     traci.vehicle.changeTarget(vehID, target_edge)
-    traci.vehicle.setStop(vehID, target_edge, 1.0, 0, 1.0)
+    traci.vehicle.setStop(vehID, target_edge, float(traci.simulation.getTime() % 50) * 0.1 + 1.0, 0, 1.0)
     traci.vehicle.resume(vehID=vehID)
     return True
 
