@@ -34,7 +34,7 @@ glog = factory("white", "on_green")
 elog = factory("white", "on_red")
 log = factory("white", "on_grey")
 ylog = factory("yellow", "on_blue")
-dlog = factory("white", "on_blue")
+dlog = factory("black", "on_blue")
 
 if __name__ == "__main__":
     log("Hello World")

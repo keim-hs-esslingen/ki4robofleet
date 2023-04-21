@@ -19,16 +19,19 @@ from Tools.XMLogger import xlog
 from Tools.check_sumo import sumo_available
 from Moving.request import Request
 from Moving.vehicles import Vehicle
+from Moving.taxi_fleet_state_wrapper import TaxiFleetStateWrapper, TaxiState
 
 sumo_available()
 import traci  # noqa
+from traci import exceptions
 
 
 def simulation_step() -> int:
+    time = traci.simulation.getTime()
     try:
         traci.simulationStep()
     except Exception as e:
-        elog(f"step error {e}")
+        elog(f"({time}): step error {e}")
         exit()
     return int(traci.simulation.getTime())
 
@@ -39,6 +42,8 @@ def dispatch(taxi, reservations):
     try:
         #nextPoi = reservations[]
         traci.vehicle.dispatchTaxi(taxi, reservations)
+        if traci.vehicle.isStopped(taxi):
+            traci.vehicle.resume(taxi)
         #print("RESERVIERUNGSLISTE: ",str(reservations[0]))
 
 
@@ -57,6 +62,11 @@ def dispatch(taxi, reservations):
         return False
     return True
 
+def dispatch_reset_optimization(taxi, reservations, taxi_fleet_state_wrapper: TaxiFleetStateWrapper):
+    if dispatch(taxi, reservations):
+        taxi_fleet_state_wrapper.reset_optimizing_state(taxi)
+        return True
+    return False
 
 def add_route(req: Request):
     """
@@ -130,8 +140,7 @@ def add_and_route_vehicle(vehID, to_poi: Point_of_Interest, t=0):
     generate taxi and move taxi to start-poi of request
     """
     try:
-        traci.vehicle.add(vehID, routeID=to_poi.route, typeID="taxi")
-        
+        traci.vehicle.add(vehID, routeID=to_poi.route, typeID="taxi") # to_poi.route is not known
         # log(f"new vehicle {vehID}")
     except Exception as e:
         elog(f"new vehicle error {e}")
@@ -150,6 +159,24 @@ def add_and_route_vehicle(vehID, to_poi: Point_of_Interest, t=0):
 
     xlog(name="vehicle", time=t, vehicle=vehID, cmd="init", poi=to_poi.idx)
     return True
+
+def add_dummy_reservation(clean_edge):
+    """
+    generate a dummy person for sup strategy
+    needed an initial and reusable dispatchTaxi command with a dummy reservation
+    """
+    try:
+        traci.person.add("dummy_person", clean_edge, pos=0.0, typeID="DEFAULT_PEDTYPE")
+    except Exception as e:
+        elog("could not add dummy person. reason:" + str(e))
+        return False
+    try:
+        traci.person.appendDrivingStage("dummy_person", clean_edge, lines="taxi")
+    except Exception as e:
+        elog("could not appendDrivingStage. reason:" + str(e))
+        return False
+    return True
+
 
 
 def add_person_request(personID, req: Request):
@@ -176,3 +203,31 @@ def add_person_request(personID, req: Request):
     req.personID = personID
     req.reservation = None
     return True
+
+def route_to_edge(vehID: str, target_edge: str) -> bool:
+    """
+    generate a route to target_edge and set it for vehID
+    WARNING: to_edge (from SectorEdges.xml) always must be in format 1234#y. Does not work without #y; e.g. y=0
+    """
+    stage = None
+    try:
+        stage = traci.simulation.findRoute(fromEdge=traci.vehicle.getRoadID(vehID), toEdge=target_edge)
+    except exceptions.TraCIException as e:
+        elog(e)
+        return False
+    if not stage or len(stage.edges) <= 2:
+        dlog(f"Optimization target is too close (less than 3 edges) for vehID({vehID}). Will not route to target")
+        return False
+    traci.vehicle.changeTarget(vehID, target_edge)
+    traci.vehicle.setStop(vehID, target_edge, float(traci.simulation.getTime() % 50) * 0.1 + 1.0, 0, 1.0)
+    traci.vehicle.resume(vehID=vehID)
+    return True
+
+def route_to_edge_for_optimization(taxi_fleet_state_wrapper: TaxiFleetStateWrapper, vehID: str, target_edge: str) -> bool:
+    """
+    generate a route to target_edge and set it for vehID
+    """
+    if route_to_edge(vehID, target_edge):
+        taxi_fleet_state_wrapper.set_optimizing_state(vehID)
+        return True
+    return False

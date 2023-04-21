@@ -7,3 +7,4 @@ lxml
 Pillow
 sumolib
 traci
+plotly

@@ -16,6 +16,7 @@ from Moving.request_manager import Request_Manager
 from Tools.dotdict import DotDict
 import os
 import atexit
+import pandas as pd
 import xml.etree.ElementTree as ET
 from typing import List
 
@@ -31,6 +32,7 @@ from Project.check import (
     shared_strategy,
     simple_strategy,
     look_ahead_strategy,
+    sup_learn_strategy
 )
 from Project.project_data import ProjectConfigData
 
@@ -41,6 +43,8 @@ from Opt.optimizer import routing_with_variants
 from Opt.sharing import sharing
 
 from Tools.check_sumo import sumo_available
+from KI4RoboRoutingTools.Request_Creation.sumohelper.EdgeCoordsAccess import EdgeCoordsAccess
+from KI4RoboRoutingTools.Request_Creation.sumohelper.SectorCoordsAccess import SectorCoordsAccess
 
 sumo_available()
 from sumolib import checkBinary  # noqa
@@ -120,7 +124,8 @@ class Project:
         self.data.realistic_time = 1.0
 
         if self.data.requests == None or len(self.data.requests) == 0:
-            if config.requests_file and os.path.exists(config.requests_file):
+            if os.path.splitext(self.data.requests_file)[-1].lower() == ".xml":
+                # Warum nochmal zuweisen. Enthält bereits den identischen Wert. Gleiches bei EdgeCoords, SectorCoords
                 self.data.requests_file = config.requests_file
                 self.read_requests_xml_file()
             else:
@@ -130,6 +135,33 @@ class Project:
                 f"Using requests, POI, parking and distances from {config.project_file}"
             )
 
+        if self.data.edge_coords == None or len(self.data.edge_coords) == 0:
+            dlog(f"Reading EdgeCoords from {config.edge_coords_file}")
+            self.data.edge_coords_file = config.edge_coords_file
+            try:
+                self.read_edge_coords_xml()
+                dlog(f"Example: EdgeCoords[0]: {self.data.edge_coords[0]}")
+            except AttributeError as e:
+                dlog(f"Cannot read a valid EdgeCoords file. Error:" + str(e))
+
+        if self.data.sector_coords == None or len(self.data.sector_coords) == 0:
+            dlog(f"Reading SectorCoords from {config.sector_coords_file}")
+            self.data.sector_coords_file = config.sector_coords_file
+            try:
+                self.read_sector_coords_xml()
+                dlog(f"Example: SectorCoords[0]: {self.data.sector_coords[0]}")
+            except AttributeError as e:
+                dlog(f"Cannot read a valid SectorCoords file. Error:" + str(e))
+
+        if self.data.sup_learn_training_data == None or len(self.data.sup_learn_training_data) == 0:
+            dlog(f"Reading Supervised Learning training data from {config.sup_learn_training_data_file}")
+            self.data.sup_learn_training_data_file = config.sup_learn_training_data_file
+            try:
+                self.read_sup_learn_training_data_csv()
+                dlog(f"Example: TrainData[0]: {self.data.sup_learn_training_data.iloc[0]}")
+            except AttributeError as e:
+                dlog(f"Cannot read a valid TrainData file. Error:" + str(e))
+
     def init_poi_manager(self):
         assert self.data.clean_edge != None
         self.init_sumo()
@@ -138,7 +170,8 @@ class Project:
         reader.read_config(self.data.sumo_config_file)
         
         # clean_roads takes a lot of time, therefore it should be considered to skip this method
-        reader.clean_roads(traci, self.data.clean_edge)
+        reader.clean_roads(traci, self.data.clean_edge,
+                           skip_find_route_to_clean_edge=self.data.skip_find_route_to_clean_edge)
         
         return poi_mgr
 
@@ -277,6 +310,38 @@ class Project:
         )
         write_pickle(self.data.project_file, self.data)
         dlog(f"Project saving {self.data.project_file} with {len(self.data.requests)} ")
+
+    def read_edge_coords_xml(self):
+        """
+        read EdgeCoords from XML
+        """
+        if not os.path.exists(self.data.edge_coords_file):
+            raise AttributeError(f"EdgeCoords file not found")
+        if os.path.splitext(self.data.edge_coords_file)[-1].lower() != ".xml":
+            raise AttributeError(f"EdgeCoords file is no valid .xml file")
+        edge_coords_reader = EdgeCoordsAccess.read_from_file(self.data.edge_coords_file)
+        self.data.edge_coords = edge_coords_reader.get_all()
+
+    def read_sector_coords_xml(self):
+        """
+        read SectorCoords from XML
+        """
+        if not os.path.exists(self.data.sector_coords_file):
+            raise AttributeError(f"SectorCoords file not found")
+        if os.path.splitext(self.data.sector_coords_file)[-1].lower() != ".xml":
+            raise AttributeError(f"SectorCoords file is no valid .xml file")
+        sector_coords_reader = SectorCoordsAccess.read_from_file(self.data.sector_coords_file)
+        self.data.sector_coords = sector_coords_reader.get_all()
+
+    def read_sup_learn_training_data_csv(self):
+        """
+        read Training Data for supervised learning based dispatching algorithms
+        """
+        if not os.path.exists(self.data.sup_learn_training_data_file):
+            raise AttributeError(f"Supervised Learning csv file not found")
+        if os.path.splitext(self.data.sup_learn_training_data_file)[-1].lower() != ".csv":
+            raise AttributeError(f"Supervised Learning file is no valid .csv file")
+        self.data.sup_learn_training_data = pd.read_csv(self.data.sup_learn_training_data_file)
 
     def print_requests_routes(self):
         for req in self.data.requests:
@@ -422,6 +487,10 @@ class Project:
 
         if strategy == "look_ahead":
             look_ahead_strategy(self.data)
+            num_of_vehicles = self.data.no_of_vehicles
+
+        if strategy == "sup_learn":
+            sup_learn_strategy(self.data)
             num_of_vehicles = self.data.no_of_vehicles
 
         if Request.manager:
