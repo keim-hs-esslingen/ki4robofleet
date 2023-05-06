@@ -8,3 +8,6 @@ Pillow
 sumolib
 traci
 plotly
+scikit-learn
+geopy
+plotly_express
