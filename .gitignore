@@ -188,3 +188,6 @@ fabric.properties
 Results
 *.pickle
 cleaned_POI.txt
+
+# Own SUMO models
+NY_Brooklyn_SUMO_Model/
