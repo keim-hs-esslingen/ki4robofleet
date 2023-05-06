@@ -14,6 +14,7 @@ from sumohelper.EdgeCoordsAccess import EdgeCoordsAccess, EdgeCoord
 from sumohelper.SectorCoordsAccess import SectorCoordsAccess, SectorCoord
 from helper.TimeHelperFunction import timediff_seconds, to_car2go_format
 from helper.RequestFilter import filter_by_datettime
+from helper.NycFormatConversionAndFilter import convert_nyc_to_sumo4av_format, filter_by_lat_long
 from dataseteval import MapMetrics, MapPlotter, DateTimeHelper
 from sectorizing import Sectorizing
 
@@ -24,7 +25,7 @@ logging.basicConfig(filename=f'Request_Creation_{datetime.now().isoformat()}', l
 
 
 def build_output_path(city: str, filename: str):
-    basepath = f"_output/{city}_{datetime.now().strftime('%Y-%m-%d')}/"
+    basepath = os.path.dirname(os.path.abspath(__file__)) + f"/_output/{city}_{datetime.now().strftime('%Y-%m-%d')}/"
     if not os.path.exists(basepath):
         os.makedirs(basepath)
     return basepath + filename
@@ -59,8 +60,9 @@ COLUMNS = ['idx', 'start_lat', 'start_long',
            'finish_edge', 'finish_edge_pos', 'finish_poi', 'finish_poi_way_id']
 COLUMNS_LATLONG_EDGES = ["edge_id", "lat", "long"]
 
-SIMU_START_DATETIME = datetime(year=2014, month=10, day=10, hour=12, minute=0, second=0)
-SIMU_END_DATETIME = datetime(year=2014, month=10, day=10, hour=13, minute=59, second=59)
+SIMU_START_DATETIME = datetime(year=2016, month=5, day=6, hour=12, minute=0, second=0)
+#SIMU_END_DATETIME = datetime(year=2016, month=5, day=6, hour=12, minute=1, second=59)
+SIMU_END_DATETIME = datetime(year=2016, month=5, day=6, hour=13, minute=59, second=59)
 
 
 # 1 Find Edges that are reachable both from pedestrians as well as cars --> List
@@ -104,9 +106,10 @@ def main(sumo_working_dir: str, trips: str):
     edge_finder = EdgeFinder(f"{complete_sumo_dir}/osm.sumocfg")
 
     # filter set of trips by simulation start and end time
-    trips = filter_by_datettime(df=pd.read_csv(complete_trips_file),
-                                        from_dt=SIMU_START_DATETIME,
-                                        to_dt=SIMU_END_DATETIME)
+    trips = filter_by_datettime(df=filter_by_lat_long(convert_nyc_to_sumo4av_format(complete_trips_file),
+                                    long_min=-74.101683, lat_min=-40.409339, long_max=-73.813532, lat_max=40.881307),
+                                from_dt=SIMU_START_DATETIME,
+                                to_dt=SIMU_END_DATETIME)
 
     print(trips.head())
 
@@ -163,6 +166,7 @@ def main(sumo_working_dir: str, trips: str):
         pd.DataFrame(columns=COLUMNS),
         pd.DataFrame(columns=COLUMNS),
         pd.DataFrame(columns=COLUMNS_LATLONG_EDGES)]
+    mapped_trips_test = trips_test.copy()
     for idx, trip in trips_test.iterrows():
         trip_info = f"Trip({idx},lat={trip[KEY_STARTLAT]},long={trip[KEY_STARTLONG]})"
         start_coord_valid, finish_coord_valid, start_poi_valid, finish_poi_valid = False, False, False, False
@@ -172,7 +176,7 @@ def main(sumo_working_dir: str, trips: str):
             logging.info(f"{trip_info}: Find best fitting 'start edge'...")
             start_edge, start_lane_pos, start_lane_idx = edge_finder.findBestFittingEdge(
                 lat=trip[KEY_STARTLAT], long=trip[KEY_STARTLONG],
-                edges_list=edges_for_cars, allow_correction=True, corr_algorithm="eqdistcircles",
+                edges_list=edges_for_cars, allow_correction=False, corr_algorithm="eqdistcircles",
                 max_matching_distance_meters=250)
             start_coord_valid = True
         except RuntimeError as e:
@@ -190,7 +194,7 @@ def main(sumo_working_dir: str, trips: str):
             logging.info(f"{trip_info}: Find best fitting 'finish edge'...")
             finish_edge, finish_lane_pos, finish_lane_idx = edge_finder.findBestFittingEdge(
                 lat=trip[KEY_FINLAT], long=trip[KEY_FINLONG],
-                edges_list=edges_for_cars, allow_correction=True, corr_algorithm="eqdistcircles",
+                edges_list=edges_for_cars, allow_correction=False, corr_algorithm="eqdistcircles",
                 max_matching_distance_meters=250)
             finish_coord_valid = True
         except RuntimeError as e:
@@ -228,6 +232,7 @@ def main(sumo_working_dir: str, trips: str):
                                                                        finish_edge, finish_lane_pos, finish_poi, finish_way_id]],
                                                                      columns=COLUMNS)])
             logging.warning(f"{trip_info}:could not be mapped to an edge for cars")
+            mapped_trips_test = mapped_trips_test.drop([idx])
 
     edges_total = len(mapped_edges) + len(unmapped_edges)
     logging.info(
@@ -238,7 +243,7 @@ def main(sumo_working_dir: str, trips: str):
     rq_creator = CustomerRequestAccess(start_datetime=SIMU_START_DATETIME, sim_duration_seconds=int(
         (SIMU_END_DATETIME - SIMU_START_DATETIME).total_seconds()))
     poi_edge_creator = PoiEdgesAccess()
-    for idx, trip in trips_test.iterrows():
+    for idx, trip in mapped_trips_test.iterrows():
         try:
             time_diff = timediff_seconds(SIMU_START_DATETIME, trip['STARTED_LOCAL'])
             try:
