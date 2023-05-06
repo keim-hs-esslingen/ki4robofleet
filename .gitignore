@@ -191,3 +191,6 @@ cleaned_POI.txt
 
 # Own SUMO models
 NY_Brooklyn_SUMO_Model/
+
+# KI4RoboRoutingTools/Request_Creation/_output folder
+KI4RoboRoutingTools/Request_Creation/_output/
