@@ -86,7 +86,8 @@ def add_route_to_poi(start, poi: Point_of_Interest):
     - necessary for parking
     """
     stage = traci.simulation.findRoute(start, poi.road)
-    assert stage and len(stage.edges) > 2
+    if not stage or len(stage.edges) <= 2:
+        raise RuntimeError(f"route from start({start}) to parking({poi.road}) could not be found")
     rid = f"to_poi_{poi.idx}"
     traci.route.add(rid, stage.edges)
     return rid
@@ -122,7 +123,11 @@ def shared_strategy(data: ProjectConfigData):
     # add routes to sumo and store route-id in poi
     # used to initially send taxis to parking places
     for poi in parking:
-        poi.route = add_route_to_poi(data.clean_edge, poi)
+        try:
+            poi.route = add_route_to_poi(data.clean_edge, poi)
+        except RuntimeError as e:
+            elog(e)
+            parking.remove(poi)
 
     open_requests = check_requests(requests, logging=True)
 
@@ -270,7 +275,11 @@ def simple_strategy(data: ProjectConfigData):
     # add routes to sumo and store route-id in poi
     # used to initially send taxis to parking places
     for poi in parking:
-        poi.route = add_route_to_poi(data.clean_edge, poi)
+        try:
+            poi.route = add_route_to_poi(data.clean_edge, poi)
+        except RuntimeError as e:
+            elog(e)
+            parking.remove(poi)
 
     vehicle_positions: Dict[Vehicle] = {}
     requests_dict = {}
@@ -386,7 +395,11 @@ def look_ahead_strategy(data: ProjectConfigData):
     # add routes to sumo and store route-id in poi
     # used to initially send taxis to parking places
     for poi in parking:
-        poi.route = add_route_to_poi(data.clean_edge, poi)
+        try:
+            poi.route = add_route_to_poi(data.clean_edge, poi)
+        except RuntimeError as e:
+            elog(e)
+            parking.remove(poi)
 
     open_requests = check_requests(requests)
 
@@ -516,7 +529,11 @@ def sup_learn_strategy(data: ProjectConfigData):
     # add routes to sumo and store route-id in poi
     # used to initially send taxis to parking places
     for poi in parking:
-        poi.route = add_route_to_poi(data.clean_edge, poi)
+        try:
+            poi.route = add_route_to_poi(data.clean_edge, poi)
+        except RuntimeError as e:
+            elog(e)
+            parking.remove(poi)
 
     vehicle_positions: Dict[Vehicle] = {}
     requests_dict = {}
