@@ -184,14 +184,7 @@ def main(sumo_working_dir: str, trips: str):
         except RuntimeError as e:
             logging.error(f"{trip_info}:{e}")
             start_edge = "-1"
-        try:
-            logging.info(f"{trip_info}: Find best fitting 'start POI'...")
-            start_poi, start_way_id = findBestFittingPoi(lat=trip[KEY_STARTLAT], long=trip[KEY_STARTLONG], corr_algorithm="normdist",
-                                           max_matching_distance_meters=500)
-            start_poi_valid = True
-        except RuntimeError as re:
-            logging.warning(f"{trip_info}:{re}")
-            start_poi = get_default_poi()
+        start_poi = get_default_poi()
         try:
             logging.info(f"{trip_info}: Find best fitting 'finish edge'...")
             finish_edge, finish_lane_pos, finish_lane_idx = edge_finder.findBestFittingEdge(
@@ -202,14 +195,7 @@ def main(sumo_working_dir: str, trips: str):
         except RuntimeError as e:
             logging.error(f"{trip_info}:{e}")
             finish_edge = "-1"
-        try:
-            logging.info(f"{trip_info}: Find best fitting 'start POI'...")
-            finish_poi, finish_way_id = findBestFittingPoi(lat=trip[KEY_FINLAT], long=trip[KEY_FINLONG], corr_algorithm="normdist",
-                                            max_matching_distance_meters=500)
-            finish_poi_valid = True
-        except RuntimeError as re:
-            logging.warning(f"{trip_info}:{re}")
-            finish_poi = get_default_poi()
+        finish_poi = get_default_poi()
         logging.info(
             f"{trip_info}: Start Edge: {start_edge}, Lane pos: {start_lane_pos} idx: {start_lane_idx}, Start POI: {start_poi}, way: {start_way_id} - valid: {start_poi_valid}"
             f"- Finish Edge: {finish_edge}, Lane pos: {finish_lane_pos} idx: {finish_lane_idx}, Finish POI: {finish_poi}, way: {finish_way_id} - valid: {finish_poi_valid}")
