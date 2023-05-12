@@ -17,6 +17,7 @@ from helper.RequestFilter import filter_by_datettime
 from helper.NycFormatConversionAndFilter import convert_nyc_to_sumo4av_format, filter_by_lat_long
 from dataseteval import MapMetrics, MapPlotter, DateTimeHelper
 from sectorizing import Sectorizing
+from parking import ParkingAreaCoordinates
 
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -46,7 +47,7 @@ def build_output_path(city: str, filename: str):
 #|-------|------------|-------------------|---------------------|----------|----------|------------------|-------------------|------------------|-------------------|
 #|    10 |         21 | WMEEJ3BA1CK573655 | 2014-10-10 07:44:25 |      281 |        1 | 47.6547255606243 | -122.373674595368 | 47.6629051839964 | -122.369596853198 |
 
-STEP_SIZE_SECTORS = 3000
+STEP_SIZE_SECTORS = 5000
 
 KEY_WEEKDAY = 'WEEKDAY'
 KEY_HOUR = 'HOUR'
@@ -107,7 +108,7 @@ def main(sumo_working_dir: str, trips: str):
 
     # filter set of trips by simulation start and end time
     trips = filter_by_datettime(df=filter_by_lat_long(convert_nyc_to_sumo4av_format(complete_trips_file),
-                                    long_min=-74.101683, lat_min=-40.409339, long_max=-73.813532, lat_max=40.881307),
+                                    long_min=-74.02749, lat_min=40.57406, long_max=-73.85266, lat_max=40.71400),
                                 from_dt=SIMU_START_DATETIME,
                                 to_dt=SIMU_END_DATETIME)
 
@@ -138,6 +139,7 @@ def main(sumo_working_dir: str, trips: str):
     trips = sectorizer.enrich_sectors()
     list_sector_coords = sectorizer.bbox_of_sectors()
     additional_edge_coords = sectorizer.additional_edge_coords()
+    parking_edge_coords = ParkingAreaCoordinates.ParkingAreaCoordinates(xml_file=f"{complete_sumo_dir}/parkingAreas.xml").additional_edge_coords()
     sector_coords_creator = SectorCoordsAccess()
     for sector_dict in list_sector_coords:
         sector_coords_creator.add_sector_coord(SectorCoord(row=sector_dict['row'],
@@ -285,6 +287,12 @@ def main(sumo_working_dir: str, trips: str):
             long=edge["long"]
         ))
     for edge_coords in additional_edge_coords:
+        edge_coords_creator.add_edge_coord(EdgeCoord(
+            edge_id=edge_coords["edge_id"],
+            lat=edge_coords["lat"],
+            long=edge_coords["lon"]
+        ))
+    for edge_coords in parking_edge_coords:
         edge_coords_creator.add_edge_coord(EdgeCoord(
             edge_id=edge_coords["edge_id"],
             lat=edge_coords["lat"],
