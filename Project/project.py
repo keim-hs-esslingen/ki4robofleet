@@ -231,7 +231,7 @@ class Project:
      
             from_poi = None
             to_poi = None
-            # here we check if the current customer request is assigned to a certain POI 
+            # here we check if the current customer request is assigned to a certain POI
             if req.attrib.get("fromPOI"):
                 from_poi = poi_mgr.find_poi(
                     req.attrib.get("fromEdge"), float(req.attrib.get("fromEdgePosition"))
@@ -241,7 +241,7 @@ class Project:
                 )
 
             # if the current customer request is not assigned to a certain POIs, we create a generic POIs
-            else:
+            if from_poi is None or to_poi is None:
                 genericPoiId = "generic_"+str(genericPoiIdCounter)
                 from_poi = Point_of_Interest(genericPoiId, req.attrib.get("fromEdge"))
                 from_poi.pos = float(req.attrib.get("fromEdgePosition"))
