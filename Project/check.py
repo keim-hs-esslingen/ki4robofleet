@@ -578,22 +578,13 @@ def sup_learn_strategy(data: ProjectConfigData):
                                             coords=Coordinates(lat=edge_coord.lat, lon=edge_coord.long))
         except ValueError as e:
             pass
-    # TODO - echte Koordinate der edge suchen
-    edge_coords.add_edge_coordinates(edge_id=parking[0].edge_id,
-                                     coords=Coordinates(lat=47.64675, lon=-122.33633))
 
     sector_coords = SectorCoordinates()
     for sector_coord in data.sector_coords:
         sector_coords.add_sector_coordinates(sector=Sector(row=sector_coord.row, col=sector_coord.col),
                                              bbox=tuple(sector_coord.bbox),
                                              representative_edge=sector_coord.representative_edge)
-        # bullshit start
-        #if sf.route_to_edge("taxi_0001", sector_coord.representative_edge):
-        #    dlog(f"edge {sector_coord.representative_edge} is found")
-        #else:
-        #    elog(f"edge {sector_coord.representative_edge} is invalid")
 
-        # bullshit end
     training_data = TrainingData.from_weekday_hour_df(df=data.sup_learn_training_data,
                                                       abs_start_dt=datetime.datetime(2014,10,10,00,00),
                                                       normalize_cols=['REQUESTS'])
