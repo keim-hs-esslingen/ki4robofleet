@@ -1,5 +1,7 @@
 from .sector import Sector
 from .coordinates import Coordinates
+from math import sqrt
+from Tools.logger import elog
 
 class SectorCoordinates:
     def __init__(self):
@@ -52,12 +54,34 @@ class SectorCoordinates:
                 return sector_coord["representative_edge"]
         raise ValueError(f"sector {sector} not found in sector_coordiantes, len={len(self.__sector_coordinates)}")
 
+    from math import sqrt
+
+    def find_closest_sector(self, coords: Coordinates) -> Sector:
+        closest_sector = None
+        min_distance = float('inf')
+        for sector_coord in self.__sector_coordinates:
+            sector_bbox = sector_coord["bbox"]
+            if coords.lon() < sector_bbox[0] or coords.lon() > sector_bbox[2] or \
+                    coords.lat() < sector_bbox[1] or coords.lat() > sector_bbox[3]:
+                # Coordinates are outside the sector's bbox
+                sector_center_lon = (sector_bbox[0] + sector_bbox[2]) / 2
+                sector_center_lat = (sector_bbox[1] + sector_bbox[3]) / 2
+                distance = sqrt((coords.lon() - sector_center_lon) ** 2 + (coords.lat() - sector_center_lat) ** 2)
+                if distance < min_distance:
+                    min_distance = distance
+                    closest_sector = sector_coord["sector"]
+        if closest_sector is None:
+            raise ValueError(f"No sector found near the given coordinates: {coords}")
+        else:
+            elog("Warning: The given coordinates are outside the defined sectors. Closest sector will be used.")
+            return closest_sector
+
     def get_sector(self, coords: Coordinates) -> Sector:
         for sector_coord in self.__sector_coordinates:
             if sector_coord["bbox"][0] <= coords.lon() <= sector_coord["bbox"][2] and \
                     sector_coord["bbox"][1] <= coords.lat() <= sector_coord["bbox"][3]:
                 return sector_coord["sector"]
-        raise ValueError(f"coords {coords} not found in range of any sector_coordiantes, bbox is {self.__overall_bbox}")
+        return self.find_closest_sector(coords)
 
     def get_sectors_shape(self) -> tuple:
         min_row, max_row, min_col, max_col = (None, None, None, None)
