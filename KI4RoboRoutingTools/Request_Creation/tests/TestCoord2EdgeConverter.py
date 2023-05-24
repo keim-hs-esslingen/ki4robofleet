@@ -1,7 +1,7 @@
 import unittest
 import sys
 import argparse
-from sumohelper.Coord2EdgeConverter import EdgeFinder
+from KI4RoboRoutingTools.Request_Creation.sumohelper.Coord2EdgeConverter import EdgeFinder
 
 class Coord2EdgeConverterTest(unittest.TestCase):
     SUMO_CONFIG = "../../../../Seattle_OSM/osm.sumocfg"

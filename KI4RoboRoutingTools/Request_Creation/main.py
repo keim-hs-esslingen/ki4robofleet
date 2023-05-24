@@ -14,8 +14,10 @@ from sumohelper.EdgeCoordsAccess import EdgeCoordsAccess, EdgeCoord
 from sumohelper.SectorCoordsAccess import SectorCoordsAccess, SectorCoord
 from helper.TimeHelperFunction import timediff_seconds, to_car2go_format
 from helper.RequestFilter import filter_by_datettime
+from helper.NycFormatConversionAndFilter import convert_nyc_to_sumo4av_format, filter_by_lat_long
 from dataseteval import MapMetrics, MapPlotter, DateTimeHelper
 from sectorizing import Sectorizing
+from parking import ParkingAreaCoordinates
 
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -24,7 +26,7 @@ logging.basicConfig(filename=f'Request_Creation_{datetime.now().isoformat()}', l
 
 
 def build_output_path(city: str, filename: str):
-    basepath = f"_output/{city}_{datetime.now().strftime('%Y-%m-%d')}/"
+    basepath = os.path.dirname(os.path.abspath(__file__)) + f"/_output/{city}_{datetime.now().strftime('%Y-%m-%d')}/"
     if not os.path.exists(basepath):
         os.makedirs(basepath)
     return basepath + filename
@@ -45,7 +47,7 @@ def build_output_path(city: str, filename: str):
 #|-------|------------|-------------------|---------------------|----------|----------|------------------|-------------------|------------------|-------------------|
 #|    10 |         21 | WMEEJ3BA1CK573655 | 2014-10-10 07:44:25 |      281 |        1 | 47.6547255606243 | -122.373674595368 | 47.6629051839964 | -122.369596853198 |
 
-STEP_SIZE_SECTORS = 3000
+STEP_SIZE_SECTORS = 5000
 
 KEY_WEEKDAY = 'WEEKDAY'
 KEY_HOUR = 'HOUR'
@@ -59,8 +61,9 @@ COLUMNS = ['idx', 'start_lat', 'start_long',
            'finish_edge', 'finish_edge_pos', 'finish_poi', 'finish_poi_way_id']
 COLUMNS_LATLONG_EDGES = ["edge_id", "lat", "long"]
 
-SIMU_START_DATETIME = datetime(year=2014, month=10, day=10, hour=12, minute=0, second=0)
-SIMU_END_DATETIME = datetime(year=2014, month=10, day=10, hour=13, minute=59, second=59)
+SIMU_START_DATETIME = datetime(year=2016, month=5, day=6, hour=12, minute=0, second=0)
+#SIMU_END_DATETIME = datetime(year=2016, month=5, day=6, hour=12, minute=1, second=59)
+SIMU_END_DATETIME = datetime(year=2016, month=5, day=6, hour=13, minute=59, second=59)
 
 
 # 1 Find Edges that are reachable both from pedestrians as well as cars --> List
@@ -104,9 +107,10 @@ def main(sumo_working_dir: str, trips: str):
     edge_finder = EdgeFinder(f"{complete_sumo_dir}/osm.sumocfg")
 
     # filter set of trips by simulation start and end time
-    trips = filter_by_datettime(df=pd.read_csv(complete_trips_file),
-                                        from_dt=SIMU_START_DATETIME,
-                                        to_dt=SIMU_END_DATETIME)
+    trips = filter_by_datettime(df=filter_by_lat_long(convert_nyc_to_sumo4av_format(complete_trips_file),
+                                    long_min=-74.02749, lat_min=40.57406, long_max=-73.85266, lat_max=40.71400),
+                                from_dt=SIMU_START_DATETIME,
+                                to_dt=SIMU_END_DATETIME)
 
     print(trips.head())
 
@@ -135,6 +139,7 @@ def main(sumo_working_dir: str, trips: str):
     trips = sectorizer.enrich_sectors()
     list_sector_coords = sectorizer.bbox_of_sectors()
     additional_edge_coords = sectorizer.additional_edge_coords()
+    parking_edge_coords = ParkingAreaCoordinates.ParkingAreaCoordinates(xml_file=f"{complete_sumo_dir}/parkingAreas.xml").additional_edge_coords()
     sector_coords_creator = SectorCoordsAccess()
     for sector_dict in list_sector_coords:
         sector_coords_creator.add_sector_coord(SectorCoord(row=sector_dict['row'],
@@ -163,6 +168,7 @@ def main(sumo_working_dir: str, trips: str):
         pd.DataFrame(columns=COLUMNS),
         pd.DataFrame(columns=COLUMNS),
         pd.DataFrame(columns=COLUMNS_LATLONG_EDGES)]
+    mapped_trips_test = trips_test.copy()
     for idx, trip in trips_test.iterrows():
         trip_info = f"Trip({idx},lat={trip[KEY_STARTLAT]},long={trip[KEY_STARTLONG]})"
         start_coord_valid, finish_coord_valid, start_poi_valid, finish_poi_valid = False, False, False, False
@@ -172,38 +178,24 @@ def main(sumo_working_dir: str, trips: str):
             logging.info(f"{trip_info}: Find best fitting 'start edge'...")
             start_edge, start_lane_pos, start_lane_idx = edge_finder.findBestFittingEdge(
                 lat=trip[KEY_STARTLAT], long=trip[KEY_STARTLONG],
-                edges_list=edges_for_cars, allow_correction=True, corr_algorithm="eqdistcircles",
+                edges_list=edges_for_cars, allow_correction=False, corr_algorithm="eqdistcircles",
                 max_matching_distance_meters=250)
             start_coord_valid = True
         except RuntimeError as e:
             logging.error(f"{trip_info}:{e}")
             start_edge = "-1"
-        try:
-            logging.info(f"{trip_info}: Find best fitting 'start POI'...")
-            start_poi, start_way_id = findBestFittingPoi(lat=trip[KEY_STARTLAT], long=trip[KEY_STARTLONG], corr_algorithm="normdist",
-                                           max_matching_distance_meters=500)
-            start_poi_valid = True
-        except RuntimeError as re:
-            logging.warning(f"{trip_info}:{re}")
-            start_poi = get_default_poi()
+        start_poi = get_default_poi()
         try:
             logging.info(f"{trip_info}: Find best fitting 'finish edge'...")
             finish_edge, finish_lane_pos, finish_lane_idx = edge_finder.findBestFittingEdge(
                 lat=trip[KEY_FINLAT], long=trip[KEY_FINLONG],
-                edges_list=edges_for_cars, allow_correction=True, corr_algorithm="eqdistcircles",
+                edges_list=edges_for_cars, allow_correction=False, corr_algorithm="eqdistcircles",
                 max_matching_distance_meters=250)
             finish_coord_valid = True
         except RuntimeError as e:
             logging.error(f"{trip_info}:{e}")
             finish_edge = "-1"
-        try:
-            logging.info(f"{trip_info}: Find best fitting 'start POI'...")
-            finish_poi, finish_way_id = findBestFittingPoi(lat=trip[KEY_FINLAT], long=trip[KEY_FINLONG], corr_algorithm="normdist",
-                                            max_matching_distance_meters=500)
-            finish_poi_valid = True
-        except RuntimeError as re:
-            logging.warning(f"{trip_info}:{re}")
-            finish_poi = get_default_poi()
+        finish_poi = get_default_poi()
         logging.info(
             f"{trip_info}: Start Edge: {start_edge}, Lane pos: {start_lane_pos} idx: {start_lane_idx}, Start POI: {start_poi}, way: {start_way_id} - valid: {start_poi_valid}"
             f"- Finish Edge: {finish_edge}, Lane pos: {finish_lane_pos} idx: {finish_lane_idx}, Finish POI: {finish_poi}, way: {finish_way_id} - valid: {finish_poi_valid}")
@@ -228,6 +220,7 @@ def main(sumo_working_dir: str, trips: str):
                                                                        finish_edge, finish_lane_pos, finish_poi, finish_way_id]],
                                                                      columns=COLUMNS)])
             logging.warning(f"{trip_info}:could not be mapped to an edge for cars")
+            mapped_trips_test = mapped_trips_test.drop([idx])
 
     edges_total = len(mapped_edges) + len(unmapped_edges)
     logging.info(
@@ -238,7 +231,7 @@ def main(sumo_working_dir: str, trips: str):
     rq_creator = CustomerRequestAccess(start_datetime=SIMU_START_DATETIME, sim_duration_seconds=int(
         (SIMU_END_DATETIME - SIMU_START_DATETIME).total_seconds()))
     poi_edge_creator = PoiEdgesAccess()
-    for idx, trip in trips_test.iterrows():
+    for idx, trip in mapped_trips_test.iterrows():
         try:
             time_diff = timediff_seconds(SIMU_START_DATETIME, trip['STARTED_LOCAL'])
             try:
@@ -280,6 +273,12 @@ def main(sumo_working_dir: str, trips: str):
             long=edge["long"]
         ))
     for edge_coords in additional_edge_coords:
+        edge_coords_creator.add_edge_coord(EdgeCoord(
+            edge_id=edge_coords["edge_id"],
+            lat=edge_coords["lat"],
+            long=edge_coords["lon"]
+        ))
+    for edge_coords in parking_edge_coords:
         edge_coords_creator.add_edge_coord(EdgeCoord(
             edge_id=edge_coords["edge_id"],
             lat=edge_coords["lat"],

@@ -28,9 +28,9 @@ def process_map_metrics(df: pd.DataFrame):
     print(f"Distance North - South: {metrics['distance_northsouth']:.2f} km")
     metrics['distance_eastwest'] = geopy.distance.geodesic(coord_east, coord_west).km
     print(f"Distance East  - West : {metrics['distance_eastwest']:.2f} km")
-    metrics['avgtriplength'] = df['DISTANCE'].mean()
+    metrics['avgtriplength'] = 0.0
     print(f"Average trip length: {metrics['avgtriplength']:.2f} miles/km?")
-    metrics['avgtripduration'] = df['DURATION'].mean()
+    metrics['avgtripduration'] = 0.0
     print(f"Average trip duration: {metrics['avgtripduration']:.2f} s / {metrics['avgtripduration']/60:.2f} min")
     try:
         lat_center_ns = (metrics['maxlat'] + metrics['minlat'])/2.
