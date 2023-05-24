@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import re
 
 # =============================================================================
 # Created at Hochschule Esslingen - University of Applied Sciences
@@ -13,7 +14,7 @@
 
 
 from Net.point_of_interest import Point_of_Interest
-from typing import List, Dict
+from typing import List, Dict, Tuple
 from Tools.logger import log, elog, dlog
 from Tools.XMLogger import xlog
 from Tools.check_sumo import sumo_available
@@ -204,22 +205,71 @@ def add_person_request(personID, req: Request):
     req.reservation = None
     return True
 
+class RouteCheck:
+    def __init__(self, fromEdge, toEdge):
+        self.fromEdgeRaw = fromEdge
+        self.toEdgeRaw = toEdge
+        self.fromEdgeFixed = None
+        self.toEdgeFixed = None
+
+    def route_exists(self):
+        # fix '420627369#12' --> '420627369#12' maybe causing problems
+        re_hash = re.compile(r'#\d+')
+        fromEdgeNoHash = re_hash.sub(repl='', string=self.fromEdgeRaw)
+        fromEdgeWithHash = self.fromEdgeRaw
+        if self.fromEdgeRaw == fromEdgeNoHash:
+            fromEdgeWithHash = fromEdgeNoHash + '#0'
+        toEdgeNoHash = re_hash.sub(repl='', string=self.toEdgeRaw)
+        toEdgeWithHash = self.toEdgeRaw
+        if self.toEdgeRaw == toEdgeNoHash:
+            toEdgeWithHash = toEdgeNoHash + '#0'
+
+        logs = []
+
+        combinations = []
+        combinations.append((fromEdgeWithHash, toEdgeWithHash))
+        combinations.append((fromEdgeNoHash, toEdgeWithHash))
+        combinations.append((fromEdgeWithHash, toEdgeNoHash))
+        combinations.append((fromEdgeNoHash, toEdgeNoHash))
+        # extend toEdge with hashes from 0 - 39:
+        [combinations.append((fromEdgeWithHash, toEdgeNoHash + f'#{i}')) for i in range(40)]
+        stage = None
+        for combination in combinations:
+            try:
+                stage = traci.simulation.findRoute(fromEdge=combination[0], toEdge=combination[1])
+                if not stage or len(stage.edges) <= 2:
+                    dlog(
+                        f"target is too close ({self.fromEdgeRaw} --> {self.toEdgeRaw} = less than 3 edges). Will not route to target")
+                    return False
+                self.fromEdgeFixed = combination[0]
+                self.toEdgeFixed = combination[1]
+                return True
+            except exceptions.TraCIException as e:
+                logs.append(str(e))
+        elog(', '.join(logs))
+        return False
+
+    def fixed_edges(self) -> Tuple[str, str]:
+        if self.route_exists():
+            return self.fromEdgeFixed, self.toEdgeFixed
+        else:
+            raise RuntimeError("No edges available")
+
 def route_to_edge(vehID: str, target_edge: str) -> bool:
     """
     generate a route to target_edge and set it for vehID
     WARNING: to_edge (from SectorEdges.xml) always must be in format 1234#y. Does not work without #y; e.g. y=0
     """
-    stage = None
+    route_check = RouteCheck(fromEdge=traci.vehicle.getRoadID(vehID), toEdge=target_edge)
+    validated_target_edge = None
     try:
-        stage = traci.simulation.findRoute(fromEdge=traci.vehicle.getRoadID(vehID), toEdge=target_edge)
-    except exceptions.TraCIException as e:
-        elog(e)
+        validated_target_edge = route_check.fixed_edges()[1]
+    except RuntimeError as e:
+        print(e)
+        dlog(f'optimization route for vehID({vehID}) not available or too short')
         return False
-    if not stage or len(stage.edges) <= 2:
-        dlog(f"Optimization target is too close (less than 3 edges) for vehID({vehID}). Will not route to target")
-        return False
-    traci.vehicle.changeTarget(vehID, target_edge)
-    traci.vehicle.setStop(vehID, target_edge, float(traci.simulation.getTime() % 50) * 0.1 + 1.0, 0, 1.0)
+    traci.vehicle.changeTarget(vehID, validated_target_edge)
+    traci.vehicle.setStop(vehID, validated_target_edge, float(traci.simulation.getTime() % 50) * 0.1 + 1.0, 0, 1.0)
     traci.vehicle.resume(vehID=vehID)
     return True
 
