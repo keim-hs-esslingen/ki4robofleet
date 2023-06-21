@@ -47,7 +47,7 @@ def build_output_path(city: str, filename: str):
 #|-------|------------|-------------------|---------------------|----------|----------|------------------|-------------------|------------------|-------------------|
 #|    10 |         21 | WMEEJ3BA1CK573655 | 2014-10-10 07:44:25 |      281 |        1 | 47.6547255606243 | -122.373674595368 | 47.6629051839964 | -122.369596853198 |
 
-STEP_SIZE_SECTORS = 5000
+STEP_SIZE_SECTORS = 3000
 
 KEY_WEEKDAY = 'WEEKDAY'
 KEY_HOUR = 'HOUR'
@@ -61,9 +61,9 @@ COLUMNS = ['idx', 'start_lat', 'start_long',
            'finish_edge', 'finish_edge_pos', 'finish_poi', 'finish_poi_way_id']
 COLUMNS_LATLONG_EDGES = ["edge_id", "lat", "long"]
 
-SIMU_START_DATETIME = datetime(year=2016, month=5, day=6, hour=12, minute=0, second=0)
+SIMU_START_DATETIME = datetime(year=2016, month=5, day=6, hour=0, minute=0, second=0)
 #SIMU_END_DATETIME = datetime(year=2016, month=5, day=6, hour=12, minute=1, second=59)
-SIMU_END_DATETIME = datetime(year=2016, month=5, day=6, hour=13, minute=59, second=59)
+SIMU_END_DATETIME = datetime(year=2016, month=5, day=6, hour=23, minute=59, second=59)
 
 
 # 1 Find Edges that are reachable both from pedestrians as well as cars --> List
