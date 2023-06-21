@@ -54,7 +54,7 @@ class SimpleDistributionAlgorithm(BaseAlgorithm):
                 self.__most_underserved_sector = sector
 
     # can throw ValueError
-    def get_edge(self, vid):
+    def get_edge(self):
         if self.__most_underserved_sector is None:
             return None
         # return representative edge of sector
