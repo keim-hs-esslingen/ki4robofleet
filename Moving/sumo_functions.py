@@ -255,12 +255,20 @@ class RouteCheck:
         else:
             raise RuntimeError("No edges available")
 
+GET_ROAD_ID_ERROR_VALUE = ""
 def route_to_edge(vehID: str, target_edge: str) -> bool:
     """
     generate a route to target_edge and set it for vehID
     WARNING: to_edge (from SectorEdges.xml) always must be in format 1234#y. Does not work without #y; e.g. y=0
     """
-    route_check = RouteCheck(fromEdge=traci.vehicle.getRoadID(vehID), toEdge=target_edge)
+    from_edge = None
+    try:
+        from_edge = traci.vehicle.getRoadID(vehID)
+        if from_edge == GET_ROAD_ID_ERROR_VALUE:
+            return False
+    except Exception as e:
+        return False
+    route_check = RouteCheck(fromEdge=from_edge, toEdge=target_edge)
     validated_target_edge = None
     try:
         validated_target_edge = route_check.fixed_edges()[1]
@@ -268,9 +276,14 @@ def route_to_edge(vehID: str, target_edge: str) -> bool:
         print(e)
         dlog(f'optimization route for vehID({vehID}) not available or too short')
         return False
-    traci.vehicle.changeTarget(vehID, validated_target_edge)
-    traci.vehicle.setStop(vehID, validated_target_edge, float(traci.simulation.getTime() % 50) * 0.1 + 1.0, 0, 1.0)
-    traci.vehicle.resume(vehID=vehID)
+    try:
+        traci.vehicle.changeTarget(vehID, validated_target_edge)
+        traci.vehicle.setStop(vehID, validated_target_edge, float(traci.simulation.getTime() % 50) * 0.1 + 1.0, 0, 1.0)
+        traci.vehicle.resume(vehID=vehID)
+    except Exception as e:
+        elog(f"Something went wrong routing to edge({validated_target_edge}): {e}. Removed vehicle ({vehID})")
+        #traci.vehicle.remove(vehID=vehID)
+        return False
     return True
 
 def route_to_edge_for_optimization(taxi_fleet_state_wrapper: TaxiFleetStateWrapper, vehID: str, target_edge: str) -> bool:
@@ -281,3 +294,27 @@ def route_to_edge_for_optimization(taxi_fleet_state_wrapper: TaxiFleetStateWrapp
         taxi_fleet_state_wrapper.set_optimizing_state(vehID)
         return True
     return False
+
+def find_closest_vehID(fleet: list, vehicle_positions: dict, target_edge: str) -> str:
+    """
+    find the closest vehicle to the given target edge
+    """
+    # find vehicle next to req.from_edge
+    bestVehID = None
+    min_dist = 10000000
+    for vehID in fleet:
+        vehicle_edge = vehicle_positions[vehID].edge
+        validated_target_edge = None
+        try:
+            route_check = RouteCheck(fromEdge=vehicle_edge, toEdge=target_edge)
+            validated_target_edge = route_check.fixed_edges()[1]
+            stage_to = traci.simulation.findRoute(vehicle_edge, validated_target_edge)
+        except RuntimeError as e:
+            dlog(f'Find closest vehID: route from vehID({vehID}) ({vehicle_edge} --> {validated_target_edge}) '
+                 f'not available or too short: {e}')
+            continue
+        if stage_to and len(stage_to.edges):
+            if stage_to.length < min_dist:
+                min_dist = stage_to.length
+                bestVehID = vehID
+    return bestVehID
