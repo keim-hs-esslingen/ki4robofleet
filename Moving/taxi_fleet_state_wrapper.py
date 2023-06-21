@@ -31,11 +31,19 @@ class TaxiFleetStateWrapper:
         for vehID in fleet:
             self.__update_state(vehID, TaxiState.Empty)
 
+    def __delete_absent_items(self):
+        """
+        It sometimes happens that a taxi is removed by the simulation. Then also remove it from wrapper (not the source of truth)
+        """
+        taxis_to_delete = [key for key in self.fleet.keys()
+                           if key not in traci.vehicle.getIDList() and key not in traci.vehicle.getTaxiFleet(-1)]
+        for key in taxis_to_delete:
+            elog(f"Needed to remove taxi({key}) from wrapper. Taxi does not exist in SUMO anymore!!!")
+            del self.fleet[key]
+
     def __update_state(self, vehID: str, state: TaxiState):
         if vehID in self.fleet and self.fleet[vehID] != state:
             dlog(f"vehID({vehID}) changes state: '{self.fleet[vehID]}' to '{state}' ")
-            dlog(f"vehID({vehID}) is on route: '{traci.vehicle.getRouteID(vehID)}' "
-                 f"with {len(traci.vehicle.getRoute(vehID))} edges")
         elif vehID not in self.fleet:
             dlog(f"vehID({vehID}) init state: ''{state}'")
         else:
@@ -57,7 +65,12 @@ class TaxiFleetStateWrapper:
             if self.fleet[vehID] != TaxiState.EmptyButOptimizing:
                 self.__update_state(vehID, TaxiState.Empty)
         for vehID in self.fleet.keys():
-            if self.fleet[vehID] == TaxiState.EmptyButOptimizing and traci.vehicle.isStopped(vehID):
+            # isStopped crashes sometimes
+            try:
+                if self.fleet[vehID] == TaxiState.EmptyButOptimizing and traci.vehicle.isStopped(vehID):
+                    self.__update_state(vehID, TaxiState.Empty)
+            except Exception as e:
+                elog(f"isStopped crashed: {e}")
                 self.__update_state(vehID, TaxiState.Empty)
 
     def set_optimizing_state(self, vehID: str):
@@ -68,6 +81,7 @@ class TaxiFleetStateWrapper:
 
     # update state of all taxis and return requested state
     def get_taxi_fleet(self, taxiState: TaxiState) -> list:
+        self.__delete_absent_items()
         self.__update()
         # empty state contains also TaxiState.EmptyButOptimizing
         if taxiState == TaxiState.Empty:
