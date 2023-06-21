@@ -462,15 +462,9 @@ def look_ahead_strategy(data: ProjectConfigData):
             req = current_open_requests.pop(0)
 
             # find vehicle next to req.from_edge
-            bestVehID = None
-            min_dist = 100000
-            for vehID in empty_fleet:
-                vehicle_edge = vehicle_positions[vehID].edge
-                stage_to = traci.simulation.findRoute(vehicle_edge, req.from_edge)
-                if stage_to and len(stage_to.edges):
-                    if stage_to.length < min_dist:
-                        min_dist = stage_to.length
-                        bestVehID = vehID
+            bestVehID = sf.find_closest_vehID(fleet=empty_fleet,
+                                              vehicle_positions=vehicle_positions,
+                                              target_edge=req.from_edge)
             if bestVehID:
                 empty_fleet.remove(bestVehID)
                 fromPoiColor = req.from_poi.color
@@ -623,15 +617,9 @@ def sup_learn_strategy(data: ProjectConfigData):
             req = current_open_requests.pop(0)
 
             # find vehicle next to req.from_edge
-            bestVehID = None
-            min_dist = 100000
-            for vehID in empty_fleet:
-                vehicle_edge = vehicle_positions[vehID].edge
-                stage_to = traci.simulation.findRoute(vehicle_edge, req.from_edge)
-                if stage_to and len(stage_to.edges):
-                    if stage_to.length < min_dist:
-                        min_dist = stage_to.length
-                        bestVehID = vehID
+            bestVehID = sf.find_closest_vehID(fleet=empty_fleet,
+                                              vehicle_positions=vehicle_positions,
+                                              target_edge=req.from_edge)
             if bestVehID:
                 if sf.dispatch_reset_optimization(bestVehID, [req.reservation.id], taxi_fleet_state_wrapper=taxi_fleet_state):
                     empty_fleet.remove(bestVehID)
@@ -650,16 +638,23 @@ def sup_learn_strategy(data: ProjectConfigData):
         optimizing_fleet = taxi_fleet_state.get_taxi_fleet(taxiState=TaxiState.EmptyButOptimizing)
         real_empty_fleet = []
         [real_empty_fleet.append(vehID) for vehID in empty_fleet if vehID not in optimizing_fleet]
-        for vehID in real_empty_fleet:
-            # PRED_MODEL predict next edge
-            better_pos_edge = algorithm.get_edge(vid=vehID)
-            if better_pos_edge:
-                # traci.vehicle.changeTarget(vehID, better_pos_edge)
-                if sf.route_to_edge_for_optimization(taxi_fleet_state_wrapper=taxi_fleet_state, vehID=vehID,
-                                                    target_edge=better_pos_edge):
-                    dlog(f"({sumo_time}) Successfully send {vehID} for optimization to edge {better_pos_edge}")
-                    monitoring.update_veh_state(vehID=vehID, state=State.positioning, sumo_time=sumo_time)
-                    algorithm.push_edge(vid=vehID, edge_id=better_pos_edge, time=sumo_time)
+        if sumo_time % 60 == 0:
+            for _ in range(len(real_empty_fleet)):
+                # PRED_MODEL predict next edge
+                better_pos_edge = algorithm.get_edge()
+                if better_pos_edge:
+                    # find vehicle next to better_pos_edge
+                    bestVehID = sf.find_closest_vehID(fleet=real_empty_fleet,
+                                                      vehicle_positions=vehicle_positions,
+                                                      target_edge=better_pos_edge)
+                    if bestVehID:
+                        # traci.vehicle.changeTarget(vehID, better_pos_edge)
+                        if sf.route_to_edge_for_optimization(taxi_fleet_state_wrapper=taxi_fleet_state, vehID=bestVehID,
+                                                            target_edge=better_pos_edge):
+                            dlog(f"({sumo_time}) Successfully send {bestVehID} for optimization to edge {better_pos_edge}")
+                            monitoring.update_veh_state(vehID=bestVehID, state=State.positioning, sumo_time=sumo_time)
+                            algorithm.push_edge(vid=bestVehID, edge_id=better_pos_edge, time=sumo_time)
+                        real_empty_fleet.remove(bestVehID)
 
         left_vehicles = [
             vehID for vehID in vehicle_ids if vehID not in full_vehicle_id_list
